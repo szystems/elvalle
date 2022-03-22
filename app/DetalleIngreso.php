@@ -16,6 +16,7 @@ class DetalleIngreso extends Model
     protected $fillable =[
     	'idingreso',
     	'idarticulo',
+        'codigo',
     	'cantidad',
     	'idpresentacion_compra',
         'cantidad_compra',

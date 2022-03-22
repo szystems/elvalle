@@ -29,6 +29,7 @@ class IngresoFormRequest extends FormRequest
             'serie_comprobante'=>'max:50',
             'num_comprobante'=>'max:50',
             'idarticulo'=>'required',
+            'codigo'=>'max:50',
             'idpresentacion_compra'=>'required',
             'cantidad_compra'=>'required|min:1',
             'bonificacion'=>'required|min:0',

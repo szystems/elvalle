@@ -114,7 +114,7 @@ class IngresoController extends Controller
         ->where('idempresa','=',$idempresa)
         ->get();
     	$articulos=DB::table('articulo as art')
-    	->select(DB::raw('CONCAT(art.codigo, " ",art.nombre) AS articulo'),'art.idarticulo','art.descripcion')
+    	->select(DB::raw('art.nombre AS articulo'),'art.idarticulo','art.descripcion')
     	->where('art.estado','=','Activo')
         ->where('art.idempresa','=',$idempresa)
     	->get();
@@ -255,7 +255,7 @@ class IngresoController extends Controller
         	->join('articulo as a','d.idarticulo','=','a.idarticulo')
             ->join('presentacion as pc','d.idpresentacion_compra','=','pc.idpresentacion')
             ->join('presentacion as pi','d.idpresentacion_inventario','=','pi.idpresentacion')
-            ->select('d.iddetalle_ingreso','d.idingreso','d.idarticulo','a.nombre as Articulo','a.codigo as Codigo','a.minimo','d.idpresentacion_compra','pc.nombre as PresentacionCompra','d.cantidad_compra','d.bonificacion','d.cantidad_total_compra','d.costo_unidad_compra','d.sub_total_compra','d.descuento','d.total_compra','d.fecha_vencimiento','d.idpresentacion_inventario','pi.nombre as PresentacionInventario','d.cantidadxunidad','d.total_unidades_inventario','d.costo_unidad_inventario','d.descripcion_inventario','d.precio_venta','d.precio_oferta','d.estado_oferta','d.stock','d.estado')
+            ->select('d.iddetalle_ingreso','d.idingreso','d.idarticulo','a.nombre as Articulo','d.codigo as Codigo','a.minimo','d.idpresentacion_compra','pc.nombre as PresentacionCompra','d.cantidad_compra','d.bonificacion','d.cantidad_total_compra','d.costo_unidad_compra','d.sub_total_compra','d.descuento','d.total_compra','d.fecha_vencimiento','d.idpresentacion_inventario','pi.nombre as PresentacionInventario','d.cantidadxunidad','d.total_unidades_inventario','d.costo_unidad_inventario','d.descripcion_inventario','d.precio_venta','d.precio_oferta','d.estado_oferta','d.stock','d.estado')
             ->where('d.idingreso','=',$id)
         	->get();
 
