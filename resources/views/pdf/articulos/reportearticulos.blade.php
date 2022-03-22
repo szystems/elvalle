@@ -51,7 +51,6 @@
 		<table>
 			<tr>		
 				<th>Nombre</th>
-				<th>Codigo</th>
 				<th>Categoría</th>
 				<th>Descripción</th>
 				<th>Imagen</th>
@@ -59,7 +58,6 @@
 			@foreach ($articulos as $art)
 			<tr>
 				<td><h4 align="center">{{ $art->nombre}}</h4></td>
-				<td><h4 align="center">{{ $art->codigo}}</h4></td>
 				<td><h4 align="center">{{ $art->categoria}}</h4></td>
 				<td><h4 align="center">{{ $art->descripcion}}</h4></td>
 				<td>

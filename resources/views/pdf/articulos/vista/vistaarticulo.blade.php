@@ -57,10 +57,6 @@
 				<th colspan="2"><h4 align="center">{{ $articulo->nombre}}</h4></th>
 			</tr>
 			<tr>
-				<td><h4 align="right"><strong>Codigo:</strong></h4></td>
-				<td><h4 align="left"><font color="Blue">{{ $articulo->codigo}}</font></h4></td>
-			</tr>
-			<tr>
 				<td><h4 align="right"><strong>Categoría:</strong></h4></td>
 				<td><h4 align="left"><font color="Blue">{{ $articulo->categoria}}</font></h4></td>
 			</tr>
