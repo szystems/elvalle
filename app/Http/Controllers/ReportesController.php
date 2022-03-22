@@ -346,7 +346,7 @@ class ReportesController extends Controller
                 
                 $articulos=DB::table('articulo as a')
                     ->join('categoria as c','a.idcategoria','=','c.idcategoria')
-                    ->select('a.idarticulo','a.idempresa','a.nombre','a.codigo','c.nombre as categoria','a.bodega','a.ubicacion','a.descripcion','a.imagen','a.estado')
+                    ->select('a.idarticulo','a.idempresa','a.nombre','c.nombre as categoria','a.bodega','a.ubicacion','a.descripcion','a.imagen','a.estado')
                     ->where('a.idempresa','=',$idempresa)
                     ->where('a.estado','=','Activo')
                     ->orderBy('c.nombre','asc')
@@ -576,7 +576,7 @@ class ReportesController extends Controller
 
                 $articulo=DB::table('articulo as a')
                 ->join('categoria as c','a.idcategoria','=','c.idcategoria')
-                ->select('a.idarticulo','c.nombre as categoria','a.codigo','a.nombre','a.bodega','a.ubicacion','a.descripcion','a.imagen','a.estado')
+                ->select('a.idarticulo','c.nombre as categoria','a.nombre','a.bodega','a.ubicacion','a.descripcion','a.imagen','a.estado')
                 ->where('a.estado','=','Activo')
                 ->where('a.idarticulo','=',$idarticulo)
                 ->where('a.idempresa','=',$idempresa)
@@ -1298,7 +1298,7 @@ class ReportesController extends Controller
                 {
                     $articulos=DB::table('articulo as a')
                     ->join('categoria as c','a.idcategoria','=','c.idcategoria')
-                    ->select('a.idarticulo','a.idempresa','a.nombre','a.codigo','a.stock','c.nombre as categoria','a.bodega','a.ubicacion','a.descripcion','a.imagen','a.estado','a.ultimo_precio_venta','a.ultimo_precio_compra','ultimo_precio_oferta','oferta_activar')
+                    ->select('a.idarticulo','a.idempresa','a.nombre','a.stock','c.nombre as categoria','a.bodega','a.ubicacion','a.descripcion','a.imagen','a.estado','a.ultimo_precio_venta','a.ultimo_precio_compra','ultimo_precio_oferta','oferta_activar')
                     ->where('a.idempresa','=',$idempresa)
                     ->where('a.estado','=','Activo')
                     ->where('a.activar_tienda','=','Activado')
@@ -1312,7 +1312,7 @@ class ReportesController extends Controller
                 {
                     $articulos=DB::table('articulo as a')
                     ->join('categoria as c','a.idcategoria','=','c.idcategoria')
-                    ->select('a.idarticulo','a.idempresa','a.nombre','a.codigo','a.stock','c.nombre as categoria','a.bodega','a.ubicacion','a.descripcion','a.imagen','a.estado','a.ultimo_precio_venta','a.ultimo_precio_compra','ultimo_precio_oferta','oferta_activar')
+                    ->select('a.idarticulo','a.idempresa','a.nombre','a.stock','c.nombre as categoria','a.bodega','a.ubicacion','a.descripcion','a.imagen','a.estado','a.ultimo_precio_venta','a.ultimo_precio_compra','ultimo_precio_oferta','oferta_activar')
                     ->where('a.idempresa','=',$idempresa)
                     ->where('a.estado','=','Activo')
                     ->where('a.activar_tienda','=','Activado')
