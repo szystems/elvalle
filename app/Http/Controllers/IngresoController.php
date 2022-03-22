@@ -114,7 +114,7 @@ class IngresoController extends Controller
         ->where('idempresa','=',$idempresa)
         ->get();
     	$articulos=DB::table('articulo as art')
-    	->select(DB::raw('art.nombre AS articulo'),'art.idarticulo','art.descripcion')
+    	->select(DB::raw('CONCAT(art.codigo, " ",art.nombre) AS articulo'),'art.idarticulo','art.descripcion')
     	->where('art.estado','=','Activo')
         ->where('art.idempresa','=',$idempresa)
     	->get();

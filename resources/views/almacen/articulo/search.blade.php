@@ -6,10 +6,10 @@
 	</header>
 	<div class="card-body">
 		<div class="row">
-		<div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+		<div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
 				<div class="form-group mb-2">
-					<label for="nombrecodigo">Nombre</label>
-					<input type="text" class="form-control" name="searchText" placeholder="Buscar por Nombre..." data-live-search="true" value="{{$searchText}}">
+					<label for="nombrecodigo">Nombre/codigo</label>
+					<input type="text" class="form-control" name="searchText" placeholder="Buscar por Nombre o Codigo..." data-live-search="true" value="{{$searchText}}">
 				</div>
 			</div>
 			<div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">

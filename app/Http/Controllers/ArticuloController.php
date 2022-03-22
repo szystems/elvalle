@@ -31,10 +31,13 @@ class ArticuloController extends Controller
             $queryoferta=trim($request->get('searchoferta'));
             $articulos=DB::table('articulo as a')
             ->join('categoria as c','a.idcategoria','=','c.idcategoria')
-            ->select('a.idarticulo','a.idempresa','a.nombre','a.minimo','c.nombre as categoria','a.bodega','a.ubicacion','a.descripcion','a.imagen','a.estado')
+            ->select('a.idarticulo','a.idempresa','a.nombre','a.codigo','a.minimo','c.nombre as categoria','a.bodega','a.ubicacion','a.descripcion','a.imagen','a.estado')
             ->where('a.nombre','LIKE','%'.$query.'%')
             ->where('a.idempresa','=',$idempresa)
             ->where('a.estado','=','Activo')
+            ->orwhere('a.codigo','LIKE','%'.$query.'%')
+             ->where('a.idempresa','=',$idempresa)
+             ->where('a.estado','=','Activo')
             ->orderBy('c.nombre','asc')
             ->orderBy('c.nombre','a.nombre','asc')
             ->paginate(20);
@@ -56,6 +59,7 @@ class ArticuloController extends Controller
         $idempresa = Auth::user()->idempresa;
         $articulo=new Articulo;
         $articulo->idcategoria=$request->get('idcategoria');
+        $articulo->codigo=$request->get('codigo');
         $articulo->nombre=$request->get('nombre');
         $articulo->bodega=$request->get('bodega');
         $articulo->ubicacion=$request->get('ubicacion');
@@ -85,7 +89,7 @@ class ArticuloController extends Controller
         $bitacora->idusuario=Auth::user()->id;
         $bitacora->fecha=$fechahora;
         $bitacora->tipo="Artículo ";
-        $bitacora->descripcion="Se creo un artículo nuevo, Nombre: ".$articulo->nombre.", Stock minimo: ".$articulo->minimo.", Descripción: ".$articulo->descripcion.", Bodega: ".$articulo->bodega.", Ubicación: ".$articulo->ubicacion;
+        $bitacora->descripcion="Se creo un artículo nuevo, Nombre: ".$articulo->nombre.", Código: ".$articulo->codigo.", Stock minimo: ".$articulo->minimo.", Descripción: ".$articulo->descripcion.", Bodega: ".$articulo->bodega.", Ubicación: ".$articulo->ubicacion;
         $bitacora->save();
 
         return Redirect::to('almacen/articulo');
@@ -97,7 +101,7 @@ class ArticuloController extends Controller
         $idempresa = Auth::user()->idempresa;
     	$articulo=DB::table('articulo as a')
             ->join('categoria as c','a.idcategoria','=','c.idcategoria')
-            ->select('a.idarticulo','c.nombre as categoria','a.nombre','a.minimo','a.bodega','a.ubicacion','a.descripcion','a.imagen','a.estado')
+            ->select('a.idarticulo','c.nombre as categoria','a.codigo','a.nombre','a.minimo','a.bodega','a.ubicacion','a.descripcion','a.imagen','a.estado')
             ->where('a.estado','=','Activo')
             ->where('a.idarticulo','=',$id)
             ->where('a.idempresa','=',$idempresa)
@@ -126,6 +130,7 @@ class ArticuloController extends Controller
     {
         $articulo=Articulo::findOrFail($id);
         $articulo->idcategoria=$request->get('idcategoria');
+        $articulo->codigo=$request->get('codigo');
         $articulo->nombre=$request->get('nombre');
         $articulo->minimo=$request->get('minimo');
         $articulo->bodega=$request->get('bodega');
@@ -153,7 +158,7 @@ class ArticuloController extends Controller
         $bitacora->idusuario=Auth::user()->id;
         $bitacora->fecha=$fechahora;
         $bitacora->tipo="Artículo ";
-        $bitacora->descripcion="Se edito un artículo, Nombre: ".$articulo->nombre.", Stock minimo: ".$articulo->minimo.", Descripción: ".$articulo->descripcion.", Bodega: ".$articulo->bodega.", Ubicación: ".$articulo->ubicacion;
+        $bitacora->descripcion="Se edito un artículo, Nombre: ".$articulo->nombre.", Código: ".$articulo->codigo.", Stock minimo: ".$articulo->minimo.", Descripción: ".$articulo->descripcion.", Bodega: ".$articulo->bodega.", Ubicación: ".$articulo->ubicacion;
         $bitacora->save();
 
         return Redirect::to('almacen/articulo');

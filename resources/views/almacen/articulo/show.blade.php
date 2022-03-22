@@ -57,6 +57,12 @@
                   <div class="row">
                     <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
                         <div class="form-group">
+                            <label for="codigo"><strong>Código</strong></label>
+                            <p>{{$articulo->codigo}}</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+                        <div class="form-group">
                             <label for="nombre"><strong>Nombre</strong></label>
                             <p>{{$articulo->nombre}}</p>
                         </div>

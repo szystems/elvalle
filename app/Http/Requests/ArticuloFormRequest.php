@@ -25,6 +25,7 @@ class ArticuloFormRequest extends FormRequest
     {
         return [
             'idcategoria'=>'required',
+            'codigo'=>'max:50',
             'nombre'=>'required|max:45',
             'minimo'=>'required|numeric',
             'bodega'=>'max:100',

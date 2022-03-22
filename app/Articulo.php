@@ -16,6 +16,7 @@ class Articulo extends Model
     protected $fillable =[
     	'idempresa',
     	'idcategoria',
+    	'codigo',
     	'nombre',
 		'minimo',
     	'bodega',
