@@ -63,7 +63,6 @@
 						<thead>
 							<th><h5><strong><i class="fa fa-sliders-h"></i></strong></h5></th>
 							<th><h5><strong>Nombre</strong></h5></th>
-							<th><h5><strong>Codigo</strong></h5></th>
 							<th><h5><strong>Categoria</strong></h5></th>
 							<th><h5><strong>Imagen</strong></h5></th>
 							
@@ -98,7 +97,6 @@
 
 							</td>
 							<td align="left"><h5>{{ $art->nombre}}</h5></td>
-							<td align="center"><h5>{{ $art->codigo}}</h5></td>
 							<td align="left"><h5>{{ $art->categoria}}</h5></td>
 							<td align="center">
 								<h5>

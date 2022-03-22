@@ -47,10 +47,6 @@
                                           <input type="text" name="nombre" class="form-control" placeholder="Nombre..." value="{{$articulo->nombre}}">
                                     </div>
                                     <div class="form-group">
-                                          <label for="codigo"><font color="orange">*</font>Código</label>
-                                          <input type="text" name="codigo" class="form-control" placeholder="Codigo..." value="{{$articulo->codigo}}">
-                                    </div>
-                                    <div class="form-group">
                                           <label for="categoria"><font color="orange">*</font>Categoría</label>
                                                 <a href="{{url('almacen\categoria\create')}}">
                                                       <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Crear Nueva Categoria">

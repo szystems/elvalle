@@ -28,10 +28,6 @@
                         <input type="text" name="nombre" class="form-control" placeholder="Nombre..." value="{{old('nombre')}}">
                   </div>
                   <div class="form-group">
-                        <label for="codigo"><font color="orange">*</font>Código</label>
-                        <input type="text" name="codigo" class="form-control" placeholder="Codigo..." value="{{old('codigo')}}">
-                  </div>
-                  <div class="form-group">
                         <label for="idcategoria">
                               <font color="orange">*</font>Categoría
                               <a href="{{url('almacen\categoria\create')}}">
