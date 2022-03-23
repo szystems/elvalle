@@ -127,6 +127,7 @@
                                         <tbody>
                                             @foreach($detalles as $det)
                                             <tr>
+                                                    
                                                 @if($det->iddetalle_ingreso == null)
                                                     <td align="left">{{ $det->codigo}} {{ $det->articulo}}</td>
                                                     <?php
@@ -137,7 +138,8 @@
                                                         $articulo_ingreso=DB::table('detalle_venta as d')
                                                         ->join('articulo as a','d.idarticulo','=','a.idarticulo')
                                                         ->join('presentacion as p','d.idpresentacion','=','p.idpresentacion')
-                                                        ->select('a.nombre as articulo','p.nombre as presentacion','a.codigo','d.cantidad','d.descuento','d.precio_compra','d.precio_venta','d.precio_oferta')
+                                                        ->join('detalle_ingreso as di','d.iddetalle_ingreso','=','di.iddetalle_ingreso')
+                                                        ->select('a.nombre as articulo','p.nombre as presentacion','di.codigo','d.cantidad','d.descuento','d.precio_compra','d.precio_venta','d.precio_oferta')
                                                         ->where('d.iddetalle_ingreso','=',$det->iddetalle_ingreso)
                                                         ->first();
 

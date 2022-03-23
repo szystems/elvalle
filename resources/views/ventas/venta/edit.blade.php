@@ -62,7 +62,7 @@
                                                     </a>
                                                 </td>
                                                 
-                                                <td align="left">{{ $det->codigo}} {{ $det->articulo}} - {{$det->presentacion}}</td>
+                                                <td align="left">{{$det->codigo}} {{ $det->articulo}} - {{$det->presentacion}}</td>
                                                 <td align="center">{{ $det->cantidad}}</td>
                                                 <!--<td align="right">{{ Auth::user()->moneda }}{{ number_format($det->precio_compra,2, '.', ',')}}</td>-->
                                                 <td align="right">{{ Auth::user()->moneda }}{{ number_format($det->precio_venta,2, '.', ',')}}</td>

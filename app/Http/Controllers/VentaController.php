@@ -148,12 +148,12 @@ class VentaController extends Controller
     	$articulos=DB::table('detalle_ingreso as di')
             ->join('articulo as a','di.idarticulo','=','a.idarticulo')
             ->join('presentacion as pr','di.idpresentacion_inventario','=','pr.idpresentacion')
-            ->select('di.iddetalle_ingreso','di.idingreso','a.nombre as Articulo','a.codigo','di.idarticulo','a.estado','di.idpresentacion_inventario','pr.nombre as Presentacion','di.stock','a.minimo','di.precio_venta','di.costo_unidad_inventario','di.precio_oferta','di.estado_oferta')
+            ->select('di.iddetalle_ingreso','di.idingreso','a.nombre as Articulo','di.codigo','di.idarticulo','a.estado','di.idpresentacion_inventario','pr.nombre as Presentacion','di.stock','a.minimo','di.precio_venta','di.costo_unidad_inventario','di.precio_oferta','di.estado_oferta')
             ->where('a.estado','=','Activo')
             ->where('di.estado','=','Activo')
             ->where('di.stock','>','0')
             ->where('idempresa','=',$idempresa)
-            ->groupBy('di.iddetalle_ingreso','di.idingreso','a.nombre','a.codigo','di.idarticulo','a.estado','di.idpresentacion_inventario','pr.nombre','di.stock','a.minimo','di.precio_venta','di.costo_unidad_inventario','di.precio_oferta','di.estado_oferta')
+            ->groupBy('di.iddetalle_ingreso','di.idingreso','a.nombre','di.codigo','di.idarticulo','a.estado','di.idpresentacion_inventario','pr.nombre','di.stock','a.minimo','di.precio_venta','di.costo_unidad_inventario','di.precio_oferta','di.estado_oferta')
             ->get();
     	return view("ventas.venta.create",["personas"=>$personas,"articulos"=>$articulos]);
     }
@@ -300,12 +300,12 @@ class VentaController extends Controller
     	$articulos=DB::table('detalle_ingreso as di')
             ->join('articulo as a','di.idarticulo','=','a.idarticulo')
             ->join('presentacion as pr','di.idpresentacion_inventario','=','pr.idpresentacion')
-            ->select('di.iddetalle_ingreso','di.idingreso','a.nombre as Articulo','a.codigo','di.idarticulo','a.estado','di.idpresentacion_inventario','pr.nombre as Presentacion','di.stock','a.minimo','di.precio_venta','di.costo_unidad_inventario','di.precio_oferta','di.estado_oferta')
+            ->select('di.iddetalle_ingreso','di.idingreso','a.nombre as Articulo','di.codigo','di.idarticulo','a.estado','di.idpresentacion_inventario','pr.nombre as Presentacion','di.stock','a.minimo','di.precio_venta','di.costo_unidad_inventario','di.precio_oferta','di.estado_oferta')
             ->where('a.estado','=','Activo')
             ->where('di.estado','=','Activo')
             ->where('di.stock','>','0')
             ->where('idempresa','=',$idempresa)
-            ->groupBy('di.iddetalle_ingreso','di.idingreso','a.nombre','a.codigo','di.idarticulo','a.estado','di.idpresentacion_inventario','pr.nombre','di.stock','a.minimo','di.precio_venta','di.costo_unidad_inventario','di.precio_oferta','di.estado_oferta')
+            ->groupBy('di.iddetalle_ingreso','di.idingreso','a.nombre','di.codigo','di.idarticulo','a.estado','di.idpresentacion_inventario','pr.nombre','di.stock','a.minimo','di.precio_venta','di.costo_unidad_inventario','di.precio_oferta','di.estado_oferta')
             ->get();
     	$venta=DB::table('venta as v')
             ->join('paciente as p','v.idcliente','=','p.idpaciente')
@@ -319,7 +319,8 @@ class VentaController extends Controller
         $detalles=DB::table('detalle_venta as dv')
         	->join('articulo as a','dv.idarticulo','=','a.idarticulo')
             ->join('presentacion as pr','dv.idpresentacion','=','pr.idpresentacion')
-        	->select('dv.iddetalle_venta','dv.idventa','dv.iddetalle_ingreso','dv.idpresentacion','pr.nombre as presentacion','a.nombre as articulo','dv.idarticulo as idarticulo','dv.idventa as idventa','a.codigo','dv.cantidad','dv.descuento','dv.precio_compra','dv.precio_venta','dv.precio_oferta')
+            ->join('detalle_ingreso as di','dv.iddetalle_ingreso','=','di.iddetalle_ingreso')
+        	->select('dv.iddetalle_venta','dv.idventa','dv.iddetalle_ingreso','dv.idpresentacion','pr.nombre as presentacion','a.nombre as articulo','di.codigo','dv.idarticulo as idarticulo','dv.idventa as idventa','dv.cantidad','dv.descuento','dv.precio_compra','dv.precio_venta','dv.precio_oferta')
         	->where('dv.idventa','=',$id)
         	->get();
 
@@ -451,12 +452,23 @@ class VentaController extends Controller
             ->where('v.idventa','=',$id)
             ->where('v.idempresa','=',$idempresa)
             ->first();
+        
 
         $detalles=DB::table('detalle_venta as d')
+        	->join('articulo as a','d.idarticulo','=','a.idarticulo')
+            ->join('detalle_ingreso as di','d.iddetalle_ingreso','=','di.iddetalle_ingreso')
+        	->select('d.iddetalle_ingreso','a.nombre as articulo','di.codigo','d.cantidad','d.descuento','d.precio_compra','d.precio_venta','d.precio_oferta')
+        	->where('d.idventa','=',$id)
+        	->get();
+
+        if($detalles->count() == 0)
+        {
+            $detalles=DB::table('detalle_venta as d')
         	->join('articulo as a','d.idarticulo','=','a.idarticulo')
         	->select('d.iddetalle_ingreso','a.nombre as articulo','a.codigo','d.cantidad','d.descuento','d.precio_compra','d.precio_venta','d.precio_oferta')
         	->where('d.idventa','=',$id)
         	->get();
+        }
 
         return view("ventas.venta.show",["venta"=>$venta,"detalles"=>$detalles]);
     }

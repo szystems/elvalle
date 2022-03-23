@@ -88,7 +88,7 @@
                     $subtotal=$subtotal+$det->sub_total_compra;
                     $totaldescuento=$totaldescuento+$det->descuento;
                 ?>
-                <td><h4 align="left">{{ $det->codigo}} {{ $det->articulo}}</h4></td>
+                <td><h4 align="left">{{ $det->CodigoIngreso}} {{ $det->articulo}}</h4></td>
 				<td><h4 align="center">{{ $det->PresentacionCompra}}</h4></td>
                 <td><h4 align="center">{{ $det->cantidad_compra}}</h4></td>
 				<td><h4 align="center">{{ $det->bonificacion}}</h4></td>
@@ -146,7 +146,7 @@
             <tr>
 				
 
-											<td align="left"><h4>{{ $det->Codigo}} {{ $det->articulo}}</h4></td>
+											<td align="left"><h4>{{ $det->CodigoInventario}} {{ $det->articulo}}</h4></td>
                                             <?php
                                                 $fecha_vencimiento = date("d-m-Y", strtotime($det->fecha_vencimiento));
                                             ?>

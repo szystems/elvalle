@@ -814,7 +814,6 @@ class ReportesController extends Controller
                     ->join('detalle_venta as dv','v.idventa','=','dv.idventa')
                     ->select('v.idventa','v.fecha','p.nombre','p.tipo_documento','p.num_documento','p.telefono','p.direccion','u.name','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.impuesto','v.estado','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estadosaldo','v.estadoventa','v.tipopago')
                     ->where('v.idventa','=',$idventa)
-                    ->where('v.idempresa','=',$idempresa)
                     ->first();
 
                 $detalles=DB::table('detalle_venta as d')
@@ -959,7 +958,7 @@ class ReportesController extends Controller
                     ->join('articulo as a','d.idarticulo','=','a.idarticulo')
                     ->join('presentacion as pc','d.idpresentacion_compra','=','pc.idpresentacion')
                     ->join('presentacion as pi','d.idpresentacion_inventario','=','pi.idpresentacion')
-                    ->select('d.iddetalle_ingreso','d.idingreso','d.idarticulo','a.codigo as codigo','a.nombre as articulo','a.codigo as Codigo','a.minimo','d.idpresentacion_compra','pc.nombre as PresentacionCompra','d.cantidad_compra','d.bonificacion','d.cantidad_total_compra','d.costo_unidad_compra','d.sub_total_compra','d.descuento','d.total_compra','d.fecha_vencimiento','d.idpresentacion_inventario','pi.nombre as PresentacionInventario','d.cantidadxunidad','d.total_unidades_inventario','d.costo_unidad_inventario','d.descripcion_inventario','d.precio_venta','d.precio_oferta','d.estado_oferta','d.stock','d.estado')
+                    ->select('d.iddetalle_ingreso','d.idingreso','d.idarticulo','a.codigo as CodigoIngreso','a.nombre as articulo','d.codigo as CodigoInventario','a.minimo','d.idpresentacion_compra','pc.nombre as PresentacionCompra','d.cantidad_compra','d.bonificacion','d.cantidad_total_compra','d.costo_unidad_compra','d.sub_total_compra','d.descuento','d.total_compra','d.fecha_vencimiento','d.idpresentacion_inventario','pi.nombre as PresentacionInventario','d.cantidadxunidad','d.total_unidades_inventario','d.costo_unidad_inventario','d.descripcion_inventario','d.precio_venta','d.precio_oferta','d.estado_oferta','d.stock','d.estado')
                     ->where('d.idingreso','=',$idcompra)
                     ->get();
                 
