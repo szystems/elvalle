@@ -114,7 +114,7 @@
                             <select name="pidarticulo" class="form-control selectpicker" id="pidarticulo" data-live-search="true">
                                 <option value="" selected>Seleccione un articulo</option>
                                     @foreach($articulos as $articulo)
-                                <option value="{{$articulo->idarticulo}}_{{$articulo->articulo}}_{{$articulo->descripcion}}">{{$articulo->articulo}}</option>
+                                <option value="{{$articulo->idarticulo}}_{{$articulo->articulo}}_{{$articulo->descripcion}}_{{$articulo->codigo}}_{{$articulo->nombre}}">{{$articulo->articulo}}</option>
                                     @endforeach
                             </select>
                         </div>
@@ -179,6 +179,12 @@
                       </div>
                     </div>
                     <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
+                        <div class="form-group">
+                            <label for="codigo">Codigo</label>
+                            <input type="text" name="pcodigo_inventario" class="form-control" id="pcodigo_inventario" value="">
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
                       <div class="form-group">
                         <label>Fecha Vencimiento</label>
                         <span class="form-icon-wrapper">
@@ -208,7 +214,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                    <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
                         <div class="form-group">
                             <label for="">Descripción</label>
                             <textarea name="pdescripcion_inventario" id="pdescripcion_inventario" class="form-control" cols="30" rows="2"></textarea>
@@ -311,8 +317,8 @@
                                     <th>Costo U.</th>
                                     <th>Total U.</th>
                                     <th>Desc.</th>
-                                    <th>P.Venta</th>
-                                    <th>%Desc.</th>
+                                    <th>PrecioVenta</th>
+                                    <th>%Descuento</th>
                                     <th>Oferta</th>
                                 </thead>
                                 <tfoot>
@@ -397,6 +403,7 @@
         {
             datosArticulo=document.getElementById('pidarticulo').value.split('_');
             $("#pdescripcion_inventario").val(datosArticulo[2]);
+            $("#pcodigo_inventario").val(datosArticulo[3]);
 
             
         }
@@ -416,6 +423,8 @@
             precio_unidad_compra=$("#pprecio_unidad_compra").val();
             
             //inventario
+            articulo_inventario=datosArticulo[4];
+            codigo=$("#pcodigo_inventario").val();
             fecha_vencimiento=$("#pfecha_vencimiento").val();
             idPresentacionInventario=datosPresentacionInventario[0];
             presentacion_inventario=$("#ppresentacion_inventario option:selected").text();
@@ -462,7 +471,7 @@
                         total=(total+totalcompra[cont]);
 
                         var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td><td><input type="hidden" name="idarticulo[]" value="'+idarticulo+'">'+articulo+'</input></td><td align="center"><input type="hidden" name="idpresentacion_compra[]" value="'+idPresentacionCompra+'">'+presentacion_compra+'</input></td><td align="center"><input type="hidden" readonly name="cantidad_compra[]" value="'+cantidad_compra+'">'+cantidad_compra+'</input></td><td align="right"><input type="hidden" readonly name="costo_unidad_compra[]" value="'+precio_unidad_compra+'">'+moneda+precio_unidad_compra+'</input></td><td align="right"><input type="hidden" readonly name="sub_total_compra[]" value="'+subtotalcompra[cont]+'">'+moneda+subtotalcompra[cont]+'</input></td><td align="center"><input type="hidden" readonly name="bonificacion[]" value="'+bonificacion+'">'+bonificacion+'</input></td><td align="center"><input type="hidden" readonly name="cantidad_total_compra[]" value="'+cantidad_total_compra+'">'+cantidad_total_compra+'</input></td><td align="right"><input type="hidden" readonly name="descuento[]" value="'+descuentocompra[cont]+'">'+moneda+descuentocompra[cont]+'</input></td><td align="right"><input type="hidden" readonly name="total_compra[]" value="'+totalcompra[cont]+'">'+moneda+totalcompra[cont]+'</input></td></tr>'; 
-                        var fila2='<tr class="selected" id="fila2'+cont+'"><td>'+articulo+'</td><td align="center"><input type="hidden" name="fecha_vencimiento[]" value="'+fecha_vencimiento+'">'+fecha_vencimiento+'</input></td><td align="center"><input type="hidden" name="idpresentacion_inventario[]" value="'+idPresentacionInventario+'">'+presentacion_inventario+'</input></td><td align="center"><input type="hidden" readonly name="cantidadxunidad[]" value="'+cantidadxunidad+'">'+cantidadxunidad+'</input></td><td align="right"><input type="hidden" readonly name="costo_unidad_inventario[]" value="'+costo_unidad_inventario+'">'+moneda+costo_unidad_inventario+'</input></td><td align="center"><input type="hidden" readonly name="total_unidades_inventario[]" value="'+total_unidades_inventario+'">'+total_unidades_inventario+'</input></td><td align="left"><input type="hidden" readonly name="descripcion_inventario[]" value="'+descripcion_inventario+'">'+descripcion_inventario+'</input></td><td align="right"><div class="input-group"><div class="input-group-prepend"><span class="input-group-text">{{ Auth::user()->moneda }}</span></div> <input type="" size="8"  name="precio_venta[]" class="form-control" aria-label="Amount (to the nearest dollar)" onkeypress="return validardecimal(event,this.value)" required value="'+precio_venta+'"></input></div></td><td align="right"><div class="input-group"><div class="input-group-prepend"><span class="input-group-text">%</span></div> <input type="" size="8" name="precio_oferta[]" class="form-control" aria-label="Amount (to the nearest dollar)" onkeypress="return validardecimal(event,this.value)" required value="'+precio_oferta+'"></input></td><td align="center"><input type="hidden" readonly name="estado_oferta[]" value="'+estado_oferta+'">'+estado_oferta+'</input></td></tr>';
+                        var fila2='<tr class="selected" id="fila2'+cont+'"><td><input type="text" name="codigo_inventario[]" value="'+codigo+'"><br>'+articulo_inventario+'</td><td align="center"><input type="hidden" name="fecha_vencimiento[]" value="'+fecha_vencimiento+'">'+fecha_vencimiento+'</input></td><td align="center"><input type="hidden" name="idpresentacion_inventario[]" value="'+idPresentacionInventario+'">'+presentacion_inventario+'</input></td><td align="center"><input type="hidden" readonly name="cantidadxunidad[]" value="'+cantidadxunidad+'">'+cantidadxunidad+'</input></td><td align="right"><input type="hidden" readonly name="costo_unidad_inventario[]" value="'+costo_unidad_inventario+'">'+moneda+costo_unidad_inventario+'</input></td><td align="center"><input type="hidden" readonly name="total_unidades_inventario[]" value="'+total_unidades_inventario+'">'+total_unidades_inventario+'</input></td><td align="left"><input type="hidden" readonly name="descripcion_inventario[]" value="'+descripcion_inventario+'">'+descripcion_inventario+'</input></td><td align="right"><div class="input-group"><div class="input-group-prepend"><span class="input-group-text">{{ Auth::user()->moneda }}</span></div> <input type="" size="8"  name="precio_venta[]" class="form-control" aria-label="Amount (to the nearest dollar)" onkeypress="return validardecimal(event,this.value)" required value="'+precio_venta+'"></input></div></td><td align="right"><div class="input-group"><div class="input-group-prepend"><span class="input-group-text">%</span></div> <input type="" size="8" name="precio_oferta[]" class="form-control" aria-label="Amount (to the nearest dollar)" onkeypress="return validardecimal(event,this.value)" required value="'+precio_oferta+'"></input></td><td align="center"><input type="hidden" readonly name="estado_oferta[]" value="'+estado_oferta+'">'+estado_oferta+'</input></td></tr>';
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
                         cont++;
                         limpiar();
@@ -496,6 +505,7 @@
             $("#pprecio_unidad_compra").val("0.00");
             $("#pdescuento").val("0.00");
             $("#pdescripcion_inventario").val("");
+            $("#pcodigo_inventario").val("");
             $("#pcantidadxunidad").val("1");
             $("#pprecio_venta").val("0.00");
             $("#pprecio_oferta").val("0.00");
