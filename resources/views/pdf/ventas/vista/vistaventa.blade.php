@@ -57,7 +57,7 @@
 			<br><strong>Cliente:</strong><font color="Blue"> <strong>{{ $venta->nombre}}<strong></font>
 				<strong>Teléfono:</strong><font color="Blue"> <strong>{{ $venta->telefono}}<strong></font>
 				<strong>Dirección:</strong><font color="Blue"> <strong>{{ $venta->direccion}}<strong></font>
-			<br><strong>Documento:</strong><font color="Blue"> <strong>{{ $venta->tipo_documento}} {{$venta->num_documento}}<strong></font>
+			<br><strong>Documento:</strong><font color="Blue"> <strong>{{ $venta->tipo_comprobante}} {{$venta->serie_comprobante}}-{{$venta->num_comprobante}}<strong></font>
 			<br><strong>Saldo:</strong><font color="Blue"> <strong>{{ $venta->estadosaldo}}<strong></font>
 			@if ($venta->estadosaldo == "Pendiente")
 			<br><strong>Saldo Total:</strong><font color="Red"> <strong>{{ Auth::user()->moneda }}{{ number_format($venta->total_venta-$venta->abonado,2, '.', ',')}}<strong></font>

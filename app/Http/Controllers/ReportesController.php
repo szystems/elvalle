@@ -809,19 +809,26 @@ class ReportesController extends Controller
                 $nompdf = $nompdf->format('Y-m-d H:i:s');
                 
                 $venta=DB::table('venta as v')
-                    ->join('persona as p','v.idcliente','=','p.idpersona')
-                    ->join('users as u','v.idusuario','=','u.id')
-                    ->join('detalle_venta as dv','v.idventa','=','dv.idventa')
-                    ->select('v.idventa','v.fecha','p.nombre','p.tipo_documento','p.num_documento','p.telefono','p.direccion','u.name','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.impuesto','v.estado','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estadosaldo','v.estadoventa','v.tipopago')
-                    ->where('v.idventa','=',$idventa)
-                    ->first();
+                ->join('paciente as p','v.idcliente','=','p.idpaciente')
+                ->where('v.idventa','=',$idventa)
+                ->first();
 
+
+                $detalles=DB::table('detalle_venta as d')
+                ->join('articulo as a','d.idarticulo','=','a.idarticulo')
+                ->join('detalle_ingreso as di','d.iddetalle_ingreso','=','di.iddetalle_ingreso')
+                ->select('d.iddetalle_ingreso','a.nombre as articulo','di.codigo','d.cantidad','d.descuento','d.precio_compra','d.precio_venta','d.precio_oferta')
+                ->where('d.idventa','=',$idventa)
+                ->get();
+
+                if($detalles->count() == 0)
+                {
                 $detalles=DB::table('detalle_venta as d')
                     ->join('articulo as a','d.idarticulo','=','a.idarticulo')
                     ->select('iddetalle_ingreso','a.nombre as articulo','a.codigo','d.cantidad','d.descuento','d.precio_compra','d.precio_venta')
                     ->where('d.idventa','=',$idventa)
                     ->get();
-                
+                }
                 
                 if ( $verpdf == "Descargar" )
                 {

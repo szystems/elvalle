@@ -130,9 +130,7 @@
                                                     
                                                 @if($det->iddetalle_ingreso == null)
                                                     <td align="left">{{ $det->codigo}} {{ $det->articulo}}</td>
-                                                    <?php
-                                                        $esingreso=1;
-                                                    ?>
+                                                    
                                                 @else
                                                     <?php
                                                         $articulo_ingreso=DB::table('detalle_venta as d')
@@ -142,8 +140,6 @@
                                                         ->select('a.nombre as articulo','p.nombre as presentacion','di.codigo','d.cantidad','d.descuento','d.precio_compra','d.precio_venta','d.precio_oferta')
                                                         ->where('d.iddetalle_ingreso','=',$det->iddetalle_ingreso)
                                                         ->first();
-
-                                                        $esingreso=0;
                                                     ?>
                                                     <td align="left">{{ $det->codigo}} {{ $det->articulo}} - {{ $articulo_ingreso->presentacion}}</td>
                                                 @endif
@@ -220,7 +216,6 @@
                         </div>
                     @endif 
                     {!!Form::close()!!} 
-                    @if($esingreso != 1)
                         {{Form::open(array('action' => 'ReportesController@vistaventa','method' => 'POST','role' => 'form', 'target' => '_blank'))}}
 
                         {{Form::token()}}		
@@ -254,7 +249,6 @@
                             </div>
                             
                         {{Form::close()}}
-                    @endif
             @include('ventas.venta.modaleliminarshow')
             <footer class="card-footer">
 
