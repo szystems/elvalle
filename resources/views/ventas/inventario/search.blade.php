@@ -16,7 +16,7 @@
 							<select name="articulof" class="form-control selectpicker" data-live-search="true">
 								<option value="">Todos</option>
 								@foreach ($articulos as $art)
-                                <option value="{{$art->nombre}}">{{$art->nombre}} - {{$art->codigo}}</option>
+                                <option value="{{$art->nombre}}">{{$art->nombre}}</option>
                               	@endforeach
 							</select>
 						</div>

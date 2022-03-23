@@ -14,6 +14,12 @@
 			  	<h5 class="modal-title"><b>Articulo:</b> {{ $det->Articulo}}-{{ $det->Codigo}}</h5>
 				<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
 					<div class="form-group">
+						<label for=""><strong>Codigo</strong></label>
+						<input type="number" name="codigo_inventario" class="form-control input-sm" id="codigo_inventario" value="{{$det->Codigo}}">
+					</div>
+				</div>
+				<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+					<div class="form-group">
 						<label><strong>Fecha Vencimiento</strong></label>
 						<span class="form-icon-wrapper">
 							<span class="form-icon form-icon--right">
@@ -90,11 +96,11 @@
 				</div>
       		</div>
       		<div class="modal-footer">
-			  <input type="" name="idingreso"  value="{{$det->idingreso}}">
-			  	<input type="" name="total_compra"  value="{{$det->total_compra}}">
-				<input type="" name="cantidad_total_compra"  value="{{$det->cantidad_total_compra}}">
-				<input type="" name="total_unidades_inventario_actual"  value="{{$det->total_unidades_inventario}}">
-				<input type="" name="stock_actual"  value="{{$det->stock}}">
+			  <input type="hidden" name="idingreso"  value="{{$det->idingreso}}">
+			  	<input type="hidden" name="total_compra"  value="{{$det->total_compra}}">
+				<input type="hidden" name="cantidad_total_compra"  value="{{$det->cantidad_total_compra}}">
+				<input type="hidden" name="total_unidades_inventario_actual"  value="{{$det->total_unidades_inventario}}">
+				<input type="hidden" name="stock_actual"  value="{{$det->stock}}">
 			  	<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-ban"></i> Cerrar</button>
                 <button type="submit" class="btn btn-info"><i class="far fa-edit"></i> Confirmar</button>
       		</div>

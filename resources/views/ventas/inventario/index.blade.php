@@ -57,7 +57,7 @@
 							</td>
 							<td align="center"><h5><a href="{{URL::action('IngresoController@show',$det->idingreso)}}" target="_blanc">{{ $fecha_ingreso}}</a></h5></td>
 							<td align="center"><h5><a href="{{URL::action('ProveedorController@show',$det->idproveedor)}}" target="_blanc">{{ $det->Proveedor}}</a></h5></td>
-							<td align="left"><h5><a href="{{URL::action('ArticuloController@show',$det->idarticulo)}}" target="_blanc"><strong>{{ $det->Articulo}}</strong> - {{$det->Codigo}}</a></h5></td>
+							<td align="left"><h5>{{$det->Codigo}} <br> <strong> {{ $det->Articulo}}</strong></h5></td>
 							<td align="left"><h5>{{$det->descripcion_inventario}}</h5></td>
 							<td align="center"><h5>{{$fecha_vencimiento}}</h5></td>
 							<td align="center"><h5>{{$det->Presentacion}}</h5></td>

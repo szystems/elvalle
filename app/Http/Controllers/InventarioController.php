@@ -64,14 +64,14 @@ class InventarioController extends Controller
                     ->join('persona as p','i.idproveedor','=','p.idpersona')
                     ->join('articulo as a','di.idarticulo','=','a.idarticulo')
                     ->join('presentacion as pr','di.idpresentacion_inventario','=','pr.idpresentacion')
-                    ->select('di.iddetalle_ingreso','di.idingreso','i.idproveedor','p.nombre as Proveedor','i.fecha','i.estado as EstadoIngreso','di.idarticulo','a.nombre as Articulo','a.minimo','a.codigo as Codigo','di.cantidad_total_compra','di.total_compra','di.descripcion_inventario','di.fecha_vencimiento','di.idpresentacion_inventario','pr.nombre as Presentacion','di.cantidadxunidad','di.total_unidades_inventario','di.costo_unidad_inventario','di.precio_venta','di.precio_oferta','di.estado_oferta','di.stock','di.estado as EstadoDetalle')
+                    ->select('di.iddetalle_ingreso','di.idingreso','i.idproveedor','p.nombre as Proveedor','i.fecha','i.estado as EstadoIngreso','di.idarticulo','a.nombre as Articulo','a.minimo','di.codigo as Codigo','di.cantidad_total_compra','di.total_compra','di.descripcion_inventario','di.fecha_vencimiento','di.idpresentacion_inventario','pr.nombre as Presentacion','di.cantidadxunidad','di.total_unidades_inventario','di.costo_unidad_inventario','di.precio_venta','di.precio_oferta','di.estado_oferta','di.stock','di.estado as EstadoDetalle')
                     ->where('a.nombre','LIKE','%'.$articulof.'%')
                     ->where('p.nombre','LIKE','%'.$proveedorf.'%')
                     ->where('pr.nombre','LIKE','%'.$presentacionf.'%')
                     ->where('di.estado_oferta','LIKE','%'.$estadoOfertaf.'%')
                     ->where('i.estado','LIKE','%'.$estadof.'%')
                     ->orderBy('di.fecha_vencimiento','asc')
-                    ->groupBy('di.iddetalle_ingreso','di.idingreso','i.idproveedor','p.nombre','i.fecha','i.estado','di.idarticulo','a.nombre','a.minimo','a.codigo','di.cantidad_total_compra','di.total_compra','di.descripcion_inventario','di.fecha_vencimiento','di.idpresentacion_inventario','pr.nombre','di.cantidadxunidad','di.total_unidades_inventario','di.costo_unidad_inventario','di.precio_venta','di.precio_oferta','di.estado_oferta','di.stock','di.estado')
+                    ->groupBy('di.iddetalle_ingreso','di.idingreso','i.idproveedor','p.nombre','i.fecha','i.estado','di.idarticulo','a.nombre','a.minimo','di.codigo','di.cantidad_total_compra','di.total_compra','di.descripcion_inventario','di.fecha_vencimiento','di.idpresentacion_inventario','pr.nombre','di.cantidadxunidad','di.total_unidades_inventario','di.costo_unidad_inventario','di.precio_venta','di.precio_oferta','di.estado_oferta','di.stock','di.estado')
                     ->paginate(20);
                     
                 
@@ -90,6 +90,7 @@ class InventarioController extends Controller
             $idingreso=$request->get('idingreso');
             $total_compra=$request->get('total_compra');
             $cantidad_total_compra=$request->get('cantidad_total_compra');
+            $codigo_inventario=$request->get('codigo_inventario');
             $fecha_vencimiento = $request->get('fecha_vencimiento');
             $idpresentacion_inventario = $request->get('idpresentacion_inventario');//
             $descripcion_inventario = $request->get('descripcion_inventario');
@@ -121,6 +122,7 @@ class InventarioController extends Controller
             //DB::beginTransaction();
     		$detalle =DetalleIngreso::findOrFail($id);
             //inventario
+            $detalle->codigo=$codigo_inventario;
             $detalle->fecha_vencimiento=$fecha_vencimiento_articulo;
             $detalle->idpresentacion_inventario=$idpresentacion_inventario;
             $detalle->cantidadxunidad=$cantidadxunidad;
