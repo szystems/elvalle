@@ -42,6 +42,8 @@ class IngresoFormRequest extends FormRequest
             'cantidadxunidad'=>'required|min:1',
             'total_unidades_inventario'=>'required|min:1',
             'costo_unidad_inventario'=>'required',
+            'precio_sugerido'=>'required',
+            'porcentaje_utilidad'=>'required',
             'precio_venta'=>'required',
             'precio_oferta'=>'required',
             'estado_oferta'=>'required'

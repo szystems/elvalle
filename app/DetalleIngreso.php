@@ -32,6 +32,8 @@ class DetalleIngreso extends Model
         'total_unidades_inventario',
         'costo_unidad_inventario',
         'descripcion_inventario',
+        'precio_sugerido',
+        'porcentaje_utilidad',
         'precio_venta',
         'precio_oferta',
         'estado_oferta',

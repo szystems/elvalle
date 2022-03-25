@@ -175,7 +175,9 @@
                                     <th>U*Pres</th>
                                     <th>Costo Unidad</th>
                                     <th>Total Unidades</th>
-                                    <th>Desc.</th>
+                                    <th>Descripcion</th>
+                                    <th>%Utilidad</th>
+                                    <th>P.Sugerido</th>
                                     <th>P.Venta</th>
                                     <th>%Desc.</th>
                                     <th>Oferta</th>
@@ -195,6 +197,12 @@
                                             <td align="right"><font color="orange">{{ Auth::user()->moneda }}{{ number_format($det->costo_unidad_inventario,2, '.', ',')}}</font></td>
                                             <td align="center"><font color="blue">{{ $det->total_unidades_inventario}}</font></td>
                                             <td align="left">{{ $det->descripcion_inventario}}</td>
+                                            <?php
+
+                                                $utilidad_total= (($det->porcentaje_utilidad*$det->costo_unidad_inventario)/100);
+                                            ?>
+                                            <td align="left">{{ $det->porcentaje_utilidad}}% ({{ Auth::user()->moneda }}{{ number_format($utilidad_total,2, '.', ',')}})</td>
+                                            <td align="right">{{ Auth::user()->moneda }}{{ number_format($det->precio_sugerido,2, '.', ',')}}</td>
                                             <td align="right"><font color="blue">{{ Auth::user()->moneda }}{{ number_format($det->precio_venta,2, '.', ',')}}</font></td> 
                                             <?php
 

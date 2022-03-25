@@ -220,7 +220,7 @@
                             <textarea name="pdescripcion_inventario" id="pdescripcion_inventario" class="form-control" cols="30" rows="2"></textarea>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
+                    <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
                         <div class="form-group">
                             <label for="">Dividir Unidades</label>
                             <input type="number" name="pcantidadxunidad" class="form-control" id="pcantidadxunidad" value="1" onkeypress="return validarentero(event,this.value)" required>
@@ -228,16 +228,27 @@
                     </div>
                     <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
                         <div class="form-group">
-                            <label for="precio_venta">Precio Venta</label>
+                            <label for="precio_sugerido">Precio Sugerido</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">{{ Auth::user()->moneda }}</span>
                                 </div>
-                                <input type="" name="pprecio_venta" class="form-control" id="pprecio_venta" aria-label="Amount (to the nearest dollar)" value="0.00" onkeypress="return validardecimal(event,this.value)" required>
+                                <input type="" name="pprecio_sugerido" class="form-control" id="pprecio_sugerido" aria-label="Amount (to the nearest dollar)" value="0.00" onkeypress="return validardecimal(event,this.value)" required>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
+                    <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
+                        <div class="form-group">
+                            <label for="porcentaje_utilidad">Porcentaje Utilidad</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">%</span>
+                                </div>
+                                <input type="" name="pporcentaje_utilidad" class="form-control" id="pporcentaje_utilidad" aria-label="Amount (to the nearest dollar)" value="0" onkeypress="return validardecimal(event,this.value)" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
                         <div class="form-group">
                             <label for="precio_venta">Oferta</label>
                             <div class="input-group">
@@ -317,11 +328,13 @@
                                     <th>Costo U.</th>
                                     <th>Total U.</th>
                                     <th>Desc.</th>
-                                    <th>PrecioVenta</th>
+                                    <th>%Utilidad</th>
+                                    <th>P.Sugerido/Venta</th>
                                     <th>%Descuento</th>
                                     <th>Oferta</th>
                                 </thead>
                                 <tfoot>
+                                    <th></th>
                                     <th></th>
                                     <th></th>
                                     <th></th>
@@ -430,7 +443,8 @@
             presentacion_inventario=$("#ppresentacion_inventario option:selected").text();
             descripcion_inventario=$("#pdescripcion_inventario").val();
             cantidadxunidad=$("#pcantidadxunidad").val();
-            precio_venta=$("#pprecio_venta").val();
+            precio_sugerido=$("#pprecio_sugerido").val();
+            porcentaje_utilidad=$("#pporcentaje_utilidad").val();
             precio_oferta=$("#pprecio_oferta").val();
             estado_oferta=$("#pestado_oferta option:selected").text();
 
@@ -448,9 +462,11 @@
                                 idPresentacionInventario!="" &&
                                   cantidadxunidad>0 &&
                                     cantidadxunidad!="" &&
-                                    precio_venta!="" &&
-                                      precio_venta>=0 &&
-                                        precio_oferta!=""
+                                      precio_sugerido!="" &&
+                                        porcentaje_utilidad!="" &&
+                                          precio_sugerido>=0 &&
+                                            porcentaje_utilidad>=0 &&
+                                              precio_oferta!=""
                            )
             {
                 if (precio_oferta <= 100)
@@ -469,9 +485,11 @@
                         descuentototal=(descuentototal+descuentocompra[cont]);
                         subtotal=(subtotal+subtotalcompra[cont])
                         total=(total+totalcompra[cont]);
+                        //calcular precio_venta
+                        precio_venta=(((porcentaje_utilidad/100)+1)*costo_unidad_inventario)
 
                         var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td><td><input type="hidden" name="idarticulo[]" value="'+idarticulo+'">'+articulo+'</input></td><td align="center"><input type="hidden" name="idpresentacion_compra[]" value="'+idPresentacionCompra+'">'+presentacion_compra+'</input></td><td align="center"><input type="hidden" readonly name="cantidad_compra[]" value="'+cantidad_compra+'">'+cantidad_compra+'</input></td><td align="right"><input type="hidden" readonly name="costo_unidad_compra[]" value="'+precio_unidad_compra+'">'+moneda+precio_unidad_compra+'</input></td><td align="right"><input type="hidden" readonly name="sub_total_compra[]" value="'+subtotalcompra[cont]+'">'+moneda+subtotalcompra[cont]+'</input></td><td align="center"><input type="hidden" readonly name="bonificacion[]" value="'+bonificacion+'">'+bonificacion+'</input></td><td align="center"><input type="hidden" readonly name="cantidad_total_compra[]" value="'+cantidad_total_compra+'">'+cantidad_total_compra+'</input></td><td align="right"><input type="hidden" readonly name="descuento[]" value="'+descuentocompra[cont]+'">'+moneda+descuentocompra[cont]+'</input></td><td align="right"><input type="hidden" readonly name="total_compra[]" value="'+totalcompra[cont]+'">'+moneda+totalcompra[cont]+'</input></td></tr>'; 
-                        var fila2='<tr class="selected" id="fila2'+cont+'"><td><input type="text" name="codigo_inventario[]" value="'+codigo+'"><br>'+articulo_inventario+'</td><td align="center"><input type="hidden" name="fecha_vencimiento[]" value="'+fecha_vencimiento+'">'+fecha_vencimiento+'</input></td><td align="center"><input type="hidden" name="idpresentacion_inventario[]" value="'+idPresentacionInventario+'">'+presentacion_inventario+'</input></td><td align="center"><input type="hidden" readonly name="cantidadxunidad[]" value="'+cantidadxunidad+'">'+cantidadxunidad+'</input></td><td align="right"><input type="hidden" readonly name="costo_unidad_inventario[]" value="'+costo_unidad_inventario+'">'+moneda+costo_unidad_inventario+'</input></td><td align="center"><input type="hidden" readonly name="total_unidades_inventario[]" value="'+total_unidades_inventario+'">'+total_unidades_inventario+'</input></td><td align="left"><input type="hidden" readonly name="descripcion_inventario[]" value="'+descripcion_inventario+'">'+descripcion_inventario+'</input></td><td align="right"><div class="input-group"><div class="input-group-prepend"><span class="input-group-text">{{ Auth::user()->moneda }}</span></div> <input type="" size="8"  name="precio_venta[]" class="form-control" aria-label="Amount (to the nearest dollar)" onkeypress="return validardecimal(event,this.value)" required value="'+precio_venta+'"></input></div></td><td align="right"><div class="input-group"><div class="input-group-prepend"><span class="input-group-text">%</span></div> <input type="" size="8" name="precio_oferta[]" class="form-control" aria-label="Amount (to the nearest dollar)" onkeypress="return validardecimal(event,this.value)" required value="'+precio_oferta+'"></input></td><td align="center"><input type="hidden" readonly name="estado_oferta[]" value="'+estado_oferta+'">'+estado_oferta+'</input></td></tr>';
+                        var fila2='<tr class="selected" id="fila2'+cont+'"><td><input type="text" name="codigo_inventario[]" value="'+codigo+'"><br>'+articulo_inventario+'</td><td align="center"><input type="hidden" name="fecha_vencimiento[]" value="'+fecha_vencimiento+'">'+fecha_vencimiento+'</input></td><td align="center"><input type="hidden" name="idpresentacion_inventario[]" value="'+idPresentacionInventario+'">'+presentacion_inventario+'</input></td><td align="center"><input type="hidden" readonly name="cantidadxunidad[]" value="'+cantidadxunidad+'">'+cantidadxunidad+'</input></td><td align="right"><input type="hidden" readonly name="costo_unidad_inventario[]" value="'+costo_unidad_inventario+'">'+moneda+costo_unidad_inventario+'</input></td><td align="center"><input type="hidden" readonly name="total_unidades_inventario[]" value="'+total_unidades_inventario+'">'+total_unidades_inventario+'</input></td><td align="left"><input type="hidden" readonly name="descripcion_inventario[]" value="'+descripcion_inventario+'">'+descripcion_inventario+'</input></td><td align="center"><input type="hidden" name="porcentaje_utilidad[]" value="'+porcentaje_utilidad+'">'+porcentaje_utilidad+'%'+'</td><td align="right">Precio Sugerido:<div class="input-group"><div class="input-group-prepend"><span class="input-group-text">{{ Auth::user()->moneda }}</span></div> <input type="" size="8"  name="precio_sugerido[]" class="form-control" aria-label="Amount (to the nearest dollar)" onkeypress="return validardecimal(event,this.value)" required value="'+precio_sugerido+'"></input></div>Precio Venta:<div class="input-group"><div class="input-group-prepend"><span class="input-group-text">{{ Auth::user()->moneda }}</span></div> <input type="" size="8"  name="precio_venta[]" class="form-control" aria-label="Amount (to the nearest dollar)" onkeypress="return validardecimal(event,this.value)" required value="'+precio_venta+'"></input></div></td><td align="right"><div class="input-group"><div class="input-group-prepend"><span class="input-group-text">%</span></div> <input type="" size="8" name="precio_oferta[]" class="form-control" aria-label="Amount (to the nearest dollar)" onkeypress="return validardecimal(event,this.value)" required value="'+precio_oferta+'"></input></td><td align="center"><input type="hidden" readonly name="estado_oferta[]" value="'+estado_oferta+'">'+estado_oferta+'</input></td></tr>';
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
                         cont++;
                         limpiar();
@@ -507,8 +525,10 @@
             $("#pdescripcion_inventario").val("");
             $("#pcodigo_inventario").val("");
             $("#pcantidadxunidad").val("1");
+            $("#pporcentaje_utilidad").val("0");
+            $("#pprecio_sugerido").val("0.00");
             $("#pprecio_venta").val("0.00");
-            $("#pprecio_oferta").val("0.00");
+            $("#pprecio_oferta").val("0");
         }
 
         function evaluar()

@@ -128,8 +128,8 @@ class IngresoController extends Controller
     public function store (IngresoFormRequest $request)
     {
     	
-    try
-    	{ 
+    //try
+    	//{ 
          
             $idempresa = Auth::user()->idempresa;
             $porcentaje_imp = Auth::user()->porcentaje_imp;
@@ -140,7 +140,7 @@ class IngresoController extends Controller
             $fecha=trim($request->get('fecha'));
             $fecha = date("Y-m-d", strtotime($fecha));
 
-    		DB::beginTransaction();
+    		//DB::beginTransaction();
 
     		$ingreso=new Ingreso;
     		$ingreso->idempresa=$idempresa;
@@ -173,15 +173,22 @@ class IngresoController extends Controller
             $total_unidades_inventario = $request->get('total_unidades_inventario');
             $costo_unidad_inventario = $request->get('costo_unidad_inventario');
             $descripcion_inventario = $request->get('descripcion_inventario');
+            $precio_sugerido = $request->get('precio_sugerido');
+            $porcentaje_utilidad = $request->get('porcentaje_utilidad');
             $precio_venta = $request->get('precio_venta');
             $precio_oferta = $request->get('precio_oferta');
             $estado_oferta = $request->get('estado_oferta');
+
+            
 
             $cont = 0;
             $total = 0;
 
     		while ($cont < count($idarticulo)) 
     		{
+                //calculamos el % de utilidad a partir del precio de venta y costo
+                $nuevo_porcentaje_utilidad=((($precio_venta[$cont]-$costo_unidad_inventario[$cont])/$costo_unidad_inventario[$cont])*100);
+                //formato fecha a base de datos
                 $fecha_vencimiento_articulo=$fecha_vencimiento[$cont];
                 $fecha_vencimiento_articulo = date("Y-m-d", strtotime($fecha_vencimiento_articulo));
     			$detalle = new DetalleIngreso();
@@ -205,6 +212,8 @@ class IngresoController extends Controller
                 $detalle->total_unidades_inventario=$total_unidades_inventario[$cont];
                 $detalle->costo_unidad_inventario=$costo_unidad_inventario[$cont];
                 $detalle->descripcion_inventario=$descripcion_inventario[$cont];
+                $detalle->precio_sugerido=$precio_sugerido[$cont];
+                $detalle->porcentaje_utilidad=$nuevo_porcentaje_utilidad;
                 $detalle->precio_venta=$precio_venta[$cont];
                 $detalle->precio_oferta=$precio_oferta[$cont];
                 $detalle->estado_oferta=$estado_oferta[$cont];
@@ -229,12 +238,12 @@ class IngresoController extends Controller
                 $bitacora->descripcion="Se creo un ingreso nuevo, Proveedor: ".$pro->nombre.", Comprobante: ".$ingreso->tipo_comprobante." ".$ingreso->serie_comprobante."-".$ingreso->num_comprobante.", Fecha: ".$ingreso->fecha.", Total Compra: ".$moneda.$total;
                 $bitacora->save();
 
-    		DB::commit();
+    		//DB::commit();
 
-    	}catch(\Exception $e)
-    	{
-    		DB::rollback();
-    	}
+    	//}catch(\Exception $e)
+    	//{
+    		//DB::rollback();
+    	//}
 
     	return Redirect::to('compras/ingreso');
     }
@@ -257,7 +266,7 @@ class IngresoController extends Controller
         	->join('articulo as a','d.idarticulo','=','a.idarticulo')
             ->join('presentacion as pc','d.idpresentacion_compra','=','pc.idpresentacion')
             ->join('presentacion as pi','d.idpresentacion_inventario','=','pi.idpresentacion')
-            ->select('d.iddetalle_ingreso','d.idingreso','d.idarticulo','a.nombre as Articulo','a.codigo as CodigoIngreso','d.codigo as CodigoInventario','a.minimo','d.idpresentacion_compra','pc.nombre as PresentacionCompra','d.cantidad_compra','d.bonificacion','d.cantidad_total_compra','d.costo_unidad_compra','d.sub_total_compra','d.descuento','d.total_compra','d.fecha_vencimiento','d.idpresentacion_inventario','pi.nombre as PresentacionInventario','d.cantidadxunidad','d.total_unidades_inventario','d.costo_unidad_inventario','d.descripcion_inventario','d.precio_venta','d.precio_oferta','d.estado_oferta','d.stock','d.estado')
+            ->select('d.iddetalle_ingreso','d.idingreso','d.idarticulo','a.nombre as Articulo','a.codigo as CodigoIngreso','d.codigo as CodigoInventario','a.minimo','d.idpresentacion_compra','pc.nombre as PresentacionCompra','d.cantidad_compra','d.bonificacion','d.cantidad_total_compra','d.costo_unidad_compra','d.sub_total_compra','d.descuento','d.total_compra','d.fecha_vencimiento','d.idpresentacion_inventario','pi.nombre as PresentacionInventario','d.cantidadxunidad','d.total_unidades_inventario','d.costo_unidad_inventario','d.descripcion_inventario','d.precio_sugerido','d.porcentaje_utilidad','d.precio_venta','d.precio_oferta','d.estado_oferta','d.stock','d.estado')
             ->where('d.idingreso','=',$id)
         	->get();
 
