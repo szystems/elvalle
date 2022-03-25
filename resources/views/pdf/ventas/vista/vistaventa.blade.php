@@ -57,6 +57,7 @@
 			<br><strong>Cliente:</strong><font color="Blue"> <strong>{{ $venta->nombre}}<strong></font>
 				<strong>Teléfono:</strong><font color="Blue"> <strong>{{ $venta->telefono}}<strong></font>
 				<strong>Dirección:</strong><font color="Blue"> <strong>{{ $venta->direccion}}<strong></font>
+			<br><strong>Usuario:</strong><font color="Blue"> <strong>{{ $venta->name}} ({{$venta->tipo_usuario}})<strong></font>
 			<br><strong>Documento:</strong><font color="Blue"> <strong>{{ $venta->tipo_comprobante}} {{$venta->serie_comprobante}}-{{$venta->num_comprobante}}<strong></font>
 			<br><strong>Saldo:</strong><font color="Blue"> <strong>{{ $venta->estadosaldo}}<strong></font>
 			@if ($venta->estadosaldo == "Pendiente")
