@@ -62,7 +62,7 @@
                             <div class="col-lg-4 col-sm-6 col-md-6 col-xs-12">
                                 <div class="form-group">
                                     <label for="usuario">Usuario</label>
-                                    <p>{{$venta->name}}</p>
+                                    <p>{{$venta->name}} ({{$venta->tipo_usuario}})</p>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">

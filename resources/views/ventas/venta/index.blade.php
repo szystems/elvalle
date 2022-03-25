@@ -61,10 +61,10 @@
 							<th><h5><strong><i class="fa fa-sliders-h"></i></strong></h5></th>
 							<th><h5><strong>Fecha</strong></h5></th>
 							<th><h5><strong>Cliente</strong></h5></th>
+							<th><h5><strong>Usuario</strong></h5></th>
 							<th><h5><strong>Comprobante</strong></h5></th>
 							<th><h5><strong>Total</strong></h5></th>
 							<th><h5><strong>Saldo</strong></h5></th>
-							<th><h5><strong>Usuario</strong></h5></th>
 							<th><h5><strong>Estado</strong></h5></th>
 							<th><h5><strong>Tipo Pago</strong></h5></th>
 							
@@ -125,13 +125,13 @@
 							?>
 							<td align="center"><h5>{{ $fecha}}</h5></td>
 							<td align="left"><h5>{{ $ven->nombre}}</h5></td>
+							<td align="left"><h5>{{ $ven->name}} ({{$ven->tipo_usuario}})</h5></td>
 							<td align="left"><h5>{{ $ven->tipo_comprobante.': '.$ven->serie_comprobante.'-'.$ven->num_comprobante}}</h5></td>
 							<td align="right"><h5>{{ Auth::user()->moneda }}{{number_format($ven->total_venta,2, '.', ',')}}</h5></td>
 							<td align="right"><h5> 
 								@if (($ven->total_venta - $ven->abonado) == 0)<font color="green">{{ Auth::user()->moneda }}{{ number_format(($ven->total_venta - $ven->abonado),2, '.', ',')}}</font> @endif 
 								@if (($ven->total_venta - $ven->abonado) != 0)<font color="Red">{{ Auth::user()->moneda }}{{ number_format(($ven->total_venta - $ven->abonado),2, '.', ',')}}</font> @endif
 							</h5></td>
-							<td align="center"><h5>{{ $ven->name}}</h5></td>
 							<td align="center"><h5>
 								@if ($ven->estadoventa == "Cerrada")<font color="limegreen">{{ $ven->estadoventa}} </font> @endif
 								@if ($ven->estadoventa == "Abierta")<font color="orange">{{ $ven->estadoventa}} </font> @endif

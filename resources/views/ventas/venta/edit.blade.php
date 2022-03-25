@@ -132,6 +132,7 @@
                             <input type="hidden" name="moneda" class="form-control" id="moneda" value="{{ Auth::user()->moneda }}">
                             <!--<input type="hidden" name="comision" class="form-control" id="comision" value="{{ Auth::user()->comision }}">-->
                             <input type="hidden" name="comision" class="form-control" id="comision" value="0">
+                            <input type="hidden" name="idusuario" class="form-control" id="idusaurio" value="{{$venta->idusuario}}">
                         </div>
                         </div>
                         <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">

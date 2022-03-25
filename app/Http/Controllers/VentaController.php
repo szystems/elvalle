@@ -84,7 +84,7 @@ class VentaController extends Controller
                     ->join('paciente as p','v.idcliente','=','p.idpaciente')
                     ->join('detalle_venta as dv','v.idventa','=','dv.idventa')
                     ->join('users as u','v.idusuario','=','u.id')
-                    ->select('v.idventa','p.nombre','u.name','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.fecha','v.impuesto','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estado','v.estadosaldo','v.estadoventa','v.tipopago')
+                    ->select('v.idventa','p.nombre','u.name','u.tipo_usuario','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.fecha','v.impuesto','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estado','v.estadosaldo','v.estadoventa','v.tipopago')
                     ->whereBetween('fecha', [$desde, $hasta])
                     ->where('p.idpaciente','LIKE','%'.$cliente.'%')
                     ->where('u.id','LIKE','%'.$usuario.'%')
@@ -94,7 +94,7 @@ class VentaController extends Controller
                     ->where('v.estadoventa','LIKE','%'.$estadoventa.'%')
                     ->where('v.tipopago','LIKE','%'.$tipopago.'%')
                     ->orderBy('v.fecha','desc')
-                    ->groupBy('v.idventa','p.nombre','u.name','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.fecha','v.impuesto','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estado','v.estadosaldo','v.estadoventa','v.tipopago')
+                    ->groupBy('v.idventa','p.nombre','u.name','u.tipo_usuario','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.fecha','v.impuesto','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estado','v.estadosaldo','v.estadoventa','v.tipopago')
                     ->paginate(20);
                 }
                 else
@@ -103,7 +103,7 @@ class VentaController extends Controller
                     ->join('paciente as p','v.idcliente','=','p.idpaciente')
                     ->join('detalle_venta as dv','v.idventa','=','dv.idventa')
                     ->join('users as u','v.idusuario','=','u.id')
-                    ->select('v.idventa','p.nombre','u.name','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.fecha','v.impuesto','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estado','v.estadosaldo','v.estadoventa','v.tipopago')
+                    ->select('v.idventa','p.nombre','u.name','u.tipo_usuario','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.fecha','v.impuesto','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estado','v.estadosaldo','v.estadoventa','v.tipopago')
                     ->whereBetween('fecha', [$desde, $hasta])
                     ->where('p.idpaciente','LIKE','%'.$cliente.'%')
                     ->where('u.id','LIKE','%'.$usuario.'%')
@@ -113,7 +113,7 @@ class VentaController extends Controller
                     ->where('v.tipopago','LIKE','%'.$tipopago.'%')
                     ->where('v.estadosaldo','!=',NULL)
                     ->orderBy('v.fecha','desc')
-                    ->groupBy('v.idventa','p.nombre','u.name','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.fecha','v.impuesto','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estado','v.estadosaldo','v.estadoventa','v.tipopago')
+                    ->groupBy('v.idventa','p.nombre','u.name','u.tipo_usuario','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.fecha','v.impuesto','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estado','v.estadosaldo','v.estadoventa','v.tipopago')
                     ->paginate(20);
                         
                 }
@@ -124,14 +124,14 @@ class VentaController extends Controller
                     ->join('paciente as p','v.idcliente','=','p.idpaciente')
                     ->join('detalle_venta as dv','v.idventa','=','dv.idventa')
                     ->join('users as u','v.idusuario','=','u.id')
-                    ->select('v.idventa','p.nombre','u.name','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.fecha','v.impuesto','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estado','v.estadosaldo','v.estadoventa','v.tipopago')
+                    ->select('v.idventa','p.nombre','u.name','u.tipo_usuario','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.fecha','v.impuesto','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estado','v.estadosaldo','v.estadoventa','v.tipopago')
                     ->where('v.idempresa','=',$idempresa)
                     ->where('v.estado','=','A')
                     ->where('v.estadoventa','LIKE','%'.$estadoventa.'%')
                     ->where('v.tipopago','LIKE','%'.$tipopago.'%')
                     ->where('v.estadosaldo','!=',NULL)
                     ->orderBy('v.fecha','desc')
-                    ->groupBy('v.idventa','p.nombre','u.name','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.fecha','v.impuesto','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estado','v.estadosaldo','v.estadoventa','v.tipopago')
+                    ->groupBy('v.idventa','p.nombre','u.name','u.tipo_usuario','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.fecha','v.impuesto','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estado','v.estadosaldo','v.estadoventa','v.tipopago')
                     ->paginate(20);
             }
             return view('ventas.venta.index',["ventas"=>$ventas,"personas"=>$personas,"usuarios"=>$usuarios,"desde"=>$desde,"hasta"=>$hasta,"cliente"=>$cliente,"usuario"=>$usuario,"estadosaldo"=>$estadosaldo,"estadoventa"=>$estadoventa,"tipopago"=>$tipopago,"hoy"=>$hoy,"usufiltro"=>$usufiltro,"clientefiltro"=>$clientefiltro]);
@@ -311,7 +311,7 @@ class VentaController extends Controller
             ->join('paciente as p','v.idcliente','=','p.idpaciente')
             ->join('users as u','v.idusuario','=','u.id')
             ->join('detalle_venta as dv','v.idventa','=','dv.idventa')
-            ->select('v.idventa','v.idcliente','v.fecha','p.nombre','u.name','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.impuesto','v.estado','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estadosaldo','v.estadoventa','v.tipopago')
+            ->select('v.idventa','v.idcliente','v.idusuario','v.fecha','p.nombre','u.name','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.impuesto','v.estado','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estadosaldo','v.estadoventa','v.tipopago')
             ->where('v.idventa','=',$id)
             ->where('v.idempresa','=',$idempresa)
             ->first();
@@ -334,7 +334,7 @@ class VentaController extends Controller
             $idempresa = Auth::user()->idempresa;
             $porcentaje_imp = Auth::user()->porcentaje_imp;
             $max_descuento = Auth::user()->max_descuento;
-            $idusuario = Auth::user()->id;
+            $idusuario = $request->get('idusuario');
             $zona_horaria = Auth::user()->zona_horaria;
             $comision = Auth::user()->comision;
 
@@ -448,7 +448,7 @@ class VentaController extends Controller
             ->join('paciente as p','v.idcliente','=','p.idpaciente')
             ->join('users as u','v.idusuario','=','u.id')
             ->join('detalle_venta as dv','v.idventa','=','dv.idventa')
-            ->select('v.idventa','v.idcliente','v.fecha','p.nombre','u.name','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.impuesto','v.estado','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estadosaldo','estadoventa','tipopago')
+            ->select('v.idventa','v.idcliente','v.idusuario','v.fecha','p.nombre','u.name','u.tipo_usuario','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.impuesto','v.estado','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estadosaldo','estadoventa','tipopago')
             ->where('v.idventa','=',$id)
             ->where('v.idempresa','=',$idempresa)
             ->first();
