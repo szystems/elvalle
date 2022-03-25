@@ -146,7 +146,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">{{ Auth::user()->moneda }}</span>
                                 </div>
-                                <input type="" name="pprecio_venta" class="form-control" id="pprecio_venta" aria-label="Amount (to the nearest dollar)" value="0.00" onkeypress="return validardecimal(event,this.value)" >
+                                <input readonly type="" name="pprecio_venta" class="form-control" id="pprecio_venta" aria-label="Amount (to the nearest dollar)" value="0.00" onkeypress="return validardecimal(event,this.value)" >
                             </div>
                         </div>
                     </div>
