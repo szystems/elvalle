@@ -64,14 +64,14 @@ class InventarioController extends Controller
                     ->join('persona as p','i.idproveedor','=','p.idpersona')
                     ->join('articulo as a','di.idarticulo','=','a.idarticulo')
                     ->join('presentacion as pr','di.idpresentacion_inventario','=','pr.idpresentacion')
-                    ->select('di.iddetalle_ingreso','di.idingreso','i.idproveedor','p.nombre as Proveedor','i.fecha','i.estado as EstadoIngreso','di.idarticulo','a.nombre as Articulo','a.minimo','di.codigo as Codigo','di.cantidad_total_compra','di.total_compra','di.descripcion_inventario','di.fecha_vencimiento','di.idpresentacion_inventario','pr.nombre as Presentacion','di.cantidadxunidad','di.total_unidades_inventario','di.costo_unidad_inventario','di.precio_venta','di.precio_oferta','di.estado_oferta','di.stock','di.estado as EstadoDetalle')
+                    ->select('di.iddetalle_ingreso','di.idingreso','i.idproveedor','p.nombre as Proveedor','i.fecha','i.estado as EstadoIngreso','di.idarticulo','a.nombre as Articulo','a.minimo','di.codigo as Codigo','di.cantidad_total_compra','di.total_compra','di.descripcion_inventario','di.fecha_vencimiento','di.idpresentacion_inventario','pr.nombre as Presentacion','di.cantidadxunidad','di.total_unidades_inventario','di.costo_unidad_inventario','di.precio_sugerido','di.porcentaje_utilidad','di.precio_venta','di.precio_oferta','di.estado_oferta','di.stock','di.estado as EstadoDetalle')
                     ->where('a.nombre','LIKE','%'.$articulof.'%')
                     ->where('p.nombre','LIKE','%'.$proveedorf.'%')
                     ->where('pr.nombre','LIKE','%'.$presentacionf.'%')
                     ->where('di.estado_oferta','LIKE','%'.$estadoOfertaf.'%')
                     ->where('i.estado','LIKE','%'.$estadof.'%')
-                    ->orderBy('di.fecha_vencimiento','asc')
-                    ->groupBy('di.iddetalle_ingreso','di.idingreso','i.idproveedor','p.nombre','i.fecha','i.estado','di.idarticulo','a.nombre','a.minimo','di.codigo','di.cantidad_total_compra','di.total_compra','di.descripcion_inventario','di.fecha_vencimiento','di.idpresentacion_inventario','pr.nombre','di.cantidadxunidad','di.total_unidades_inventario','di.costo_unidad_inventario','di.precio_venta','di.precio_oferta','di.estado_oferta','di.stock','di.estado')
+                    ->orderBy('i.fecha','desc')
+                    ->groupBy('di.iddetalle_ingreso','di.idingreso','i.idproveedor','p.nombre','i.fecha','i.estado','di.idarticulo','a.nombre','a.minimo','di.codigo','di.cantidad_total_compra','di.total_compra','di.descripcion_inventario','di.fecha_vencimiento','di.idpresentacion_inventario','pr.nombre','di.cantidadxunidad','di.total_unidades_inventario','di.costo_unidad_inventario','di.precio_sugerido','di.porcentaje_utilidad','di.precio_venta','di.precio_oferta','di.estado_oferta','di.stock','di.estado')
                     ->paginate(20);
                     
                 
@@ -95,6 +95,8 @@ class InventarioController extends Controller
             $idpresentacion_inventario = $request->get('idpresentacion_inventario');//
             $descripcion_inventario = $request->get('descripcion_inventario');
             $cantidadxunidad = $request->get('cantidadxunidad');
+            $precio_sugerido = $request->get('precio_sugerido');
+            $porcentaje_sujerido = $request->get('porcentaje_sujerido');
             $precio_venta = $request->get('precio_venta');
             $precio_oferta = $request->get('precio_oferta');
             $estado_oferta = $request->get('estado_oferta');
@@ -114,6 +116,9 @@ class InventarioController extends Controller
                 $stock=$total_unidades_inventario;
             }
 
+            //calculamos el % de utilidad a partir del precio de venta y costo
+            $nuevo_porcentaje_utilidad=((($precio_venta-$costo_unidad_inventario)/$costo_unidad_inventario)*100);
+
             //Formato fecha de vencimiento
             $fecha_vencimiento_articulo=$fecha_vencimiento;
             $fecha_vencimiento_articulo = date("Y-m-d", strtotime($fecha_vencimiento_articulo));
@@ -129,6 +134,8 @@ class InventarioController extends Controller
             $detalle->total_unidades_inventario=$total_unidades_inventario;
             $detalle->costo_unidad_inventario=$costo_unidad_inventario;
             $detalle->descripcion_inventario=$descripcion_inventario;
+            $detalle->precio_sugerido=$precio_sugerido;
+            $detalle->porcentaje_utilidad=$nuevo_porcentaje_utilidad;
             $detalle->precio_venta=$precio_venta;
             $detalle->precio_oferta=$precio_oferta;
             $detalle->estado_oferta=$estado_oferta;

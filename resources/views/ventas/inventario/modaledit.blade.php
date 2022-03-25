@@ -64,6 +64,28 @@
 				@endif
 				<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
 					<div class="form-group">
+						<label for="porcentaje_utilidad"><strong>Porcentaje de Utilidad</strong></label>
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text">%</span>
+							</div>
+							<input type="" readonly name="porcentaje_utilidad" class="form-control" id="porcentaje_utilidad" aria-label="Amount (to the nearest dollar)" value="{{$det->porcentaje_utilidad}}" onkeypress="return validardecimal(event,this.value)" required>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+					<div class="form-group">
+						<label for="precio_sugerido"><strong>Precio Sugerido</strong></label>
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text">{{ Auth::user()->moneda }}</span>
+							</div>
+							<input type="" name="precio_sugerido" class="form-control input-sm" id="precio_sugerido" aria-label="Amount (to the nearest dollar)" value="{{$det->precio_sugerido}}" onkeypress="return validardecimal(event,this.value)" required>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+					<div class="form-group">
 						<label for="precio_venta"><strong>Precio Venta</strong></label>
 						<div class="input-group">
 							<div class="input-group-prepend">

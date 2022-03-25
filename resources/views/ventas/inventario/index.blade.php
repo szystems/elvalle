@@ -28,20 +28,21 @@
 				<div class="table-responsive">
 					<table class="table table-striped table-bordered table-condensed table-hover">
 						<thead>
-							<th><h5><strong><i class="fa fa-sliders-h"></i></strong></h5></th>
-							<th><h5><strong>Fecha_Ingreso</strong></h5></th>
-							<th><h5><strong>Proveedor</strong></h5></th>
-							<th><h5><strong>Articulo/Codigo</strong></h5></th>
-							<th><h5><strong>Descripcion</strong></h5></th>
-							<th><h5><strong>F.Vencimiento</strong></h5></th>
-							<th><h5><strong>Presentacion</strong></h5></th>
-							<th><h5><strong>Unidades</strong></h5></th>
-							<th><h5><strong>Stock</strong></h5></th>
-							<th><h5><strong>CostoU.</strong></h5></th>
-							<th><h5><strong>P.Venta</strong></h5></th>
-							<th><h5><strong>%Oferta</strong></h5></th>
-							<th><h5><strong>Oferta</strong></h5></th>
-							<th><h5><strong>Estado</strong></h5></th>
+							<th><small><strong><i class="fa fa-sliders-h"></i></strong></small></th>
+							<th><small><strong>FechaIngreso</strong></small></th>
+							<th><small><strong>Proveedor</strong></small></th>
+							<th><small><strong>Articulo/Codigo</strong></small></th>
+							<th><small><strong>Descripcion</strong></small></th>
+							<th><small><strong>F.Vencimiento</strong></small></th>
+							<th><small><strong>Presentacion</strong></small></th>
+							<th><small><strong>Unds.</strong></small></th>
+							<th><small><strong>Stock</strong></small></th>
+							<th><small><strong>CostoU.</strong></small></th>
+							<th><small><strong>%Uti.</strong></small></th>
+							<th><small><strong>P.Venta</strong></small></th>
+							<th><small><strong>%Oferta</strong></small></th>
+							<th><small><strong>Oferta</strong></small></th>
+							<th><small><strong>Estado</strong></small></th>
 						</thead>
 		               @foreach ($detalles as $det)
 						<tr>
@@ -55,12 +56,12 @@
 									<i class="far fa-edit"></i>
 								</button>
 							</td>
-							<td align="center"><h5><a href="{{URL::action('IngresoController@show',$det->idingreso)}}" target="_blanc">{{ $fecha_ingreso}}</a></h5></td>
-							<td align="center"><h5><a href="{{URL::action('ProveedorController@show',$det->idproveedor)}}" target="_blanc">{{ $det->Proveedor}}</a></h5></td>
-							<td align="left"><h5>{{$det->Codigo}} <br> <strong> {{ $det->Articulo}}</strong></h5></td>
-							<td align="left"><h5>{{$det->descripcion_inventario}}</h5></td>
-							<td align="center"><h5>{{$fecha_vencimiento}}</h5></td>
-							<td align="center"><h5>{{$det->Presentacion}}</h5></td>
+							<td align="center"><small><a href="{{URL::action('IngresoController@show',$det->idingreso)}}" target="_blanc">{{ $fecha_ingreso}}</a></small></td>
+							<td align="center"><small><a href="{{URL::action('ProveedorController@show',$det->idproveedor)}}" target="_blanc">{{ $det->Proveedor}}</a></small></td>
+							<td align="left"><small>{{$det->Codigo}} <br> <strong> {{ $det->Articulo}}</strong></small></td>
+							<td align="left"><small>{{$det->descripcion_inventario}}</small></td>
+							<td align="center"><small>{{$fecha_vencimiento}}</small></td>
+							<td align="center"><small>{{$det->Presentacion}}</small></td>
 							<td align="center"><font color="blue"><strong>{{$det->total_unidades_inventario}}</strong></font></td>
 							@if(($det->stock <= $det->minimo) & ($det->stock > 0))
                                 @if($det->EstadoDetalle == "Activo")
@@ -84,20 +85,21 @@
                                 @endif
                             @endif
 							<td align="right"><h5><font color="orange">{{ Auth::user()->moneda }}{{ number_format($det->costo_unidad_inventario,2, '.', ',')}}</font></h5></td>
-							<td align="right"><h5><font color="blue">{{ Auth::user()->moneda }}{{ number_format($det->precio_venta,2, '.', ',')}}</h5></td>
+							<td align="center"><h5>{{$det->porcentaje_utilidad}}%</h5></td>
+							<td align="right"><h5><font color="blue">{{ Auth::user()->moneda }}{{ number_format($det->precio_venta,2, '.', ',')}}</font></h5> <small> P.S:{{ Auth::user()->moneda }}{{ number_format($det->precio_sugerido,2, '.', ',')}}</small></td>
 							<?php
                                 $precio_descuento= ($det->precio_venta-(($det->precio_oferta*$det->precio_venta)/(100)));
                             ?>
 							<td align="right"><h5>{{$det->precio_oferta}}% <font color="limegreen">({{ Auth::user()->moneda }}{{ number_format($precio_descuento,2, '.', ',')}})</font></h5></td>
 							@if($det->estado_oferta == "Activada")
-                                <td align="center"><font color="limegreen">{{$det->estado_oferta}}</font></td>
+                                <td align="center"><font color="limegreen"><small>{{$det->estado_oferta}}</small></font></td>
                             @elseif($det->estado_oferta == "Inactivo")
-                                <td align="center"><font color="red">{{$det->estado_oferta}}</font></td>
+                                <td align="center"><font color="red"><small>{{$det->estado_oferta}}</small></font></td>
                             @endif
 							@if($det->EstadoDetalle == "Activo")
-								<td align="center"><font color="limegreen">{{$det->EstadoDetalle}}</font></td>
+								<td align="center"><font color="limegreen"><small>{{$det->EstadoDetalle}}</small></font></td>
 							@else
-								<td align="center"><font color="red">{{$det->EstadoDetalle}}</font></td>
+								<td align="center"><font color="red"><small>{{$det->EstadoDetalle}}</small></font></td>
 							@endif
 						</tr>
 						@include('ventas.inventario.modaledit')
