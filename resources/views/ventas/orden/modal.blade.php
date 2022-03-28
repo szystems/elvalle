@@ -10,7 +10,7 @@
 						</button>
 					</div>
 					<div class="modal-body">
-						Confirme si desea cancelar la orden.
+						Confirme si desea cancelar la orden ID: {{$orden->idorden}}.
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-info" data-dismiss="modal"><i class="fas fa-ban"></i> Cerrar</button>

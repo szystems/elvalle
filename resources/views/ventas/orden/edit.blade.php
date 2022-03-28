@@ -6,7 +6,7 @@
       <div class="col-md-12 mb-4">
             <div class="card">
                 <header class="card-header">
-                    <h2 class="h3 card-header-title"><strong>Editar Orden </strong></h2>
+                    <h2 class="h3 card-header-title"><strong>Editar Orden ID: {{$orden->idorden}}</strong></h2>
                 </header>
 
                 <div class="card-body">

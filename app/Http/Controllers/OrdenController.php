@@ -99,7 +99,7 @@ class OrdenController extends Controller
                 ->where('u.id','LIKE','%'.$usuario.'%')
                 ->where('o.estado_orden','LIKE','%'.$estadoorden.'%')
                 ->where('o.estado','!=','Eliminado')
-                ->orderBy('o.fecha','desc')
+                ->orderBy('o.idorden','desc')
                 
                 ->paginate(20);
             }
@@ -111,7 +111,7 @@ class OrdenController extends Controller
                 ->join('users as u','o.idusuario','=','u.id')
                 ->select('o.idorden','o.fecha','o.estado_orden','o.estado','o.total','p.idpaciente','p.nombre as Paciente','p.sexo','p.telefono','p.fecha_nacimiento','p.dpi','p.nit','d.id as iddoctor','d.name as Doctor','d.especialidad','u.id as idusuario','u.name as Usuario','u.tipo_usuario')
                 ->where('o.estado','!=','Eliminado')
-                ->orderBy('o.fecha','desc')
+                ->orderBy('o.idorden','desc')
                 
                 ->paginate(20);
             }

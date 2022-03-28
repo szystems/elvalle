@@ -59,6 +59,7 @@
 					<table class="table table-striped table-bordered table-condensed table-hover">
 						<thead>
 							<th><h5><strong><i class="fa fa-sliders-h"></i></strong></h5></th>
+							<th><h5><strong>ID</strong></h5></th>
 							<th><h5><strong>Fecha</strong></h5></th>
 							<th><h5><strong>Doctor</strong></h5></th>
 							<th><h5><strong>Paciente</strong></h5></th>
@@ -108,6 +109,7 @@
 							<?php
 								$fecha = date("d-m-Y", strtotime($orden->fecha));
 							?>
+							<td align="left"><h5>{{ $orden->idorden}}</h5></td>
 							<td align="center"><h5>{{ $fecha}}</h5></td>
 							<td align="left"><h5>{{ $orden->Doctor}}</h5></td>
 							<td align="left"><h5>{{ $orden->Paciente}}</h5></td>
