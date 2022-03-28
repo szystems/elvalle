@@ -84,7 +84,7 @@ class ReportesController extends Controller
                         ->join('persona as p','v.idcliente','=','p.idpersona')
                         ->join('detalle_venta as dv','v.idventa','=','dv.idventa')
                         ->join('users as u','v.idusuario','=','u.id')
-                        ->select('v.idventa','p.nombre','u.name','u.tipo_usuario','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.fecha','v.impuesto','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estado','v.estadosaldo','v.estadoventa','v.tipopago')
+                        ->select('v.idventa','p.nombre','u.name','u.tipo_usuario','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.fecha','v.impuesto','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estado','v.estadosaldo','v.estadoventa','v.tipopago','v.idorden')
                         ->whereBetween('fecha', [$desde, $hasta])
                         ->where('p.idpersona','LIKE','%'.$cliente.'%')
                         ->where('u.id','LIKE','%'.$usuario.'%')
@@ -94,7 +94,7 @@ class ReportesController extends Controller
                         ->where('v.estadoventa','LIKE','%'.$estadoventa.'%')
                         ->where('v.tipopago','LIKE','%'.$tipopago.'%')
                         ->orderBy('v.fecha','asc')
-                        ->groupBy('v.idventa','p.nombre','u.name','u.tipo_usuario','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.fecha','v.impuesto','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estado','v.estadosaldo','v.estadoventa','v.tipopago')
+                        ->groupBy('v.idventa','p.nombre','u.name','u.tipo_usuario','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.fecha','v.impuesto','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estado','v.estadosaldo','v.estadoventa','v.tipopago','v.idorden')
                         ->paginate(20);
                         //return view('pdf.ventas.reporteventas',["ventas"=>$ventas,"personas"=>$personas,"usuarios"=>$usuarios,"desde"=>$desde,"hasta"=>$hasta,"cliente"=>$cliente,"usuario"=>$usuario,"estadosaldo"=>$estadosaldo,"hoy"=>$hoy,"usufiltro"=>$usufiltro,"provfiltro"=>$clientefiltro]);
                         //return view('pdf.ventas.reporteventas', array("ventas"=>$ventas,"personas"=>$personas,"usuarios"=>$usuarios,"desde"=>$desde,"hasta"=>$hasta,"cliente"=>$cliente,"usuario"=>$usuario,"estadosaldo"=>$estadosaldo,"hoy"=>$hoy,"usufiltro"=>$usufiltro,"provfiltro"=>$clientefiltro));
@@ -105,7 +105,7 @@ class ReportesController extends Controller
                         ->join('persona as p','v.idcliente','=','p.idpersona')
                         ->join('detalle_venta as dv','v.idventa','=','dv.idventa')
                         ->join('users as u','v.idusuario','=','u.id')
-                        ->select('v.idventa','p.nombre','u.name','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.fecha','v.impuesto','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estado','v.estadosaldo','v.estadoventa','v.tipopago')
+                        ->select('v.idventa','p.nombre','u.name','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.fecha','v.impuesto','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estado','v.estadosaldo','v.estadoventa','v.tipopago','v.idorden')
                         ->whereBetween('fecha', [$desde, $hasta])
                         ->where('p.idpersona','LIKE','%'.$cliente.'%')
                         ->where('u.id','LIKE','%'.$usuario.'%')
@@ -115,7 +115,7 @@ class ReportesController extends Controller
                         ->where('v.tipopago','LIKE','%'.$tipopago.'%')
                         ->where('v.estadosaldo','!=',NULL)
                         ->orderBy('v.fecha','asc')
-                        ->groupBy('v.idventa','p.nombre','u.name','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.fecha','v.impuesto','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estado','v.estadosaldo','v.estadoventa','v.tipopago')
+                        ->groupBy('v.idventa','p.nombre','u.name','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.fecha','v.impuesto','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estado','v.estadosaldo','v.estadoventa','v.tipopago','v.idorden')
                         ->paginate(20);
                         //return view('pdf.ventas.reporteventas',["ventas"=>$ventas,"personas"=>$personas,"usuarios"=>$usuarios,"desde"=>$desde,"hasta"=>$hasta,"cliente"=>$cliente,"usuario"=>$usuario,"estadosaldo"=>$estadosaldo,"hoy"=>$hoy,"usufiltro"=>$usufiltro,"provfiltro"=>$clientefiltro]);
                         //return view('pdf.ventas.reporteventas', array("ventas"=>$ventas,"personas"=>$personas,"usuarios"=>$usuarios,"desde"=>$desde,"hasta"=>$hasta,"cliente"=>$cliente,"usuario"=>$usuario,"estadosaldo"=>$estadosaldo,"hoy"=>$hoy,"usufiltro"=>$usufiltro,"provfiltro"=>$clientefiltro));
@@ -128,13 +128,13 @@ class ReportesController extends Controller
                         ->join('persona as p','v.idcliente','=','p.idpersona')
                         ->join('detalle_venta as dv','v.idventa','=','dv.idventa')
                         ->join('users as u','v.idusuario','=','u.id')
-                        ->select('v.idventa','p.nombre','u.name','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.fecha','v.impuesto','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estado','v.estadosaldo','v.estadoventa','v.tipopago')
+                        ->select('v.idventa','p.nombre','u.name','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.fecha','v.impuesto','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estado','v.estadosaldo','v.estadoventa','v.tipopago','v.idorden')
                         ->where('v.idempresa','=',$idempresa)
                         ->where('v.estado','=','A')
                         ->where('v.estadoventa','LIKE','%'.$estadoventa.'%')
                         ->where('v.tipopago','LIKE','%'.$tipopago.'%')
                         ->orderBy('v.fecha','asc')
-                        ->groupBy('v.idventa','p.nombre','u.name','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.fecha','v.impuesto','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estado','v.estadosaldo','v.estadoventa','v.tipopago')
+                        ->groupBy('v.idventa','p.nombre','u.name','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.fecha','v.impuesto','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estado','v.estadosaldo','v.estadoventa','v.tipopago','v.idorden')
                         ->paginate(20);
                 }
                 if ( $verpdf == "Descargar" )

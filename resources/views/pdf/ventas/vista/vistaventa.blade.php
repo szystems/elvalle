@@ -53,6 +53,7 @@
 				$fecha = date("d-m-Y", strtotime($venta->fecha));
 			?>
 			<strong>Fecha Venta:</strong><font color="Blue"> <strong>{{ $fecha}} </strong></font>
+			@if($venta->idorden != null)<br><strong>ID Orden:</strong><font color="Blue"> <strong>{{ $venta->idorden}} </strong></font>@endif
 			<br><strong>Comprobante:</strong><font color="Blue"> <strong>{{$venta->tipo_comprobante}} {{$venta->serie_comprobante}}-{{$venta->num_comprobante}} </strong></font>
 			<br><strong>Cliente:</strong><font color="Blue"> <strong>{{ $venta->nombre}}<strong></font>
 				<strong>Teléfono:</strong><font color="Blue"> <strong>{{ $venta->telefono}}<strong></font>

@@ -39,7 +39,15 @@
                                     <p>{{$orden->idorden}}</p>
                                 </div>
                             </div>
-                            <div class="col-lg-8 col-sm-8 col-md-8 col-xs-12">
+                            @if($orden->idventa != null)
+                            <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+                                <div class="form-group">
+                                    <label for="estado_orden"><b>ID Venta</b></label>
+                                    <p>@if($orden->idventa != null)<a href="{{URL::action('VentaController@show',$orden->idventa)}}">{{ $orden->idventa}}</a>@endif</p>
+                                </div>
+                            </div>
+                            @endif
+                            <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
                                 <div class="form-group">
                                     <?php
                                         $fecha = date("d-m-Y", strtotime($orden->fecha));
@@ -54,6 +62,7 @@
                                     <p>{{$orden->estado_orden}}</p>
                                 </div>
                             </div>
+                            
                             <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
                                 <div class="form-group">
                                     <label for="paciente"><b>Paciente</b></label>
@@ -69,7 +78,7 @@
                             <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
                                 <div class="form-group">
                                     <label><b>Usuario</b></label>
-                                    <p>{{$orden->Usuario}}</p>
+                                    <p>{{$orden->Usuario}} ({{$orden->tipo_usuario}})</p>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">

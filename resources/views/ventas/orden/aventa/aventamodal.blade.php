@@ -19,7 +19,7 @@
 					</div>
 					<div class="modal-body">
 						
-					Confirme si desea cerrar la orden, si confirma la orden cambiara su estado a “Finalizada” lo cual no le permitirá cambiar los datos de la misma y pasara a ser una venta la cual podrá visualizar en el módulo de venta.
+					Confirme si desea cerrar la orden, si confirma la orden cambiara su estado a “Finalizada” y pasara a ser una venta la cual podrá visualizar en el módulo de venta, si esta ya existe "Remplazara todos los datos existentes de la misma por esta orden".
 						
 					</div>
 					<div class="modal-footer">

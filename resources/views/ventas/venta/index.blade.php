@@ -68,7 +68,7 @@
 							<th><h5><strong>Saldo</strong></h5></th>
 							<th><h5><strong>Estado</strong></h5></th>
 							<th><h5><strong>Tipo Pago</strong></h5></th>
-							
+							<th><h5><strong>ID Orden</strong></h5></th>
 						</thead>
 		               @foreach ($ventas as $ven)
 						<tr>
@@ -139,6 +139,7 @@
 								@if ($ven->estadoventa == "Abierta")<font color="orange">{{ $ven->estadoventa}} </font> @endif
 							</h5></td>
 							<td align="left"><h5>{{ $ven->tipopago}}</h5></td>
+							<td align="left"><h5>@if($ven->idorden != null)<a href="{{URL::action('OrdenController@show',$ven->idorden)}}">{{ $ven->idorden}}</a>@endif</h5></td>
 						</tr>
 						@include('ventas.venta.modal')
 						@include('ventas.venta.modals.modalcerrar')

@@ -25,6 +25,14 @@
                                     <p>{{$venta->idventa}}</p>
                                 </div>
                             </div>
+                            @if($venta->idorden != null)
+                            <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+                                <div class="form-group">
+                                    <label for="id">ID Orden</label>
+                                    <p><a href="{{URL::action('OrdenController@show',$venta->idorden)}}">{{ $venta->idorden}}</a></p>
+                                </div>
+                            </div>
+                            @endif
                             <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
                                 <div class="form-group">
                                     <?php
@@ -216,7 +224,7 @@
                                     </thead>
                                                     
                                 </table> 
-                                <h6><font color="orange"> Si has equivocado la cantidad puedes abonar o restar cantidades con números negativos por ejemplo (-10.50).</</font></h6>
+                                <h6><font color="orange"> Si has equivocado la cantidad puedes abonar o restar cantidades con números negativos por ejemplo (-10.50).</font></h6>
                             <h6><font color="orange"> Si la cantidad abonada al agregar artículos fue mayor, puede que te aparezcan números negativos, lo cual indica que tienes un sobrante lo cual puedes revertir al abonar la cantidad negativa exacta.</font></h6>
                             </div>
                         </div>

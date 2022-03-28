@@ -23,7 +23,8 @@ class Orden extends Model
     	'observaciones',
     	'estado_orden',
     	'estado',
-        'total'        
+        'total',
+        'idventa'        
     ];
 
     protected $guarded =[

@@ -65,8 +65,8 @@
 							<th><h5><strong>Paciente</strong></h5></th>
 							<th><h5><strong>Total</strong></h5></th>
 							<th><h5><strong>Estado</strong></h5></th>
+							<th><h5><strong>ID Venta</strong></h5></th>
 							<th><h5><strong>Usuario</strong></h5></th>
-							
 						</thead>
 		               @foreach ($ordenes as $orden)
 						<tr>
@@ -79,7 +79,6 @@
 										</button>
 									</span>
 								</a>
-								@if($orden->estado_orden != "Finalizada")
 								<a href="{{URL::action('OrdenController@edit',$orden->idorden)}}">
                                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar orden">
                                           <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button">
@@ -87,7 +86,6 @@
                                           </button>
                                     </span>
                               	</a>
-								@endif
 		                        <a href="" data-target="#modal-delete-{{$orden->idorden}}" data-toggle="modal">
 									<span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Eliminar Orden">
 		                        		<button class="btn btn-sm btn-danger" style="pointer-events: none;" type="button">
@@ -95,7 +93,7 @@
 										</button>
 									</span>
 		                        </a>
-								@if($orden->estado_orden != "Finalizada")
+								
 								<a href="" data-target="#modal-aventa-{{$orden->idorden}}" data-toggle="modal">
 									<span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Pasar a Venta">
 										<button class="btn btn-sm btn-warning" style="pointer-events: none;" type="button">
@@ -103,19 +101,19 @@
 										</button>
 									</span>
 								</a>
-								@endif
 							
 							</td>
 							<?php
 								$fecha = date("d-m-Y", strtotime($orden->fecha));
 							?>
-							<td align="left"><h5>{{ $orden->idorden}}</h5></td>
+							<td align="center"><h5>{{ $orden->idorden}}</h5></td>
 							<td align="center"><h5>{{ $fecha}}</h5></td>
 							<td align="left"><h5>{{ $orden->Doctor}}</h5></td>
 							<td align="left"><h5>{{ $orden->Paciente}}</h5></td>
 							<td align="right"><h5>{{ Auth::user()->moneda }}{{number_format($orden->total,2, '.', ',')}}</h5></td>
 							<td align="center"><h5>{{ $orden->estado_orden}}</h5></td>
-							<td align="left"><h5>{{ $orden->Usuario}}</h5></td>
+							<td align="center"><h5>@if($orden->idventa != null)<a href="{{URL::action('VentaController@show',$orden->idventa)}}">{{ $orden->idventa}}</a>@endif</h5></td>
+							<td align="left"><h5>{{ $orden->Usuario}} ({{$orden->tipo_usuario}})</h5></td>
 						</tr>
 						@include('ventas.orden.modal')
 						@include('ventas.orden.aventa.aventamodal')

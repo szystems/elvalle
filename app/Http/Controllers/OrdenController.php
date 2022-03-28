@@ -92,7 +92,7 @@ class OrdenController extends Controller
                 ->join('paciente as p','o.idpaciente','=','p.idpaciente')
                 ->join('users as d','o.iddoctor','=','d.id')
                 ->join('users as u','o.idusuario','=','u.id')
-                ->select('o.idorden','o.fecha','o.estado_orden','o.estado','o.total','p.idpaciente','p.nombre as Paciente','p.sexo','p.telefono','p.fecha_nacimiento','p.dpi','p.nit','d.id as iddoctor','d.name as Doctor','d.especialidad','u.id as idusuario','u.name as Usuario','u.tipo_usuario')
+                ->select('o.idorden','o.idventa','o.fecha','o.estado_orden','o.estado','o.total','p.idpaciente','p.nombre as Paciente','p.sexo','p.telefono','p.fecha_nacimiento','p.dpi','p.nit','d.id as iddoctor','d.name as Doctor','d.especialidad','u.id as idusuario','u.name as Usuario','u.tipo_usuario')
                 ->whereBetween('fecha', [$desde, $hasta])
                 ->where('p.idpaciente','LIKE','%'.$paciente.'%')
                 ->where('d.id','LIKE','%'.$doctor.'%')
@@ -109,7 +109,7 @@ class OrdenController extends Controller
                 ->join('paciente as p','o.idpaciente','=','p.idpaciente')
                 ->join('users as d','o.iddoctor','=','d.id')
                 ->join('users as u','o.idusuario','=','u.id')
-                ->select('o.idorden','o.fecha','o.estado_orden','o.estado','o.total','p.idpaciente','p.nombre as Paciente','p.sexo','p.telefono','p.fecha_nacimiento','p.dpi','p.nit','d.id as iddoctor','d.name as Doctor','d.especialidad','u.id as idusuario','u.name as Usuario','u.tipo_usuario')
+                ->select('o.idorden','o.idventa','o.fecha','o.estado_orden','o.estado','o.total','p.idpaciente','p.nombre as Paciente','p.sexo','p.telefono','p.fecha_nacimiento','p.dpi','p.nit','d.id as iddoctor','d.name as Doctor','d.especialidad','u.id as idusuario','u.name as Usuario','u.tipo_usuario')
                 ->where('o.estado','!=','Eliminado')
                 ->orderBy('o.idorden','desc')
                 
@@ -235,7 +235,7 @@ class OrdenController extends Controller
         ->join('paciente as p','o.idpaciente','=','p.idpaciente')
         ->join('users as d','o.iddoctor','=','d.id')
         ->join('users as u','o.idusuario','=','u.id')
-        ->select('o.idorden','o.fecha','o.codigoeeps','o.codigopapanicolau','o.observaciones','o.estado_orden','o.estado','o.total','p.idpaciente','p.nombre as Paciente','p.sexo','p.telefono','p.fecha_nacimiento','p.dpi','p.nit','d.id as iddoctor','d.name as Doctor','d.especialidad','u.id as idusuario','u.name as Usuario','u.tipo_usuario')
+        ->select('o.idorden','o.fecha','o.codigoeeps','o.codigopapanicolau','o.observaciones','o.estado_orden','o.estado','o.total','p.idpaciente','p.nombre as Paciente','p.sexo','p.telefono','p.fecha_nacimiento','p.dpi','p.nit','d.id as iddoctor','d.name as Doctor','d.especialidad','u.id as idusuario','u.name as Usuario','u.tipo_usuario','o.idventa')
         ->where('o.idorden','=',$id)   
         ->first();
 
@@ -405,6 +405,7 @@ class OrdenController extends Controller
 
             $totalorden=Orden::findOrFail($orden->idorden);
             $totalorden->total=$total;
+            $totalorden->estado_orden="Pendiente";
     		$totalorden->save();
             
             
@@ -443,7 +444,7 @@ class OrdenController extends Controller
             ->join('paciente as p','o.idpaciente','=','p.idpaciente')
             ->join('users as d','o.iddoctor','=','d.id')
             ->join('users as u','o.idusuario','=','u.id')
-            ->select('o.idorden','o.fecha','o.codigoeeps','o.codigopapanicolau','o.observaciones','o.estado_orden','o.estado','o.total','p.idpaciente','p.nombre as Paciente','p.sexo','p.telefono','p.fecha_nacimiento','p.dpi','p.nit','d.id as iddoctor','d.name as Doctor','d.especialidad','u.id as idusuario','u.name as Usuario','u.tipo_usuario')
+            ->select('o.idorden','o.idventa','o.fecha','o.codigoeeps','o.codigopapanicolau','o.observaciones','o.estado_orden','o.estado','o.total','p.idpaciente','p.nombre as Paciente','p.sexo','p.telefono','p.fecha_nacimiento','p.dpi','p.nit','d.id as iddoctor','d.name as Doctor','d.especialidad','u.id as idusuario','u.name as Usuario','u.tipo_usuario')
             ->where('o.idorden','=',$idorden)   
             ->first();
 
@@ -466,6 +467,8 @@ class OrdenController extends Controller
             $impuesto=0;
             $total_impuesto=0;
             $total_comision=0;
+            
+            
             $total_abonado=0;
             $estadoventa="Cerrada";
             $tipopago="Efectivo";
@@ -480,88 +483,144 @@ class OrdenController extends Controller
                 $totalPrecioCompra = $detalle->precio_costo;
                 $total_compra = $total_compra + $totalPrecioCompra;
             }
-
-            if ($total_abonado == $total_venta)
+            
+            if($orden->idventa == null)
             {
-                $saldo = "Pagado";
-            }
-            else
+                if ($total_abonado == $total_venta)
+                {
+                    $saldo = "Pagado";
+                }
+                else
+                {
+                    $saldo = "Pendiente";
+                }
+
+                DB::beginTransaction();
+
+                $venta=new Venta;
+                $venta->idempresa=$idempresa;
+                $venta->idcliente=$orden->idpaciente;
+                $venta->idusuario=$idusuario;
+                $venta->tipo_comprobante="";
+                $venta->serie_comprobante=null;
+                $venta->num_comprobante=null;
+                
+                $venta->fecha=$fecha;
+                $venta->impuesto=$impuesto;
+                $venta->total_venta=$total_venta;
+                $venta->total_compra=$total_compra;
+                $venta->total_comision=$total_comision;
+                $venta->total_impuesto=$total_impuesto;
+                $venta->abonado=$total_abonado;
+                $venta->estado='A';
+                $venta->estadosaldo=$saldo;
+                $venta->estadoventa=$estadoventa;
+                $venta->tipopago=$tipopago;
+                $venta->idorden=$idorden;
+                $venta->save();
+
+
+                $idarticulo = $request->get('idarticulo');
+                $cantidad = $request->get('cantidad');
+                $descuento = $request->get('descuento');
+                $precio_venta = $request->get('precio_venta');
+                $precio_compra = $request->get('precio_compra');
+                $precio_oferta = $request->get('precio_oferta');
+
+
+                foreach($detalles as $od) 
+                {
+                    $detalle = new DetalleVenta();
+                    $detalle->idventa=$venta->idventa;
+                    $detalle->idarticulo=$od->idarticulo;
+                    $detalle->cantidad=$od->cantidad;
+                    $detalle->precio_venta=$od->precio_venta;
+                    $detalle->precio_compra=$od->precio_costo;
+                    $detalle->precio_oferta=0;
+                    $detalle->descuento=0;
+                    $detalle->agregado= "SI";
+                    $detalle->save();	
+                }
+
+                //cambiamos estado de orden a finalizada y agregamos id de venta
+
+                $totalorden=Orden::findOrFail($orden->idorden);
+                $totalorden->estado_orden="Finalizada";
+                $totalorden->idventa=$venta->idventa;
+                $totalorden->save();
+
+            }else
             {
-                $saldo = "Pendiente";
+                $ventaAnterior = DB::table('venta')
+                ->where('idventa','=',$orden->idventa)
+                ->first();
+
+                $total_abonado=$ventaAnterior->abonado;
+
+                if ($total_abonado == $total_venta)
+                {
+                    $saldo = "Pagado";
+                }
+                else
+                {
+                    $saldo = "Pendiente";
+                }
+
+                DB::beginTransaction();
+
+                $venta=Venta::findOrFail($orden->idventa);
+                $venta->idempresa=$idempresa;
+                $venta->idcliente=$orden->idpaciente;
+                $venta->idusuario=$idusuario;
+                $venta->tipo_comprobante="";
+                $venta->serie_comprobante=null;
+                $venta->num_comprobante=null;
+                
+                $venta->fecha=$fecha;
+                $venta->impuesto=$impuesto;
+                $venta->total_venta=$total_venta;
+                $venta->total_compra=$total_compra;
+                $venta->total_comision=$total_comision;
+                $venta->total_impuesto=$total_impuesto;
+                $venta->abonado=$total_abonado;
+                $venta->estado='A';
+                $venta->estadosaldo=$saldo;
+                $venta->estadoventa=$estadoventa;
+                $venta->tipopago=$tipopago;
+                $venta->idorden=$idorden;
+                $venta->save();
+
+                $idarticulo = $request->get('idarticulo');
+                $cantidad = $request->get('cantidad');
+                $descuento = $request->get('descuento');
+                $precio_venta = $request->get('precio_venta');
+                $precio_compra = $request->get('precio_compra');
+                $precio_oferta = $request->get('precio_oferta');
+
+                $BorrarDetallesVenta=DetalleVenta::where('idventa',$orden->idventa)->delete();
+
+                foreach($detalles as $od) 
+                {
+                    $detalle = new DetalleVenta();
+                    $detalle->idventa=$venta->idventa;
+                    $detalle->idarticulo=$od->idarticulo;
+                    $detalle->cantidad=$od->cantidad;
+                    $detalle->precio_venta=$od->precio_venta;
+                    $detalle->precio_compra=$od->precio_costo;
+                    $detalle->precio_oferta=0;
+                    $detalle->descuento=0;
+                    $detalle->agregado= "SI";
+                    $detalle->save();	
+                }
+
+                //cambiamos estado de orden a finalizada y agregamos id de venta
+
+                $totalorden=Orden::findOrFail($orden->idorden);
+                $totalorden->estado_orden="Finalizada";
+                $totalorden->save();
             }
-            
 
-    		DB::beginTransaction();
-
-            $venta=new Venta;
-            $venta->idempresa=$idempresa;
-            $venta->idcliente=$orden->idpaciente;
-            $venta->idusuario=$idusuario;
-    		$venta->tipo_comprobante="";
-    		$venta->serie_comprobante=null;
-            $venta->num_comprobante=null;
-            
-            $venta->fecha=$fecha;
-            $venta->impuesto=$impuesto;
-            $venta->total_venta=$total_venta;
-            $venta->total_compra=$total_compra;
-            $venta->total_comision=$total_comision;
-            $venta->total_impuesto=$total_impuesto;
-            $venta->abonado=$total_abonado;
-            $venta->estado='A';
-            $venta->estadosaldo=$saldo;
-            $venta->estadoventa=$estadoventa;
-            $venta->tipopago=$tipopago;
-    		$venta->save();
-
-
-    		$idarticulo = $request->get('idarticulo');
-    		$cantidad = $request->get('cantidad');
-    		$descuento = $request->get('descuento');
-            $precio_venta = $request->get('precio_venta');
-            $precio_compra = $request->get('precio_compra');
-            $precio_oferta = $request->get('precio_oferta');
-
-
-    		foreach($detalles as $od) 
-    		{
-    			$detalle = new DetalleVenta();
-    			$detalle->idventa=$venta->idventa;
-    			$detalle->idarticulo=$od->idarticulo;
-    			$detalle->cantidad=$od->cantidad;
-                $detalle->precio_venta=$od->precio_venta;
-                $detalle->precio_compra=$od->precio_costo;
-                $detalle->precio_oferta=0;
-                $detalle->descuento=0;
-                $detalle->agregado= "SI";
-    			$detalle->save();	
-            }
-            
-            /*Inicio quitar stock a articulos*/
-
-            //$idventastock=$venta->idventa;//obtenemos id de venta
-            //seleccionamos el detalle del venta
-            //$dets=DB::table('detalle_venta')->where('idventa','=',$idventastock)->get();
-            //recorrer detalles
-            //foreach ($dets as $det)
-                //{
-                    //encontrar articulo de detalle
-                    //$art=DB::table('articulo')->where('idarticulo','=',$det->idarticulo)->first();
-                    //sumar stock a articulo
-                    //$stocknuevo=$art->stock - $det->cantidad;
-                    
-                    //actualizamos stock y precios
-                    //$artupt=Articulo::findOrFail($art->idarticulo);
-                    //$artupt->stock=$stocknuevo;
-                    
-                    //$artupt->update();
-                //}
-
-            //cambiamos estado de orden a finalizada
-
-            $totalorden=Orden::findOrFail($orden->idorden);
-            $totalorden->estado_orden="Finalizada";
-    		$totalorden->save();
+    		
 
             /*Fin agregar stock a articulos*/
             $cli=DB::table('paciente')->where('idpaciente','=',$venta->idcliente)->first();
