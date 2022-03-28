@@ -59,6 +59,7 @@
 					<table class="table table-striped table-bordered table-condensed table-hover">
 						<thead>
 							<th><h5><strong><i class="fa fa-sliders-h"></i></strong></h5></th>
+							<th><h5><strong>ID</strong></h5></th>
 							<th><h5><strong>Fecha</strong></h5></th>
 							<th><h5><strong>Cliente</strong></h5></th>
 							<th><h5><strong>Usuario</strong></h5></th>
@@ -123,6 +124,7 @@
 							<?php
 								$fecha = date("d-m-Y", strtotime($ven->fecha));
 							?>
+							<td align="center"><h5>{{ $ven->idventa}}</h5></td>
 							<td align="center"><h5>{{ $fecha}}</h5></td>
 							<td align="left"><h5>{{ $ven->nombre}}</h5></td>
 							<td align="left"><h5>{{ $ven->name}} ({{$ven->tipo_usuario}})</h5></td>

@@ -5,7 +5,7 @@
 <div>
       <div class="card mb-4">
             <header class="card-header">
-                  <h2 class="h3 card-header-title"><strong>Detalle de Venta </strong></h2>
+                  <h2 class="h3 card-header-title"><strong>Detalle de Venta ID: {{$venta->idventa}}</strong></h2>
             </header>
             
 
@@ -19,6 +19,12 @@
                             </span>
                         </a>
                         <div class="row">
+                            <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+                                <div class="form-group">
+                                    <label for="id">ID</label>
+                                    <p>{{$venta->idventa}}</p>
+                                </div>
+                            </div>
                             <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
                                 <div class="form-group">
                                     <?php

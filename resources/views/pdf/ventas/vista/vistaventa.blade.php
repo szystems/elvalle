@@ -46,7 +46,7 @@
 			
 		</h6>
 		<h4 align="center">
-			<strong><u>Venta</u></strong>
+			<strong><u>Venta ID: {{$venta->idventa}}</u></strong>
 		</h4>
 		<h6>
 			<?php

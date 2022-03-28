@@ -10,7 +10,7 @@
 						</button>
 					</div>
 					<div class="modal-body">
-						Confirme si desea cancelar la venta, los articulos seran devueltos al stock.
+						Confirme si desea cancelar la venta ID: {{$ven->idventa}}, los articulos seran devueltos al stock.
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-info" data-dismiss="modal"><i class="fas fa-ban"></i> Cerrar</button>

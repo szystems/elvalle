@@ -61,7 +61,7 @@
 		
 		<table>
 			<tr>
-							
+				<th>ID</th> 		
 				<th>Fecha</th>         
 				<th>Cliente</th>
 				<th>Comprobante</th>
@@ -85,6 +85,7 @@
 				<?php
 					$fecha = date("d-m-Y", strtotime($ven->fecha));					
 				?>			
+				<td><h4 align="left">{{ $ven->idventa}}</h4></td>
 				<td class="celda"><h4 align="center">{{ $fecha}}</h4></td>
 				<td><h4 align="left">{{ $ven->nombre}}</h4></td>
 				<td><h4 align="left">{{ $ven->tipo_comprobante.': '.$ven->serie_comprobante.'-'.$ven->num_comprobante}}</h4></td>
