@@ -887,7 +887,7 @@ class ReportesController extends Controller
                     ->join('persona as p','v.idcliente','=','p.idpersona')
                     ->join('users as u','v.idusuario','=','u.id')
                     ->join('detalle_venta as dv','v.idventa','=','dv.idventa')
-                    ->select('v.idventa','v.fecha','p.nombre','p.tipo_documento','p.num_documento','p.telefono','p.direccion','u.name','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.impuesto','v.estado','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estadosaldo','v.estadoventa','tipopago')
+                    ->select('v.idventa','v.fecha','p.nombre','p.tipo_documento','p.num_documento','p.telefono','p.direccion','u.name','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.impuesto','v.estado','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estadosaldo','v.estadoventa','tipopago','v.idorden')
                     ->where('v.idventa','=',$idventa)
                     ->where('v.idempresa','=',$idempresa)
                     ->first();
