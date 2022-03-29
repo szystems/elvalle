@@ -131,6 +131,8 @@
 				@endforeach
 					</table>
 				</div>
+
+				
 				
 				{{$ordenes->render()}}
 			</div>

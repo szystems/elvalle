@@ -44,6 +44,17 @@
 							<th><small><strong>Oferta</strong></small></th>
 							<th><small><strong>Estado</strong></small></th>
 						</thead>
+							<?php
+								$cantidadArticulos = $detalles->count();
+								$totalUnidades = 0;
+								$totalStock = 0;
+								$sumCosto = 0;
+								$sumUtilidad = 0;
+								$sumPrecioVenta = 0;
+								$sumPrecioSugerido = 0;
+								$sumPorcentajeDescuento = 0;
+								$sumPrecioDescuento = 0;
+							?>
 		               @foreach ($detalles as $det)
 						<tr>
 							<?php
@@ -101,9 +112,49 @@
 							@else
 								<td align="center"><font color="red"><small>{{$det->EstadoDetalle}}</small></font></td>
 							@endif
+							<?php
+                                $totalUnidades= $totalUnidades + $det->total_unidades_inventario;
+								$totalStock = $totalStock + $det->stock;
+								$sumCosto = $sumCosto + $det->costo_unidad_inventario;
+								$sumUtilidad = $sumUtilidad + $det->porcentaje_utilidad;
+								$sumPrecioVenta = $sumPrecioVenta + $det->precio_venta;
+								$sumPrecioSugerido = $sumPrecioSugerido + $det->precio_sugerido;
+								$sumPorcentajeDescuento = $sumPorcentajeDescuento + $det->precio_oferta;
+								$sumPrecioDescuento = $sumPrecioDescuento + $precio_descuento;
+                            ?>
 						</tr>
 						@include('ventas.inventario.modaledit')
 				@endforeach
+					</table>
+				</div>
+
+				<div class="table-responsive">
+					<table class="table table-striped table-bordered table-condensed table-hover">
+						<thead>
+							<th><h3><strong><b>Total Unidades</b></strong></h3></th>
+							<th><h3><strong><b>Total Stock</b></strong></h3></th>
+							<th><h3><strong><b>Promedio Costo</b></strong></h3></th>
+							<th><h3><strong><b>Promedio %Utilidad</b></strong></h3></th>
+							<th><h3><strong><b>Promedio Precio</b></strong></h3></th>
+							<th><h3><strong><b>Promedio Descuento</b></strong></h3></th>
+						</thead>
+							<?php
+
+								$promedioCosto = $sumCosto/$cantidadArticulos;
+								$promedioUtilidad = $sumUtilidad/$cantidadArticulos;
+								$promedioPrecioVenta = $sumPrecioVenta/$cantidadArticulos;
+								$promedioPrecioSugerido = $sumPrecioSugerido/$cantidadArticulos;
+								$promedioPorcentajeDescuento = $sumPorcentajeDescuento/$cantidadArticulos;
+								$promedioPrecioDescuento = $sumPrecioDescuento/$cantidadArticulos;
+                            ?>
+						<tr>
+							<td align="center"><h3><b><font color="blue">{{$totalUnidades}}</font></b></h3></td>
+							<td align="center"><h3><b><font color="limegreen">{{$totalStock}} </font></b></h3></td>
+							<td align="center"><h3><b><font color="orange">{{ Auth::user()->moneda }}{{number_format($promedioCosto,2, '.', ',')}} </font></b></h3></td>
+							<td align="center"><h3><b><font color="green">{{ Auth::user()->moneda }}{{number_format($promedioUtilidad,2, '.', ',')}} </font></b></h3></td>
+							<td align="center"><h3><b><font color="blue">{{ Auth::user()->moneda }}{{number_format($promedioPrecioVenta,2, '.', ',')}}</font> ({{ Auth::user()->moneda }}{{number_format($promedioPrecioSugerido,2, '.', ',')}})</b></h3></td>
+							<td align="center"><h3><b><font color="limegreen">{{$promedioPorcentajeDescuento}}% ({{ Auth::user()->moneda }}{{number_format($promedioPrecioDescuento,2, '.', ',')}})</font></b></h3></td>
+						</tr>
 					</table>
 				</div>
 				
