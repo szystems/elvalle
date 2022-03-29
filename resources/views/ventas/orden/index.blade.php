@@ -64,9 +64,10 @@
 							<th><h5><strong>Doctor</strong></h5></th>
 							<th><h5><strong>Paciente</strong></h5></th>
 							<th><h5><strong>Total</strong></h5></th>
-							<th><h5><strong>Estado</strong></h5></th>
+							<th><h5><strong>Estado Venta</strong></h5></th>
 							<th><h5><strong>ID Venta</strong></h5></th>
 							<th><h5><strong>Usuario</strong></h5></th>
+							<th><h5><strong>Estado</strong></h5></th>
 						</thead>
 		               @foreach ($ordenes as $orden)
 						<tr>
@@ -79,6 +80,7 @@
 										</button>
 									</span>
 								</a>
+								@if($orden->estado != "Cancelada")
 								<a href="{{URL::action('OrdenController@edit',$orden->idorden)}}">
                                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar orden">
                                           <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button">
@@ -86,14 +88,17 @@
                                           </button>
                                     </span>
                               	</a>
+								@endif
+								@if($orden->estado != "Cancelada")
 		                        <a href="" data-target="#modal-delete-{{$orden->idorden}}" data-toggle="modal">
-									<span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Eliminar Orden">
+									<span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Cancelar Orden">
 		                        		<button class="btn btn-sm btn-danger" style="pointer-events: none;" type="button">
 		                        			<i class="far fa-minus-square"></i>
 										</button>
 									</span>
 		                        </a>
-								
+								@endif
+								@if($orden->estado != "Cancelada")
 								<a href="" data-target="#modal-aventa-{{$orden->idorden}}" data-toggle="modal">
 									<span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Pasar a Venta">
 										<button class="btn btn-sm btn-warning" style="pointer-events: none;" type="button">
@@ -101,6 +106,7 @@
 										</button>
 									</span>
 								</a>
+								@endif
 							
 							</td>
 							<?php
@@ -114,6 +120,11 @@
 							<td align="center"><h5>{{ $orden->estado_orden}}</h5></td>
 							<td align="center"><h5>@if($orden->idventa != null)<a href="{{URL::action('VentaController@show',$orden->idventa)}}">{{ $orden->idventa}}</a>@endif</h5></td>
 							<td align="left"><h5>{{ $orden->Usuario}} ({{$orden->tipo_usuario}})</h5></td>
+							@if($orden->estado == "Habilitada")
+							<td align="left"><h5><font color="limegreen">{{ $orden->estado}}</font></h5></td>
+							@else
+							<td align="left"><h5><font color="red">{{ $orden->estado}}</font></h5></td>
+							@endif
 						</tr>
 						@include('ventas.orden.modal')
 						@include('ventas.orden.aventa.aventamodal')

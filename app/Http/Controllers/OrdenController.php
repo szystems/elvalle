@@ -98,7 +98,6 @@ class OrdenController extends Controller
                 ->where('d.id','LIKE','%'.$doctor.'%')
                 ->where('u.id','LIKE','%'.$usuario.'%')
                 ->where('o.estado_orden','LIKE','%'.$estadoorden.'%')
-                ->where('o.estado','!=','Eliminado')
                 ->orderBy('o.idorden','desc')
                 
                 ->paginate(20);
@@ -110,7 +109,6 @@ class OrdenController extends Controller
                 ->join('users as d','o.iddoctor','=','d.id')
                 ->join('users as u','o.idusuario','=','u.id')
                 ->select('o.idorden','o.idventa','o.fecha','o.estado_orden','o.estado','o.total','p.idpaciente','p.nombre as Paciente','p.sexo','p.telefono','p.fecha_nacimiento','p.dpi','p.nit','d.id as iddoctor','d.name as Doctor','d.especialidad','u.id as idusuario','u.name as Usuario','u.tipo_usuario')
-                ->where('o.estado','!=','Eliminado')
                 ->orderBy('o.idorden','desc')
                 
                 ->paginate(20);
@@ -643,5 +641,28 @@ class OrdenController extends Controller
     		//DB::rollback();
     	//}   
         return Redirect::to('ventas/venta');
+    }
+
+    public function destroy($id)
+    {
+    	$orden=Orden::findOrFail($id);
+    	$orden->Estado='Cancelada';
+        $orden->update();
+  
+        $pac=DB::table('paciente')->where('idpaciente','=',$orden->idpaciente)->first();
+        $doc=DB::table('users')->where('id','=',$orden->iddoctor)->first();
+
+            $zonahoraria = Auth::user()->zona_horaria;
+            $moneda = Auth::user()->moneda;
+            $fechahora= Carbon::now($zonahoraria);
+            $bitacora=new Bitacora;
+            $bitacora->idempresa=Auth::user()->idempresa;
+            $bitacora->idusuario=Auth::user()->id;
+            $bitacora->fecha=$fechahora;
+            $bitacora->tipo="Venta";
+            $bitacora->descripcion="Se Cancelo una orden, Paciente: ".$pac->nombre.", Doctor: ".$doc->name.", Total:".$moneda.$orden->total;
+            $bitacora->save();
+
+    	return Redirect::to('ventas/orden');
     }
 }
