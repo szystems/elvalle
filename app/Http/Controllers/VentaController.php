@@ -755,8 +755,8 @@ class VentaController extends Controller
         }
         elseif ($updateventa == "update")
         {
-            try
-            { 
+            //try
+            //{ 
                 //obtenemos datos del usuario
                 $idempresa = Auth::user()->idempresa;
                 $porcentaje_imp = Auth::user()->porcentaje_imp;
@@ -800,7 +800,7 @@ class VentaController extends Controller
                 }
                 
                 //transaccion para guardar los cambios a datos de venta
-                DB::beginTransaction();
+                //DB::beginTransaction();
 
                 $venta=Venta::findOrFail($id);
                 $venta->idempresa=$idempresa;
@@ -826,7 +826,7 @@ class VentaController extends Controller
                 //obtenemos los vectores de los nuevos detalles de venta
                 $idarticulo = $request->get('idarticulo');
                 //si hay mas de algun articulo para agregar procedemos a agregarlos
-                if($idarticulo[0])
+                if(isset($idarticulo[0]))
                 {
                     $iddetalle_ingreso = $request->get('iddetalle_ingreso');
                     $idpresentacion = $request->get('idpresentacion');
@@ -901,12 +901,13 @@ class VentaController extends Controller
                 $bitacora->descripcion="Se edito una venta, Cliente: ".$cli->nombre.", Comprobante: ".$venta->tipo_comprobante." ".$venta->serie_comprobante."-".$venta->num_comprobante.", Fecha: ".$venta->fecha.", Total Venta: ".$moneda.$venta->total_venta.", Abonado: ".$moneda.$venta->abonado.", Estado Saldo: ".$venta->estadosaldo.", Estado Venta: ".$venta->estadoventa.", Tipo Pago: ".$venta->tipopago;
                 $bitacora->save();
 
-                DB::commit();
+                //DB::commit();
+                
 
-            }catch(\Exception $e)
-            {
-                DB::rollback();
-            }
+            //}catch(\Exception $e)
+            //{
+                //DB::rollback();
+            //}
 
             return Redirect::to('ventas/venta'); 
         }

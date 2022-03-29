@@ -101,7 +101,7 @@
 									</span>
 								</a>
 								@endif
-								@if ($ven->estadoventa == 'Abierta')
+								
 								<a href="{{URL::action('VentaController@edit',$ven->idventa)}}">
                                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar venta">
                                           <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button">
@@ -109,7 +109,6 @@
                                           </button>
                                     </span>
                               	</a>
-								@endif 
 								
 								@if ($ven->estadoventa == 'Abierta')
 								<a href="" data-target="#modal-cerrar-{{$ven->idventa}}" data-toggle="modal">

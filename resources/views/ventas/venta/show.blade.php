@@ -13,6 +13,11 @@
                 {{Form::token()}}
                 <input type="hidden" name="updateventa" class="form-control" id="updateventa" value="abonar">
                     <div class="card-body">
+                        <a href="{{URL::action('VentaController@edit',$venta->idventa)}}">
+                            <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar Venta">
+                                <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button"><i class="far fa-edit"></i> Editar</button>
+                            </span>
+                        </a>
                         <a href="" data-target="#modaleliminarshow-delete-{{$venta->idventa}}" data-toggle="modal">
                             <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Eliminar Venta">
                                 <button class="btn btn-sm btn-danger" style="pointer-events: none;" type="button"><i class="far fa-minus-square"></i> Eliminar</button>

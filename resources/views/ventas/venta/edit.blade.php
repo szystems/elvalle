@@ -5,11 +5,21 @@
 <div>
       <div class="col-md-12 mb-4">
             <div class="card">
+                <!--Mensaje de abono correcto-->
+                <div class="flash-message">
+                    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                    @if(Session::has('alert-' . $msg))
+
+                    <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+                    @endif
+                    @endforeach
+                </div> <!-- fin .flash-message -->
                 <header class="card-header">
                     <h2 class="h3 card-header-title"><strong>Editar Venta ID: {{$venta->idventa}}</strong></h2>
                 </header>
 
                 <div class="card-body">
+                @if ($venta->estadoventa == 'Abierta')
                     <h5 class="h4 card-title">Cambie los datos que desee editar:</h5>
                     
                     <label><h6><font color="orange"> *Recuerde Cerrar la venta cuando este seguro que la venta no podrá tener más cambios en el futuro, esto lo podrá realizar en el listado de ventas.</font></h6></label>
@@ -77,7 +87,7 @@
                                 </table>
                             </div>
                         </div>
-
+                @endif
                     {!!Form::model($venta,['method'=>'PATCH','route'=>['venta.update',$venta->idventa]])!!}
                     {{Form::token()}}
                     <input type="hidden" name="updateventa" class="form-control" id="updateventa" value="update">
@@ -143,7 +153,7 @@
                         <div class="col-lg-4 col-sm-3 col-md-4 col-xs-12">
                         <div class="form-group">
                             <label>Tipo Comprobante</label>
-                            <select name="tipo_comprobante" class="form-control">
+                            <select name="tipo_comprobante" class="form-control" required>
                             <option value="{{$venta->tipo_comprobante}}" selected>{{$venta->tipo_comprobante}}</option>
                             <option value="Factura">Factura</option>
                             <option value="Boleta">Boleta</option>
@@ -163,15 +173,17 @@
                                 <input type="text" name="num_comprobante"  value="{{$venta->num_comprobante}}" class="form-control" placeholder="Numero comprobante...">
                             </div>
                         </div>
+                        @if($venta->estadoventa !=  "Cerrada")
                         <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
                             <div class="form-group">
                                 <button class="btn btn-danger" type="reset"><i class="fas fa-ban"></i> Borrar</button>
                                 <button class="btn btn-info" type="submit"><i class="far fa-save"></i> Guardar</button>
                             </div>
                         </div>
-                            
+                        @endif   
                         <!-- aqui tabla-->
-
+                
+                        @if($venta->estadoventa !=  "Cerrada")
                         <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                             
                             <div class="form-group">
@@ -234,13 +246,13 @@
                             </div>
                         </div>
                         <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
-                        <div class="form-group">
-                           
-                            <label for="precio_venta">Oferta</label>
-                            <input type="" name="pprecio_oferta" class="form-control" id="pprecio_oferta" placeholder="Oferta" onkeypress="return validardecimal(event,this.value)">
-                            <input type="hidden" name="pporcentaje_oferta" class="form-control" id="pporcentaje_oferta" placeholder="Porcentaje Oferta">
+                            <div class="form-group">
+                            
+                                <label for="precio_venta">Oferta</label>
+                                <input type="" name="pprecio_oferta" class="form-control" id="pprecio_oferta" placeholder="Oferta" onkeypress="return validardecimal(event,this.value)">
+                                <input type="hidden" name="pporcentaje_oferta" class="form-control" id="pporcentaje_oferta" placeholder="Porcentaje Oferta">
+                            </div>
                         </div>
-                    </div>
                         <div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
                             <hr>
                             <div class="form-group">
@@ -261,6 +273,7 @@
                                 
                             </div>
                         </div>
+                        
                         <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                             <div class="form-group">
                                 <table id="detalles" class="table table-striped table-bordered table-condensed table-hover">
@@ -293,20 +306,17 @@
                                 <input type="hidden" name="total_saldo" class="form-control" id="total_saldo" placeholder="total_saldo" onkeypress="return validardecimal(event,this.value)">
                             </div>
                         </div>-->
+                        @endif
+                        @if($venta->estadoventa !=  "Cerrada")
                         <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
                             <div class="form-group">
                                 <label for="abonado">Abonar {{ Auth::user()->moneda }}</label>
                                 <input type="" name="abonado" class="form-control" id="abonado" placeholder="0" onkeypress="return validardecimal(event,this.value)">
-                                <input type="hidden" name="abonar" class="form-control" id="abonar" value="0">
-                                <input type="hidden" name="total_venta_anterior" class="form-control" id="total_venta_anterior" value="{{$venta->total_venta}}">
-                                <input type="hidden" name="total_compra_anterior" class="form-control" id="total_compra_anterior" value="{{$venta->total_compra}}">
-                                <input type="hidden" name="total_comision_anterior" class="form-control" id="total_comision_anterior" value="0">
-                                <!--<input type="hidden" name="total_comision_anterior" class="form-control" id="total_comision_anterior" value="{{$venta->total_comision}}">-->
-                                <input type="hidden" name="abonado_anterior" class="form-control" id="abonado_anterior" value="{{$venta->abonado}}">
-                                <input type="hidden" name="impuesto_anterior" class="form-control" id="impuesto_anterior" value="0">
-                                <!--<input type="hidden" name="impuesto_anterior" class="form-control" id="impuesto_anterior" value="{{$venta->total_impuesto}}">-->
                             </div>
                         </div>
+                        @else
+                            <input type="hidden" name="abonado" class="form-control" id="abonado" value="0">
+                        @endif
                         <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
                             <div class="form-group">
                                 <label>Tipo Pago:</label>
@@ -319,6 +329,7 @@
                                 </select>
                             </div>
                         </div>
+                
                         <!--<div>
                             <div class="form-group">
                                 <label for="total_comision">Total Comision</label>
@@ -351,6 +362,15 @@
 
             
                 </footer>
+                
+                <input type="hidden" name="abonar" class="form-control" id="abonar" value="0">
+                <input type="hidden" name="total_venta_anterior" class="form-control" id="total_venta_anterior" value="{{$venta->total_venta}}">
+                <input type="hidden" name="total_compra_anterior" class="form-control" id="total_compra_anterior" value="{{$venta->total_compra}}">
+                <input type="hidden" name="total_comision_anterior" class="form-control" id="total_comision_anterior" value="0">
+                <!--<input type="hidden" name="total_comision_anterior" class="form-control" id="total_comision_anterior" value="{{$venta->total_comision}}">-->
+                <input type="hidden" name="abonado_anterior" class="form-control" id="abonado_anterior" value="{{$venta->abonado}}">
+                <input type="hidden" name="impuesto_anterior" class="form-control" id="impuesto_anterior" value="0">
+                <!--<input type="hidden" name="impuesto_anterior" class="form-control" id="impuesto_anterior" value="{{$venta->total_impuesto}}">-->
             </div>
       </div>
 </div>

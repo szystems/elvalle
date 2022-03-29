@@ -9,13 +9,11 @@
             </header>
                 
                     <div class="card-body">
-                        @if($orden->estado_orden != "Finalizada")
                         <a href="{{URL::action('OrdenController@edit',$orden->idorden)}}">
                             <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar Orden">
                                 <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button"><i class="far fa-edit"></i> Editar</button>
                             </span>
                         </a>
-                        @endif
                         <a href="" data-target="#modaleliminarshow-delete-{{$orden->idorden}}" data-toggle="modal">
                             <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Eliminar Venta">
                                 <button class="btn btn-sm btn-danger" style="pointer-events: none;" type="button"><i class="far fa-minus-square"></i> Eliminar</button>
