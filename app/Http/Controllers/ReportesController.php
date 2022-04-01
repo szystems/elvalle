@@ -540,6 +540,60 @@ class ReportesController extends Controller
         
     }
 
+    public function reportepacientes(ReportesFormRequest $rrequest)
+    {  
+            if ($rrequest)
+            {
+                
+                $idempresa = Auth::user()->idempresa;
+                $nombreusu = Auth::user()->name;
+                $empresa = Auth::user()->empresa;
+                if (Auth::user()->logo == null)
+                {
+                    $logo = null;
+                    $imagen = null;
+                }
+                else
+                {
+                     $logo = Auth::user()->logo;
+                     $imagen = public_path('imagenes/logos/'.$logo);
+                }
+
+                $verpdf=trim($rrequest->get('pdf'));
+                $zona_horaria = Auth::user()->zona_horaria;
+                $hoy = Carbon::now($zona_horaria);
+                $hoy = $hoy->format('d-m-Y');
+
+                $nompdf = Carbon::now($zona_horaria);
+                $nompdf = $nompdf->format('Y-m-d H:i:s');
+                
+
+
+                $pacientes=DB::table('paciente')
+                ->where('estado','!=','Habilitado')
+                ->orderBy('nombre','desc')
+                ->get();
+                
+                if ( $verpdf == "Descargar" )
+                {
+                    $view = \View::make('pdf.pacientes.reportepacientes', compact('pacientes','hoy','nombreusu','empresa','imagen'))->render();
+                    $pdf = \App::make('dompdf.wrapper');
+                    $pdf->loadHTML($view);
+                     $pdf->setPaper('A4', 'landscape');
+                    return $pdf->download ('ListadoPacientes'.$nompdf.'.pdf');
+                }
+                if ( $verpdf == "Navegador" )
+                {
+                    $view = \View::make('pdf.pacientes.reportepacientes', compact('pacientes','hoy','nombreusu','empresa','imagen'))->render();
+                    $pdf = \App::make('dompdf.wrapper');
+                    $pdf->loadHTML($view);
+                     $pdf->setPaper('A4', 'landscape');
+                    return $pdf->stream ('ListadoPacientes'.$nompdf.'.pdf');
+                }
+            }
+        
+    }
+
     public function vistaarticulo(ReportesFormRequest $rrequest)
     {  
             if ($rrequest)
