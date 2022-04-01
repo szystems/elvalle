@@ -131,15 +131,47 @@
 	<div class="card-body">
 	<h4><strong>Listado de Citas</strong>
 		<div class="row">
-
+				
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				<?php
                     $doctorBuscar=DB::table('users')->where('id','=',$iddoctorBuscar)->first();
+					$fechaImprimir=$fechaBuscar;
 					$fechaBuscar = date("d-m-Y", strtotime($fechaBuscar));
                 ?>
 				@include('pacientes/cita.search')
 				<p> <b><u>Filtros:</u></b> </p>
 				<p>Fecha: <font color="Blue">{{$fechaBuscar}}</font>,  Doctor: <font color="Blue">@if($iddoctorBuscar == "") Todos @else {{$doctorBuscar->name}} ({{$doctorBuscar->especialidad}}) @endif</font></p>
+				{{Form::open(array('action' => 'ReportesController@reportecitas','method' => 'POST','role' => 'form', 'target' => '_blank'))}}
+
+                {{Form::token()}}
+					<input type="" id="rfecha" class="form-control datepicker" name="rfecha" value="{{$fechaImprimir}}">
+					<input type="" id="rdoctor" class="form-control datepicker" name="rdoctor" @if($iddoctorBuscar != null) value="{{ $iddoctorBuscar }}" @else value="" @endif>
+					
+					<div class="card mb-4">
+						<div class="card-body">
+							<div class="row">
+							<div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
+									<div class="form-group mb-2">
+										<select name="pdf" class="form-control" value="">
+												<option value="Descargar" selected>Descargar</option>
+												<option value="Navegador">Ver en navegador</option>
+											</select>
+									</div>
+								</div>
+								<div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
+									<div class="form-group mb-2">
+										<span class="input-group-btn">
+											<button type="submit" class="btn btn-danger">
+												<i class="fa fa-file-pdf"></i> PDF
+											</button>
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+				{{Form::close()}}
 				<div class="table-responsive">
 					<table class="table table-striped table-bordered table-condensed table-hover">
 						<thead>

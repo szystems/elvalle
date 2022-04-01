@@ -8,7 +8,38 @@
                   <h2 class="h3 card-header-title"><strong>Cita: </strong></h2>
                   
             </header>
-            
+                {{Form::open(array('action' => 'ReportesController@vistacita','method' => 'POST','role' => 'form', 'target' => '_blank'))}}
+
+                {{Form::token()}}		
+					<div class="card mb-4">
+						<header class="card-header d-md-flex align-items-center">
+							<h4><strong>Imprimir Cita </strong></h4>
+							<input type="hidden" id="rid" class="form-control datepicker" name="rid" value="{{$cita->idcita}}">
+						</header>
+						<div class="card-body">
+							<div class="row">
+								<div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
+									<div class="form-group mb-2">
+										<select name="pdf" class="form-control" value="">
+												<option value="Descargar" selected>Descargar</option>
+												<option value="Navegador">Ver en navegador</option>
+											</select>
+									</div>
+								</div>
+								<div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
+									<div class="form-group mb-2">
+										<span class="input-group-btn">
+											<button type="submit" class="btn btn-danger">
+												<i class="fa fa-file-pdf"></i> PDF
+											</button>
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+				{{Form::close()}}
             <div class="card-body">
                 @if($cita->estado != "Cancelada")
                 <a href="{{URL::action('CitaController@edit',$cita->idcita)}}">

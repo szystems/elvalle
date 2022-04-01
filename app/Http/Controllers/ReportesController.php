@@ -888,6 +888,73 @@ class ReportesController extends Controller
         
     }
 
+    public function vistacita(ReportesFormRequest $rrequest)
+    {  
+            if ($rrequest)
+            {
+                
+                $idempresa = Auth::user()->idempresa;
+                $nombreusu = Auth::user()->name;
+                $empresa = Auth::user()->empresa;
+                $moneda = Auth::user()->moneda;
+                if (Auth::user()->logo == null)
+                {
+                    $logo = null;
+                    $imagen = null;
+                }
+                else
+                {
+                     $logo = Auth::user()->logo;
+                     $imagen = public_path('imagenes/logos/'.$logo);
+                     
+                }
+                
+                $verpdf=trim($rrequest->get('pdf'));
+                $idcita=trim($rrequest->get('rid'));
+
+                $zona_horaria = Auth::user()->zona_horaria;
+                $hoy = Carbon::now($zona_horaria);
+                $hoy = $hoy->format('d-m-Y');
+
+                $nompdf = Carbon::now($zona_horaria);
+                $nompdf = $nompdf->format('Y-m-d H:i:s');
+                
+                $cita=DB::table('cita')
+                ->where('idcita','=',$idcita)
+                ->first();
+
+                $paciente=DB::table('paciente')
+                ->where('idpaciente','=',$cita->idpaciente)
+                ->first();
+
+                $doctor=DB::table('users')
+                ->where('id','=',$cita->iddoctor)
+                ->first();
+
+                $usuario=DB::table('users')
+                ->where('id','=',$cita->idusuario)
+                ->first();
+                
+                if ( $verpdf == "Descargar" )
+                {
+                    $view = \View::make('pdf.citas.vista.vistacita', compact('cita','paciente','doctor','usuario','hoy','nombreusu','empresa','imagen','moneda'))->render();
+                    $pdf = \App::make('dompdf.wrapper');
+                    $pdf->loadHTML($view);
+                    //$pdf->setPaper('A4', 'landscape');
+                    return $pdf->download ('VistaCita'.'-'.$nompdf.'.pdf');
+                }
+                if ( $verpdf == "Navegador" )
+                {
+                    $view = \View::make('pdf.citas.vista.vistacita', compact('cita','paciente','doctor','usuario','hoy','nombreusu','empresa','imagen','moneda'))->render();
+                    $pdf = \App::make('dompdf.wrapper');
+                    $pdf->loadHTML($view);
+                    //$pdf->setPaper('A4', 'landscape');
+                    return $pdf->stream ('VistaCita'.'-'.$nompdf.'.pdf');
+                }
+            }
+        
+    }
+
     public function vistaventa(ReportesFormRequest $rrequest)
     {  
             if ($rrequest)
@@ -1376,6 +1443,82 @@ class ReportesController extends Controller
                     $pdf->loadHTML($view);
                     //$pdf->setPaper('A4', 'landscape');
                     return $pdf->stream ('Vistabitacorareporte'.'-'.$nompdf.'.pdf');
+                }
+            }
+        
+    }
+
+    public function reportecitas(ReportesFormRequest $rrequest)
+    {  
+            if ($rrequest)
+            {
+                
+                $idempresa = Auth::user()->idempresa;
+                $nombreusu = Auth::user()->name;
+                $empresa = Auth::user()->empresa;
+                if (Auth::user()->logo == null)
+                {
+                    $logo = null;
+                    $imagen = null;
+                }
+                else
+                {
+                     $logo = Auth::user()->logo;
+                     $imagen = public_path('imagenes/logos/'.$logo);
+                }
+
+                
+                $verpdf=trim($rrequest->get('pdf'));
+                $fecha=trim($rrequest->get('rfecha'));
+                $mananaBuscar = date("Y-m-d", strtotime($fecha.'+ 1 days'));
+                $doctor=trim($rrequest->get('rdoctor'));
+
+                $usuarios=DB::table('users')
+                ->where('idempresa','=',$idempresa)
+                ->get();
+
+                $docfiltro=DB::table('users')
+					->select('name')
+                	->where('id','=',$doctor)
+                    ->first();
+
+                $zona_horaria = Auth::user()->zona_horaria;
+                $hoy = Carbon::now($zona_horaria);
+                $hoy = $hoy->format('d-m-Y');
+
+                $nompdf = Carbon::now($zona_horaria);
+                $nompdf = $nompdf->format('Y-m-d H:i:s');
+                
+                if($fecha != '1970-01-01')
+                {
+                    $citas=DB::table('cita')
+                    ->where('iddoctor','LIKE', '%'.$doctor.'%')
+                    ->where('fecha_inicio','>=', $fecha)
+                    ->where('fecha_inicio','<', $mananaBuscar)
+                    ->orderBy('fecha_inicio','asc')
+                    ->paginate(20);
+                }
+                else
+                {
+                    $citas=DB::table('cita')
+                    ->where('fecha_inicio','>=',$fecha)
+                    ->where('fecha_inicio','<',$manana)
+                    ->orderBy('fecha_inicio','asc')
+                    ->paginate(20);
+                }  
+                if ( $verpdf == "Descargar" )
+                {
+                    $view = \View::make('pdf.citas.reportecitas', compact('citas','fecha','doctor','hoy','nombreusu','empresa','imagen','docfiltro'))->render();
+                    $pdf = \App::make('dompdf.wrapper');
+                    $pdf->loadHTML($view);
+                    return $pdf->download ('ReporteCitas'.$nompdf.'.pdf');
+                }
+                if ( $verpdf == "Navegador" )
+                {
+                    $view = \View::make('pdf.citas.reportecitas', compact('citas','fecha','doctor','hoy','nombreusu','empresa','imagen','docfiltro'))->render();
+                    $pdf = \App::make('dompdf.wrapper');
+                    $pdf->loadHTML($view);
+                    return $pdf->stream ('ReporteCitas'.$nompdf.'.pdf');
                 }
             }
         

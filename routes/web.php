@@ -70,6 +70,10 @@ Route::resource('reportes/ingresos','ReporteIngresosController');
     Route::post('pdf/pacientes','ReportesController@reportepacientes');
     Route::post('pdf/pacientes/vista','ReportesController@vistapaciente');
 
+    /*Citas */
+    Route::post('pdf/citas','ReportesController@reportecitas');
+    Route::post('pdf/citas/vista','ReportesController@vistacita');
+
     /*Articulos */
 
     Route::post('pdf/articulos','ReportesController@reportearticulos');
