@@ -66,9 +66,10 @@ Route::resource('reportes/ingresos','ReporteIngresosController');
     Route::post('pdf/usuarios','ReportesController@reporteusuarios');
     Route::post('pdf/usuarios/vista','ReportesController@vistausuario');
 
-    /*Usuarios */
-    Route::post('pdf/usuarios','ReportesController@reportepacientes');
-    
+    /*Pacientes */
+    Route::post('pdf/pacientes','ReportesController@reportepacientes');
+    Route::post('pdf/pacientes/vista','ReportesController@vistapaciente');
+
     /*Articulos */
 
     Route::post('pdf/articulos','ReportesController@reportearticulos');

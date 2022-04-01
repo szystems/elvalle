@@ -52,20 +52,15 @@
 			<tr>
 				<th>Nombre</th>
 				<th>Sexo</th>
-				<th>F.Nacimiento/Edad</th>
+				<th>F.Nacimiento / Edad</th>
 				<th>Dirección</th>
 				<th>Teléfono</th>
 				<th>Email</th>
-				<th>DPI/NIT</th>
+				<th>DPI / NIT</th>
 			</tr>
 			@foreach ($pacientes as $paciente)
 			<tr>
 				<td><h4 align="center">
-					@if ($paciente->foto != null)
-						<img class="u-avatar--sm rounded-circle mr-3" src="{{asset('imagenes/pacientes/'.$paciente->foto)}}">
-					@else
-						<img class="u-avatar--sm rounded-circle mr-3" src="{{asset('imagenes/noimage.png')}}">
-					@endif
 					{{ $paciente->nombre}}
 				</h4></td>
 				<td><h4 align="center">{{ $paciente->nombre}}</h4></td>
@@ -81,6 +76,7 @@
 				<td><h4 align="center">{{ $paciente->direccion}}</h4></td>
 				<td><h4 align="center">{{ $paciente->telefono}}</h4></td>
 				<td><h4 align="center">{{ $paciente->correo}}</h4></td>
+				<td><h4 align="center">{{ $paciente->dpi}} / {{ $paciente->nit }}</h4></td>
 			</tr>
 			@endforeach
 		</table>

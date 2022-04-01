@@ -559,6 +559,7 @@ class ReportesController extends Controller
                      $imagen = public_path('imagenes/logos/'.$logo);
                 }
 
+                $path = public_path('imagenes/pacientes/');
                 $verpdf=trim($rrequest->get('pdf'));
                 $zona_horaria = Auth::user()->zona_horaria;
                 $hoy = Carbon::now($zona_horaria);
@@ -570,13 +571,13 @@ class ReportesController extends Controller
 
 
                 $pacientes=DB::table('paciente')
-                ->where('estado','!=','Habilitado')
+                ->where('estado','=','Habilitado')
                 ->orderBy('nombre','desc')
                 ->get();
                 
                 if ( $verpdf == "Descargar" )
                 {
-                    $view = \View::make('pdf.pacientes.reportepacientes', compact('pacientes','hoy','nombreusu','empresa','imagen'))->render();
+                    $view = \View::make('pdf.pacientes.reportepacientes', compact('pacientes','hoy','nombreusu','empresa','imagen','path'))->render();
                     $pdf = \App::make('dompdf.wrapper');
                     $pdf->loadHTML($view);
                      $pdf->setPaper('A4', 'landscape');
@@ -584,7 +585,7 @@ class ReportesController extends Controller
                 }
                 if ( $verpdf == "Navegador" )
                 {
-                    $view = \View::make('pdf.pacientes.reportepacientes', compact('pacientes','hoy','nombreusu','empresa','imagen'))->render();
+                    $view = \View::make('pdf.pacientes.reportepacientes', compact('pacientes','hoy','nombreusu','empresa','imagen','path'))->render();
                     $pdf = \App::make('dompdf.wrapper');
                     $pdf->loadHTML($view);
                      $pdf->setPaper('A4', 'landscape');
@@ -651,6 +652,63 @@ class ReportesController extends Controller
                     $pdf->loadHTML($view);
                     //$pdf->setPaper('A4', 'landscape');
                     return $pdf->stream ('VistaArticulo'.'-'.$nombrearticulo.'-'.$nompdf.'.pdf');
+                }
+            }
+        
+    }
+
+    public function vistapaciente(ReportesFormRequest $rrequest)
+    {  
+            if ($rrequest)
+            {
+                
+                $idempresa = Auth::user()->idempresa;
+                $nombreusu = Auth::user()->name;
+                $empresa = Auth::user()->empresa;
+                $moneda = Auth::user()->moneda;
+                if (Auth::user()->logo == null)
+                {
+                    $logo = null;
+                    $imagen = null;
+                }
+                else
+                {
+                     $logo = Auth::user()->logo;
+                     $imagen = public_path('imagenes/logos/'.$logo);
+                     
+                }
+                $path = public_path('imagenes/pacientes/');
+                $verpdf=trim($rrequest->get('pdf'));
+                $idpaciente=trim($rrequest->get('rid'));
+
+                $zona_horaria = Auth::user()->zona_horaria;
+                $hoy = Carbon::now($zona_horaria);
+                $hoy = $hoy->format('d-m-Y');
+
+                $nompdf = Carbon::now($zona_horaria);
+                $nompdf = $nompdf->format('Y-m-d H:i:s');
+                
+
+
+                $paciente=DB::table('paciente')
+                ->where('idpaciente','=',$idpaciente)
+                ->first();
+                
+                if ( $verpdf == "Descargar" )
+                {
+                    $view = \View::make('pdf.pacientes.vista.vistapaciente', compact('paciente','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
+                    $pdf = \App::make('dompdf.wrapper');
+                    $pdf->loadHTML($view);
+                    //$pdf->setPaper('A4', 'landscape');
+                    return $pdf->download ('VistaPaciente'.'-'.$paciente->nombre.'-'.$nompdf.'.pdf');
+                }
+                if ( $verpdf == "Navegador" )
+                {
+                    $view = \View::make('pdf.pacientes.vista.vistapaciente', compact('paciente','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
+                    $pdf = \App::make('dompdf.wrapper');
+                    $pdf->loadHTML($view);
+                    //$pdf->setPaper('A4', 'landscape');
+                    return $pdf->stream ('VistaPaciente'.'-'.$paciente->nombre.'-'.$nompdf.'.pdf');
                 }
             }
         
