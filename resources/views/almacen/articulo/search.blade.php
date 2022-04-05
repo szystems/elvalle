@@ -12,10 +12,11 @@
 					<label>Articulo</label>
 					<select name="farticulo" class="form-control selectpicker" id="farticulo" data-live-search="true">
 						<option value="">Todos</option>
+						@if ($queryArticulo != null)
+							<option value="{{ $queryArticulo }}" >{{ $queryArticulo }}</option>
+						@endif
 						@foreach($filtroArticulos as $articulo)
-							@if ($queryArticulo != null)
-								<option value="{{ $queryArticulo }}" selected>{{ $queryArticulo }}</option>
-							@endif
+							
 							<option value="{{$articulo->nombre}}">{{$articulo->codigo}} - {{$articulo->nombre}}</option>
 						@endforeach
 					</select>
@@ -27,10 +28,11 @@
 					<label>Categoria</label>
 					<select name="fcategoria" class="form-control selectpicker" id="fcategoria" data-live-search="true">
 						<option value="">Todas</option>
+						@if ($queryCategoria != null)
+							<option value="{{ $queryCategoria }}" selected>{{ $queryCategoria }}</option>
+						@endif
 						@foreach($filtroCategorias as $categoria)
-							@if ($queryCategoria != null)
-								<option value="{{ $queryCategoria }}" selected>{{ $queryCategoria }}</option>
-							@endif
+							
 							<option value="{{$categoria->nombre}}">{{$categoria->nombre}}</option>
 						@endforeach
 					</select>
