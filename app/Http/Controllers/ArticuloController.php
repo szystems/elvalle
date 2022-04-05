@@ -27,21 +27,28 @@ class ArticuloController extends Controller
         if ($request)
         {
             $idempresa = Auth::user()->idempresa;
-            $query=trim($request->get('searchText'));
-            $queryoferta=trim($request->get('searchoferta'));
+            $queryArticulo=trim($request->get('farticulo'));
+            $queryCategoria=trim($request->get('fcategoria'));
             $articulos=DB::table('articulo as a')
             ->join('categoria as c','a.idcategoria','=','c.idcategoria')
             ->select('a.idarticulo','a.idempresa','a.nombre','a.codigo','a.minimo','c.nombre as categoria','a.bodega','a.ubicacion','a.descripcion','a.imagen','a.estado')
-            ->where('a.nombre','LIKE','%'.$query.'%')
-            ->where('a.idempresa','=',$idempresa)
+            ->where('a.nombre','LIKE','%'.$queryArticulo.'%')
+            ->where('c.nombre','LIKE','%'.$queryCategoria.'%')
             ->where('a.estado','=','Activo')
-            ->orwhere('a.codigo','LIKE','%'.$query.'%')
-             ->where('a.idempresa','=',$idempresa)
-             ->where('a.estado','=','Activo')
             ->orderBy('a.nombre','asc')
-            ->orderBy('c.nombre','a.nombre','asc')
             ->paginate(20);
-            return view('almacen.articulo.index',["articulos"=>$articulos,"searchText"=>$query]);
+
+            $filtroArticulos=DB::table('articulo')
+            ->where('estado','=','Activo')
+            ->orderBy('nombre','asc')
+            ->get();
+
+            $filtroCategorias=DB::table('categoria')
+            ->where('condicion','=','1')
+            ->orderBy('nombre','asc')
+            ->get();
+
+            return view('almacen.articulo.index',["articulos"=>$articulos,"filtroArticulos"=>$filtroArticulos,"filtroCategorias"=>$filtroCategorias,"queryArticulo"=>$queryArticulo,"queryCategoria"=>$queryCategoria]);
         }
     }
     public function create()

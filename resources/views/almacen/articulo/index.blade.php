@@ -21,13 +21,16 @@
 		<div class="row">
 
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				
+				@include('almacen.articulo.search')
 				{{Form::open(array('action' => 'ReportesController@reportearticulos','method' => 'POST','role' => 'form', 'target' => '_blank'))}}
 
                 {{Form::token()}}		
 					<div class="card mb-4">
 						<header class="card-header d-md-flex align-items-center">
 							<h4><strong>Imprimir Listado de Artículos </strong></h4>
-							
+							<input type="hidden" name="searchArticulo" value="{{ $queryArticulo }}">
+							<input type="hidden" name="searchCategoria" value="{{ $queryCategoria }}">
 						</header>
 						<div class="card-body">
 							<div class="row">
@@ -57,7 +60,6 @@
 					</div>
 					
 				{{Form::close()}}
-				@include('almacen.articulo.search')
 				<div class="table-responsive">
 					<table class="table table-striped table-bordered table-condensed table-hover">
 						<thead>

@@ -6,10 +6,34 @@
 	</header>
 	<div class="card-body">
 		<div class="row">
-		<div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
-				<div class="form-group mb-2">
-					<label for="nombrecodigo">Nombre/codigo</label>
-					<input type="text" class="form-control" name="searchText" placeholder="Buscar por Nombre o Codigo..." data-live-search="true" value="{{$searchText}}">
+			<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+				<div class="form-group">
+					
+					<label>Articulo</label>
+					<select name="farticulo" class="form-control selectpicker" id="farticulo" data-live-search="true">
+						<option value="">Todos</option>
+						@foreach($filtroArticulos as $articulo)
+							@if ($queryArticulo != null)
+								<option value="{{ $queryArticulo }}" selected>{{ $queryArticulo }}</option>
+							@endif
+							<option value="{{$articulo->nombre}}">{{$articulo->codigo}} - {{$articulo->nombre}}</option>
+						@endforeach
+					</select>
+				</div>
+			</div>
+			<div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
+				<div class="form-group">
+					
+					<label>Categoria</label>
+					<select name="fcategoria" class="form-control selectpicker" id="fcategoria" data-live-search="true">
+						<option value="">Todas</option>
+						@foreach($filtroCategorias as $categoria)
+							@if ($queryCategoria != null)
+								<option value="{{ $queryCategoria }}" selected>{{ $queryCategoria }}</option>
+							@endif
+							<option value="{{$categoria->nombre}}">{{$categoria->nombre}}</option>
+						@endforeach
+					</select>
 				</div>
 			</div>
 			<div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">

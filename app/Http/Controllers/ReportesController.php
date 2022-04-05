@@ -335,6 +335,8 @@ class ReportesController extends Controller
                 }
                 $path = public_path('imagenes/articulos/');
                 $verpdf=trim($rrequest->get('pdf'));
+                $articulo=trim($rrequest->get('searchArticulo'));
+                $categoria=trim($rrequest->get('searchCategoria'));
                 
 
                 $zona_horaria = Auth::user()->zona_horaria;
@@ -347,9 +349,9 @@ class ReportesController extends Controller
                 $articulos=DB::table('articulo as a')
                     ->join('categoria as c','a.idcategoria','=','c.idcategoria')
                     ->select('a.idarticulo','a.idempresa','a.nombre','a.codigo','c.nombre as categoria','a.bodega','a.ubicacion','a.descripcion','a.imagen','a.estado')
-                    ->where('a.idempresa','=',$idempresa)
+                    ->where('a.nombre','LIKE','%'.$articulo.'%')
+                    ->where('c.nombre','LIKE','%'.$categoria.'%')
                     ->where('a.estado','=','Activo')
-                    ->orderBy('c.nombre','asc')
                     ->orderBy('a.nombre','asc')
                     ->get();
                 
