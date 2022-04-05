@@ -753,10 +753,14 @@ class ReportesController extends Controller
                 $proveedor=DB::table('persona')
                 ->where('idpersona','=',$idproveedor)
                 ->first();
+
+                $vendedores=DB::table('vendedor')
+                ->where('idproveedor','=',$idproveedor)
+                ->get();
                 
                 if ( $verpdf == "Descargar" )
                 {
-                    $view = \View::make('pdf.proveedores.vista.vistaproveedor', compact('proveedor','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
+                    $view = \View::make('pdf.proveedores.vista.vistaproveedor', compact('proveedor','vendedores','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
                     $pdf = \App::make('dompdf.wrapper');
                     $pdf->loadHTML($view);
                     //$pdf->setPaper('A4', 'landscape');
@@ -764,7 +768,7 @@ class ReportesController extends Controller
                 }
                 if ( $verpdf == "Navegador" )
                 {
-                    $view = \View::make('pdf.proveedores.vista.vistaproveedor', compact('proveedor','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
+                    $view = \View::make('pdf.proveedores.vista.vistaproveedor', compact('proveedor','vendedores','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
                     $pdf = \App::make('dompdf.wrapper');
                     $pdf->loadHTML($view);
                     //$pdf->setPaper('A4', 'landscape');

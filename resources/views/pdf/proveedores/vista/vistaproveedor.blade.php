@@ -77,8 +77,27 @@
 			</tr>
 			
 		</table>
+		<h4 align="left">
+			<strong><u>Vendedores</u></strong>
+		</h4>
+		<table>
+			<tr>		
+				<th>Nombre</th>
+				<th>Codigo</th>
+				<th>Telefono</th>
+				<th>Email</th>
+			</tr>
+			@foreach ($vendedores as $vendedor)
+			<tr>
+				<td><h4 align="center">{{ $vendedor->nombre}}</h4></td>
+				<td><h4 align="center">{{ $vendedor->codigo}}</h4></td>
+				<td><h4 align="center">{{ $vendedor->telefono}}</h4></td>
+				<td><h4 align="center">{{ $vendedor->email}}</h4></td>
+			</tr>
+			@endforeach
+		</table>
 		</div>
 		<br>
-		<h6>Reporte generado en: <a href="https://szystems.com/" target="_blank">SZ-Ventas Version 1.0</a> &copy; 2019 <a class="link-muted" href="https://szystems.com/" target="_blank">Szystems</a>. Todos los derechos reservados.</h6>
+		<h6>Reporte generado en: <a href="https://szystems.com/" target="_blank">SZ-Ventas Version 1.0</a> &copy; 2022 <a class="link-muted" href="https://szystems.com/" target="_blank">Szystems</a>. Todos los derechos reservados.</h6>
 	</body>
 </html>
