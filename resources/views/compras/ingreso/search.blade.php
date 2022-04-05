@@ -19,7 +19,7 @@
 								<span class="form-icon form-icon--right">
 									<i class="fas fa-calendar-alt form-icon__item"></i>
 								</span>
-								<input type="text" id="datepickerdesde" class="form-control datepicker" name="desde" value="">
+								<input type="text" id="datepickerdesde" class="form-control datepicker" name="desde" value="{{ $desde }}">
 							</span>
 						</div>
 					</div>
@@ -31,7 +31,7 @@
 								<span class="form-icon form-icon--right">
 									<i class="fas fa-calendar-alt form-icon__item"></i>
 								</span>
-								<input type="text" id="datepickerhasta" class="form-control datepicker" name="hasta" value="">
+								<input type="text" id="datepickerhasta" class="form-control datepicker" name="hasta" value="{{ $hasta }}">
 							</span>
 						</div>
 					</div>
@@ -41,9 +41,12 @@
 							<label for="proveedor"></label>Proveedor:</label>
 							<select name="proveedor" class="form-control" value="{{ old('proveedor') }}">
 								<option value="">Todos</option>
-								@foreach ($personas as $per)
-                                <option value="{{$per->idpersona}}">{{$per->nombre}}</option>
-                              	@endforeach
+								@if (isset($provfiltro))
+								  	<option selected value="{{$provfiltro->idpersona}}">{{$provfiltro->nombre}}</option>
+								@endif
+								@foreach($personas as $per)
+								  	<option value="{{$per->idpersona}}">{{$per->nombre}}</option>
+							  	@endforeach
 							</select>
 						</div>
 					</div>
@@ -52,10 +55,14 @@
                         <div class="form-group mb-2">
 							<label for="usuario"></label>Usuario:</label>
 							<select name="usuario" class="form-control" value="{{ old('usuario') }}">
+
 								<option value="">Todos</option>
-								@foreach ($usuarios as $usu)
-                                <option value="{{$usu->id}}">{{$usu->name}}</option>
-                              	@endforeach
+								@if (isset($usufiltro))
+								  	<option selected value="{{$usufiltro->id}}">{{$usufiltro->name}} ({{ $usufiltro->tipo_usuario }})</option>
+								@endif
+								@foreach($usuarios as $usu)
+								  	<option value="{{$usu->id}}">{{$usu->name}} ({{ $usu->tipo_usuario }})</option>
+							  	@endforeach
 							</select>
 						</div>
 					</div>
@@ -65,8 +72,13 @@
 							<label for="estado"></label>Estado:</label>
 							<select name="estado" class="form-control" value="{{ old('estado') }}">
 								<option value="">Todos</option>
-								<option value="A">Activo</option>
-								<option value="C">Cancelado</option>
+								@if ($estado != null)
+								  	<option selected value="{{$estado}}">{{$estado}}</option>
+								@else
+									<option selected value="">Todos</option>
+								@endif
+								<option value="Activo">Activo</option>
+								<option value="Cancelado">Cancelado</option>
 							</select>
 						</div>
 					</div>
@@ -108,7 +120,7 @@
 
 	$( '#datepickerhasta' ).datepicker( optSimple );
 
-	$( '#datepickerdesde,#datepickerhasta' ).datepicker( 'setDate', today );
+	
 </script>
 
     

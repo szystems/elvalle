@@ -178,11 +178,11 @@ class ReportesController extends Controller
 
                 
                 $verpdf=trim($rrequest->get('pdf'));
-                $desde=trim($rrequest->get('rdesde'));
-                $hasta=trim($rrequest->get('rhasta'));
-                $proveedor=trim($rrequest->get('rproveedor'));
-                $usuario=trim($rrequest->get('rusuario'));
-                $estado=trim($rrequest->get('restado'));
+                $desde=trim($rrequest->get('searchDesde'));
+                $hasta=trim($rrequest->get('searchHasta'));
+                $proveedor=trim($rrequest->get('searchProveedor'));
+                $usuario=trim($rrequest->get('searchUsuario'));
+                $estado=trim($rrequest->get('searchEstado'));
 
                 $personas=DB::table('persona')
                 ->where('tipo','=','Cliente')
@@ -216,7 +216,7 @@ class ReportesController extends Controller
                     ->join('persona as p','i.idproveedor','=','p.idpersona')
                     ->join('detalle_ingreso as di','i.idingreso','=','di.idingreso')
                     ->join('users as u','i.idusuario','=','u.id')
-                    ->select('i.idingreso','i.fecha','p.nombre','u.name','i.tipo_comprobante','i.serie_comprobante','i.num_comprobante','i.impuesto','i.estado',DB::raw('sum(di.cantidad*precio_compra) as total'))
+                    ->select('i.idingreso','i.fecha','p.nombre','u.name','i.tipo_comprobante','i.serie_comprobante','i.num_comprobante','i.impuesto','i.estado',DB::raw('sum(di.total_compra) as total'))
                     ->whereBetween('fecha', [$desde, $hasta])
                     ->where('p.idpersona','LIKE','%'.$proveedor.'%')
                     ->where('u.id','LIKE','%'.$usuario.'%')
@@ -233,7 +233,7 @@ class ReportesController extends Controller
                     ->join('persona as p','i.idproveedor','=','p.idpersona')
                     ->join('detalle_ingreso as di','i.idingreso','=','di.idingreso')
                     ->join('users as u','i.idusuario','=','u.id')
-                    ->select('i.idingreso','i.fecha','p.nombre','u.name','i.tipo_comprobante','i.serie_comprobante','i.num_comprobante','i.impuesto','i.estado',DB::raw('sum(di.cantidad*precio_compra) as total'))
+                    ->select('i.idingreso','i.fecha','p.nombre','u.name','i.tipo_comprobante','i.serie_comprobante','i.num_comprobante','i.impuesto','i.estado',DB::raw('sum(di.total_compra) as total'))
                     ->where('i.idempresa','=',$idempresa)
                     ->orderBy('i.fecha','asc')
                     ->groupBy('i.idingreso','i.fecha','p.nombre','u.name','i.tipo_comprobante','i.serie_comprobante','i.num_comprobante','i.impuesto','i.estado')

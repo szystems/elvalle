@@ -56,16 +56,18 @@ class IngresoController extends Controller
                 ->get();
 
                 $usufiltro=DB::table('users')
-					->select('name','id')
                     ->where('id','=',$usuario)
-                    ->where('idempresa','=',$idempresa)
-                    ->get();
-                    
-                $provfiltro=DB::table('persona')
-                ->select('nombre','idpersona')
-                ->where('idpersona','=',$proveedor)
-                ->where('idempresa','=',$idempresa)
-                ->get();
+                    ->first();
+                if($proveedor != null)
+                {
+                    $provfiltro=DB::table('persona')
+                    ->where('idpersona','=',$proveedor)
+                    ->first();
+                }else
+                {
+                    $provfiltro = null;
+                }   
+                
 
                 $zona_horaria = Auth::user()->zona_horaria;
                 $hoy = Carbon::now($zona_horaria);
