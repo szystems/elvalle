@@ -257,6 +257,75 @@ class ReportesController extends Controller
         
     }
 
+    public function reporteinventario(ReportesFormRequest $rrequest)
+    {  
+            if ($rrequest)
+            {
+                
+                $idempresa = Auth::user()->idempresa;
+                $nombreusu = Auth::user()->name;
+                $empresa = Auth::user()->empresa;
+                if (Auth::user()->logo == null)
+                {
+                    $logo = null;
+                    $imagen = null;
+                }
+                else
+                {
+                     $logo = Auth::user()->logo;
+                     $imagen = public_path('imagenes/logos/'.$logo);
+                }
+
+                
+                $verpdf=trim($rrequest->get('pdf'));
+                $articulof=trim($rrequest->get('searchArticulo'));
+                $proveedorf=trim($rrequest->get('searchProveedor'));
+                $presentacionf=trim($rrequest->get('searchPresentacion'));
+                $estadoOfertaf=trim($rrequest->get('searchOferta'));
+                $estadof=trim($rrequest->get('searchEstado'));
+
+                $zona_horaria = Auth::user()->zona_horaria;
+                $hoy = Carbon::now($zona_horaria);
+                $hoy = $hoy->format('d-m-Y');
+
+                $nompdf = Carbon::now($zona_horaria);
+                $nompdf = $nompdf->format('Y-m-d H:i:s');
+                
+                $detalles=DB::table('detalle_ingreso as di')
+                    ->join('ingreso as i','di.idingreso','=','i.idingreso')
+                    ->join('persona as p','i.idproveedor','=','p.idpersona')
+                    ->join('articulo as a','di.idarticulo','=','a.idarticulo')
+                    ->join('presentacion as pr','di.idpresentacion_inventario','=','pr.idpresentacion')
+                    ->select('di.iddetalle_ingreso','di.idingreso','i.idproveedor','p.nombre as Proveedor','i.fecha','i.estado as EstadoIngreso','di.idarticulo','a.nombre as Articulo','a.minimo','di.codigo as Codigo','di.cantidad_total_compra','di.total_compra','di.descripcion_inventario','di.fecha_vencimiento','di.idpresentacion_inventario','pr.nombre as Presentacion','di.cantidadxunidad','di.total_unidades_inventario','di.costo_unidad_inventario','di.precio_sugerido','di.porcentaje_utilidad','di.precio_venta','di.precio_oferta','di.estado_oferta','di.stock','di.estado as EstadoDetalle')
+                    ->where('a.nombre','LIKE','%'.$articulof.'%')
+                    ->where('p.nombre','LIKE','%'.$proveedorf.'%')
+                    ->where('pr.nombre','LIKE','%'.$presentacionf.'%')
+                    ->where('di.estado_oferta','LIKE','%'.$estadoOfertaf.'%')
+                    ->where('i.estado','LIKE','%'.$estadof.'%')
+                    ->orderBy('i.fecha','desc')
+                    ->groupBy('di.iddetalle_ingreso','di.idingreso','i.idproveedor','p.nombre','i.fecha','i.estado','di.idarticulo','a.nombre','a.minimo','di.codigo','di.cantidad_total_compra','di.total_compra','di.descripcion_inventario','di.fecha_vencimiento','di.idpresentacion_inventario','pr.nombre','di.cantidadxunidad','di.total_unidades_inventario','di.costo_unidad_inventario','di.precio_sugerido','di.porcentaje_utilidad','di.precio_venta','di.precio_oferta','di.estado_oferta','di.stock','di.estado')
+                    ->paginate(20);
+
+                if ( $verpdf == "Descargar" )
+                {
+                    $view = \View::make('pdf.inventario.reporteinventario', compact('detalles','articulof','proveedorf','presentacionf','estadoOfertaf','estadof','hoy','nombreusu','empresa','imagen'))->render();
+                    $pdf = \App::make('dompdf.wrapper');
+                    $pdf->setPaper('A4', 'landscape');
+                    $pdf->loadHTML($view);
+                    return $pdf->download ('ReporteInventario'.$nompdf.'.pdf');
+                }
+                if ( $verpdf == "Navegador" )
+                {
+                    $view = \View::make('pdf.inventario.reporteinventario', compact('detalles','articulof','proveedorf','presentacionf','estadoOfertaf','estadof','hoy','nombreusu','empresa','imagen'))->render();
+                    $pdf = \App::make('dompdf.wrapper');
+                    $pdf->setPaper('A4', 'landscape');
+                    $pdf->loadHTML($view);
+                    return $pdf->stream ('ReporteInventario'.$nompdf.'.pdf');
+                }
+            }
+        
+    }
+
     public function reportecategorias(ReportesFormRequest $rrequest)
     {  
             if ($rrequest)

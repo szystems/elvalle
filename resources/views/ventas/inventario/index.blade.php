@@ -23,7 +23,46 @@
 
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				@include('ventas.inventario.search')
-				
+				{{Form::open(array('action' => 'ReportesController@reporteinventario','method' => 'POST','role' => 'form', 'target' => '_blank'))}}
+
+                {{Form::token()}}		
+					<div class="card mb-4">
+						<header class="card-header d-md-flex align-items-center">
+							<h4><strong>Imprimir Listado de Ingresos </strong></h4>
+							<input type="hidden" name="searchArticulo" value="{{ $articulof }}">
+							<input type="hidden" name="searchProveedor" value="{{ $proveedorf }}">
+							<input type="hidden" name="searchPresentacion" value="{{ $presentacionf }}">
+							<input type="hidden" name="searchOferta" value="{{ $estadoOfertaf }}">
+							<input type="hidden" name="searchEstado" value="{{ $estadof }}">
+						</header>
+						<div class="card-body">
+							<div class="row">
+								<div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
+									<div class="form-group mb-2">
+										<label for="rpdf">Visualización</label>
+										<select name="pdf" class="form-control" value="">
+												<option value="Descargar" selected>Descargar</option>
+												<option value="Navegador">Ver en navegador</option>
+											</select>
+									</div>
+								</div>
+								<div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
+								<label for="rpdf"></label>
+									<div class="form-group mb-2">
+									
+										<span class="input-group-btn">
+										
+											<button type="submit" class="btn btn-danger">
+												<i class="fa fa-file-pdf"></i> PDF
+											</button>
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+				{{Form::close()}}
 				<h6><strong>Filtros:</strong><font color="Blue"> <strong>Articulo:</strong> {{$articulof}}, <strong>Proveedor:</strong> {{$proveedorf}}, <strong>Presentacion:</strong> {{$presentacionf}}, <strong>Oferta:</strong> {{$estadoOfertaf}}, <strong>Estado:</strong> {{$estadof}}</font></h6>
 				<div class="table-responsive">
 					<table class="table table-striped table-bordered table-condensed table-hover">
@@ -45,15 +84,20 @@
 							<th><small><strong>Estado</strong></small></th>
 						</thead>
 							<?php
+								
 								$cantidadArticulos = $detalles->count();
-								$totalUnidades = 0;
-								$totalStock = 0;
-								$sumCosto = 0;
-								$sumUtilidad = 0;
-								$sumPrecioVenta = 0;
-								$sumPrecioSugerido = 0;
-								$sumPorcentajeDescuento = 0;
-								$sumPrecioDescuento = 0;
+								if($cantidadArticulos != null)
+								{
+									$totalUnidades = 0;
+									$totalStock = 0;
+									$sumCosto = 0;
+									$sumUtilidad = 0;
+									$sumPrecioVenta = 0;
+									$sumPrecioSugerido = 0;
+									$sumPorcentajeDescuento = 0;
+									$sumPrecioDescuento = 0;
+								}
+								
 							?>
 		               @foreach ($detalles as $det)
 						<tr>
@@ -113,51 +157,55 @@
 								<td align="center"><font color="red"><small>{{$det->EstadoDetalle}}</small></font></td>
 							@endif
 							<?php
-                                $totalUnidades= $totalUnidades + $det->total_unidades_inventario;
-								$totalStock = $totalStock + $det->stock;
-								$sumCosto = $sumCosto + $det->costo_unidad_inventario;
-								$sumUtilidad = $sumUtilidad + $det->porcentaje_utilidad;
-								$sumPrecioVenta = $sumPrecioVenta + $det->precio_venta;
-								$sumPrecioSugerido = $sumPrecioSugerido + $det->precio_sugerido;
-								$sumPorcentajeDescuento = $sumPorcentajeDescuento + $det->precio_oferta;
-								$sumPrecioDescuento = $sumPrecioDescuento + $precio_descuento;
+								if($cantidadArticulos != null)
+								{
+									$totalUnidades= $totalUnidades + $det->total_unidades_inventario;
+									$totalStock = $totalStock + $det->stock;
+									$sumCosto = $sumCosto + $det->costo_unidad_inventario;
+									$sumUtilidad = $sumUtilidad + $det->porcentaje_utilidad;
+									$sumPrecioVenta = $sumPrecioVenta + $det->precio_venta;
+									$sumPrecioSugerido = $sumPrecioSugerido + $det->precio_sugerido;
+									$sumPorcentajeDescuento = $sumPorcentajeDescuento + $det->precio_oferta;
+									$sumPrecioDescuento = $sumPrecioDescuento + $precio_descuento;
+								}
                             ?>
 						</tr>
 						@include('ventas.inventario.modaledit')
 				@endforeach
 					</table>
 				</div>
-
-				<div class="table-responsive">
-					<table class="table table-striped table-bordered table-condensed table-hover">
-						<thead>
-							<th><h3><strong><b>Total Unidades</b></strong></h3></th>
-							<th><h3><strong><b>Total Stock</b></strong></h3></th>
-							<th><h3><strong><b>Promedio Costo</b></strong></h3></th>
-							<th><h3><strong><b>Promedio %Utilidad</b></strong></h3></th>
-							<th><h3><strong><b>Promedio Precio</b></strong></h3></th>
-							<th><h3><strong><b>Promedio Descuento</b></strong></h3></th>
-						</thead>
-							<?php
-
-								$promedioCosto = $sumCosto/$cantidadArticulos;
-								$promedioUtilidad = $sumUtilidad/$cantidadArticulos;
-								$promedioPrecioVenta = $sumPrecioVenta/$cantidadArticulos;
-								$promedioPrecioSugerido = $sumPrecioSugerido/$cantidadArticulos;
-								$promedioPorcentajeDescuento = $sumPorcentajeDescuento/$cantidadArticulos;
-								$promedioPrecioDescuento = $sumPrecioDescuento/$cantidadArticulos;
-                            ?>
-						<tr>
-							<td align="center"><h3><b><font color="blue">{{$totalUnidades}}</font></b></h3></td>
-							<td align="center"><h3><b><font color="limegreen">{{$totalStock}} </font></b></h3></td>
-							<td align="center"><h3><b><font color="orange">{{ Auth::user()->moneda }}{{number_format($promedioCosto,2, '.', ',')}} </font></b></h3></td>
-							<td align="center"><h3><b><font color="green">{{ Auth::user()->moneda }}{{number_format($promedioUtilidad,2, '.', ',')}} </font></b></h3></td>
-							<td align="center"><h3><b><font color="blue">{{ Auth::user()->moneda }}{{number_format($promedioPrecioVenta,2, '.', ',')}}</font> ({{ Auth::user()->moneda }}{{number_format($promedioPrecioSugerido,2, '.', ',')}})</b></h3></td>
-							<td align="center"><h3><b><font color="limegreen">{{$promedioPorcentajeDescuento}}% ({{ Auth::user()->moneda }}{{number_format($promedioPrecioDescuento,2, '.', ',')}})</font></b></h3></td>
-						</tr>
-					</table>
-				</div>
-				
+				@if($cantidadArticulos != null)
+			
+					<div class="table-responsive">
+						<table class="table table-striped table-bordered table-condensed table-hover">
+							<thead>
+								<th><h3><strong><b>Total Unidades</b></strong></h3></th>
+								<th><h3><strong><b>Total Stock</b></strong></h3></th>
+								<th><h3><strong><b>Promedio Costo</b></strong></h3></th>
+								<th><h3><strong><b>Promedio %Utilidad</b></strong></h3></th>
+								<th><h3><strong><b>Promedio Precio</b></strong></h3></th>
+								<th><h3><strong><b>Promedio Descuento</b></strong></h3></th>
+							</thead>
+								<?php
+									
+									$promedioCosto = $sumCosto/$cantidadArticulos;
+									$promedioUtilidad = $sumUtilidad/$cantidadArticulos;
+									$promedioPrecioVenta = $sumPrecioVenta/$cantidadArticulos;
+									$promedioPrecioSugerido = $sumPrecioSugerido/$cantidadArticulos;
+									$promedioPorcentajeDescuento = $sumPorcentajeDescuento/$cantidadArticulos;
+									$promedioPrecioDescuento = $sumPrecioDescuento/$cantidadArticulos;
+								?>
+							<tr>
+								<td align="center"><h3><b><font color="blue">{{$totalUnidades}}</font></b></h3></td>
+								<td align="center"><h3><b><font color="limegreen">{{$totalStock}} </font></b></h3></td>
+								<td align="center"><h3><b><font color="orange">{{ Auth::user()->moneda }}{{number_format($promedioCosto,2, '.', ',')}} </font></b></h3></td>
+								<td align="center"><h3><b><font color="green">{{ Auth::user()->moneda }}{{number_format($promedioUtilidad,2, '.', ',')}} </font></b></h3></td>
+								<td align="center"><h3><b><font color="blue">{{ Auth::user()->moneda }}{{number_format($promedioPrecioVenta,2, '.', ',')}}</font> ({{ Auth::user()->moneda }}{{number_format($promedioPrecioSugerido,2, '.', ',')}})</b></h3></td>
+								<td align="center"><h3><b><font color="limegreen">{{$promedioPorcentajeDescuento}}% ({{ Auth::user()->moneda }}{{number_format($promedioPrecioDescuento,2, '.', ',')}})</font></b></h3></td>
+							</tr>
+						</table>
+					</div>
+				@endif
 				{{$detalles->render()}}
 			</div>
 		</div>
