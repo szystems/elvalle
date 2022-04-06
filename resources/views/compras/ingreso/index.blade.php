@@ -109,6 +109,9 @@
 							<th><h5><strong>Estado </strong></h5></th>
 							
 						</thead>
+						<?php
+							$sumatotal = 0;
+						?>
 		               @foreach ($ingresos as $ing)
 						<tr>
 							<td align="left">
@@ -150,9 +153,22 @@
 							@else
 							<td align="center"><h5><font color="Red"><strong>{{ $ing->estado}}</strong></font></h5></td>
 							@endif
+							<?php
+								$sumatotal = $sumatotal + $ing->total;
+							?>
 						</tr>
 						@include('compras.ingreso.modal')
 				@endforeach
+						<tr>
+							<td ></td>
+							<td ></td>
+							<td ></td>
+							<td ></td>
+							<td align="right"><h1><strong>Total Compras:</strong></h1></td>
+							<td align="right"><font color="orange"><h1><strong>{{ Auth::user()->moneda }}{{number_format($sumatotal,2, '.', ',')}}</strong></h1></font></td>
+							<td ></td>
+							
+						</tr>
 					</table>
 				</div>
 				
