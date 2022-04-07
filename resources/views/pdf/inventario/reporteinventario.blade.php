@@ -64,6 +64,7 @@
 				<th>P.Venta</th>
 				<th>%Oferta</th>
 				<th>Oferta</th>
+				<th>E.Oferta</th>
 				<th>Estado</th>
 			</tr>
 			<?php
@@ -86,13 +87,26 @@
 			<tr>
 				<?php
 					$fecha_ingreso = date("d-m-Y", strtotime($det->fecha));
+					//formato fecha vencimiento
 					$fecha_vencimiento = date("d-m-Y", strtotime($det->fecha_vencimiento));
 				?>
 				<td><h4 align="center">{{ $fecha_ingreso}}</h4></td>
 				<td><h4 align="center">{{ $det->Proveedor }}</h4></td>
 				<td><h4 align="center">{{$det->Codigo}} <br> <strong> {{ $det->Articulo}}</strong></h4></td>
 				<td><h4 align="center">{{$det->descripcion_inventario}}</h4></td>
-				<td><h4 align="center">{{$fecha_vencimiento}}</h4></td>
+				<?php 
+					$fv = date("d-m-Y", strtotime($det->fecha_vencimiento));
+					$hoy = date("d-m-Y", strtotime($hoy));
+					$mas30 = date("d-m-Y", strtotime($hoy.'+ 1 month'));
+				?>
+				@if($fv > $mas30)
+					<td><h4 align="center">{{$fecha_vencimiento}} <br><font color="limegreen">Vigente</font></h4></td>
+				@elseif($fv >= $hoy and $fv <= $mas30)
+					<td><h4 align="center">{{$fecha_vencimiento}} <br><font color="orange">Vigente</font></h4></td>
+				@elseif($fv < $hoy )
+					<td><h4 align="center">{{$fecha_vencimiento}} <br><font color="red">Vencido</font></h4></td>
+				@endif
+				<td><h4 align="center">{{$fecha_vencimiento}} </h4></td>
 				<td><h4 align="center">{{$det->Presentacion}}</h4></td>
 				<td><h4 align="center">{{$det->total_unidades_inventario}}</h4></td>
 				@if(($det->stock <= $det->minimo) & ($det->stock > 0))
@@ -174,7 +188,7 @@
 					<td><h3 align="center"><b><font color="blue">{{$totalUnidades}}</font></b></h3></td>
 					<td><h3 align="center"><b><font color="limegreen">{{$totalStock}} </font></b></h3></td>
 					<td><h3 align="center"><b><font color="orange">{{ Auth::user()->moneda }}{{number_format($promedioCosto,2, '.', ',')}} </font></b></h3></td>
-					<td><h3 align="center"><b><font color="green">{{ Auth::user()->moneda }}{{number_format($promedioUtilidad,2, '.', ',')}} </font></b></h3></td>
+					<td><h3 align="center"><b><font color="green">{{number_format($promedioUtilidad,2, '.', ',')}}% </font></b></h3></td>
 					<td><h3 align="center"><b><font color="blue">{{ Auth::user()->moneda }}{{number_format($promedioPrecioVenta,2, '.', ',')}}</font> ({{ Auth::user()->moneda }}{{number_format($promedioPrecioSugerido,2, '.', ',')}})</b></h3></td>
 					<td><h3 align="center"><b><font color="limegreen">{{$promedioPorcentajeDescuento}}% ({{ Auth::user()->moneda }}{{number_format($promedioPrecioDescuento,2, '.', ',')}})</font></b></h3></td>
 				</tr>	

@@ -28,17 +28,25 @@
 
 					$desde = date("d-m-Y", strtotime($desde));
 					$hasta = date("d-m-Y", strtotime($hasta));
-					if($desde == '01-01-1970' or $hasta == '01-01-1970')
+					if($desde == '01-01-1970' and $hasta == '01-01-1970')
 					{
-						
+						$desde = date('d-m-Y');
 						$hasta = date('d-m-Y');
-
+					}else
+					{
 						$FechaMin = DB::table('ingreso')
 						->where('estado','=','Activo')
 						->first();
-
-						$desde = $FechaMin->fecha;
-						$desde = date("d-m-Y", strtotime($desde));
+						if(isset($FechaMin))
+						{
+							$desde = $FechaMin->fecha;
+							$desde = date("d-m-Y", strtotime($desde));
+							$hasta = date('d-m-Y');
+						}else
+						{
+							$desde = date('d-m-Y');
+							$hasta = date('d-m-Y');
+						}
 					}
 								
 				?>

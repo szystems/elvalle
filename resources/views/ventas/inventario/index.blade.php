@@ -22,6 +22,17 @@
 		<div class="row">
 
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<?php
+					$desdeReporte=$desdef;
+					$hastaReporte=$hastaf;
+
+					$desde = $desdef;
+					$hasta = $hastaf;
+
+					$desde = date("d-m-Y", strtotime($desde));
+					$hasta = date("d-m-Y", strtotime($hasta));
+								
+				?>
 				@include('ventas.inventario.search')
 				{{Form::open(array('action' => 'ReportesController@reporteinventario','method' => 'POST','role' => 'form', 'target' => '_blank'))}}
 
@@ -29,6 +40,8 @@
 					<div class="card mb-4">
 						<header class="card-header d-md-flex align-items-center">
 							<h4><strong>Imprimir Listado de Ingresos </strong></h4>
+							<input type="hidden" name="searchDesde" value="{{ $desdeReporte }}">
+							<input type="hidden" name="searchHasta" value="{{ $hastaReporte }}">
 							<input type="hidden" name="searchArticulo" value="{{ $articulof }}">
 							<input type="hidden" name="searchProveedor" value="{{ $proveedorf }}">
 							<input type="hidden" name="searchPresentacion" value="{{ $presentacionf }}">
@@ -63,7 +76,7 @@
 					</div>
 					
 				{{Form::close()}}
-				<h6><strong>Filtros:</strong><font color="Blue"> <strong>Articulo:</strong> {{$articulof}}, <strong>Proveedor:</strong> {{$proveedorf}}, <strong>Presentacion:</strong> {{$presentacionf}}, <strong>Oferta:</strong> {{$estadoOfertaf}}, <strong>Estado:</strong> {{$estadof}}</font></h6>
+				<h6><strong>Filtros:</strong><font color="Blue"> <strong>Desde:</strong> {{$desde}},<strong>Hasta:</strong> {{$hasta}},<strong>Articulo:</strong> {{$articulof}}, <strong>Proveedor:</strong> {{$proveedorf}}, <strong>Presentacion:</strong> {{$presentacionf}}, <strong>Oferta:</strong> {{$estadoOfertaf}}, <strong>Estado:</strong> {{$estadof}}</font></h6>
 				<div class="table-responsive">
 					<table class="table table-striped table-bordered table-condensed table-hover">
 						<thead>
@@ -104,6 +117,7 @@
 							<?php
 								$fecha_ingreso = date("d-m-Y", strtotime($det->fecha));
 								$fecha_vencimiento = date("d-m-Y", strtotime($det->fecha_vencimiento));
+
 							?>
 							<td align="left">
 								<!-- Button trigger modal -->
@@ -115,7 +129,18 @@
 							<td align="center"><small><a href="{{URL::action('ProveedorController@show',$det->idproveedor)}}" target="_blanc">{{ $det->Proveedor}}</a></small></td>
 							<td align="left"><small>{{$det->Codigo}} <br> <strong> {{ $det->Articulo}}</strong></small></td>
 							<td align="left"><small>{{$det->descripcion_inventario}}</small></td>
-							<td align="center"><small>{{$fecha_vencimiento}}</small></td>
+							<?php 
+								$fv = date("d-m-Y", strtotime($det->fecha_vencimiento));
+								$hoy = date("d-m-Y", strtotime($hoy));
+								$mas30 = date("d-m-Y", strtotime($hoy.'+ 1 month'));
+							?>
+							@if($fv > $mas30)
+								<td align="center"><small>{{$fecha_vencimiento}} <br><font color="limegreen">Vigente</font></small></td>
+							@elseif($fv >= $hoy and $fv <= $mas30)
+								<td align="center"><small>{{$fecha_vencimiento}} <br><font color="orange">Vigente</font></small></td>
+							@elseif($fv < $hoy )
+								<td align="center"><small>{{$fecha_vencimiento}} <br><font color="red">Vencido</font></small></td>
+							@endif
 							<td align="center"><small>{{$det->Presentacion}}</small></td>
 							<td align="center"><font color="blue"><strong>{{$det->total_unidades_inventario}}</strong></font></td>
 							@if(($det->stock <= $det->minimo) & ($det->stock > 0))
@@ -199,7 +224,7 @@
 								<td align="center"><h3><b><font color="blue">{{$totalUnidades}}</font></b></h3></td>
 								<td align="center"><h3><b><font color="limegreen">{{$totalStock}} </font></b></h3></td>
 								<td align="center"><h3><b><font color="orange">{{ Auth::user()->moneda }}{{number_format($promedioCosto,2, '.', ',')}} </font></b></h3></td>
-								<td align="center"><h3><b><font color="green">{{ Auth::user()->moneda }}{{number_format($promedioUtilidad,2, '.', ',')}} </font></b></h3></td>
+								<td align="center"><h3><b><font color="green">{{number_format($promedioUtilidad,2, '.', ',')}}% </font></b></h3></td>
 								<td align="center"><h3><b><font color="blue">{{ Auth::user()->moneda }}{{number_format($promedioPrecioVenta,2, '.', ',')}}</font> ({{ Auth::user()->moneda }}{{number_format($promedioPrecioSugerido,2, '.', ',')}})</b></h3></td>
 								<td align="center"><h3><b><font color="limegreen">{{$promedioPorcentajeDescuento}}% ({{ Auth::user()->moneda }}{{number_format($promedioPrecioDescuento,2, '.', ',')}})</font></b></h3></td>
 							</tr>

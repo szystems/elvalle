@@ -9,7 +9,30 @@
             </header>
             <div class="card-body">
                 <div class="row">
+					<div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
+                        <div class="form-group mb-2">
+							<label for="desde"></label><font color="orange">*</font>Desde:</label>
+							<span class="form-icon-wrapper">
+								<span class="form-icon form-icon--right">
+									<i class="fas fa-calendar-alt form-icon__item"></i>
+								</span>
+								<input type="text" id="datepickerdesde" class="form-control datepicker" name="desde" value="{{ $desde }}">
+							</span>
+						</div>
+					</div>
 
+					<div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
+                        <div class="form-group mb-2">
+							<label for="hasta"></label><font color="orange">*</font>Hasta:</label>
+							<span class="form-icon-wrapper">
+								<span class="form-icon form-icon--right">
+									<i class="fas fa-calendar-alt form-icon__item"></i>
+								</span>
+								<input type="text" id="datepickerhasta" class="form-control datepicker" name="hasta" value="{{ $hasta }}">
+							</span>
+						</div>
+					</div>
+					
 					<div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
                         <div class="form-group mb-2">
 							<label for="articulof"></label>Articulo:</label>
@@ -134,8 +157,6 @@
 	$( '#datepickerdesde' ).datepicker( optSimple );
 
 	$( '#datepickerhasta' ).datepicker( optSimple );
-
-	$( '#datepickerdesde,#datepickerhasta' ).datepicker( 'setDate', today );
 </script>
 
     

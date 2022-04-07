@@ -36,6 +36,12 @@ class InventarioController extends Controller
             if ($request)
             {
                 $idempresa = Auth::user()->idempresa;
+                $desde=trim($request->get('desde'));
+                $hasta=trim($request->get('hasta'));
+                
+
+                $desdef = date("Y-m-d", strtotime($desde));
+                $hastaf = date("Y-m-d", strtotime($hasta));
 
                 $articulof=trim($request->get('articulof'));
                 $proveedorf=trim($request->get('proveedorf'));
@@ -58,13 +64,18 @@ class InventarioController extends Controller
                 $zona_horaria = Auth::user()->zona_horaria;
                 $hoy = Carbon::now($zona_horaria);
                 $hoy = $hoy->format('d-m-Y');
+
+                
     			
-                $detalles=DB::table('detalle_ingreso as di')
+                if($desdef != '1970-01-01' or $hastaf != '1970-01-01')
+                {
+                    $detalles=DB::table('detalle_ingreso as di')
                     ->join('ingreso as i','di.idingreso','=','i.idingreso')
                     ->join('persona as p','i.idproveedor','=','p.idpersona')
                     ->join('articulo as a','di.idarticulo','=','a.idarticulo')
                     ->join('presentacion as pr','di.idpresentacion_inventario','=','pr.idpresentacion')
                     ->select('di.iddetalle_ingreso','di.idingreso','i.idproveedor','p.nombre as Proveedor','i.fecha','i.estado as EstadoIngreso','di.idarticulo','a.nombre as Articulo','a.minimo','di.codigo as Codigo','di.cantidad_total_compra','di.total_compra','di.descripcion_inventario','di.fecha_vencimiento','di.idpresentacion_inventario','pr.nombre as Presentacion','di.cantidadxunidad','di.total_unidades_inventario','di.costo_unidad_inventario','di.precio_sugerido','di.porcentaje_utilidad','di.precio_venta','di.precio_oferta','di.estado_oferta','di.stock','di.estado as EstadoDetalle')
+                    ->whereBetween('i.fecha', [$desdef, $hastaf])
                     ->where('a.nombre','LIKE','%'.$articulof.'%')
                     ->where('p.nombre','LIKE','%'.$proveedorf.'%')
                     ->where('pr.nombre','LIKE','%'.$presentacionf.'%')
@@ -73,10 +84,40 @@ class InventarioController extends Controller
                     ->orderBy('i.fecha','desc')
                     ->groupBy('di.iddetalle_ingreso','di.idingreso','i.idproveedor','p.nombre','i.fecha','i.estado','di.idarticulo','a.nombre','a.minimo','di.codigo','di.cantidad_total_compra','di.total_compra','di.descripcion_inventario','di.fecha_vencimiento','di.idpresentacion_inventario','pr.nombre','di.cantidadxunidad','di.total_unidades_inventario','di.costo_unidad_inventario','di.precio_sugerido','di.porcentaje_utilidad','di.precio_venta','di.precio_oferta','di.estado_oferta','di.stock','di.estado')
                     ->paginate(20);
+                }else
+                {
+                    $FechaMin = DB::table('ingreso')
+					->where('estado','=','Activo')
+					->first();
+					if(isset($FechaMin))
+					{
+						$desdef = $FechaMin->fecha;
+						$desdef = date("d-m-Y", strtotime($desdef));
+						$hastaf = date('d-m-Y');
+					}else
+					{
+						$desdef = date('d-m-Y');
+						$hastaf = date('d-m-Y');
+					}
+
+                    $detalles=DB::table('detalle_ingreso as di')
+                    ->join('ingreso as i','di.idingreso','=','i.idingreso')
+                    ->join('persona as p','i.idproveedor','=','p.idpersona')
+                    ->join('articulo as a','di.idarticulo','=','a.idarticulo')
+                    ->join('presentacion as pr','di.idpresentacion_inventario','=','pr.idpresentacion')
+                    ->select('di.iddetalle_ingreso','di.idingreso','i.idproveedor','p.nombre as Proveedor','i.fecha','i.estado as EstadoIngreso','di.idarticulo','a.nombre as Articulo','a.minimo','di.codigo as Codigo','di.cantidad_total_compra','di.total_compra','di.descripcion_inventario','di.fecha_vencimiento','di.idpresentacion_inventario','pr.nombre as Presentacion','di.cantidadxunidad','di.total_unidades_inventario','di.costo_unidad_inventario','di.precio_sugerido','di.porcentaje_utilidad','di.precio_venta','di.precio_oferta','di.estado_oferta','di.stock','di.estado as EstadoDetalle')
                     
-                
+                    ->where('a.nombre','LIKE','%'.$articulof.'%')
+                    ->where('p.nombre','LIKE','%'.$proveedorf.'%')
+                    ->where('pr.nombre','LIKE','%'.$presentacionf.'%')
+                    ->where('di.estado_oferta','LIKE','%'.$estadoOfertaf.'%')
+                    ->where('i.estado','LIKE','%'.$estadof.'%')
+                    ->orderBy('i.fecha','desc')
+                    ->groupBy('di.iddetalle_ingreso','di.idingreso','i.idproveedor','p.nombre','i.fecha','i.estado','di.idarticulo','a.nombre','a.minimo','di.codigo','di.cantidad_total_compra','di.total_compra','di.descripcion_inventario','di.fecha_vencimiento','di.idpresentacion_inventario','pr.nombre','di.cantidadxunidad','di.total_unidades_inventario','di.costo_unidad_inventario','di.precio_sugerido','di.porcentaje_utilidad','di.precio_venta','di.precio_oferta','di.estado_oferta','di.stock','di.estado')
+                    ->paginate(20);
+                }
                
-                return view('ventas.inventario.index',["detalles"=>$detalles,"articulos"=>$articulos,"proveedores"=>$proveedores,"presentaciones"=>$presentaciones,"articulof"=>$articulof,"proveedorf"=>$proveedorf,"presentacionf"=>$presentacionf,"estadoOfertaf"=>$estadoOfertaf,"estadof"=>$estadof,"hoy"=>$hoy]);
+                return view('ventas.inventario.index',["detalles"=>$detalles,"articulos"=>$articulos,"proveedores"=>$proveedores,"presentaciones"=>$presentaciones,"articulof"=>$articulof,"proveedorf"=>$proveedorf,"presentacionf"=>$presentacionf,"estadoOfertaf"=>$estadoOfertaf,"estadof"=>$estadof,"desdef"=>$desdef,"hastaf"=>$hastaf,"hoy"=>$hoy]);
             } 
     }
 
