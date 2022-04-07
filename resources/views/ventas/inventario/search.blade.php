@@ -120,6 +120,22 @@
 							</select>
 						</div>
 					</div>
+
+					<div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
+                        <div class="form-group mb-2">
+							<label for="stockf"></label>Stock:</label>
+							<select name="stockf" class="form-control" value="{{ old('stockf') }}">
+								<option value="">Todos</option>
+								@if ($stockf != null)
+								  	<option selected value="Stock">Stock</option>
+								@else
+									<option selected value="">Todos</option>
+								@endif
+
+								<option value="Stock">Stock</option>
+							</select>
+						</div>
+					</div>
 					
 				</div>
 
