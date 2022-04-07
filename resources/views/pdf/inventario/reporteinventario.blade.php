@@ -42,7 +42,7 @@
 			</center>
 		@endif
 		<h4 align="center">
-			<strong><u>Reporte de Compras</u></strong>
+			<strong><u>Reporte de Inventario</u></strong>
 		</h4>
 		<h6><strong>Empresa:</strong><font color="Blue"> <strong>'{{ $empresa}}' </strong></font>
 			<br><strong>Fecha:</strong><font color="Blue"> <strong>'{{ $hoy}}' <strong></font>
