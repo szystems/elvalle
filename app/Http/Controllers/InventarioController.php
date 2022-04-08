@@ -39,6 +39,9 @@ class InventarioController extends Controller
                 $desde=trim($request->get('desde'));
                 $hasta=trim($request->get('hasta'));
                 
+                $zona_horaria = Auth::user()->zona_horaria;
+                $hoy = Carbon::now($zona_horaria);
+                $hoy = $hoy->format('d-m-Y');
 
                 $desdef = date("Y-m-d", strtotime($desde));
                 $hastaf = date("Y-m-d", strtotime($hasta));
@@ -48,7 +51,50 @@ class InventarioController extends Controller
                 $presentacionf=trim($request->get('presentacionf'));
                 $estadoOfertaf=trim($request->get('estadoOfertaf'));
                 $estadof=trim($request->get('estadof'));
+
                 $stockf=trim($request->get('stockf'));
+                if($stockf == "Stock")
+                {
+                    $stock=0;
+                }else
+                {
+                    $stock=-1;
+                }
+
+                $vigenciaf=trim($request->get('vigenciaf'));
+                if(!isset($vigenciaf))
+                {
+                    $vigenciaf = "";
+                }
+                $today = Carbon::now($zona_horaria);
+                $today = $today->format('Y-m-d');
+                $signo = ">=";
+                if($vigenciaf == "+30 dias")
+                {
+                    $vigencia = date("Y-m-d", strtotime($today.'+ 30 days'));
+                    $signo = ">";
+                }
+                elseif($vigenciaf == "-30 dias")
+                {
+                    $vigenciaDesde = $today;
+                    $vigenciaHasta = date("Y-m-d", strtotime($today.'+ 29 days'));
+                }
+                elseif($vigenciaf == "Vigentes")
+                {
+                    $vigencia = $today;
+                    $signo = ">=";
+                }
+                elseif($vigenciaf == "Vencidos")
+                {
+                    $vigencia = date("Y-m-d", strtotime($today.'- 1 days'));
+                    $signo = "<";
+                }
+                elseif($vigenciaf == "")
+                {
+                    $vigencia = strtotime("1970-01-01");
+                    $signo = ">=";
+                }
+
 
                 $articulos=DB::table('articulo')
                 ->where('estado','=','Activo')
@@ -62,15 +108,10 @@ class InventarioController extends Controller
                 ->get();
 
                 
-                $zona_horaria = Auth::user()->zona_horaria;
-                $hoy = Carbon::now($zona_horaria);
-                $hoy = $hoy->format('d-m-Y');
-
                 
-    			
                 if($desdef != '1970-01-01' or $hastaf != '1970-01-01')
                 {
-                    if($stockf == "Stock")
+                    if($vigenciaf == "-30 dias")
                     {
                         $detalles=DB::table('detalle_ingreso as di')
                         ->join('ingreso as i','di.idingreso','=','i.idingreso')
@@ -84,10 +125,11 @@ class InventarioController extends Controller
                         ->where('pr.nombre','LIKE','%'.$presentacionf.'%')
                         ->where('di.estado_oferta','LIKE','%'.$estadoOfertaf.'%')
                         ->where('i.estado','LIKE','%'.$estadof.'%')
-                        ->where('di.stock','>',0)
+                        ->where('di.stock','>',$stock)
+                        ->whereBetween('di.fecha_vencimiento', [$vigenciaDesde, $vigenciaHasta])
                         ->orderBy('i.fecha','desc')
                         ->groupBy('di.iddetalle_ingreso','di.idingreso','i.idproveedor','p.nombre','i.fecha','i.estado','di.idarticulo','a.nombre','a.minimo','di.codigo','di.cantidad_total_compra','di.total_compra','di.descripcion_inventario','di.fecha_vencimiento','di.idpresentacion_inventario','pr.nombre','di.cantidadxunidad','di.total_unidades_inventario','di.costo_unidad_inventario','di.precio_sugerido','di.porcentaje_utilidad','di.precio_venta','di.precio_oferta','di.estado_oferta','di.stock','di.estado')
-                        ->paginate(20);
+                        ->paginate(20);  
                     }else
                     {
                         $detalles=DB::table('detalle_ingreso as di')
@@ -102,9 +144,11 @@ class InventarioController extends Controller
                         ->where('pr.nombre','LIKE','%'.$presentacionf.'%')
                         ->where('di.estado_oferta','LIKE','%'.$estadoOfertaf.'%')
                         ->where('i.estado','LIKE','%'.$estadof.'%')
+                        ->where('di.stock','>',$stock)
+                        ->where('di.fecha_vencimiento',$signo,$vigencia)
                         ->orderBy('i.fecha','desc')
                         ->groupBy('di.iddetalle_ingreso','di.idingreso','i.idproveedor','p.nombre','i.fecha','i.estado','di.idarticulo','a.nombre','a.minimo','di.codigo','di.cantidad_total_compra','di.total_compra','di.descripcion_inventario','di.fecha_vencimiento','di.idpresentacion_inventario','pr.nombre','di.cantidadxunidad','di.total_unidades_inventario','di.costo_unidad_inventario','di.precio_sugerido','di.porcentaje_utilidad','di.precio_venta','di.precio_oferta','di.estado_oferta','di.stock','di.estado')
-                        ->paginate(20);
+                        ->paginate(20); 
                     }
                     
                 }else
@@ -135,7 +179,7 @@ class InventarioController extends Controller
                     ->paginate(20);
                 }
                
-                return view('ventas.inventario.index',["detalles"=>$detalles,"articulos"=>$articulos,"proveedores"=>$proveedores,"presentaciones"=>$presentaciones,"articulof"=>$articulof,"proveedorf"=>$proveedorf,"presentacionf"=>$presentacionf,"estadoOfertaf"=>$estadoOfertaf,"estadof"=>$estadof,"desdef"=>$desdef,"hastaf"=>$hastaf,"stockf"=>$stockf,"hoy"=>$hoy]);
+                return view('ventas.inventario.index',["detalles"=>$detalles,"articulos"=>$articulos,"proveedores"=>$proveedores,"presentaciones"=>$presentaciones,"articulof"=>$articulof,"proveedorf"=>$proveedorf,"presentacionf"=>$presentacionf,"estadoOfertaf"=>$estadoOfertaf,"estadof"=>$estadof,"desdef"=>$desdef,"hastaf"=>$hastaf,"stockf"=>$stockf,"vigenciaf"=>$vigenciaf,"hoy"=>$hoy]);
             } 
     }
 

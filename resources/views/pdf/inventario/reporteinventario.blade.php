@@ -48,7 +48,7 @@
 			<br><strong>Fecha:</strong><font color="Blue"> <strong>'{{ $hoy}}' <strong></font>
 		<br><strong>Reporte creado por:</strong><font color="Blue"> <strong>'{{ $nombreusu}}' <strong></font><h6>
 		
-		<br><strong>Filtros:</strong><font color="Blue"> <strong>Articulo:</strong> '{{ $articulof}}', <strong>Proveedor:</strong> '{{ $proveedorf}}', <strong>Presentacion:</strong> '{{$presentacionf}}', <strong>Oferta:</strong> '{{$estadoOfertaf}}', <strong>Estado:</strong> '{{ $estadof}}', <strong>Stock:</strong> '{{ $stockf}}'</font></h6>
+		<br><strong>Filtros:</strong><font color="Blue"> <strong>Articulo:</strong> '{{ $articulof}}', <strong>Proveedor:</strong> '{{ $proveedorf}}', <strong>Presentacion:</strong> '{{$presentacionf}}', <strong>Oferta:</strong> '{{$estadoOfertaf}}', <strong>Estado:</strong> '{{ $estadof}}', <strong>Stock:</strong> '{{ $stockf}}', <strong>Vigencia:</strong> '{{ $vigenciaf}}'</font></h6>
 		<br>
 		<table>
 			<tr>		

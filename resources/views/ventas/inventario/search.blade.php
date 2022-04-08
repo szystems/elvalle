@@ -136,6 +136,26 @@
 							</select>
 						</div>
 					</div>
+
+					<div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
+                        <div class="form-group mb-2">
+							<label for="vigenciaf"></label>Vigencia:</label>
+							<select name="vigenciaf" class="form-control" value="{{ old('vigenciaf') }}">
+								<option value="">Todos</option>
+								@if ($vigenciaf != null)
+								  	<option selected value="{{ $vigenciaf }}">{{ $vigenciaf }}</option>
+								@else
+									<option selected value="">Todos</option>
+								@endif
+
+								<option value="+30 dias">+30 dias</option>
+								<option value="-30 dias">-30 dias</option>
+								<option value="Vigentes">Vigentes</option>
+								<option value="Vencidos">Vencidos</option>
+
+							</select>
+						</div>
+					</div>
 					
 				</div>
 

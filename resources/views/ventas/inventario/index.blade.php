@@ -48,6 +48,7 @@
 							<input type="hidden" name="searchOferta" value="{{ $estadoOfertaf }}">
 							<input type="hidden" name="searchEstado" value="{{ $estadof }}">
 							<input type="hidden" name="searchStock" value="{{ $stockf }}">
+							<input type="hidden" name="searchVigencia" value="{{ $vigenciaf }}">
 						</header>
 						<div class="card-body">
 							<div class="row">
@@ -77,7 +78,7 @@
 					</div>
 					
 				{{Form::close()}}
-				<h6><strong>Filtros:</strong><font color="Blue"> <strong>Desde:</strong> {{$desde}},<strong>Hasta:</strong> {{$hasta}},<strong>Articulo:</strong> {{$articulof}}, <strong>Proveedor:</strong> {{$proveedorf}}, <strong>Presentacion:</strong> {{$presentacionf}}, <strong>Oferta:</strong> {{$estadoOfertaf}}, <strong>Estado:</strong> {{$estadof}}, <strong>Stock:</strong> {{$stockf}}</font></h6>
+				<h6><strong>Filtros:</strong><font color="Blue"> <strong>Desde:</strong> {{$desde}},<strong>Hasta:</strong> {{$hasta}},<strong>Articulo:</strong> {{$articulof}}, <strong>Proveedor:</strong> {{$proveedorf}}, <strong>Presentacion:</strong> {{$presentacionf}}, <strong>Oferta:</strong> {{$estadoOfertaf}}, <strong>Estado:</strong> {{$estadof}}, <strong>Stock:</strong> {{$stockf}}, <strong>Vigencia:</strong> {{$vigenciaf}}</font></h6>
 				<div class="table-responsive">
 					<table class="table table-striped table-bordered table-condensed table-hover">
 						<thead>

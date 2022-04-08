@@ -276,6 +276,15 @@ class ReportesController extends Controller
                      $imagen = public_path('imagenes/logos/'.$logo);
                 }
 
+                $zona_horaria = Auth::user()->zona_horaria;
+                $hoy = Carbon::now($zona_horaria);
+                $hoy = $hoy->format('d-m-Y');
+
+                $desde=trim($rrequest->get('searchDesde'));
+                $hasta=trim($rrequest->get('searchHasta'));
+
+                $desdef = date("Y-m-d", strtotime($desde));
+                $hastaf = date("Y-m-d", strtotime($hasta));
                 
                 $verpdf=trim($rrequest->get('pdf'));
                 $articulof=trim($rrequest->get('searchArticulo'));
@@ -283,53 +292,100 @@ class ReportesController extends Controller
                 $presentacionf=trim($rrequest->get('searchPresentacion'));
                 $estadoOfertaf=trim($rrequest->get('searchOferta'));
                 $estadof=trim($rrequest->get('searchEstado'));
+                
                 $stockf=trim($rrequest->get('searchStock'));
+                if($stockf == "Stock")
+                {
+                    $stock=0;
+                }else
+                {
+                    $stock=-1;
+                }
 
-                $zona_horaria = Auth::user()->zona_horaria;
-                $hoy = Carbon::now($zona_horaria);
-                $hoy = $hoy->format('d-m-Y');
+                $vigenciaf=trim($rrequest->get('searchVigencia'));
+                if(!isset($vigenciaf))
+                {
+                    $vigenciaf = "";
+                }
+                $today = Carbon::now($zona_horaria);
+                $today = $today->format('Y-m-d');
+                $signo = ">=";
+                if($vigenciaf == "+30 dias")
+                {
+                    $vigencia = date("Y-m-d", strtotime($today.'+ 30 days'));
+                    $signo = ">";
+                }
+                elseif($vigenciaf == "-30 dias")
+                {
+                    $vigenciaDesde = $today;
+                    $vigenciaHasta = date("Y-m-d", strtotime($today.'+ 29 days'));
+                }
+                elseif($vigenciaf == "Vigentes")
+                {
+                    $vigencia = $today;
+                    $signo = ">=";
+                }
+                elseif($vigenciaf == "Vencidos")
+                {
+                    $vigencia = date("Y-m-d", strtotime($today.'- 1 days'));
+                    $signo = "<";
+                }
+                elseif($vigenciaf == "")
+                {
+                    $vigencia = strtotime("1970-01-01");
+                    $signo = ">=";
+                }
+                
 
                 $nompdf = Carbon::now($zona_horaria);
                 $nompdf = $nompdf->format('Y-m-d H:i:s');
                 
-                if($stockf = "Stock")
-                {
-                    $detalles=DB::table('detalle_ingreso as di')
-                    ->join('ingreso as i','di.idingreso','=','i.idingreso')
-                    ->join('persona as p','i.idproveedor','=','p.idpersona')
-                    ->join('articulo as a','di.idarticulo','=','a.idarticulo')
-                    ->join('presentacion as pr','di.idpresentacion_inventario','=','pr.idpresentacion')
-                    ->select('di.iddetalle_ingreso','di.idingreso','i.idproveedor','p.nombre as Proveedor','i.fecha','i.estado as EstadoIngreso','di.idarticulo','a.nombre as Articulo','a.minimo','di.codigo as Codigo','di.cantidad_total_compra','di.total_compra','di.descripcion_inventario','di.fecha_vencimiento','di.idpresentacion_inventario','pr.nombre as Presentacion','di.cantidadxunidad','di.total_unidades_inventario','di.costo_unidad_inventario','di.precio_sugerido','di.porcentaje_utilidad','di.precio_venta','di.precio_oferta','di.estado_oferta','di.stock','di.estado as EstadoDetalle')
-                    ->where('a.nombre','LIKE','%'.$articulof.'%')
-                    ->where('p.nombre','LIKE','%'.$proveedorf.'%')
-                    ->where('pr.nombre','LIKE','%'.$presentacionf.'%')
-                    ->where('di.estado_oferta','LIKE','%'.$estadoOfertaf.'%')
-                    ->where('i.estado','LIKE','%'.$estadof.'%')
-                    ->where('di.stock','>',0)
-                    ->orderBy('i.fecha','desc')
-                    ->groupBy('di.iddetalle_ingreso','di.idingreso','i.idproveedor','p.nombre','i.fecha','i.estado','di.idarticulo','a.nombre','a.minimo','di.codigo','di.cantidad_total_compra','di.total_compra','di.descripcion_inventario','di.fecha_vencimiento','di.idpresentacion_inventario','pr.nombre','di.cantidadxunidad','di.total_unidades_inventario','di.costo_unidad_inventario','di.precio_sugerido','di.porcentaje_utilidad','di.precio_venta','di.precio_oferta','di.estado_oferta','di.stock','di.estado')
-                    ->paginate(20);
-                }else
-                {
-                    $detalles=DB::table('detalle_ingreso as di')
-                    ->join('ingreso as i','di.idingreso','=','i.idingreso')
-                    ->join('persona as p','i.idproveedor','=','p.idpersona')
-                    ->join('articulo as a','di.idarticulo','=','a.idarticulo')
-                    ->join('presentacion as pr','di.idpresentacion_inventario','=','pr.idpresentacion')
-                    ->select('di.iddetalle_ingreso','di.idingreso','i.idproveedor','p.nombre as Proveedor','i.fecha','i.estado as EstadoIngreso','di.idarticulo','a.nombre as Articulo','a.minimo','di.codigo as Codigo','di.cantidad_total_compra','di.total_compra','di.descripcion_inventario','di.fecha_vencimiento','di.idpresentacion_inventario','pr.nombre as Presentacion','di.cantidadxunidad','di.total_unidades_inventario','di.costo_unidad_inventario','di.precio_sugerido','di.porcentaje_utilidad','di.precio_venta','di.precio_oferta','di.estado_oferta','di.stock','di.estado as EstadoDetalle')
-                    ->where('a.nombre','LIKE','%'.$articulof.'%')
-                    ->where('p.nombre','LIKE','%'.$proveedorf.'%')
-                    ->where('pr.nombre','LIKE','%'.$presentacionf.'%')
-                    ->where('di.estado_oferta','LIKE','%'.$estadoOfertaf.'%')
-                    ->where('i.estado','LIKE','%'.$estadof.'%')
-                    ->orderBy('i.fecha','desc')
-                    ->groupBy('di.iddetalle_ingreso','di.idingreso','i.idproveedor','p.nombre','i.fecha','i.estado','di.idarticulo','a.nombre','a.minimo','di.codigo','di.cantidad_total_compra','di.total_compra','di.descripcion_inventario','di.fecha_vencimiento','di.idpresentacion_inventario','pr.nombre','di.cantidadxunidad','di.total_unidades_inventario','di.costo_unidad_inventario','di.precio_sugerido','di.porcentaje_utilidad','di.precio_venta','di.precio_oferta','di.estado_oferta','di.stock','di.estado')
-                    ->paginate(20);
-                }
+                
+                    if($vigenciaf == "-30 dias")
+                    {
+                        $detalles=DB::table('detalle_ingreso as di')
+                        ->join('ingreso as i','di.idingreso','=','i.idingreso')
+                        ->join('persona as p','i.idproveedor','=','p.idpersona')
+                        ->join('articulo as a','di.idarticulo','=','a.idarticulo')
+                        ->join('presentacion as pr','di.idpresentacion_inventario','=','pr.idpresentacion')
+                        ->select('di.iddetalle_ingreso','di.idingreso','i.idproveedor','p.nombre as Proveedor','i.fecha','i.estado as EstadoIngreso','di.idarticulo','a.nombre as Articulo','a.minimo','di.codigo as Codigo','di.cantidad_total_compra','di.total_compra','di.descripcion_inventario','di.fecha_vencimiento','di.idpresentacion_inventario','pr.nombre as Presentacion','di.cantidadxunidad','di.total_unidades_inventario','di.costo_unidad_inventario','di.precio_sugerido','di.porcentaje_utilidad','di.precio_venta','di.precio_oferta','di.estado_oferta','di.stock','di.estado as EstadoDetalle')
+                        ->whereBetween('i.fecha', [$desdef, $hastaf])
+                        ->where('a.nombre','LIKE','%'.$articulof.'%')
+                        ->where('p.nombre','LIKE','%'.$proveedorf.'%')
+                        ->where('pr.nombre','LIKE','%'.$presentacionf.'%')
+                        ->where('di.estado_oferta','LIKE','%'.$estadoOfertaf.'%')
+                        ->where('i.estado','LIKE','%'.$estadof.'%')
+                        ->where('di.stock','>',$stock)
+                        ->whereBetween('di.fecha_vencimiento', [$vigenciaDesde, $vigenciaHasta])
+                        ->orderBy('i.fecha','desc')
+                        ->groupBy('di.iddetalle_ingreso','di.idingreso','i.idproveedor','p.nombre','i.fecha','i.estado','di.idarticulo','a.nombre','a.minimo','di.codigo','di.cantidad_total_compra','di.total_compra','di.descripcion_inventario','di.fecha_vencimiento','di.idpresentacion_inventario','pr.nombre','di.cantidadxunidad','di.total_unidades_inventario','di.costo_unidad_inventario','di.precio_sugerido','di.porcentaje_utilidad','di.precio_venta','di.precio_oferta','di.estado_oferta','di.stock','di.estado')
+                        ->paginate(20);  
+                    }else
+                    {
+                        $detalles=DB::table('detalle_ingreso as di')
+                        ->join('ingreso as i','di.idingreso','=','i.idingreso')
+                        ->join('persona as p','i.idproveedor','=','p.idpersona')
+                        ->join('articulo as a','di.idarticulo','=','a.idarticulo')
+                        ->join('presentacion as pr','di.idpresentacion_inventario','=','pr.idpresentacion')
+                        ->select('di.iddetalle_ingreso','di.idingreso','i.idproveedor','p.nombre as Proveedor','i.fecha','i.estado as EstadoIngreso','di.idarticulo','a.nombre as Articulo','a.minimo','di.codigo as Codigo','di.cantidad_total_compra','di.total_compra','di.descripcion_inventario','di.fecha_vencimiento','di.idpresentacion_inventario','pr.nombre as Presentacion','di.cantidadxunidad','di.total_unidades_inventario','di.costo_unidad_inventario','di.precio_sugerido','di.porcentaje_utilidad','di.precio_venta','di.precio_oferta','di.estado_oferta','di.stock','di.estado as EstadoDetalle')
+                        ->whereBetween('i.fecha', [$desdef, $hastaf])
+                        ->where('a.nombre','LIKE','%'.$articulof.'%')
+                        ->where('p.nombre','LIKE','%'.$proveedorf.'%')
+                        ->where('pr.nombre','LIKE','%'.$presentacionf.'%')
+                        ->where('di.estado_oferta','LIKE','%'.$estadoOfertaf.'%')
+                        ->where('i.estado','LIKE','%'.$estadof.'%')
+                        ->where('di.stock','>',$stock)
+                        ->where('di.fecha_vencimiento',$signo,$vigencia)
+                        ->orderBy('i.fecha','desc')
+                        ->groupBy('di.iddetalle_ingreso','di.idingreso','i.idproveedor','p.nombre','i.fecha','i.estado','di.idarticulo','a.nombre','a.minimo','di.codigo','di.cantidad_total_compra','di.total_compra','di.descripcion_inventario','di.fecha_vencimiento','di.idpresentacion_inventario','pr.nombre','di.cantidadxunidad','di.total_unidades_inventario','di.costo_unidad_inventario','di.precio_sugerido','di.porcentaje_utilidad','di.precio_venta','di.precio_oferta','di.estado_oferta','di.stock','di.estado')
+                        ->paginate(20); 
+                    }
+                    
+               
 
                 if ( $verpdf == "Descargar" )
                 {
-                    $view = \View::make('pdf.inventario.reporteinventario', compact('detalles','articulof','proveedorf','presentacionf','estadoOfertaf','estadof','stockf','hoy','nombreusu','empresa','imagen'))->render();
+                    $view = \View::make('pdf.inventario.reporteinventario', compact('detalles','articulof','proveedorf','presentacionf','estadoOfertaf','estadof','stockf','vigenciaf','hoy','nombreusu','empresa','imagen'))->render();
                     $pdf = \App::make('dompdf.wrapper');
                     $pdf->setPaper('A4', 'landscape');
                     $pdf->loadHTML($view);
@@ -337,7 +393,7 @@ class ReportesController extends Controller
                 }
                 if ( $verpdf == "Navegador" )
                 {
-                    $view = \View::make('pdf.inventario.reporteinventario', compact('detalles','articulof','proveedorf','presentacionf','estadoOfertaf','estadof','stockf','hoy','nombreusu','empresa','imagen'))->render();
+                    $view = \View::make('pdf.inventario.reporteinventario', compact('detalles','articulof','proveedorf','presentacionf','estadoOfertaf','estadof','stockf','vigenciaf','hoy','nombreusu','empresa','imagen'))->render();
                     $pdf = \App::make('dompdf.wrapper');
                     $pdf->setPaper('A4', 'landscape');
                     $pdf->loadHTML($view);
