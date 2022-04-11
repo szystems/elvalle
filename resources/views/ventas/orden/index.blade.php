@@ -43,25 +43,81 @@
             <div class="row">
 
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    @include('ventas.orden.search')
                     <?php
-                    $desde = date('d-m-Y', strtotime($desde));
-                    $hasta = date('d-m-Y', strtotime($hasta));
-                    if ($desde == '01-01-1970' or $hasta == '01-01-1970') {
-                        $desde = null;
-                        $hasta = null;
-                    }
-                    
+                        $desdeReporte=$desde;
+                        $hastaReporte=$hasta;
+
+                        $desde = $desde;
+                        $hasta = $hasta;
+
+                        $desde = date("d-m-Y", strtotime($desde));
+                        $hasta = date("d-m-Y", strtotime($hasta));
+                                    
                     ?>
+                    @include('ventas.orden.search')
+                    {{Form::open(array('action' => 'ReportesController@reporteordenes','method' => 'POST','role' => 'form', 'target' => '_blank'))}}
+
+                    {{Form::token()}}		
+                        <div class="card mb-4">
+                            <header class="card-header d-md-flex align-items-center">
+                                <h4><strong>Imprimir Listado de Ingresos </strong></h4>
+                                <input type="hidden" name="searchDesde" value="{{ $desdeReporte }}">
+                                <input type="hidden" name="searchHasta" value="{{ $hastaReporte }}">
+                                @if(isset($pacientefiltro))
+                                    <input type="hidden" name="searchPaciente" value="{{ $pacientefiltro->idpaciente }}">
+                                @else
+                                <input type="hidden" name="searchPaciente" value="">
+                                @endif
+                                @if(isset($docfiltro))
+                                    <input type="hidden" name="searchDoctor" value="{{ $docfiltro->id }}">
+                                @else
+                                    <input type="hidden" name="searchDoctor" value="">
+                                @endif
+                                @if(isset($usufiltro))
+                                    <input type="hidden" name="searchUsuario" value="{{ $usufiltro->id }}">
+                                @else
+                                    <input type="hidden" name="searchUsuario" value="">
+                                @endif
+                                <input type="hidden" name="searchEstadoorden" value="{{ $estadoorden }}">
+                                <input type="hidden" name="searchEstado" value="{{ $estado }}">
+                            </header>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
+                                        <div class="form-group mb-2">
+                                            <label for="rpdf">Visualización</label>
+                                            <select name="pdf" class="form-control" value="">
+                                                    <option value="Descargar" selected>Descargar</option>
+                                                    <option value="Navegador">Ver en navegador</option>
+                                                </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
+                                    <label for="rpdf"></label>
+                                        <div class="form-group mb-2">
+                                        
+                                            <span class="input-group-btn">
+                                            
+                                                <button type="submit" class="btn btn-danger">
+                                                    <i class="fa fa-file-pdf"></i> PDF
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    {{Form::close()}}
                     <h6><strong>Filtros:</strong>
-                        <font color="Blue"> <strong>Desde:</strong> '{{ $desde }}', <strong>Hasta:</strong>
-                            '{{ $hasta }}', <strong>Paciente:</strong> ''@foreach ($pacientefiltro as $pacientef)
-                                {{ $pacientef->nombre }}
-                                @endforeach', <strong>Doctor:</strong> '@foreach ($docfiltro as $docf)
-                                    {{ $docf->name }}
-                                    @endforeach', <strong>Usuario:</strong> '@foreach ($usufiltro as $usuf)
-                                        {{ $usuf->name }}
-                                    @endforeach', <strong>Estado:</strong> '{{ $estadoorden }}'
+                        <font color="Blue"> 
+                            <strong>Desde:</strong> '{{ $desde }}', 
+                            <strong>Hasta:</strong> '{{ $hasta }}', 
+                            <strong>Paciente:</strong> '@if(isset($pacientefiltro)) {{ $pacientefiltro->nombre }}' @endif, 
+                            <strong>Doctor:</strong> '@if(isset($docfiltro)) {{ $docfiltro->name }}  @endif', 
+                            <strong>Usuario:</strong> '@if(isset($usufiltro)) {{ $usufiltro->name }}  @endif',
+                            <strong>Estado Orden:</strong> '{{ $estadoorden }}',
+                            <strong>Estado:</strong> '{{ $estado }}'
                         </font>
                     </h6>
                     <div class="table-responsive">
@@ -86,7 +142,7 @@
                                     <h5><strong>Total</strong></h5>
                                 </th>
                                 <th>
-                                    <h5><strong>Estado Venta</strong></h5>
+                                    <h5><strong>Estado Orden</strong></h5>
                                 </th>
                                 <th>
                                     <h5><strong>ID Venta</strong></h5>
@@ -135,16 +191,18 @@
                                             </a>
                                         @endif
                                         @if ($orden->estado != 'Cancelada')
-                                            <a href="" data-target="#modal-aventa-{{ $orden->idorden }}"
-                                                data-toggle="modal">
-                                                <span class="d-inline-block" tabindex="0" data-toggle="tooltip"
-                                                    title="Pasar a Venta">
-                                                    <button class="btn btn-sm btn-warning" style="pointer-events: none;"
-                                                        type="button">
-                                                        <i class="fas fa-money-bill"></i>
-                                                    </button>
-                                                </span>
-                                            </a>
+                                            @if ($orden->estado_orden != 'Finalizada')
+                                                <a href="" data-target="#modal-aventa-{{ $orden->idorden }}"
+                                                    data-toggle="modal">
+                                                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip"
+                                                        title="Pasar a Venta">
+                                                        <button class="btn btn-sm btn-warning" style="pointer-events: none;"
+                                                            type="button">
+                                                            <i class="fas fa-money-bill"></i>
+                                                        </button>
+                                                    </span>
+                                                </a>
+                                            @endif
                                         @endif
 
                                     </td>
@@ -158,7 +216,7 @@
                                         <h5>{{ $fecha }}</h5>
                                     </td>
                                     <td align="left">
-                                        <h5>{{ $orden->Doctor }}</h5>
+                                        <h5>{{ $orden->Doctor }} ({{ $orden->especialidad }})</h5>
                                     </td>
                                     <td align="left">
                                         <h5>{{ $orden->Paciente }}</h5>
@@ -168,13 +226,17 @@
                                         </h5>
                                     </td>
                                     <td align="center">
-                                        <h5>{{ $orden->estado_orden }}</h5>
+                                        @if ($orden->estado_orden == 'Pendiente')
+                                            <h5><font color="Orange">{{ $orden->estado_orden }}</font></h5>
+                                        @elseif ($orden->estado_orden == 'Finalizada')
+                                            <h5><font color="limegreen">{{ $orden->estado_orden }}</font></h5>
+                                        @endif
                                     </td>
                                     <td align="center">
                                         <h5>
                                             @if ($orden->idventa != null)
                                                 <a
-                                                    href="{{ URL::action('VentaController@show', $orden->idventa) }}">{{ $orden->idventa }}</a>
+                                                    href="{{ URL::action('VentaController@show', $orden->idventa) }}"><b>{{ $orden->idventa }}</b></a>
                                             @endif
                                         </h5>
                                     </td>

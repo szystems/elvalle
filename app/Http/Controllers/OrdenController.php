@@ -48,6 +48,7 @@ class OrdenController extends Controller
             $doctor=trim($request->get('doctor'));
             $usuario=trim($request->get('usuario'));
             $estadoorden=trim($request->get('estadoorden'));
+            $estado=trim($request->get('estado'));
             
             $pacientes=DB::table('paciente')
             ->where('estado','=','Habilitado')
@@ -64,21 +65,18 @@ class OrdenController extends Controller
             ->get();
 
             $usufiltro=DB::table('users')
-			->select('name','id','tipo_usuario')
             ->where('id','=',$usuario)
             ->where('idempresa','=',$idempresa)
-            ->get();
+            ->first();
                     
             $pacientefiltro=DB::table('paciente')
-            ->select('nombre','idpaciente')
             ->where('idpaciente','=',$paciente)
-            ->get();
+            ->first();
 
             $docfiltro=DB::table('users')
-			->select('name','id','tipo_usuario')
             ->where('tipo_usuario','=','Doctor')
             ->where('id','=',$doctor)
-            ->get();
+            ->first();
 
             $zona_horaria = Auth::user()->zona_horaria;
             $hoy = Carbon::now($zona_horaria);
@@ -98,12 +96,26 @@ class OrdenController extends Controller
                 ->where('d.id','LIKE','%'.$doctor.'%')
                 ->where('u.id','LIKE','%'.$usuario.'%')
                 ->where('o.estado_orden','LIKE','%'.$estadoorden.'%')
+                ->where('o.estado','LIKE','%'.$estado.'%')
                 ->orderBy('o.idorden','desc')
                 
                 ->paginate(20);
             }
             else
             {
+                $FechaMin = DB::table('orden')
+				->first();
+				if(isset($FechaMin))
+				{
+					$desde = $FechaMin->fecha;
+					$desde = date("d-m-Y", strtotime($desde));
+					$hasta = date('d-m-Y');
+				}else
+				{
+					$desde = date('d-m-Y');
+					$hasta = date('d-m-Y');
+				}
+
                 $ordenes=DB::table('orden as o')
                 ->join('paciente as p','o.idpaciente','=','p.idpaciente')
                 ->join('users as d','o.iddoctor','=','d.id')
@@ -113,7 +125,7 @@ class OrdenController extends Controller
                 
                 ->paginate(20);
             }
-            return view('ventas.orden.index',["ordenes"=>$ordenes,"pacientes"=>$pacientes,"usuarios"=>$usuarios,"doctores"=>$doctores,"desde"=>$desde,"hasta"=>$hasta,"paciente"=>$paciente,"doctor"=>$doctor,"usuario"=>$usuario,"estadoorden"=>$estadoorden,"hoy"=>$hoy,"usufiltro"=>$usufiltro,"pacientefiltro"=>$pacientefiltro,"docfiltro"=>$docfiltro]);
+            return view('ventas.orden.index',["ordenes"=>$ordenes,"pacientes"=>$pacientes,"usuarios"=>$usuarios,"doctores"=>$doctores,"desde"=>$desde,"hasta"=>$hasta,"paciente"=>$paciente,"doctor"=>$doctor,"usuario"=>$usuario,"estadoorden"=>$estadoorden,"estado"=>$estado,"hoy"=>$hoy,"usufiltro"=>$usufiltro,"pacientefiltro"=>$pacientefiltro,"docfiltro"=>$docfiltro]);
         }
 
     }
@@ -434,8 +446,8 @@ class OrdenController extends Controller
 
     public function aventa(Request $request)
     {
-        //try
-    	//{ 
+        try
+    	{ 
             //cargar orden
             $idorden = $request->get('idorden');
             $orden=DB::table('orden as o')
@@ -636,11 +648,11 @@ class OrdenController extends Controller
 
     		DB::commit();
 
-    	//}catch(\Exception $e)
-    	//{
-    		//DB::rollback();
-    	//}   
-        return Redirect::to('ventas/venta');
+    	}catch(\Exception $e)
+    	{
+    		DB::rollback();
+    	}   
+        return Redirect::to('ventas/orden');
     }
 
     public function destroy($id)

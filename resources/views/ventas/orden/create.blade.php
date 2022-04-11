@@ -37,11 +37,11 @@
                     <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
                         <div class="form-group">
                             <label>Estado Orden:</label>
-                            <select name="estado_orden" class="form-control">
+                            <!--<select name="estado_orden" class="form-control">
                                 <option selected value="Pendiente" selected>Pendiente</option>
-                                <option value="Procesando">Procesando</option>
                                 <option value="Finalizada">Finalizada</option>
-                            </select>
+                            </select>-->
+                            <input readonly type="text" name="estado_orden"  value="Pendiente" class="form-control">
                         </div>
                     </div>
                     <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">

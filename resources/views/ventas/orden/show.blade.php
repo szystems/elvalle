@@ -7,7 +7,38 @@
             <header class="card-header">
                   <h2 class="h3 card-header-title"><strong>Detalle de Orden ID: {{$orden->idorden}}</strong></h2>
             </header>
-                
+                    {{Form::open(array('action' => 'ReportesController@vistaorden','method' => 'POST','role' => 'form', 'target' => '_blank'))}}
+
+                    {{Form::token()}}		
+                        <div class="card mb-4">
+                            <header class="card-header d-md-flex align-items-center">
+                                <h4><strong>Imprimir Orden </strong></h4>
+                                <input type="hidden" id="rid" class="form-control datepicker" name="rid" value="{{$orden->idorden}}">
+                            </header>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
+                                        <div class="form-group mb-2">
+                                            <select name="pdf" class="form-control" value="">
+                                                    <option value="Descargar" selected>Descargar</option>
+                                                    <option value="Navegador">Ver en navegador</option>
+                                                </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
+                                        <div class="form-group mb-2">
+                                            <span class="input-group-btn">
+                                                <button type="submit" class="btn btn-danger">
+                                                    <i class="fa fa-file-pdf"></i> PDF
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    {{Form::close()}}
                     <div class="card-body">
                         <a href="{{URL::action('OrdenController@edit',$orden->idorden)}}">
                             <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar Orden">
@@ -70,7 +101,7 @@
                             <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
                                 <div class="form-group">
                                     <label for="doctor"><b>Doctor</b></label>
-                                    <p>{{$orden->Doctor}}</p>
+                                    <p>{{$orden->Doctor}} ({{ $orden->especialidad }})</p>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
@@ -131,33 +162,33 @@
                                                 <th class="col-3"><h5><strong>Precio ({{ Auth::user()->moneda }})</strong></h5></th>
                                                 
                                             </thead>
-                                        @foreach ($articulos as $articulo)
-                                            <tr>
-                                                <?php
-                                                    $ExisteArticuloOrden=DB::table('detalle_orden')
-                                                    ->where('idorden','=',$orden->idorden)
-                                                    ->where('idarticulo','=',$articulo->idarticulo)
-                                                    ->get();
-                                                ?>
-                                                @if($ExisteArticuloOrden->count() >= 1)
+                                            @foreach ($articulos as $articulo)
+                                                <tr>
                                                     <?php
-                                                        $detalleExistente=DB::table('detalle_orden')
+                                                        $ExisteArticuloOrden=DB::table('detalle_orden')
                                                         ->where('idorden','=',$orden->idorden)
                                                         ->where('idarticulo','=',$articulo->idarticulo)
-                                                        ->first();
+                                                        ->get();
                                                     ?>
-                                                    <td align="center"><h5>{{ $articulo->nombre}}</h5></td>
-                                                    <td>
-                                                        <div class="input-group">
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text">{{ Auth::user()->moneda }}</span>
+                                                    @if($ExisteArticuloOrden->count() >= 1)
+                                                        <?php
+                                                            $detalleExistente=DB::table('detalle_orden')
+                                                            ->where('idorden','=',$orden->idorden)
+                                                            ->where('idarticulo','=',$articulo->idarticulo)
+                                                            ->first();
+                                                        ?>
+                                                        <td align="center"><h5>{{ $articulo->nombre}}</h5></td>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text">{{ Auth::user()->moneda }}</span>
+                                                                </div>
+                                                                <input readonly type="text"  class="form-control" aria-label="Amount (to the nearest dollar)" value="{{$detalleExistente->precio_venta}}" onkeypress="return validardecimal(event,this.value)">
                                                             </div>
-                                                            <input readonly type="text"  class="form-control" aria-label="Amount (to the nearest dollar)" value="{{$detalleExistente->precio_venta}}" onkeypress="return validardecimal(event,this.value)">
-                                                        </div>
-                                                    </td>
-                                                @endif
-                                            </tr>
-                                        @endforeach
+                                                        </td>
+                                                    @endif
+                                                </tr>
+                                            @endforeach
                                         </table>
                                     </div>
                                     

@@ -94,8 +94,12 @@ Route::resource('reportes/ingresos','ReporteIngresosController');
     Route::post('pdf/ventas/vista','ReportesController@vistaventa');
     Route::post('reportes/ventas/vista','ReportesController@vistaventareporte');
 
-    /*Ventas */
+    /*Inventario */
     Route::post('pdf/inventario','ReportesController@reporteinventario');
+
+    /*Ordenes */
+    Route::post('pdf/ordenes','ReportesController@reporteordenes');
+    Route::post('pdf/ordenes/vista','ReportesController@vistaorden');
 
     /*Proveedores */
     Route::post('pdf/proveedores','ReportesController@reporteproveedores');

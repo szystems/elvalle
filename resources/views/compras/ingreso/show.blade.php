@@ -12,7 +12,7 @@
                 {{Form::token()}}		
 					<div class="card mb-4">
 						<header class="card-header d-md-flex align-items-center">
-							<h4><strong>Imprimir Proveedor </strong></h4>
+							<h4><strong>Imprimir Ingreso </strong></h4>
 							<input type="hidden" id="rid" class="form-control datepicker" name="rid" value="{{$ingreso->idingreso}}">
                             <input type="hidden" id="rcomprobante" class="form-control datepicker" name="rnombre" value="{{$ingreso->tipo_comprobante}}: {{$ingreso->serie_comprobante}}-{{$ingreso->num_comprobante}}">
 						</header>

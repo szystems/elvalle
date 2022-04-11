@@ -403,6 +403,126 @@ class ReportesController extends Controller
         
     }
 
+    public function reporteordenes(ReportesFormRequest $rrequest)
+    {  
+            if ($rrequest)
+            {
+                
+                $idempresa = Auth::user()->idempresa;
+                $nombreusu = Auth::user()->name;
+                $empresa = Auth::user()->empresa;
+                if (Auth::user()->logo == null)
+                {
+                    $logo = null;
+                    $imagen = null;
+                }
+                else
+                {
+                     $logo = Auth::user()->logo;
+                     $imagen = public_path('imagenes/logos/'.$logo);
+                }
+
+                $zona_horaria = Auth::user()->zona_horaria;
+                $hoy = Carbon::now($zona_horaria);
+                $hoy = $hoy->format('d-m-Y');
+
+                $desde=trim($rrequest->get('searchDesde'));
+                $hasta=trim($rrequest->get('searchHasta'));
+
+                $desdef = date("Y-m-d", strtotime($desde));
+                $hastaf = date("Y-m-d", strtotime($hasta));
+                
+                $verpdf=trim($rrequest->get('pdf'));
+                $pacientef=trim($rrequest->get('searchPaciente'));
+                $doctorf=trim($rrequest->get('searchDoctor'));
+                $usuariof=trim($rrequest->get('searchUsuario'));
+                $estadoordenf=trim($rrequest->get('searchEstadoorden'));
+                $estadof=trim($rrequest->get('searchEstado'));
+                
+                $usufiltro=DB::table('users')
+                ->where('id','=',$usuariof)
+                ->where('idempresa','=',$idempresa)
+                ->first();
+                        
+                $pacientefiltro=DB::table('paciente')
+                ->where('idpaciente','=',$pacientef)
+                ->first();
+
+                $docfiltro=DB::table('users')
+                ->where('tipo_usuario','=','Doctor')
+                ->where('id','=',$doctorf)
+                ->first();
+                
+
+                $nompdf = Carbon::now($zona_horaria);
+                $nompdf = $nompdf->format('Y-m-d H:i:s');
+                
+                
+                if($desdef != '1970-01-01' or $hastaf != '1970-01-01')
+                {
+                    
+                    $ordenes=DB::table('orden as o')
+                    ->join('paciente as p','o.idpaciente','=','p.idpaciente')
+                    ->join('users as d','o.iddoctor','=','d.id')
+                    ->join('users as u','o.idusuario','=','u.id')
+                    ->select('o.idorden','o.idventa','o.fecha','o.estado_orden','o.estado','o.total','p.idpaciente','p.nombre as Paciente','p.sexo','p.telefono','p.fecha_nacimiento','p.dpi','p.nit','d.id as iddoctor','d.name as Doctor','d.especialidad','u.id as idusuario','u.name as Usuario','u.tipo_usuario')
+                    ->whereBetween('fecha', [$desdef, $hastaf])
+                    ->where('p.idpaciente','LIKE','%'.$pacientef.'%')
+                    ->where('d.id','LIKE','%'.$doctorf.'%')
+                    ->where('u.id','LIKE','%'.$usuariof.'%')
+                    ->where('o.estado_orden','LIKE','%'.$estadoordenf.'%')
+                    ->where('o.estado','LIKE','%'.$estadof.'%')
+                    ->orderBy('o.idorden','desc')
+                    
+                    ->paginate(20);
+                }
+                else
+                {
+                    $FechaMin = DB::table('orden')
+                    ->first();
+                    if(isset($FechaMin))
+                    {
+                        $desde = $FechaMin->fecha;
+                        $desde = date("d-m-Y", strtotime($desde));
+                        $hasta = date('d-m-Y');
+                    }else
+                    {
+                        $desde = date('d-m-Y');
+                        $hasta = date('d-m-Y');
+                    }
+    
+                    $ordenes=DB::table('orden as o')
+                    ->join('paciente as p','o.idpaciente','=','p.idpaciente')
+                    ->join('users as d','o.iddoctor','=','d.id')
+                    ->join('users as u','o.idusuario','=','u.id')
+                    ->select('o.idorden','o.idventa','o.fecha','o.estado_orden','o.estado','o.total','p.idpaciente','p.nombre as Paciente','p.sexo','p.telefono','p.fecha_nacimiento','p.dpi','p.nit','d.id as iddoctor','d.name as Doctor','d.especialidad','u.id as idusuario','u.name as Usuario','u.tipo_usuario')
+                    ->orderBy('o.idorden','desc')
+                    
+                    ->paginate(20);
+                }
+                    
+               
+
+                if ( $verpdf == "Descargar" )
+                {
+                    $view = \View::make('pdf.ordenes.reporteordenes', compact('ordenes','usufiltro','docfiltro','pacientefiltro','desdef','hastaf','estadoordenf','estadof','hoy','nombreusu','empresa','imagen'))->render();
+                    $pdf = \App::make('dompdf.wrapper');
+                    $pdf->setPaper('A4', 'landscape');
+                    $pdf->loadHTML($view);
+                    return $pdf->download ('ReporteOrdenes'.$nompdf.'.pdf');
+                }
+                if ( $verpdf == "Navegador" )
+                {
+                    $view = \View::make('pdf.ordenes.reporteordenes', compact('ordenes','usufiltro','docfiltro','pacientefiltro','desdef','hastaf','estadoordenf','estadof','hoy','nombreusu','empresa','imagen'))->render();
+                    $pdf = \App::make('dompdf.wrapper');
+                    $pdf->setPaper('A4', 'landscape');
+                    $pdf->loadHTML($view);
+                    return $pdf->stream ('ReporteOrdenes'.$nompdf.'.pdf');
+                }
+            }
+        
+    }
+
     public function reportecategorias(ReportesFormRequest $rrequest)
     {  
             if ($rrequest)
@@ -1182,6 +1302,68 @@ class ReportesController extends Controller
         
     }
 
+    public function vistaorden(ReportesFormRequest $rrequest)
+    {  
+            if ($rrequest)
+            {
+                
+                $idempresa = Auth::user()->idempresa;
+                $nombreusu = Auth::user()->name;
+                $empresa = Auth::user()->empresa;
+                $moneda = Auth::user()->moneda;
+                if (Auth::user()->logo == null)
+                {
+                    $logo = null;
+                    $imagen = null;
+                }
+                else
+                {
+                     $logo = Auth::user()->logo;
+                     $imagen = public_path('imagenes/logos/'.$logo);
+                     
+                }
+                $path = public_path('imagenes/articulos/');
+                $verpdf=trim($rrequest->get('pdf'));
+                $idorden=trim($rrequest->get('rid'));
+
+                $zona_horaria = Auth::user()->zona_horaria;
+                $hoy = Carbon::now($zona_horaria);
+                $hoy = $hoy->format('d-m-Y');
+
+                $nompdf = Carbon::now($zona_horaria);
+                $nompdf = $nompdf->format('Y-m-d H:i:s');
+                
+                $orden=DB::table('orden as o')
+                ->join('paciente as p','o.idpaciente','=','p.idpaciente')
+                ->join('users as d','o.iddoctor','=','d.id')
+                ->join('users as u','o.idusuario','=','u.id')
+                ->select('o.idorden','o.fecha','o.codigoeeps','o.codigopapanicolau','o.observaciones','o.estado_orden','o.estado','o.total','p.idpaciente','p.nombre as Paciente','p.sexo','p.telefono','p.fecha_nacimiento','p.dpi','p.nit','d.id as iddoctor','d.name as Doctor','d.especialidad','u.id as idusuario','u.name as Usuario','u.tipo_usuario','o.idventa')
+                ->where('o.idorden','=',$idorden)   
+                ->first();
+
+                $rubros=DB::table('rubro')
+                ->get();
+
+                if ( $verpdf == "Descargar" )
+                {
+                    $view = \View::make('pdf.ordenes.vista.vistaorden', compact('orden','rubros','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
+                    $pdf = \App::make('dompdf.wrapper');
+                    $pdf->loadHTML($view);
+                    //$pdf->setPaper('A4', 'landscape');
+                    return $pdf->download ('Vistaorden'.$nompdf.'.pdf');
+                }
+                if ( $verpdf == "Navegador" )
+                {
+                    $view = \View::make('pdf.ordenes.vista.vistaorden', compact('orden','rubros','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
+                    $pdf = \App::make('dompdf.wrapper');
+                    $pdf->loadHTML($view);
+                    //$pdf->setPaper('A4', 'landscape');
+                    return $pdf->stream ('Vistaorden'.$nompdf.'.pdf');
+                }
+            }
+        
+    }
+
     public function vistaventareporte(ReportesFormRequest $rrequest)
     {  
             if ($rrequest)
@@ -1756,69 +1938,5 @@ class ReportesController extends Controller
         
     }
 
-    public function vistaorden(ReportesFormRequest $rrequest)
-    {  
-            if ($rrequest)
-            {
-                
-                $idempresa = Auth::user()->idempresa;
-                $nombreusu = Auth::user()->name;
-                $empresa = Auth::user()->empresa;
-                $moneda = Auth::user()->moneda;
-                if (Auth::user()->logo == null)
-                {
-                    $logo = null;
-                    $imagen = null;
-                }
-                else
-                {
-                     $logo = Auth::user()->logo;
-                     $imagen = public_path('imagenes/logos/'.$logo);
-                     
-                }
-                $path = public_path('imagenes/articulos/');
-                $verpdf=trim($rrequest->get('pdf'));
-                $idorden=trim($rrequest->get('rid'));
-                $nombrearticulo=trim($rrequest->get('rnombre'));
-
-                $zona_horaria = Auth::user()->zona_horaria;
-                $hoy = Carbon::now($zona_horaria);
-                $hoy = $hoy->format('d-m-Y');
-
-                $nompdf = Carbon::now($zona_horaria);
-                $nompdf = $nompdf->format('Y-m-d H:i:s');
-                
-                $orden=DB::table('orden as o')
-                    ->join('persona as c','o.idcliente','=','c.idpersona')
-                    ->select('o.idorden','o.idempresa','o.idcliente','c.nombre as cliente','o.fecha','o.fecha_update','o.codigo','o.comentarios','o.total','o.estado','o.condicion','o.estado_orden','o.estado_pago','o.nom_contacto','o.email_contacto','o.telefono_contacto','o.whatsapp_contacto','o.tipo_pago','o.link_pago','o.pais','o.departamento','o.municipio','o.direccion','o.envio')
-                    ->where('o.idorden','=',$idorden)
-                    ->first();
-
-                $detalles=DB::table('orden_detalle as d')
-                    ->join('articulo as a','d.idarticulo','=','a.idarticulo')
-                    ->join('categoria as c','a.idcategoria','=','c.idcategoria')
-			        ->select('d.idorden_detalle','d.idorden','d.idarticulo','a.nombre as articulo','a.imagen','c.nombre as categoria','a.codigo','d.cantidad','d.precio','d.estado','d.condicion')
-                    ->where('d.condicion','=','1')
-                    ->where('d.idorden','=',$idorden)
-                    ->get();
-                    
-                if ( $verpdf == "Descargar" )
-                {
-                    $view = \View::make('pdf.ordenes.vista.vistaorden', compact('orden','detalles','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
-                    $pdf = \App::make('dompdf.wrapper');
-                    $pdf->loadHTML($view);
-                    //$pdf->setPaper('A4', 'landscape');
-                    return $pdf->download ('VistaOrden'.'-'.$orden->codigo.'-'.$nompdf.'.pdf');
-                }
-                if ( $verpdf == "Navegador" )
-                {
-                    $view = \View::make('pdf.ordenes.vista.vistaorden', compact('orden','detalles','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
-                    $pdf = \App::make('dompdf.wrapper');
-                    $pdf->loadHTML($view);
-                    //$pdf->setPaper('A4', 'landscape');
-                    return $pdf->stream ('VistaOrden'.'-'.$orden->codigo.'-'.$nompdf.'.pdf');
-                }
-            }
-        
-    }
+    
 }
