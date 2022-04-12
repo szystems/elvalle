@@ -234,10 +234,10 @@
 							<?php
 								$diferencia = $ventatotal - $compratotal;
 							?>
-							<td align="right"><h1><strong><font color="Orange">{{ Auth::user()->moneda }}{{number_format($compratotal,2, '.', ',')}}</font></strong></h1></td>
-							<td align="right"><h1><strong><font color="Blue">{{ Auth::user()->moneda }}{{number_format($ventatotal,2, '.', ',')}}</font></strong></h1></td>
-							<td align="right"><h1><strong><font color="Green">{{ Auth::user()->moneda }}{{number_format($diferencia,2, '.', ',')}}</font></strong></h1></td>
-							<td align="right"><h1><strong><font color="Red">{{ Auth::user()->moneda }}{{number_format($totalsaldo,2, '.', ',')}}</font></strong></h1></td>
+							<td align="center"><h1><strong><font color="Orange">{{ Auth::user()->moneda }}{{number_format($compratotal,2, '.', ',')}}</font></strong></h1></td>
+							<td align="center"><h1><strong><font color="Blue">{{ Auth::user()->moneda }}{{number_format($ventatotal,2, '.', ',')}}</font></strong></h1></td>
+							<td align="center"><h1><strong><font color="Green">{{ Auth::user()->moneda }}{{number_format($diferencia,2, '.', ',')}}</font></strong></h1></td>
+							<td align="center"><h1><strong><font color="Red">{{ Auth::user()->moneda }}{{number_format($totalsaldo,2, '.', ',')}}</font></strong></h1></td>
 						</tr>
 					</table>
 				</div>
