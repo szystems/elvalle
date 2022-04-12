@@ -754,8 +754,8 @@ class ReportesController extends Controller
 
                 $usuarios=DB::table('users')
                 ->where('idempresa','=',$idempresa)
-                ->where('tipo_usuario','!=','Cliente')
-                ->orderBy('principal','desc')
+                ->where('tipo_usuario','!=','Doctor')
+                ->where('email','!=','Eliminado')
                 ->orderBy('name','asc')
                 ->get();
                 
