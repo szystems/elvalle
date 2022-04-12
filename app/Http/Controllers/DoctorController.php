@@ -38,9 +38,15 @@ class DoctorController extends Controller
 			->orderBy('name','asc')
 			->paginate(20);
 
-            
+            $doctor = DB::table('users')
+            ->where('name','=',$query)
+            ->first();
 
-			return view('seguridad.doctor.index',["doctores"=>$doctores,"searchText"=>$query]);
+            $doctoresFiltro = DB::table('users')
+            ->where('tipo_usuario','=',"Doctor")
+            ->get();
+
+			return view('seguridad.doctor.index',["doctores"=>$doctores,"searchText"=>$query,"doctor"=>$doctor,"doctoresFiltro"=>$doctoresFiltro]);
 		}
 	}
 
@@ -161,8 +167,13 @@ class DoctorController extends Controller
 
     public function show($id)
     {
+        $zona_horaria = Auth::user()->zona_horaria;
+        $hoy = Carbon::now($zona_horaria);
+        $hoy = date("Y-m-d", strtotime ($hoy."- 1 days"));
+
         $dias=DB::table('dias')
             ->where('iddoctor','=',$id)
+            ->where('fecha','>=',$hoy)
             ->orderBy('fecha','asc')
 			->paginate(10);
 

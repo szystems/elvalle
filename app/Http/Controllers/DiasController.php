@@ -38,10 +38,15 @@ class DiasController extends Controller
             
             //return Redirect::to('seguridad/doctor');
 
+            $zona_horaria = Auth::user()->zona_horaria;
+            $hoy = Carbon::now($zona_horaria);
+            $diasfecha = date("Y-m-d", strtotime ($hoy."- 1 days"));
+
             $dias=DB::table('dias')
             ->where('iddoctor','=',$iddoctor)
+            ->where('fecha','>=',$diasfecha)
             ->orderBy('fecha','asc')
-			->paginate(10);
+			->get();
             
             return view("seguridad.doctor.show",["doctor"=>User::findOrFail($iddoctor),"dias"=>$dias]);
         }
@@ -69,10 +74,15 @@ class DiasController extends Controller
             $request->session()->flash('alert-success', "Se a Bloqueado una fecha para citas con el Doctor, Nombre: ".$doctor->name.", Fecha: ".$request->get('fecha'));
 
             //return Redirect::to('seguridad/doctor');
+            $zona_horaria = Auth::user()->zona_horaria;
+            $hoy = Carbon::now($zona_horaria);
+            $diasfecha = date("Y-m-d", strtotime ($hoy."- 1 days"));
+
             $dias=DB::table('dias')
             ->where('iddoctor','=',$iddoctor)
+            ->where('fecha','>=',$diasfecha)
             ->orderBy('fecha','asc')
-			->paginate(10);
+			->get();
 
             return view("seguridad.doctor.show",["doctor"=>User::findOrFail($iddoctor),"dias"=>$dias]);
         }
@@ -94,12 +104,17 @@ class DiasController extends Controller
             $bitacora->descripcion="Se desbloqueo la fecha: ".$fecha;
             $bitacora->save();
 
+            $zona_horaria = Auth::user()->zona_horaria;
+            $hoy = Carbon::now($zona_horaria);
+            $diasfecha = date("Y-m-d", strtotime ($hoy."- 1 days"));
+
             $dias=DB::table('dias')
-            ->where('iddoctor','=',$dia->iddoctor)
-            ->orderBy('fecha','asc')
-			->paginate(10);
+                ->where('iddoctor','=',$id)
+                ->where('fecha','>=',$diasfecha)
+                ->orderBy('fecha','asc')
+                ->get();
             
-            return view("seguridad.doctor.show",["doctor"=>User::findOrFail($dia->iddoctor),"dias"=>$dias]);
+            return Redirect::to('seguridad/doctor');
     	
     }
 }

@@ -834,6 +834,62 @@ class ReportesController extends Controller
         
     }
 
+    public function reportedoctores(ReportesFormRequest $rrequest)
+    {  
+            if ($rrequest)
+            {
+                
+                $idempresa = Auth::user()->idempresa;
+                $nombreusu = Auth::user()->name;
+                $empresa = Auth::user()->empresa;
+                if (Auth::user()->logo == null)
+                {
+                    $logo = null;
+                    $imagen = null;
+                }
+                else
+                {
+                     $logo = Auth::user()->logo;
+                     $imagen = public_path('imagenes/logos/'.$logo);
+                }
+
+                $path = public_path('imagenes/pacientes/');
+                $verpdf=trim($rrequest->get('pdf'));
+                $zona_horaria = Auth::user()->zona_horaria;
+                $hoy = Carbon::now($zona_horaria);
+                $hoy = $hoy->format('d-m-Y');
+
+                $nompdf = Carbon::now($zona_horaria);
+                $nompdf = $nompdf->format('Y-m-d H:i:s');
+                
+
+
+                $doctores=DB::table('users')
+                ->where('tipo_usuario','=','Doctor')
+                ->where('email','!=','Eliminado')
+                ->orderBy('name','desc')
+                ->get();
+                
+                if ( $verpdf == "Descargar" )
+                {
+                    $view = \View::make('pdf.doctores.reportedoctores', compact('doctores','hoy','nombreusu','empresa','imagen','path'))->render();
+                    $pdf = \App::make('dompdf.wrapper');
+                    $pdf->loadHTML($view);
+                     $pdf->setPaper('A4', 'landscape');
+                    return $pdf->download ('ListadoDoctores'.$nompdf.'.pdf');
+                }
+                if ( $verpdf == "Navegador" )
+                {
+                    $view = \View::make('pdf.doctores.reportedoctores', compact('doctores','hoy','nombreusu','empresa','imagen','path'))->render();
+                    $pdf = \App::make('dompdf.wrapper');
+                    $pdf->loadHTML($view);
+                     $pdf->setPaper('A4', 'landscape');
+                    return $pdf->stream ('ListadoDoctores'.$nompdf.'.pdf');
+                }
+            }
+        
+    }
+
     public function vistaarticulo(ReportesFormRequest $rrequest)
     {  
             if ($rrequest)
@@ -948,6 +1004,71 @@ class ReportesController extends Controller
                     $pdf->loadHTML($view);
                     //$pdf->setPaper('A4', 'landscape');
                     return $pdf->stream ('VistaPaciente'.'-'.$paciente->nombre.'-'.$nompdf.'.pdf');
+                }
+            }
+        
+    }
+
+    public function vistadoctor(ReportesFormRequest $rrequest)
+    {  
+            if ($rrequest)
+            {
+                
+                $idempresa = Auth::user()->idempresa;
+                $nombreusu = Auth::user()->name;
+                $empresa = Auth::user()->empresa;
+                $moneda = Auth::user()->moneda;
+                if (Auth::user()->logo == null)
+                {
+                    $logo = null;
+                    $imagen = null;
+                }
+                else
+                {
+                     $logo = Auth::user()->logo;
+                     $imagen = public_path('imagenes/logos/'.$logo);
+                     
+                }
+                $path = public_path('imagenes/usuarios/');
+                $verpdf=trim($rrequest->get('pdf'));
+                $iddoctor=trim($rrequest->get('rid'));
+
+                $zona_horaria = Auth::user()->zona_horaria;
+                $hoy = Carbon::now($zona_horaria);
+                $hoy = $hoy->format('d-m-Y');
+
+                $nompdf = Carbon::now($zona_horaria);
+                $nompdf = $nompdf->format('Y-m-d H:i:s');
+                
+
+
+                $doctor=DB::table('users')
+                ->where('id','=',$iddoctor)
+                ->first();
+
+                $diasfecha = date("Y-m-d", strtotime ($hoy."- 1 days"));
+
+                $dias=DB::table('dias')
+                ->where('iddoctor','=',$iddoctor)
+                ->where('fecha','>=',$diasfecha)
+                ->orderBy('fecha','asc')
+                ->get();
+                
+                if ( $verpdf == "Descargar" )
+                {
+                    $view = \View::make('pdf.doctores.vista.vistadoctores', compact('doctor','hoy','nombreusu','empresa','imagen','moneda','path','dias'))->render();
+                    $pdf = \App::make('dompdf.wrapper');
+                    $pdf->loadHTML($view);
+                    //$pdf->setPaper('A4', 'landscape');
+                    return $pdf->download ('VistaDoctor'.'-'.$doctor->name.'-'.$nompdf.'.pdf');
+                }
+                if ( $verpdf == "Navegador" )
+                {
+                    $view = \View::make('pdf.doctores.vista.vistadoctor', compact('doctor','hoy','nombreusu','empresa','imagen','moneda','path','dias'))->render();
+                    $pdf = \App::make('dompdf.wrapper');
+                    $pdf->loadHTML($view);
+                    //$pdf->setPaper('A4', 'landscape');
+                    return $pdf->stream ('VistaDoctor'.'-'.$doctor->name.'-'.$nompdf.'.pdf');
                 }
             }
         

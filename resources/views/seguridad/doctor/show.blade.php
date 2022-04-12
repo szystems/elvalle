@@ -8,7 +8,7 @@
                   <h2 class="h3 card-header-title"><strong>Doctor: {{$doctor->name}}</strong></h2>
                   
             </header>
-            <!--{{Form::open(array('action' => 'ReportesController@vistausuario','method' => 'POST','role' => 'form', 'target' => '_blank'))}}
+            {{Form::open(array('action' => 'ReportesController@vistadoctor','method' => 'POST','role' => 'form', 'target' => '_blank'))}}
 
                 {{Form::token()}}		
 					<div class="card mb-4">
@@ -40,7 +40,7 @@
 						</div>
 					</div>
 					
-				{{Form::close()}}-->
+				{{Form::close()}}
             <div class="card-body">
                 <a href="{{URL::action('DoctorController@edit',$doctor->id)}}">
                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar Doctor">
@@ -234,7 +234,6 @@
 						@endforeach
 					</table>
 				</div>
-				{{$dias->render()}}
                   
 
         

@@ -36,14 +36,13 @@
 		<div class="row">
 
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-				<!--{{Form::open(array('action' => 'ReportesController@reporteusuarios','method' => 'POST','role' => 'form', 'target' => '_blank'))}}
+				{{Form::open(array('action' => 'ReportesController@reportedoctores','method' => 'POST','role' => 'form', 'target' => '_blank'))}}
 
                 {{Form::token()}}
 					
 					<div class="card mb-4">
 						<header class="card-header d-md-flex align-items-center">
-							<h4><strong>Imprimir Listado de Administradores </strong></h4>
-							
+							<h4><strong>Imprimir Listado de Doctores </strong></h4>
 						</header>
 						<div class="card-body">
 							<div class="row">
@@ -69,7 +68,7 @@
 						</div>
 					</div>
 					
-				{{Form::close()}}-->
+				{{Form::close()}}
 				@include('seguridad/doctor.search')
 				<div class="table-responsive">
 					<table class="table table-striped table-bordered table-condensed table-hover">
@@ -116,7 +115,7 @@
 									@else
 										<img class="u-avatar--sm rounded-circle mr-3" src="{{asset('imagenes/noimage.png')}}">
 									@endif
-									{{ $usu->name}}
+									{{ $usu->name}} ({{ $usu->especialidad }})
 								</h5>
 							</td>
 							<td align="left"><h5>{{ $usu->email}}</h5></td>
