@@ -14,6 +14,7 @@ use sisVentasWeb\Http\Requests\ArticuloFormRequest;
 
 
 use sisVentasWeb\Venta;
+use sisVentasWeb\Orden;
 use sisVentasWeb\Ingreso;
 use sisVentasWeb\DetalleIngreso;
 use sisVentasWeb\DetalleVenta;
@@ -43,6 +44,10 @@ class VentaController extends Controller
             $desde=trim($request->get('desde'));
             $hasta=trim($request->get('hasta'));
 
+            $zona_horaria = Auth::user()->zona_horaria;
+            $hoy = Carbon::now($zona_horaria);
+            $hoy = $hoy->format('d-m-Y');
+
             $desde = date("Y-m-d", strtotime($desde));
             $hasta = date("Y-m-d", strtotime($hasta));
 
@@ -60,21 +65,17 @@ class VentaController extends Controller
             ->get();
 
             $usufiltro=DB::table('users')
-			->select('name','id')
             ->where('id','=',$usuario)
-            ->where('idempresa','=',$idempresa)
-            ->get();
+            ->first();
                     
             $clientefiltro=DB::table('paciente')
-            ->select('nombre','idpaciente')
             ->where('idpaciente','=',$cliente)
-            ->where('estado','=',"Habilitado")
-            ->get();
+            ->first();
 
-            $zona_horaria = Auth::user()->zona_horaria;
-            $hoy = Carbon::now($zona_horaria);
-            $hoy = $hoy->format('d-m-Y');
+            
 
+            $today = Carbon::now($zona_horaria);
+            $today = $today->format('Y-m-d');
                 
             if($desde != '1970-01-01' or $hasta != '1970-01-01')
             {
@@ -120,6 +121,20 @@ class VentaController extends Controller
             }
             else
             {
+                $FechaMin = DB::table('venta')
+				->where('estado','=','A')
+				->first();
+				if(isset($FechaMin))
+				{
+					$desde = $FechaMin->fecha;
+					$desde = date("d-m-Y", strtotime($desde));
+					$hasta = date('d-m-Y');
+				}else
+				{
+					$desde = date('d-m-Y');
+					$hasta = date('d-m-Y');
+				}
+
                 $ventas=DB::table('venta as v')
                     ->join('paciente as p','v.idcliente','=','p.idpaciente')
                     ->join('detalle_venta as dv','v.idventa','=','dv.idventa')
@@ -504,6 +519,17 @@ class VentaController extends Controller
                 }
 
         /*Fin agregar stock a articulos*/
+
+        //borrar idventa si existe en orden
+        $orden=DB::table('orden')->where('idventa','=',$id)->first();
+        if(isset($orden))
+        {
+            $ordenidventa=Orden::findOrFail($orden->idorden);
+            $ordenidventa->idventa=null;
+            $ordenidventa->estado_orden="Pendiente";
+            $ordenidventa->update();
+        }
+
             
         $ven=DB::table('venta')->where('idventa','=',$id)->first();
         $cli=DB::table('paciente')->where('idpaciente','=',$ven->idcliente)->first();

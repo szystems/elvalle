@@ -29,6 +29,11 @@ class ReportesController extends Controller
                 $idempresa = Auth::user()->idempresa;
                 $nombreusu = Auth::user()->name;
                 $empresa = Auth::user()->empresa;
+
+                $zona_horaria = Auth::user()->zona_horaria;
+                $hoy = Carbon::now($zona_horaria);
+                $hoy = $hoy->format('d-m-Y');
+                
                 if (Auth::user()->logo == null)
                 {
                     $logo = null;
@@ -42,111 +47,77 @@ class ReportesController extends Controller
 
                 
                 $verpdf=trim($rrequest->get('pdf'));
-                $desde=trim($rrequest->get('rdesde'));
-                $hasta=trim($rrequest->get('rhasta'));
-                $cliente=trim($rrequest->get('rcliente'));
-                $usuario=trim($rrequest->get('rusuario'));
-                $estadosaldo=trim($rrequest->get('rsaldo'));
-                $estadoventa=trim($rrequest->get('restadoventa'));
-                $tipopago=trim($rrequest->get('rtipopago'));
-
-                $personas=DB::table('persona')
-                ->where('tipo','=','Cliente')
-                ->where('idempresa','=',$idempresa)
-                ->get();
-
-                $usuarios=DB::table('users')
-                ->where('idempresa','=',$idempresa)
-                ->get();
+                $desde=trim($rrequest->get('searchDesde'));
+                $hasta=trim($rrequest->get('searchHasta'));
+                $cliente=trim($rrequest->get('searchCliente'));
+                $usuario=trim($rrequest->get('searchUsuario'));
+                $saldo=trim($rrequest->get('searchSaldo'));
+                $estado=trim($rrequest->get('searchEstado'));
+                $tipopago=trim($rrequest->get('searchTipopago'));
 
                 $usufiltro=DB::table('users')
-					->select('name')
                 	->where('id','=',$usuario)
-                    ->get();
+                    ->first();
                     
-                $clientefiltro=DB::table('persona')
-                ->select('nombre')
-                ->where('idpersona','=',$cliente)
-                ->get();
+                $clientefiltro=DB::table('paciente')
+                ->where('idpaciente','=',$cliente)
+                ->first();
 
-                $zona_horaria = Auth::user()->zona_horaria;
-                $hoy = Carbon::now($zona_horaria);
-                $hoy = $hoy->format('d-m-Y');
+                
 
                 $nompdf = Carbon::now($zona_horaria);
                 $nompdf = $nompdf->format('Y-m-d H:i:s');
                 
-                if($desde != '1970-01-01' or $hasta != '1970-01-01')
+                
+                if ( $saldo != null )
                 {
-                    if ( $estadosaldo != null )
-                    {
-                        $ventas=DB::table('venta as v')
-                        ->join('persona as p','v.idcliente','=','p.idpersona')
-                        ->join('detalle_venta as dv','v.idventa','=','dv.idventa')
-                        ->join('users as u','v.idusuario','=','u.id')
-                        ->select('v.idventa','p.nombre','u.name','u.tipo_usuario','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.fecha','v.impuesto','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estado','v.estadosaldo','v.estadoventa','v.tipopago','v.idorden')
-                        ->whereBetween('fecha', [$desde, $hasta])
-                        ->where('p.idpersona','LIKE','%'.$cliente.'%')
-                        ->where('u.id','LIKE','%'.$usuario.'%')
-                        ->where('v.idempresa','=',$idempresa)
-                        ->where('v.estado','=','A')
-                        ->where('v.estadosaldo','=',$estadosaldo)
-                        ->where('v.estadoventa','LIKE','%'.$estadoventa.'%')
-                        ->where('v.tipopago','LIKE','%'.$tipopago.'%')
-                        ->orderBy('v.fecha','asc')
-                        ->groupBy('v.idventa','p.nombre','u.name','u.tipo_usuario','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.fecha','v.impuesto','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estado','v.estadosaldo','v.estadoventa','v.tipopago','v.idorden')
-                        ->paginate(20);
-                        //return view('pdf.ventas.reporteventas',["ventas"=>$ventas,"personas"=>$personas,"usuarios"=>$usuarios,"desde"=>$desde,"hasta"=>$hasta,"cliente"=>$cliente,"usuario"=>$usuario,"estadosaldo"=>$estadosaldo,"hoy"=>$hoy,"usufiltro"=>$usufiltro,"provfiltro"=>$clientefiltro]);
-                        //return view('pdf.ventas.reporteventas', array("ventas"=>$ventas,"personas"=>$personas,"usuarios"=>$usuarios,"desde"=>$desde,"hasta"=>$hasta,"cliente"=>$cliente,"usuario"=>$usuario,"estadosaldo"=>$estadosaldo,"hoy"=>$hoy,"usufiltro"=>$usufiltro,"provfiltro"=>$clientefiltro));
-                    }
-                    else
-                    {
-                        $ventas=DB::table('venta as v')
-                        ->join('persona as p','v.idcliente','=','p.idpersona')
-                        ->join('detalle_venta as dv','v.idventa','=','dv.idventa')
-                        ->join('users as u','v.idusuario','=','u.id')
-                        ->select('v.idventa','p.nombre','u.name','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.fecha','v.impuesto','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estado','v.estadosaldo','v.estadoventa','v.tipopago','v.idorden')
-                        ->whereBetween('fecha', [$desde, $hasta])
-                        ->where('p.idpersona','LIKE','%'.$cliente.'%')
-                        ->where('u.id','LIKE','%'.$usuario.'%')
-                        ->where('v.idempresa','=',$idempresa)
-                        ->where('v.estado','=','A')
-                        ->where('v.estadoventa','LIKE','%'.$estadoventa.'%')
-                        ->where('v.tipopago','LIKE','%'.$tipopago.'%')
-                        ->where('v.estadosaldo','!=',NULL)
-                        ->orderBy('v.fecha','asc')
-                        ->groupBy('v.idventa','p.nombre','u.name','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.fecha','v.impuesto','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estado','v.estadosaldo','v.estadoventa','v.tipopago','v.idorden')
-                        ->paginate(20);
-                        //return view('pdf.ventas.reporteventas',["ventas"=>$ventas,"personas"=>$personas,"usuarios"=>$usuarios,"desde"=>$desde,"hasta"=>$hasta,"cliente"=>$cliente,"usuario"=>$usuario,"estadosaldo"=>$estadosaldo,"hoy"=>$hoy,"usufiltro"=>$usufiltro,"provfiltro"=>$clientefiltro]);
-                        //return view('pdf.ventas.reporteventas', array("ventas"=>$ventas,"personas"=>$personas,"usuarios"=>$usuarios,"desde"=>$desde,"hasta"=>$hasta,"cliente"=>$cliente,"usuario"=>$usuario,"estadosaldo"=>$estadosaldo,"hoy"=>$hoy,"usufiltro"=>$usufiltro,"provfiltro"=>$clientefiltro));
-                    }
-                    //return view('pdf.ventas.reporteventas',["ventas"=>$ventas,"personas"=>$personas,"usuarios"=>$usuarios,"desde"=>$desde,"hasta"=>$hasta,"cliente"=>$cliente,"usuario"=>$usuario,"estadosaldo"=>$estadosaldo,"hoy"=>$hoy,"usufiltro"=>$usufiltro,"clientefiltro"=>$clientefiltro]);
+                    $ventas=DB::table('venta as v')
+                    ->join('paciente as p','v.idcliente','=','p.idpaciente')
+                    ->join('detalle_venta as dv','v.idventa','=','dv.idventa')
+                    ->join('users as u','v.idusuario','=','u.id')
+                    ->select('v.idventa','p.nombre','u.name','u.tipo_usuario','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.fecha','v.impuesto','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estado','v.estadosaldo','v.estadoventa','v.tipopago','v.idorden')
+                    ->whereBetween('fecha', [$desde, $hasta])
+                    ->where('p.idpaciente','LIKE','%'.$cliente.'%')
+                    ->where('u.id','LIKE','%'.$usuario.'%')
+                    ->where('v.estado','=','A')
+                    ->where('v.estadosaldo','=',$saldo)
+                    ->where('v.estadoventa','LIKE','%'.$estado.'%')
+                    ->where('v.tipopago','LIKE','%'.$tipopago.'%')
+                    ->orderBy('v.idventa','desc')
+                    ->groupBy('v.idventa','p.nombre','u.name','u.tipo_usuario','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.fecha','v.impuesto','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estado','v.estadosaldo','v.estadoventa','v.tipopago','v.idorden')
+                    ->paginate(20);
                 }
                 else
                 {
                     $ventas=DB::table('venta as v')
-                        ->join('persona as p','v.idcliente','=','p.idpersona')
-                        ->join('detalle_venta as dv','v.idventa','=','dv.idventa')
-                        ->join('users as u','v.idusuario','=','u.id')
-                        ->select('v.idventa','p.nombre','u.name','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.fecha','v.impuesto','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estado','v.estadosaldo','v.estadoventa','v.tipopago','v.idorden')
-                        ->where('v.idempresa','=',$idempresa)
-                        ->where('v.estado','=','A')
-                        ->where('v.estadoventa','LIKE','%'.$estadoventa.'%')
-                        ->where('v.tipopago','LIKE','%'.$tipopago.'%')
-                        ->orderBy('v.fecha','asc')
-                        ->groupBy('v.idventa','p.nombre','u.name','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.fecha','v.impuesto','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estado','v.estadosaldo','v.estadoventa','v.tipopago','v.idorden')
-                        ->paginate(20);
+                    ->join('paciente as p','v.idcliente','=','p.idpaciente')
+                    ->join('detalle_venta as dv','v.idventa','=','dv.idventa')
+                    ->join('users as u','v.idusuario','=','u.id')
+                    ->select('v.idventa','p.nombre','u.name','u.tipo_usuario','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.fecha','v.impuesto','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estado','v.estadosaldo','v.estadoventa','v.tipopago','v.idorden')
+                    ->whereBetween('fecha', [$desde, $hasta])
+                    ->where('p.idpaciente','LIKE','%'.$cliente.'%')
+                    ->where('u.id','LIKE','%'.$usuario.'%')
+                    ->where('v.estado','=','A')
+                    ->where('v.estadoventa','LIKE','%'.$estado.'%')
+                    ->where('v.tipopago','LIKE','%'.$tipopago.'%')
+                    ->where('v.estadosaldo','!=',NULL)
+                    ->orderBy('v.idventa','desc')
+                    ->groupBy('v.idventa','p.nombre','u.name','u.tipo_usuario','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.fecha','v.impuesto','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estado','v.estadosaldo','v.estadoventa','v.tipopago','v.idorden')
+                    ->paginate(20);
+                        
                 }
+            
+
                 if ( $verpdf == "Descargar" )
                 {
-                    $view = \View::make('pdf.ventas.reporteventas', compact('ventas','personas','usuarios','desde','hasta','cliente','usuario','estadosaldo','estadoventa','tipopago','hoy','usufiltro','clientefiltro','nombreusu','empresa','imagen'))->render();
+                    $view = \View::make('pdf.ventas.reporteventas', compact('ventas','desde','hasta','cliente','usuario','saldo','estado','tipopago','hoy','usufiltro','clientefiltro','nombreusu','empresa','imagen'))->render();
                     $pdf = \App::make('dompdf.wrapper');
                     $pdf->loadHTML($view);
                     return $pdf->download ('ReporteVentas'.$nompdf.'.pdf');
                 }
                 if ( $verpdf == "Navegador" )
                 {
-                    $view = \View::make('pdf.ventas.reporteventas', compact('ventas','personas','usuarios','desde','hasta','cliente','usuario','estadosaldo','estadoventa','tipopago','hoy','usufiltro','clientefiltro','nombreusu','empresa','imagen'))->render();
+                    $view = \View::make('pdf.ventas.reporteventas', compact('ventas','desde','hasta','cliente','usuario','saldo','estado','tipopago','hoy','usufiltro','clientefiltro','nombreusu','empresa','imagen'))->render();
                     $pdf = \App::make('dompdf.wrapper');
                     $pdf->loadHTML($view);
                     return $pdf->stream ('ReporteVentas'.$nompdf.'.pdf');

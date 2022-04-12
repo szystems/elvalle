@@ -19,7 +19,7 @@
 								<span class="form-icon form-icon--right">
 									<i class="fas fa-calendar-alt form-icon__item"></i>
 								</span>
-								<input type="text" id="datepickerdesde" class="form-control datepicker" name="desde" value="">
+								<input type="text" id="datepickerdesde" class="form-control datepicker" name="desde" value="{{ $desde }}">
 							</span>
 						</div>
 					</div>
@@ -31,7 +31,7 @@
 								<span class="form-icon form-icon--right">
 									<i class="fas fa-calendar-alt form-icon__item"></i>
 								</span>
-								<input type="text" id="datepickerhasta" class="form-control datepicker" name="hasta" value="">
+								<input type="text" id="datepickerhasta" class="form-control datepicker" name="hasta" value="{{ $hasta }}">
 							</span>
 						</div>
 					</div>
@@ -39,8 +39,12 @@
 					<div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
                         <div class="form-group mb-2">
 							<label for="cliente"></label>Cliente:</label>
-							<select name="cliente" class="form-control" value="{{ old('cliente') }}">
+							<select name="cliente" class="form-control">
 								<option value="">Todos</option>
+								@if (isset($clientefiltro))
+								  	<option selected value="{{$clientefiltro->idpaciente}}">{{$clientefiltro->nombre}}</option>
+								@endif
+
 								@foreach ($personas as $per)
                                 <option value="{{$per->idpaciente}}">{{$per->nombre}}</option>
                               	@endforeach
@@ -51,10 +55,14 @@
 					<div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
                         <div class="form-group mb-2">
 							<label for="usuario"></label>Usuario:</label>
-							<select name="usuario" class="form-control" value="{{ old('usuario') }}">
+							<select name="usuario" class="form-control">
 								<option value="">Todos</option>
+								@if (isset($usufiltro))
+								  	<option selected value="{{$usufiltro->id}}">{{$usufiltro->name}} ({{ $usufiltro->tipo_usuario }})</option>
+								@endif
+
 								@foreach ($usuarios as $usu)
-                                <option value="{{$usu->id}}">{{$usu->name}}</option>
+                                <option value="{{$usu->id}}">{{$usu->name}} ({{ $usu->tipo_usuario }})</option>
                               	@endforeach
 							</select>
 						</div>
@@ -63,8 +71,14 @@
 					<div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
                         <div class="form-group mb-2">
 							<label for="estadosaldo"></label>Saldo:</label>
-							<select name="estadosaldo" class="form-control" value="{{ old('estadosaldo') }}">
+							<select name="estadosaldo" class="form-control">
 								<option value="">Todos</option>
+								@if ($estadosaldo != null)
+								  	<option selected value="{{$estadosaldo}}">{{$estadosaldo}}</option>
+								@else
+									<option selected value="">Todos</option>
+								@endif
+
 								<option value="Pendiente">Pendiente</option>
 								<option value="Pagado">Pagado</option>
 							</select>
@@ -73,8 +87,14 @@
 					<div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
                         <div class="form-group mb-2">
 							<label for="estadosaldo"></label>Estado:</label>
-							<select name="estadoventa" class="form-control" value="{{ old('estadoventa') }}">
+							<select name="estadoventa" class="form-control">
 								<option value="">Todos</option>
+								@if ($estadoventa != null)
+								  	<option selected value="{{$estadoventa}}">{{$estadoventa}}</option>
+								@else
+									<option selected value="">Todos</option>
+								@endif
+
 								<option value="Cerrada">Cerrada</option>
 								<option value="Abierta">Abierta</option>
 							</select>
@@ -83,8 +103,14 @@
 					<div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
                         <div class="form-group mb-2">
 							<label for="tipopago"></label>Tipo Pago:</label>
-							<select name="tipopago" class="form-control" value="{{ old('tipopago') }}">
+							<select name="tipopago" class="form-control">
 								<option value="">Todos</option>
+								@if ($tipopago != null)
+								  	<option selected value="{{$tipopago}}">{{$tipopago}}</option>
+								@else
+									<option selected value="">Todos</option>
+								@endif
+
 								<option value="Efectivo">Efectivo</option>
 								<option value="Tarjeta">Tarjeta</option>
 								<option value="Cheque">Cheque</option>
@@ -129,8 +155,6 @@
 	$( '#datepickerdesde' ).datepicker( optSimple );
 
 	$( '#datepickerhasta' ).datepicker( optSimple );
-
-	$( '#datepickerdesde,#datepickerhasta' ).datepicker( 'setDate', today );
 </script>
 
     

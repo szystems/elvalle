@@ -55,14 +55,22 @@
 			}
 					
 		?>
-		<br><strong>Filtros:</strong><font color="Blue"> <strong>Desde:</strong> '{{ $desde}}', <strong>Hasta:</strong> '{{ $hasta}}', <strong>Cliente:</strong> '@foreach($clientefiltro as $clifiltro){{$clifiltro->nombre}}@endforeach', <strong>Usuario:</strong> '@foreach($usufiltro as $usuf){{$usuf->name}}@endforeach', <strong>Saldo:</strong> '{{ $estadosaldo}}' , <strong>Estado:</strong> '{{ $estadoventa}}', <strong> Tipo Pago:</strong> '{{ $tipopago}}'</font></h6>
+		<br><strong>Filtros:</strong>
+		<font color="Blue"> 
+			<strong>Desde:</strong> '{{ $desde}}', 
+			<strong>Hasta:</strong> '{{ $hasta}}', 
+			<strong>Cliente:</strong> ''@if(isset($clientefiltro)){{$clientefiltro->nombre}}@endif', 
+			<strong>Usuario:</strong> '@if(isset($usufiltro)){{$usufiltro->name}}@endif', 
+			<strong>Saldo:</strong> '{{ $saldo}}', 
+			<strong>Estado:</strong> '{{ $estado}}', 
+			<strong>Tipo Pago:</strong> '{{ $tipopago}}'
+		</font></h6>
 		
 		
 		
 		<table>
 			<tr>
-				<th>ID</th> 
-				<th>ID Venta</th> 		
+				<th>ID</th>  		
 				<th>Fecha</th>         
 				<th>Cliente</th>
 				<th>Comprobante</th>
@@ -71,6 +79,7 @@
 				<th>Estado</th>
 				<th>Tipo Pago</th>
 				<th>Usuario</th>
+				<th>ID Orden</th>
 							
 			</tr>
 			<?php
@@ -86,16 +95,16 @@
 				<?php
 					$fecha = date("d-m-Y", strtotime($ven->fecha));					
 				?>			
-				<td><h4 align="left">{{ $ven->idventa}}</h4></td>
-				<td><h4 align="left">@if($ven->idorden != null){{ $ven->idorden}}@endif</h4></td>
-				<td class="celda"><h4 align="center">{{ $fecha}}</h4></td>
-				<td><h4 align="left">{{ $ven->nombre}}</h4></td>
-				<td><h4 align="left">{{ $ven->tipo_comprobante.': '.$ven->serie_comprobante.'-'.$ven->num_comprobante}}</h4></td>
+				<td><h4 align="center">{{ $ven->idventa}}</h4></td>
+				<td><h4 align="center">{{ $fecha}}</h4></td>
+				<td><h4 align="center">{{ $ven->nombre}}</h4></td>
+				<td><h4 align="center">{{ $ven->tipo_comprobante.': '.$ven->serie_comprobante.'-'.$ven->num_comprobante}}</h4></td>
 				<td><h4 align="right">{{ Auth::user()->moneda }}{{number_format($ven->total_venta,2, '.', ',')}}</h4></td>
 				<td><h4 align="right">{{ Auth::user()->moneda }}{{ number_format(($ven->total_venta - $ven->abonado),2, '.', ',')}}</h4></td>
-				<td><h4 align="left">{{ $ven->estadoventa}}</h4></td>
-				<td><h4 align="left">{{ $ven->tipopago}}</h4></td>
-				<td><h4 align="center">{{ $ven->name}}</h4></td>
+				<td><h4 align="center">{{ $ven->estadoventa}}</h4></td>
+				<td><h4 align="center">{{ $ven->tipopago}}</h4></td>
+				<td><h4 align="center">{{ $ven->name}} ({{ $ven->tipo_usuario }})</h4></td>
+				<td><h4 align="center">@if($ven->idorden != null){{ $ven->idorden}}@endif</h4></td>
 				<?php
 					$ventatotal = ($ventatotal + $ven->total_venta);
 					$compratotal = $compratotal + $ven->total_compra;
@@ -116,7 +125,7 @@
 				<th><h4 align="center">Total Ventas</h4></th>
 				<th><h4 align="center">Diferencia</h4></th>
 				<th><h4 align="center">Total Saldo</h4></th>
-				<th><h4 align="center">Total Comisiones</h4></th>
+				<!--<th><h4 align="center">Total Comisiones</h4></th>-->
 			</tr>
 			<tr>
 				<?php
@@ -126,7 +135,7 @@
 				<td><h1 align="right"><strong><font color="Blue">{{ Auth::user()->moneda }}{{number_format($ventatotal,2, '.', ',')}}</font></strong></h1></td>
 				<td><h1 align="right"><strong><font color="Green">{{ Auth::user()->moneda }}{{number_format($diferencia,2, '.', ',')}}</font></strong></h1></td>
 				<td><h1 align="right"><strong><font color="Red">{{ Auth::user()->moneda }}{{number_format($totalsaldo,2, '.', ',')}}</font></strong></h1></td>
-				<td><h1 align="right"><strong><font color="Orange">{{ Auth::user()->moneda }}{{number_format($totalcomision,2, '.', ',')}}</font></strong></h1></td>
+				<!--<td><h1 align="right"><strong><font color="Orange">{{ Auth::user()->moneda }}{{number_format($totalcomision,2, '.', ',')}}</font></strong></h1></td>-->
 							
 			</tr>
 						

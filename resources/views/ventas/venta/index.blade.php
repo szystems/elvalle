@@ -43,18 +43,87 @@
 		<div class="row">
 
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-				@include('ventas.venta.search')
 				<?php
-								$desde = date("d-m-Y", strtotime($desde));
-								$hasta = date("d-m-Y", strtotime($hasta));
-								if($desde == '01-01-1970' or $hasta == '01-01-1970')
-								{
-									$desde = null;
-									$hasta = null;
-								}
+					$desdeReporte=$desde;
+					$hastaReporte=$hasta;
+
+					$desde = $desde;
+					$hasta = $hasta;
+
+					$desde = date("d-m-Y", strtotime($desde));
+					$hasta = date("d-m-Y", strtotime($hasta));
 								
-							?>
-				<h6><strong>Filtros:</strong><font color="Blue"> <strong>Desde:</strong> '{{ $desde}}', <strong>Hasta:</strong> '{{ $hasta}}', <strong>Cliente:</strong> ''@foreach($clientefiltro as $clientef){{$clientef->nombre}}@endforeach', <strong>Usuario:</strong> '@foreach($usufiltro as $usuf){{$usuf->name}}@endforeach', <strong>Saldo:</strong> '{{ $estadosaldo}}', <strong>Estado:</strong> '{{ $estadoventa}}', <strong>Tipo Pago:</strong> '{{ $tipopago}}'</font></h6>
+				?>
+				@include('ventas.venta.search')
+				{{Form::open(array('action' => 'ReportesController@reporteventas','method' => 'POST','role' => 'form', 'target' => '_blank'))}}
+
+                {{Form::token()}}		
+					<div class="card mb-4">
+						<header class="card-header d-md-flex align-items-center">
+							<h4><strong>Imprimir Listado de Ingresos </strong></h4>
+							<input type="hidden" name="searchDesde" value="{{ $desdeReporte }}">
+							<input type="hidden" name="searchHasta" value="{{ $hastaReporte }}">
+							@if(isset($clientefiltro))
+								<input type="hidden" name="searchCliente" value="{{ $clientefiltro->idpaciente }}">
+							@else
+								<input type="hidden" name="searchCliente" value="">
+							@endif
+							@if(isset($usufiltro))
+								<input type="hidden" name="searchUsuario" value="{{ $usufiltro->id }}">
+							@else
+								<input type="hidden" name="searchUsuario" value="">
+							@endif
+							<input type="hidden" name="searchSaldo" value="{{ $estadosaldo }}">
+							<input type="hidden" name="searchEstado" value="{{ $estadoventa }}">
+							<input type="hidden" name="searchTipopago" value="{{ $tipopago }}">
+						</header>
+						<div class="card-body">
+							<div class="row">
+								<div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
+									<div class="form-group mb-2">
+										<label for="rpdf">Visualización</label>
+										<select name="pdf" class="form-control" value="">
+												<option value="Descargar" selected>Descargar</option>
+												<option value="Navegador">Ver en navegador</option>
+											</select>
+									</div>
+								</div>
+								<div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
+								<label for="rpdf"></label>
+									<div class="form-group mb-2">
+									
+										<span class="input-group-btn">
+										
+											<button type="submit" class="btn btn-danger">
+												<i class="fa fa-file-pdf"></i> PDF
+											</button>
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+				{{Form::close()}}
+				<h6>
+					<strong>Filtros:</strong>
+					<font color="Blue"> 
+						<strong>Desde:</strong> '{{ $desde}}', 
+						<strong>Hasta:</strong> '{{ $hasta}}', 
+						<strong>Cliente:</strong> ''@if(isset($clientefiltro)){{$clientefiltro->nombre}}@endif', 
+						<strong>Usuario:</strong> '@if(isset($usufiltro)){{$usufiltro->name}}@endif', 
+						<strong>Saldo:</strong> '{{ $estadosaldo}}', 
+						<strong>Estado:</strong> '{{ $estadoventa}}', 
+						<strong>Tipo Pago:</strong> '{{ $tipopago}}'
+					</font>
+				</h6>
+				<?php
+					$ventatotal = 0;
+					$compratotal = 0;
+					$diferencia = 0;
+					$totalcomision = 0;
+					$totalsaldo = 0;
+				?>
 				<div class="table-responsive">
 					<table class="table table-striped table-bordered table-condensed table-hover">
 						<thead>
@@ -138,11 +207,38 @@
 								@if ($ven->estadoventa == "Abierta")<font color="orange">{{ $ven->estadoventa}} </font> @endif
 							</h5></td>
 							<td align="left"><h5>{{ $ven->tipopago}}</h5></td>
-							<td align="left"><h5>@if($ven->idorden != null)<a href="{{URL::action('OrdenController@show',$ven->idorden)}}">{{ $ven->idorden}}</a>@endif</h5></td>
+							<td align="left"><h5><b>@if($ven->idorden != null)<a href="{{URL::action('OrdenController@show',$ven->idorden)}}">{{ $ven->idorden}}</a>@endif</b></h5></td>
+							<?php
+								$ventatotal = ($ventatotal + $ven->total_venta);
+								$compratotal = $compratotal + $ven->total_compra;
+								$totalcomision = $totalcomision + $ven->total_comision;
+								$totalsaldo = $totalsaldo + ($ven->total_venta - $ven->abonado);
+							?>
 						</tr>
 						@include('ventas.venta.modal')
 						@include('ventas.venta.modals.modalcerrar')
 				@endforeach
+					</table>
+				</div>
+				<h4><strong>Resumen </strong></h4>
+				<div class="table-responsive">
+					<table class="table table-striped table-bordered table-condensed table-hover">
+						<thead>
+							<th><h5 align="center"><strong>Total Costo</strong></h5></th>
+							<th><h5 align="center"><strong>Total Ventas</strong></h5></th>
+							<th><h5 align="center"><strong>Diferncia</strong></h5></th>
+							<th><h5 align="center"><strong>Total Saldo</strong></h5></th>
+						</thead>
+		               
+						<tr>
+							<?php
+								$diferencia = $ventatotal - $compratotal;
+							?>
+							<td align="right"><h1><strong><font color="Orange">{{ Auth::user()->moneda }}{{number_format($compratotal,2, '.', ',')}}</font></strong></h1></td>
+							<td align="right"><h1><strong><font color="Blue">{{ Auth::user()->moneda }}{{number_format($ventatotal,2, '.', ',')}}</font></strong></h1></td>
+							<td align="right"><h1><strong><font color="Green">{{ Auth::user()->moneda }}{{number_format($diferencia,2, '.', ',')}}</font></strong></h1></td>
+							<td align="right"><h1><strong><font color="Red">{{ Auth::user()->moneda }}{{number_format($totalsaldo,2, '.', ',')}}</font></strong></h1></td>
+						</tr>
 					</table>
 				</div>
 				

@@ -72,7 +72,7 @@ class IngresoController extends Controller
                 $zona_horaria = Auth::user()->zona_horaria;
                 $hoy = Carbon::now($zona_horaria);
                 $hoy = $hoy->format('d-m-Y');
-    				//$ingreso->fecha=$mytime->toDateTimeString();
+    				
                 if($desde != '1970-01-01' or $hasta != '1970-01-01')
                 {
                     $ingresos=DB::table('ingreso as i')
