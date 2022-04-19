@@ -6,7 +6,7 @@
 <div class="card mb-4">
 						<!-- Card Header -->
 	<header class="card-header d-md-flex align-items-center">
-		<h4><strong>Pacientes </strong>
+		<h4><strong>Doctores </strong>
 
 			<a href="paciente/create">
                 <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Nuevo Paciente ">
@@ -85,30 +85,23 @@
 						</thead>
 		               @foreach ($pacientes as $pac)
 						<tr>
-							<td>
+							<td align="center">
 
-								<a href="{{URL::action('PacienteController@show',$pac->idpaciente)}}">
-									<span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Ver Paciente">
+								<a href="{{URL::action('HistorialController@show',$pac->idpaciente)}}">
+									<span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Ver Historial">
 										<button class="btn btn-sm btn-info" style="pointer-events: none;" type="button">
-											<i class="far fa-eye"></i>
+											<i class="far fa-clipboard"></i>
 										</button>
 									</span>
 								</a>
 
-								<a href="{{URL::action('PacienteController@edit',$pac->idpaciente)}}">
+								<!--<a href="{{URL::action('PacienteController@edit',$pac->idpaciente)}}">
                                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar Paciente">
                                           <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button">
                                                 <i class="far fa-edit"></i>
                                           </button>
                                     </span>
-                              	</a>
-								<a href="" data-target="#modal-delete-{{$pac->idpaciente}}" data-toggle="modal">
-									<span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Eliminar Paciente">
-										<button class="btn btn-sm btn-danger" style="pointer-events: none;" type="button">
-												<i class="far fa-minus-square"></i>
-										</button>
-									</span>
-								</a>
+                              	</a>-->
 							</td>
 							<td align="left">
 								<h5>
@@ -136,7 +129,6 @@
 							<td align="center"><h5>{{ $pac->dpi}}</h5></td>
 							<td align="center"><h5>{{ $pac->nit}}</h5></td>
 						</tr>
-						@include('pacientes.paciente.modal')
 						@endforeach
 					</table>
 				</div>

@@ -197,14 +197,14 @@
 								</a>
 							</li>
 
-							<!-- Pacientes -->
+							<!-- Pacientes 
 							<li class="u-sidebar-nav-menu__item">
 								<a class="u-sidebar-nav-menu__link" href="{{url('pacientes\paciente')}}" >
 									<i class="fas fa-id-badge u-sidebar-nav-menu__item-icon"></i>
 									<span class="u-sidebar-nav-menu__item-title"><b>Pacientes</b></span>
 									<span class="u-sidebar-nav-menu__indicator"></span>
 								</a>
-							</li>
+							</li>-->
 
 							<!-- Citas -->
 							<li class="u-sidebar-nav-menu__item">
@@ -215,9 +215,38 @@
 								</a>
 							</li>
 
-							
-
 							<!-- Pacientes -->
+							<li class="u-sidebar-nav-menu__item">
+								<a class="u-sidebar-nav-menu__link" href="#!"
+								   data-target="#subMenu6">
+								   <i class="fas fa-id-badge u-sidebar-nav-menu__item-icon"></i>
+									<span class="u-sidebar-nav-menu__item-title"><b>Pacientes</b></span>
+									<i class="fa fa-angle-right u-sidebar-nav-menu__item-arrow"></i>
+									<span class="u-sidebar-nav-menu__indicator"></span>
+								</a>
+
+								<ul id="subMenu6" class="u-sidebar-nav-menu u-sidebar-nav-menu--second-level" style="display: none;">
+									<!-- Components -->
+									<li class="u-sidebar-nav-menu__item">
+										<a class="u-sidebar-nav-menu__link" href="{{url('pacientes\historiales')}}">
+											<span class="u-sidebar-nav-menu__item-icon">H</span>
+											<span class="u-sidebar-nav-menu__item-title">Historiales</span>
+										</a>
+									</li>
+									<li class="u-sidebar-nav-menu__item">
+										<a class="u-sidebar-nav-menu__link" href="{{url('pacientes\paciente')}}">
+											<span class="u-sidebar-nav-menu__item-icon">P</span>
+											<span class="u-sidebar-nav-menu__item-title">Pacientes</span>
+										</a>
+									</li>
+									
+									
+									
+								</ul>
+							</li>
+							<!-- Fin Pacientes -->
+
+							<!-- Farmacia y Rubros -->
 							
 							<li class="u-sidebar-nav-menu__item">
 								<a class="u-sidebar-nav-menu__link" href="#!"
@@ -258,7 +287,7 @@
 								</ul>
 							</li>
 							
-							<!-- Fin Pacientes -->
+							<!-- Fin Farmacia y Rubros -->
 
 							<!-- Compras -->
 							<li class="u-sidebar-nav-menu__item">

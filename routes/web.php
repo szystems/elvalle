@@ -54,6 +54,7 @@ Route::resource('seguridad/dias','DiasController');
     /*Pacientes */
 Route::resource('pacientes/paciente','PacienteController');
 Route::resource('pacientes/cita','CitaController');
+Route::resource('pacientes/historiales','HistorialController');
 
 /*Reportes */
 Route::resource('reportes/bitacora','BitacoraController');
