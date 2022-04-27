@@ -47,4 +47,6 @@ class HistorialController extends Controller
     {
         return view("pacientes.historiales.show",["paciente"=>Paciente::findOrFail($id)]);
     }
+
+    
 }

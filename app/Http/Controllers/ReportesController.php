@@ -2030,5 +2030,74 @@ class ReportesController extends Controller
         
     }
 
+    public function vistareceta(ReportesFormRequest $rrequest)
+    {  
+            if ($rrequest)
+            {
+                
+                $nombreusu = Auth::user()->name;
+                $empresa = Auth::user()->empresa;
+                $moneda = Auth::user()->moneda;
+                if (Auth::user()->logo == null)
+                {
+                    $logo = null;
+                    $imagen = null;
+                }
+                else
+                {
+                     $logo = Auth::user()->logo;
+                     $imagen = public_path('imagenes/logos/'.$logo);
+                     
+                }
+                $path = public_path('imagenes/articulos/');
+                $verpdf=trim($rrequest->get('pdf'));
+                $idreceta=trim($rrequest->get('rid'));
+                $idpaciente=trim($rrequest->get('ridpaciente'));
+
+                $zona_horaria = Auth::user()->zona_horaria;
+                $hoy = Carbon::now($zona_horaria);
+                $hoy = $hoy->format('d-m-Y');
+
+                $nompdf = Carbon::now($zona_horaria);
+                $nompdf = $nompdf->format('Y-m-d H:i:s');
+                
+                $receta=DB::table('receta as r')
+                ->join('paciente as p','r.idpaciente','=','p.idpaciente')
+                ->join('users as d','r.iddoctor','=','d.id')
+                ->join('users as u','r.idusuario','=','u.id')
+                ->select('r.idreceta','r.fecha','r.iddoctor','d.name as Doctor','d.foto as Imgdoctor','d.especialidad','r.idpaciente','p.nombre as Paciente','p.foto as Imgpaciente','r.idusuario','u.name as Usuario','u.tipo_usuario')
+                ->where('r.idreceta','=',$idreceta) 
+                ->first();
+
+                $paciente=DB::table('paciente')
+                ->where('idpaciente','=',$idpaciente)
+                ->first();
+
+                $detalles=DB::table('receta_medicamento as rm')
+                ->join('presentacion as p','rm.presentacion','=','p.idpresentacion')
+                ->where('idreceta','=',$idreceta) 
+                ->get();
+
+                
+                if ( $verpdf == "Descargar" )
+                {
+                    $view = \View::make('pdf.recetas.vistareceta', compact('receta','detalles','paciente','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
+                    $pdf = \App::make('dompdf.wrapper');
+                    $pdf->loadHTML($view);
+                    //$pdf->setPaper('A4', 'landscape');
+                    return $pdf->download ('VistaReceta'.'-'.$paciente->nombre.'-'.$receta->fecha.'-'.$nompdf.'.pdf');
+                }
+                if ( $verpdf == "Navegador" )
+                {
+                    $view = \View::make('pdf.recetas.vistareceta', compact('receta','detalles','paciente','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
+                    $pdf = \App::make('dompdf.wrapper');
+                    $pdf->loadHTML($view);
+                    //$pdf->setPaper('A4', 'landscape');
+                    return $pdf->stream ('VistaReceta'.'-'.$paciente->nombre.'-'.$receta->fecha.'-'.$nompdf.'.pdf');
+                }
+            }
+        
+    }
+
     
 }

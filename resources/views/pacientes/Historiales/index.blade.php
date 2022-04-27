@@ -86,22 +86,13 @@
 		               @foreach ($pacientes as $pac)
 						<tr>
 							<td align="center">
-
 								<a href="{{URL::action('HistorialController@show',$pac->idpaciente)}}">
-									<span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Ver Historial">
-										<button class="btn btn-sm btn-info" style="pointer-events: none;" type="button">
-											<i class="far fa-clipboard"></i>
-										</button>
-									</span>
-								</a>
-
-								<!--<a href="{{URL::action('PacienteController@edit',$pac->idpaciente)}}">
                                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar Paciente">
                                           <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button">
                                                 <i class="far fa-edit"></i>
                                           </button>
                                     </span>
-                              	</a>-->
+                              	</a>
 							</td>
 							<td align="left">
 								<h5>

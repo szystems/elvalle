@@ -52,9 +52,16 @@ Route::resource('seguridad/dias','DiasController');
 
 /*Rutas Pacientes */
     /*Pacientes */
+
 Route::resource('pacientes/paciente','PacienteController');
 Route::resource('pacientes/cita','CitaController');
+Route::get('pacientes/historiales/recetas/quitar', 'RecetaController@quitar');
+Route::get('pacientes/historiales/recetas/editar', 'RecetaController@editarmedicamento');
+Route::get('pacientes/historiales/recetas/agregar', 'RecetaController@agregar');
+Route::get('pacientes/historiales/recetas/eliminar', 'RecetaController@eliminarreceta');
+Route::resource('pacientes/historiales/recetas','RecetaController');
 Route::resource('pacientes/historiales','HistorialController');
+
 
 /*Reportes */
 Route::resource('reportes/bitacora','BitacoraController');
@@ -70,6 +77,9 @@ Route::resource('reportes/ingresos','ReporteIngresosController');
     /*Pacientes */
     Route::post('pdf/pacientes','ReportesController@reportepacientes');
     Route::post('pdf/pacientes/vista','ReportesController@vistapaciente');
+
+    /*Historiales */
+    Route::post('pdf/recetas','ReportesController@vistareceta');
 
     /*Doctores */
     Route::post('pdf/doctores','ReportesController@reportedoctores');
