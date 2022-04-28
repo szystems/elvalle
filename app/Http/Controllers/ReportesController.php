@@ -2099,5 +2099,64 @@ class ReportesController extends Controller
         
     }
 
+    public function vistahistoria(ReportesFormRequest $rrequest)
+    {  
+            if ($rrequest)
+            {
+                
+                $nombreusu = Auth::user()->name;
+                $empresa = Auth::user()->empresa;
+                $moneda = Auth::user()->moneda;
+                if (Auth::user()->logo == null)
+                {
+                    $logo = null;
+                    $imagen = null;
+                }
+                else
+                {
+                     $logo = Auth::user()->logo;
+                     $imagen = public_path('imagenes/logos/'.$logo);
+                     
+                }
+                $path = public_path('imagenes/articulos/');
+                $verpdf=trim($rrequest->get('pdf'));
+                $idhistoria=trim($rrequest->get('rid'));
+                $idpaciente=trim($rrequest->get('ridpaciente'));
+
+                $zona_horaria = Auth::user()->zona_horaria;
+                $hoy = Carbon::now($zona_horaria);
+                $hoy = $hoy->format('d-m-Y');
+
+                $nompdf = Carbon::now($zona_horaria);
+                $nompdf = $nompdf->format('Y-m-d H:i:s');
+                
+                $historia = DB::table('historia')
+                ->where('idpaciente','=',$idpaciente)
+                ->first();
+
+                $paciente=DB::table('paciente')
+                ->where('idpaciente','=',$idpaciente)
+                ->first();
+                
+                if ( $verpdf == "Descargar" )
+                {
+                    $view = \View::make('pdf.historias.vistahistoria', compact('historia','paciente','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
+                    $pdf = \App::make('dompdf.wrapper');
+                    $pdf->loadHTML($view);
+                    //$pdf->setPaper('A4', 'landscape');
+                    return $pdf->download ('VistaHistoria'.'-'.$paciente->nombre.'-'.$historia->fecha.'-'.$nompdf.'.pdf');
+                }
+                if ( $verpdf == "Navegador" )
+                {
+                    $view = \View::make('pdf.historias.vistahistoria', compact('historia','paciente','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
+                    $pdf = \App::make('dompdf.wrapper');
+                    $pdf->loadHTML($view);
+                    //$pdf->setPaper('A4', 'landscape');
+                    return $pdf->stream ('VistaHistoria'.'-'.$paciente->nombre.'-'.$historia->fecha.'-'.$nompdf.'.pdf');
+                }
+            }
+        
+    }
+
     
 }
