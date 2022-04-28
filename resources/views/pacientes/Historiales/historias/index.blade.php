@@ -160,14 +160,14 @@
                                 <div class="col-lg-12 col-sm-124 col-md-12 col-xs-12">
                                     <div class="form-group">
                                         <label for="motivo"><strong>Motivo</strong></label>
-                                        <p>{{$historia->motivo}}</p>
+                                        <textarea readonly class="form-control" rows="3">{{$historia->motivo}}</textarea>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                     <div class="form-group">
                                         <label for="historia"><strong>Historia</strong></label>
-                                        <p>{{$historia->historia}}</p>
+                                        <textarea readonly class="form-control" rows="5">{{$historia->historia}}</textarea>
                                     </div>
                                 </div>
 

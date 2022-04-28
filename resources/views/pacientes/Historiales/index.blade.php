@@ -6,7 +6,7 @@
 <div class="card mb-4">
 						<!-- Card Header -->
 	<header class="card-header d-md-flex align-items-center">
-		<h4><strong>Doctores </strong>
+		<h4><strong>Historiales de Pacientes</strong>
 
 			<a href="paciente/create">
                 <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Nuevo Paciente ">
@@ -87,9 +87,9 @@
 						<tr>
 							<td align="center">
 								<a href="{{URL::action('HistorialController@show',$pac->idpaciente)}}">
-                                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar Paciente">
+                                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Ver Historial">
                                           <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button">
-                                                <i class="far fa-edit"></i>
+                                                <i class="far fa-address-card"></i>
                                           </button>
                                     </span>
                               	</a>
