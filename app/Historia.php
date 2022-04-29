@@ -21,7 +21,16 @@ class Historia extends Model
         'tel_emergencia', 
         'profesion',
         'motivo',
-        'historia'
+        'historia',
+        'ciclos_regulares'.
+        'histerectomia'.
+        'mastopatia',
+        'cardiopatias',
+        'cafelea_vascular',
+        'tabaquismo',
+        'tratamiento_quimioradiacion',
+        'ejercicio'
+
     ];
 
     protected $guarded =[

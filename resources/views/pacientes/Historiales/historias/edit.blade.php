@@ -53,7 +53,7 @@
                               </header>
 
                               <div class="card-body">
-                                    {!!Form::model($paciente,['method'=>'PATCH','route'=>['historias.update',$paciente->idpaciente]])!!}
+                                    {!!Form::model($paciente,['method'=>'PATCH','route'=>['historias.update',$historia->idhistoria]])!!}
                                     {{Form::token()}}
                                           <div class="row">
                                                 
@@ -125,6 +125,104 @@
                                                       <div class="form-group">
                                                             <label for="historia"><strong>Historia</strong></label>
                                                             <textarea name="historia" class="form-control" cols="30" rows="5">{{ $historia->historia }}</textarea>
+                                                      </div>
+                                                </div>
+                                                <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                                                      <div class="form-group">
+                                                            <label><b><u>Antecedentes Personales</u></b></label>
+                                                      </div>
+                                                </div>
+                                                <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                                                      <div class="form-group">
+                                                            <div class="table-responsive">
+                                                                  <table class="table table-sm table-striped table-bordered table-condensed table-hover">
+                                                                      
+                                                                        <tbody>
+                                                                              <tr>
+                                                                                    
+                                                                                    <td><strong>Ciclos Regulares</strong></td>
+                                                                                    <td align="left">
+                                                                                          <select name="ciclos_regulares" class="form-control">
+                                                                                                <option value="{{ $historia->ciclos_regulares }}" selected>{{ $historia->ciclos_regulares }}</option>
+                                                                                                <option value="NO">NO</option>
+                                                                                                <option value="SI">SI</option>
+                                                                                          </select>
+                                                                                    </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                    <td><strong>Histerectomia</strong></td>
+                                                                                    <td align="left">
+                                                                                          <select name="histerectomia" class="form-control">
+                                                                                                <option value="{{ $historia->histerectomia }}" selected>{{ $historia->histerectomia }}</option>
+                                                                                                <option value="NO">NO</option>
+                                                                                                <option value="SI">SI</option>
+                                                                                          </select>
+                                                                                    </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                    <td><strong>Mastopatia</strong></td>
+                                                                                    <td align="left">
+                                                                                          <select name="mastopatia" class="form-control">
+                                                                                                <option value="{{ $historia->mastopatia }}" selected>{{ $historia->mastopatia }}</option>
+                                                                                                <option value="NO">NO</option>
+                                                                                                <option value="SI">SI</option>
+                                                                                          </select>
+                                                                                    </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                    <td><strong>Cardiopatias</strong></td>
+                                                                                    <td align="left">
+                                                                                          <select name="cardiopatias" class="form-control">
+                                                                                                <option value="{{ $historia->cardiopatias }}" selected>{{ $historia->cardiopatias }}</option>
+                                                                                                <option value="NO">NO</option>
+                                                                                                <option value="SI">SI</option>
+                                                                                          </select>
+                                                                                    </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                    <td><strong>Cafelea Vascular</strong></td>
+                                                                                    <td align="left">
+                                                                                          <select name="cafelea_vascular" class="form-control">
+                                                                                                <option value="{{ $historia->cafelea_vascular }}" selected>{{ $historia->cafelea_vascular }}</option>
+                                                                                                <option value="NO">NO</option>
+                                                                                                <option value="SI">SI</option>
+                                                                                          </select>
+                                                                                    </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                    <td><strong>Tabaquismo</strong></td>
+                                                                                    <td align="left">
+                                                                                          <select name="tabaquismo" class="form-control">
+                                                                                                <option value="{{ $historia->tabaquismo }}" selected>{{ $historia->tabaquismo }}</option>
+                                                                                                <option value="NO">NO</option>
+                                                                                                <option value="SI">SI</option>
+                                                                                          </select>
+                                                                                    </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                    <td><strong>Tratamento Quimioradiacion</strong></td>
+                                                                                    <td align="left">
+                                                                                          <select name="tratamiento_quimioradiacion" class="form-control">
+                                                                                                <option value="{{ $historia->tratamiento_quimioradiacion }}" selected>{{ $historia->tratamiento_quimioradiacion }}</option>
+                                                                                                <option value="NO">NO</option>
+                                                                                                <option value="SI">SI</option>
+                                                                                          </select>
+                                                                                    </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                    <td><strong>Ejercicio</strong></td>
+                                                                                    <td align="left">
+                                                                                          <select name="ejercicio" class="form-control">
+                                                                                                <option value="{{ $historia->ejercicio }}" selected>{{ $historia->ejercicio }}</option>
+                                                                                                <option value="NO">NO</option>
+                                                                                                <option value="SI">SI</option>
+                                                                                          </select>
+                                                                                    </td>
+                                                                              </tr>
+                                                                              
+                                                                        </tbody>
+                                                                  </table>
+                                                            </div>
                                                       </div>
                                                 </div>
                                           </div>     

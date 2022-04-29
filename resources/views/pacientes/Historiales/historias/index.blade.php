@@ -171,6 +171,56 @@
                                     </div>
                                 </div>
 
+                                <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="paciente"><strong><u>Antecedentes Personales</u></strong></label>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-sm-6 col-md-6 col-xs-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-striped table-bordered table-condensed table-hover">
+                                            
+                                            <tbody>
+                                                <tr>
+                                                    
+                                                    <td><strong>Ciclos Regulares</strong></td>
+                                                    <td align="center">{{ $historia->ciclos_regulares }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Histerectomia</strong></td>
+                                                    <td align="center">{{ $historia->histerectomia }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Mastopatia</strong></td>
+                                                    <td align="center">{{ $historia->mastopatia }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Cardiopatias</strong></td>
+                                                    <td align="center">{{ $historia->cardiopatias }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Cafelea Vascular</strong></td>
+                                                    <td align="center">{{ $historia->cafelea_vascular }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Tabaquismo</strong></td>
+                                                    <td align="center">{{ $historia->tabaquismo }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Tratamento Quimioradiacion</strong></td>
+                                                    <td align="center">{{ $historia->tratamiento_quimioradiacion }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Ejercicio</strong></td>
+                                                    <td align="center">{{ $historia->ejercicio }}</td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
                             </div>
                         @else
                             @if (Auth::user()->tipo_usuario == "Doctor")

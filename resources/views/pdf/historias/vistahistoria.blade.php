@@ -69,8 +69,8 @@
 				<td><h4 align="left"><font color="black">{{$fecha_nacimiento}} (Edad: {{$edad}})</font></h4></td>
 			</tr>
 			<tr>
-				<td><h4 align="right"><strong>Sexo:</strong></h4></td>
-				<td><h4 align="left"><font color="black">{{ $paciente->sexo}}</font></h4></td>
+				<td><h4 align="right"><b>Sexo:</b></h4></td>
+				<td><p align="left"><font color="black">{{ $paciente->sexo}}</font></p></td>
 			</tr>
 			<tr>
 				<td><h4 align="right"><strong>Teléfono:</strong></h4></td>
@@ -125,6 +125,41 @@
 			<tr>
 				<td><h4 align="right"><strong>Historia:</strong></h4></td>
 				<td><h4 align="left"><font color="black">{{ $historia->historia}}</font></h4></td>	
+			</tr>
+			<tr>		
+				<th colspan="2"><h4 align="center">Antecedentes Personales: <b> {{ $paciente->nombre}}</b></h4></th>
+			</tr>
+			<tr>
+				<td><h4 align="right"><strong>Ciclos Regulares:</strong></h4></td>
+				<td><h4 align="left"><font color="black">{{ $historia->ciclos_regulares}}</font></h4></td>	
+			</tr>
+			<tr>
+				<td><h4 align="right"><strong>Histerectomia:</strong></h4></td>
+				<td><h4 align="left"><font color="black">{{ $historia->histerectomia}}</font></h4></td>	
+			</tr>
+			<tr>
+				<td><h4 align="right"><strong>Mastopatia:</strong></h4></td>
+				<td><h4 align="left"><font color="black">{{ $historia->mastopatia}}</font></h4></td>	
+			</tr>
+			<tr>
+				<td><h4 align="right"><strong>Cardiopatias:</strong></h4></td>
+				<td><h4 align="left"><font color="black">{{ $historia->cardiopatias}}</font></h4></td>	
+			</tr>
+			<tr>
+				<td><h4 align="right"><strong>Cafelea Vascular:</strong></h4></td>
+				<td><h4 align="left"><font color="black">{{ $historia->cafelea_vascular}}</font></h4></td>	
+			</tr>
+			<tr>
+				<td><h4 align="right"><strong>Tabaquismo:</strong></h4></td>
+				<td><h4 align="left"><font color="black">{{ $historia->tabaquismo}}</font></h4></td>	
+			</tr>
+			<tr>
+				<td><h4 align="right"><strong>Tratamiento Quimioradiacion:</strong></h4></td>
+				<td><h4 align="left"><font color="black">{{ $historia->tratamiento_quimioradiacion}}</font></h4></td>	
+			</tr>
+			<tr>
+				<td><h4 align="right"><strong>Ejercicio:</strong></h4></td>
+				<td><h4 align="left"><font color="black">{{ $historia->ejercicio}}</font></h4></td>	
 			</tr>
 		</table>
 		</div>

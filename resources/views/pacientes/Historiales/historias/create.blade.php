@@ -71,7 +71,7 @@
                                                                   <i class="fas fa-calendar-alt form-icon__item"></i>
                                                             </span>
                                                             <input type="text" id="datepicker" class="form-control datepicker" name="fecha"
-                                                                  value="">
+                                                                  value="{{ old('fecha') }}">
                                                             </span>
                                                       </div>
                                                 </div>
@@ -91,37 +91,175 @@
                                                 <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
                                                       <div class="form-group">
                                                             <label for="procedencia"><strong>Procedencia</strong></label>
-                                                            <input type="text" class="form-control" name="procedencia" value="">
+                                                            <input type="text" class="form-control" name="procedencia" value="{{ old('procedencia') }}">
                                                       </div>
                                                 </div>
                                                 <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
                                                       <div class="form-group">
                                                             <label for="escolaridad"><strong>Escolaridad</strong></label>
-                                                            <input type="text" class="form-control" name="escolaridad" value="">
+                                                            <input type="text" class="form-control" name="escolaridad" value="{{ old('escolaridad') }}">
                                                       </div>
                                                 </div>
                                                 <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
                                                       <div class="form-group">
                                                             <label for="tel_emergencia"><strong>Telefono de Emergencia</strong></label>
-                                                            <input type="text" class="form-control" name="tel_emergencia" value="">
+                                                            <input type="text" class="form-control" name="tel_emergencia" value="{{ old('tel_emergencia') }}">
                                                       </div>
                                                 </div>
                                                 <div class="col-lg-4 col-sm-45 col-md-4 col-xs-12">
                                                       <div class="form-group">
                                                             <label for="profesion"><strong>Profesion</strong></label>
-                                                            <input type="text" class="form-control" name="profesion" value="">
+                                                            <input type="text" class="form-control" name="profesion" value="{{ old('profesion') }}">
                                                       </div>
                                                 </div>
                                                 <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                                       <div class="form-group">
                                                             <label for="motivo"><strong>Motivo</strong></label>
-                                                            <textarea name="motivo" class="form-control" cols="30" rows="3"></textarea>
+                                                            <textarea name="motivo" class="form-control" cols="30" rows="3">{{ old('motivo') }}</textarea>
                                                       </div>
                                                 </div>
                                                 <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                                       <div class="form-group">
                                                             <label for="historia"><strong>Historia</strong></label>
-                                                            <textarea name="historia" class="form-control" cols="30" rows="5"></textarea>
+                                                            <textarea name="historia" class="form-control" cols="30" rows="5">{{ old('historia') }}</textarea>
+                                                      </div>
+                                                </div>
+                                                <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                                                      <div class="form-group">
+                                                            <label><b><u>Antecedentes Personales</u></b></label>
+                                                      </div>
+                                                </div>
+                                                <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                                                      <div class="form-group">
+                                                            <div class="table-responsive">
+                                                                  <table class="table table-sm table-striped table-bordered table-condensed table-hover">
+                                                                      
+                                                                        <tbody>
+                                                                              <tr>
+                                                                                    
+                                                                                    <td><strong>Ciclos Regulares</strong></td>
+                                                                                    <td align="left">
+                                                                                          <select name="ciclos_regulares" class="form-control">
+                                                                                                @if (old('ciclos_regulares'))
+                                                                                                      <option value="{{ old('ciclos_regulares') }}" selected>{{ old('ciclos_regulares') }}</option>
+                                                                                                      <option value="NO">NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @else
+                                                                                                      <option value="NO" selected>NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @endif
+                                                                                          </select>
+                                                                                    </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                    <td><strong>Histerectomia</strong></td>
+                                                                                    <td align="left">
+                                                                                          <select name="histerectomia" class="form-control">
+                                                                                                @if (old('histerectomia'))
+                                                                                                      <option value="{{ old('histerectomia') }}" selected>{{ old('histerectomia') }}</option>
+                                                                                                      <option value="NO">NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @else
+                                                                                                      <option value="NO" selected>NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @endif
+                                                                                          </select>
+                                                                                    </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                    <td><strong>Mastopatia</strong></td>
+                                                                                    <td align="left">
+                                                                                          <select name="mastopatia" class="form-control">
+                                                                                                @if (old('mastopatia'))
+                                                                                                      <option value="{{ old('mastopatia') }}" selected>{{ old('mastopatia') }}</option>
+                                                                                                      <option value="NO">NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @else
+                                                                                                      <option value="NO" selected>NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @endif
+                                                                                          </select>
+                                                                                    </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                    <td><strong>Cardiopatias</strong></td>
+                                                                                    <td align="left">
+                                                                                          <select name="cardiopatias" class="form-control">
+                                                                                                @if (old('cardipatias'))
+                                                                                                      <option value="{{ old('cardiopatias') }}" selected>{{ old('cardiopatias') }}</option>
+                                                                                                      <option value="NO">NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @else
+                                                                                                      <option value="NO" selected>NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @endif
+                                                                                          </select>
+                                                                                    </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                    <td><strong>Cafelea Vascular</strong></td>
+                                                                                    <td align="left">
+                                                                                          <select name="cafelea_vascular" class="form-control">
+                                                                                                @if (old('cafelea_vascular'))
+                                                                                                      <option value="{{ old('cafelea_vascular') }}" selected>{{ old('cafelea_vascular') }}</option>
+                                                                                                      <option value="NO">NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @else
+                                                                                                      <option value="NO" selected>NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @endif
+                                                                                          </select>
+                                                                                    </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                    <td><strong>Tabaquismo</strong></td>
+                                                                                    <td align="left">
+                                                                                          <select name="tabaquismo" class="form-control">
+                                                                                                @if (old('ciclos_regulares'))
+                                                                                                      <option value="{{ old('tabaquismo') }}" selected>{{ old('tabaquismo') }}</option>
+                                                                                                      <option value="NO">NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @else
+                                                                                                      <option value="NO" selected>NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @endif
+                                                                                          </select>
+                                                                                    </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                    <td><strong>Tratamento Quimioradiacion</strong></td>
+                                                                                    <td align="left">
+                                                                                          <select name="tratamiento_quimioradiacion" class="form-control">
+                                                                                                @if (old('ciclos_regulares'))
+                                                                                                      <option value="{{ old('tratamiento_quimioradiacion') }}" selected>{{ old('tratamiento_quimioradiacion') }}</option>
+                                                                                                      <option value="NO">NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @else
+                                                                                                      <option value="NO" selected>NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @endif
+                                                                                          </select>
+                                                                                    </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                    <td><strong>Ejercicio</strong></td>
+                                                                                    <td align="left">
+                                                                                          <select name="ejercicio" class="form-control">
+                                                                                                @if (old('ejercicio'))
+                                                                                                      <option value="{{ old('ejercicio') }}" selected>{{ old('ejercicio') }}</option>
+                                                                                                      <option value="NO">NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @else
+                                                                                                      <option value="NO" selected>NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @endif
+                                                                                          </select>
+                                                                                    </td>
+                                                                              </tr>
+                                                                              
+                                                                        </tbody>
+                                                                  </table>
+                                                            </div>
                                                       </div>
                                                 </div>
                                           </div>     

@@ -31,8 +31,16 @@ class HistoriaFormRequest extends FormRequest
             'escolaridad'=>'max:100', 
             'tel_emergencia'=>'max:20', 
             'profesion'=>'max:50',
-            'motivo'=>'max:100',
-            'historia'=>'max:1000'
+            'motivo'=>'max:300',
+            'historia'=>'max:1000',
+            'ciclos_regulares'=>'max:5',
+            'histerectomia'=>'max:5',
+            'mastopatia'=>'max:5',
+            'cardiopatias'=>'max:5',
+            'cafelea_vascular'=>'max:5',
+            'tabaquismo'=>'max:5',
+            'tratamiento_quimioradiacion'=>'max:5',
+            'ejercicio'=>'max:5'
         ];
     }
 }
