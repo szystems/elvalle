@@ -57,7 +57,7 @@
 				<th colspan="2"><h4 align="center">Paciente: <b> {{ $paciente->nombre}}</b></h4></th>
 			</tr>
 			<tr>
-				<td><h4 align="right"><strong>F.Nacimiento / Edad:</strong></h4></td>
+				<td><p align="right"><strong>F.Nacimiento / Edad:</strong></p></td>
 				<?php
                     $fecha_nacimiento = date("d-m-Y", strtotime($paciente->fecha_nacimiento));
 
@@ -66,101 +66,204 @@
                     $annos = $hoy->diff($cumpleanos);
                     $edad = $annos->y;
                 ?>
-				<td><h4 align="left"><font color="black">{{$fecha_nacimiento}} (Edad: {{$edad}})</font></h4></td>
+				<td><p align="left"><font color="black">{{$fecha_nacimiento}} (Edad: {{$edad}})</font></p></td>
 			</tr>
 			<tr>
-				<td><h4 align="right"><b>Sexo:</b></h4></td>
+				<td><p align="right"><b>Sexo:</b></p></td>
 				<td><p align="left"><font color="black">{{ $paciente->sexo}}</font></p></td>
 			</tr>
 			<tr>
-				<td><h4 align="right"><strong>Teléfono:</strong></h4></td>
-				<td><h4 align="left"><font color="black">{{ $paciente->telefono}}</font></h4></td>
+				<td><p align="right"><strong>Teléfono:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $paciente->telefono}}</font></p></td>
 			</tr>
 			<tr>
-				<td><h4 align="right"><strong>Dirección:</strong></h4></td>
-				<td><h4 align="left"><font color="black">{{ $paciente->direccion}}</font></h4></td>
+				<td><p align="right"><strong>Dirección:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $paciente->direccion}}</font></p></td>
 			</tr>
 			<tr>
-				<td><h4 align="right"><strong>Correo:</strong></h4></td>
-				<td><h4 align="left"><font color="black">{{ $paciente->correo}}</font></h4></td>
+				<td><p align="right"><strong>Correo:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $paciente->correo}}</font></p></td>
 			</tr>
 			<tr>
-				<td><h4 align="right"><strong>DPI / NIT:</strong></h4></td>
-				<td><h4 align="left"><font color="black">{{ $paciente->dpi}} / {{ $paciente->nit }}</font></h4></td>
+				<td><p align="right"><strong>DPI / NIT:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $paciente->dpi}} / {{ $paciente->nit }}</font></p></td>
 			</tr>
 			<tr>		
-				<th colspan="2"><h4 align="center">Historia Basica</b></h4></th>
+				<th colspan="2"><p align="center">Historia Basica</b></p></th>
 			</tr>
 			@php
 				$fecha = date("d-m-Y", strtotime($historia->fecha));
 			@endphp
 			<tr>
-				<td><h4 align="right"><strong>Fecha Historia:</strong></h4></td>
-				<td><h4 align="left"><font color="black">{{ $historia->fecha}}</font></h4></td>	
+				<td><p align="right"><strong>Fecha Historia:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->fecha}}</font></h4></td>	
 			</tr>
 			<tr>
-				<td><h4 align="right"><strong>Estado Civil:</strong></h4></td>
-				<td><h4 align="left"><font color="black">{{ $historia->estado_civil}}</font></h4></td>	
+				<td><p align="right"><strong>Estado Civil:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->estado_civil}}</font></p></td>	
 			</tr>
 			<tr>
-				<td><h4 align="right"><strong>Procedencia:</strong></h4></td>
-				<td><h4 align="left"><font color="black">{{ $historia->procedencia}}</font></h4></td>	
+				<td><p align="right"><strong>Procedencia:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->procedencia}}</font></p></td>	
 			</tr>
 			<tr>
-				<td><h4 align="right"><strong>Escolaridad:</strong></h4></td>
-				<td><h4 align="left"><font color="black">{{ $historia->escolaridad}}</font></h4></td>	
+				<td><p align="right"><strong>Escolaridad:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->escolaridad}}</font></p></td>	
 			</tr>
 			<tr>
-				<td><h4 align="right"><strong>Telefono de Emergencia:</strong></h4></td>
-				<td><h4 align="left"><font color="black">{{ $historia->tel_emergencia}}</font></h4></td>	
+				<td><p align="right"><strong>Telefono de Emergencia:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->tel_emergencia}}</font></p></td>	
 			</tr>
 			<tr>
-				<td><h4 align="right"><strong>Profesion:</strong></h4></td>
-				<td><h4 align="left"><font color="black">{{ $historia->profesion}}</font></h4></td>	
+				<td><p align="right"><strong>Profesion:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->profesion}}</font></p></td>	
 			</tr>
 			<tr>
-				<td><h4 align="right"><strong>Motivo:</strong></h4></td>
-				<td><h4 align="left"><font color="black">{{ $historia->motivo}}</font></h4></td>	
+				<td><p align="right"><strong>Motivo:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->motivo}}</font></p></td>	
 			</tr>
 			<tr>
-				<td><h4 align="right"><strong>Historia:</strong></h4></td>
-				<td><h4 align="left"><font color="black">{{ $historia->historia}}</font></h4></td>	
+				<td><p align="right"><strong>Historia de la enfermedad actual:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->historia}}</font></p></td>	
 			</tr>
 			<tr>		
-				<th colspan="2"><h4 align="center">Antecedentes Personales: <b> {{ $paciente->nombre}}</b></h4></th>
+				<th colspan="2"><p align="center">Antecedentes Personales: <b> {{ $paciente->nombre}}</b></p></th>
 			</tr>
 			<tr>
-				<td><h4 align="right"><strong>Ciclos Regulares:</strong></h4></td>
-				<td><h4 align="left"><font color="black">{{ $historia->ciclos_regulares}}</font></h4></td>	
+				<td><p align="right"><strong>Ciclos Regulares:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->ciclos_regulares}}</font></p></td>	
 			</tr>
 			<tr>
-				<td><h4 align="right"><strong>Histerectomia:</strong></h4></td>
-				<td><h4 align="left"><font color="black">{{ $historia->histerectomia}}</font></h4></td>	
+				<td><p align="right"><strong>Histerectomia:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->histerectomia}}</font></p></td>	
 			</tr>
 			<tr>
-				<td><h4 align="right"><strong>Mastopatia:</strong></h4></td>
-				<td><h4 align="left"><font color="black">{{ $historia->mastopatia}}</font></h4></td>	
+				<td><p align="right"><strong>Mastopatia:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->mastopatia}}</font></p></td>	
 			</tr>
 			<tr>
-				<td><h4 align="right"><strong>Cardiopatias:</strong></h4></td>
-				<td><h4 align="left"><font color="black">{{ $historia->cardiopatias}}</font></h4></td>	
+				<td><p align="right"><strong>Cardiopatias:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->cardiopatias}}</font></p></td>	
 			</tr>
 			<tr>
-				<td><h4 align="right"><strong>Cafelea Vascular:</strong></h4></td>
-				<td><h4 align="left"><font color="black">{{ $historia->cafelea_vascular}}</font></h4></td>	
+				<td><p align="right"><strong>Cafelea Vascular:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->cafelea_vascular}}</font></p></td>	
 			</tr>
 			<tr>
-				<td><h4 align="right"><strong>Tabaquismo:</strong></h4></td>
-				<td><h4 align="left"><font color="black">{{ $historia->tabaquismo}}</font></h4></td>	
+				<td><p align="right"><strong>Tabaquismo:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->tabaquismo}}</font></p></td>	
 			</tr>
 			<tr>
-				<td><h4 align="right"><strong>Tratamiento Quimioradiacion:</strong></h4></td>
-				<td><h4 align="left"><font color="black">{{ $historia->tratamiento_quimioradiacion}}</font></h4></td>	
+				<td><p align="right"><strong>Tratamento con quimioterapia o radiacion pelvica:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->tratamiento_quimioradiacion}}</font></p></td>	
 			</tr>
 			<tr>
-				<td><h4 align="right"><strong>Ejercicio:</strong></h4></td>
-				<td><h4 align="left"><font color="black">{{ $historia->ejercicio}}</font></h4></td>	
+				<td><p align="right"><strong>Ejercicio:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->ejercicio}}</font></p></td>	
 			</tr>
+			<tr>
+				<td><p align="right"><strong>Affecciones Ginecologicas:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->affecciones_ginecologicas}}</font></p></td>	
+			</tr>
+			<tr>
+				<td><p align="right"><strong>Cancer:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->cancer}}</font></p></td>	
+			</tr>
+			<tr>
+				<td><p align="right"><strong>Varices Trombosis:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->varices_trombosis}}</font></p></td>	
+			</tr>
+			<tr>
+				<td><p align="right"><strong>Enfermedades Hepaticas:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->enfermedades_hepaticas}}</font></p></td>	
+			</tr>
+			<tr>
+				<td><p align="right"><strong>Alcoholismo:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->alcoholismo}}</font></p></td>	
+			</tr>
+			<tr>
+				<td><p align="right"><strong>Cafeista (Mayor de 6 tazas) :</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->cafeista}}</font></p></td>	
+			</tr>
+			<tr>
+				<td><p align="right"><strong>TRH previa :</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->trh}}</font></p></td>	
+			</tr>
+			<tr>
+				<td><p align="right"><strong>Otros:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->otros}}</font></p></td>	
+			</tr>
+			<tr>
+				<td><p align="right"><strong>Si otros:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->otros_texto}}</font></p></td>	
+			</tr>
+			<tr>		
+				<th colspan="2"><p align="center">Antecedentes Familiares: <b> {{ $paciente->nombre}}</b></p></th>
+			</tr>
+			<tr>
+				<td><p align="right"><strong>Cardiopatias antes de 50 años:</strong></p></td>
+				<td>
+					<p align="left"><font color="black">{{ $historia->cardiopatias_50anos}} </font></p>
+					@if($historia->cardiopatias_50anos_quien !=null)
+						<p align="left"><font color="black"><b> Quien? </b>{{ $historia->cardiopatias_50anos_quien}}</font></p>
+					@endif
+				</td>		
+			</tr>
+			<tr>
+				<td><p align="right"><strong>Osteoporosis:</strong></p></td>
+				<td>
+					<p align="left"><font color="black">{{ $historia->osteoporosis}} </font></p>
+					@if($historia->osteoporosis_quien !=null)
+						<p align="left"><font color="black"><b> Quien? </b>{{ $historia->osteoporosis_quien}}</font></p>
+					@endif
+				</td>		
+			</tr>
+			<tr>
+				<td><p align="right"><strong>Cancer Mama:</strong></p></td>
+				<td>
+					<p align="left"><font color="black">{{ $historia->cancer_mama}} </font></p>
+					@if($historia->cancer_mama_quien !=null)
+						<p align="left"><font color="black"><b> Quien? </b>{{ $historia->cancer_mama_quien}}</font></p>
+					@endif
+				</td>		
+			</tr>
+			<tr>
+				<td><p align="right"><strong>Cancer Ovario:</strong></p></td>
+				<td>
+					<p align="left"><font color="black">{{ $historia->cancer_ovario}} </font></p>
+					@if($historia->cancer_ovario_quien !=null)
+						<p align="left"><font color="black"><b> Quien? </b>{{ $historia->cancer_ovario_quien}}</font></p>
+					@endif
+				</td>		
+			</tr>
+			<tr>
+				<td><p align="right"><strong>Diabetes:</strong></p></td>
+				<td>
+					<p align="left"><font color="black">{{ $historia->diabetes}} </font></p>
+					@if($historia->diabetes_quien !=null)
+						<p align="left"><font color="black"><b> Quien? </b>{{ $historia->diabetes_quien}}</font></p>
+					@endif
+				</td>		
+			</tr>
+			<tr>
+				<td><p align="right"><strong>Hiperlipidemias:</strong></p></td>
+				<td>
+					<p align="left"><font color="black">{{ $historia->hiperlipidemias}} </font></p>
+					@if($historia->hiperlipidemias_quien !=null)
+						<p align="left"><font color="black"><b> Quien? </b>{{ $historia->hiperlipidemias_quien}}</font></p>
+					@endif
+				</td>		
+			</tr>
+			<tr>
+				<td><p align="right"><strong>Cancer Endometrial:</strong></p></td>
+				<td>
+					<p align="left"><font color="black">{{ $historia->cancer_endometrial}} </font></p>
+					@if($historia->cancer_endometrial_quien !=null)
+						<p align="left"><font color="black"><b> Quien? </b>{{ $historia->cancer_endometrial_quien}}</font></p>
+					@endif
+				</td>		
+			</tr>
+
 		</table>
 		</div>
 		<br>

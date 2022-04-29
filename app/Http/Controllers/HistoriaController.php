@@ -75,6 +75,31 @@ class HistoriaController extends Controller
                 $historia->tabaquismo=$request->get('tabaquismo');
                 $historia->tratamiento_quimioradiacion=$request->get('tratamiento_quimioradiacion');
                 $historia->ejercicio=$request->get('ejercicio');
+                //personales
+                $historia->affecciones_ginecologicas=$request->get('affecciones_ginecologicas');
+                $historia->cancer=$request->get('cancer');
+                $historia->varices_trombosis=$request->get('varices_trombosis');
+                $historia->enfermedades_hepaticas=$request->get('enfermedades_hepaticas');
+                $historia->alcoholismo=$request->get('alcoholismo');
+                $historia->cafeista=$request->get('cafeista');
+                $historia->trh=$request->get('trh');
+                $historia->otros=$request->get('otros');
+                $historia->otros_texto=$request->get('otros_texto');
+                //Antecedentes Familiarea
+                $historia->cardiopatias_50anos=$request->get('cardiopatias_50anos');
+                $historia->cardiopatias_50anos_quien=$request->get('cardiopatias_50anos_quien');
+                $historia->osteoporosis=$request->get('osteoporosis');
+                $historia->osteoporosis_quien=$request->get('osteoporosis_quien');
+                $historia->cancer_mama=$request->get('cancer_mama');
+                $historia->cancer_mama_quien=$request->get('cancer_mama_quien');
+                $historia->cancer_ovario=$request->get('cancer_ovario');
+                $historia->cancer_ovario_quien=$request->get('cancer_ovario_quien');
+                $historia->diabetes=$request->get('diabetes');
+                $historia->diabetes_quien=$request->get('diabetes_quien');
+                $historia->hiperlipidemias=$request->get('hiperlipidemias');
+                $historia->hiperlipidemias_quien=$request->get('hiperlipidemias_quien');
+                $historia->cancer_endometrial=$request->get('cancer_endometrial');
+                $historia->cancer_endometrial_quien=$request->get('cancer_endometrial_quien');
                 
                 $historia->save();
 
@@ -156,6 +181,31 @@ class HistoriaController extends Controller
         $historia->tabaquismo=$request->get('tabaquismo');
         $historia->tratamiento_quimioradiacion=$request->get('tratamiento_quimioradiacion');
         $historia->ejercicio=$request->get('ejercicio');
+        //personales
+        $historia->affecciones_ginecologicas=$request->get('affecciones_ginecologicas');
+        $historia->cancer=$request->get('cancer');
+        $historia->varices_trombosis=$request->get('varices_trombosis');
+        $historia->enfermedades_hepaticas=$request->get('enfermedades_hepaticas');
+        $historia->alcoholismo=$request->get('alcoholismo');
+        $historia->cafeista=$request->get('cafeista');
+        $historia->trh=$request->get('trh');
+        $historia->otros=$request->get('otros');
+        $historia->otros_texto=$request->get('otros_texto');
+        //Antecedentes Familiarea
+        $historia->cardiopatias_50anos=$request->get('cardiopatias_50anos');
+        $historia->cardiopatias_50anos_quien=$request->get('cardiopatias_50anos_quien');
+        $historia->osteoporosis=$request->get('osteoporosis');
+        $historia->osteoporosis_quien=$request->get('osteoporosis_quien');
+        $historia->cancer_mama=$request->get('cancer_mama');
+        $historia->cancer_mama_quien=$request->get('cancer_mama_quien');
+        $historia->cancer_ovario=$request->get('cancer_ovario');
+        $historia->cancer_ovario_quien=$request->get('cancer_ovario_quien');
+        $historia->diabetes=$request->get('diabetes');
+        $historia->diabetes_quien=$request->get('diabetes_quien');
+        $historia->hiperlipidemias=$request->get('hiperlipidemias');
+        $historia->hiperlipidemias_quien=$request->get('hiperlipidemias_quien');
+        $historia->cancer_endometrial=$request->get('cancer_endometrial');
+        $historia->cancer_endometrial_quien=$request->get('cancer_endometrial_quien');
 
         $historia->save();
 

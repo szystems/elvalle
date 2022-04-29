@@ -22,6 +22,7 @@ class Historia extends Model
         'profesion',
         'motivo',
         'historia',
+
         'ciclos_regulares'.
         'histerectomia'.
         'mastopatia',
@@ -29,7 +30,35 @@ class Historia extends Model
         'cafelea_vascular',
         'tabaquismo',
         'tratamiento_quimioradiacion',
-        'ejercicio'
+        'ejercicio',
+
+        'affecciones_ginecologicas',
+        'cancer',
+        'varices_trombosis',
+        'enfermedades_hepaticas',
+        'alcoholismo',
+        'cafeista',
+        'trh',
+        'otros',
+        'otros_texto',
+
+        'cardiopatias_50anos',
+        'cardiopatias_50anos_quien',
+        'osteoporosis',
+        'osteoporosis_quien',
+        'cancer_mama',
+        'cancer_mama_quien',
+        'cancer_ovario',
+        'cancer_ovario_quien',
+        'diabetes',
+        'diabetes_quien',
+        'hiperlipidemias',
+        'hiperlipidemias_quien',
+        'cancer_endometrial',
+        'cancer_endometrial_quien'
+
+
+
 
     ];
 

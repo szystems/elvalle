@@ -166,7 +166,7 @@
 
                                 <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                     <div class="form-group">
-                                        <label for="historia"><strong>Historia</strong></label>
+                                        <label for="historia"><strong>Historia de la enfermedad actual</strong></label>
                                         <textarea readonly class="form-control" rows="5">{{$historia->historia}}</textarea>
                                     </div>
                                 </div>
@@ -177,7 +177,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-4 col-sm-6 col-md-6 col-xs-12">
+                                <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                                     <div class="table-responsive">
                                         <table class="table table-sm table-striped table-bordered table-condensed table-hover">
                                             
@@ -208,12 +208,112 @@
                                                     <td align="center">{{ $historia->tabaquismo }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td><strong>Tratamento Quimioradiacion</strong></td>
+                                                    <td><strong>Tratamento con quimioterapia o radiacion pelvica</strong></td>
                                                     <td align="center">{{ $historia->tratamiento_quimioradiacion }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td><strong>Ejercicio</strong></td>
                                                     <td align="center">{{ $historia->ejercicio }}</td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-striped table-bordered table-condensed table-hover">
+                                            
+                                            <tbody>
+                                                <tr>
+                                                    
+                                                    <td><strong>Affecciones Ginecologicas</strong></td>
+                                                    <td align="center">{{ $historia->affecciones_ginecologicas }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Cancer</strong></td>
+                                                    <td align="center">{{ $historia->cancer }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Varices Trombosis</strong></td>
+                                                    <td align="center">{{ $historia->varices_trombosis }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Enfermedades Hepaticas</strong></td>
+                                                    <td align="center">{{ $historia->enfermedades_hepaticas }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Alcoholismo</strong></td>
+                                                    <td align="center">{{ $historia->alcoholismo }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Cafeista (Mayor de 6 tazas) </strong></td>
+                                                    <td align="center">{{ $historia->cafeista }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>TRH previa</strong></td>
+                                                    <td align="center">{{ $historia->trh }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Otros</strong></td>
+                                                    <td align="center">{{ $historia->otros }} <textarea readonly name="otros_texto" id="" class="form-control" placeholder="Si otros...">{{ $historia->otros_texto }}</textarea></td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="paciente"><strong><u>Antecedentes Familiares</u></strong></label>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-striped table-bordered table-condensed table-hover">
+                                            <thead align="center" class="table-seconda">
+                                                <th><h3><b>Antecedente</b></h3></th>
+                                                <th><h3><b>SI/NO</b></h3></th>
+                                                <th><h3><b>Quien?</b></h3></th>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><strong>Cardiopatias antes de 50 años</strong></td>
+                                                    <td align="center">{{ $historia->cardiopatias_50anos }}</td>
+                                                    <td align="left">{{ $historia->cardiopatias_50anos_quien }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Osteoporosis</strong></td>
+                                                    <td align="center">{{ $historia->osteoporosis }}</td>
+                                                    <td align="left">{{ $historia->osteoporosis_quien }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Cancer Mama</strong></td>
+                                                    <td align="center">{{ $historia->cancer_mama }}</td>
+                                                    <td align="left">{{ $historia->cancer_mama_quien }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Cancer Ovario</strong></td>
+                                                    <td align="center">{{ $historia->cancer_ovario }}</td>
+                                                    <td align="left">{{ $historia->cancer_ovario_quien }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Diabetes</strong></td>
+                                                    <td align="center">{{ $historia->diabetes }}</td>
+                                                    <td align="left">{{ $historia->diabetes_quien }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Hiperlipidemias</strong></td>
+                                                    <td align="center">{{ $historia->hiperlipidemias }}</td>
+                                                    <td align="left">{{ $historia->hiperlipidemias_quien }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Cancer Endometrial</strong></td>
+                                                    <td align="center">{{ $historia->cancer_endometrial }}</td>
+                                                    <td align="left">{{ $historia->cancer_endometrial_quien }}</td>
                                                 </tr>
                                                 
                                             </tbody>
