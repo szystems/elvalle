@@ -45,15 +45,18 @@ class HistoriaController extends Controller
     {
     	$fechaHistoria=trim($request->get('fecha'));
         $fecha = date("Y-m-d", strtotime($fechaHistoria));
+        $fur = date("Y-m-d", strtotime($request->get('fur')));
+        $ultimo = date("Y-m-d", strtotime($request->get('ultimo')));
+
         $idpaciente=$request->get('idpaciente');
 
         $existehistoria=DB::table('historia')->where('idpaciente','=',$idpaciente)->get();
 
         if($existehistoria->count() != 1)
         {
-            try
-            { 
-                DB::beginTransaction();
+            //try
+            //{ 
+                //DB::beginTransaction();
 
                 $historia=new Historia;
                 //info general
@@ -100,6 +103,39 @@ class HistoriaController extends Controller
                 $historia->hiperlipidemias_quien=$request->get('hiperlipidemias_quien');
                 $historia->cancer_endometrial=$request->get('cancer_endometrial');
                 $historia->cancer_endometrial_quien=$request->get('cancer_endometrial_quien');
+                //Antecedentes Obstetricos
+                $historia->gestas=$request->get('gestas');
+                $historia->vias_resolucion=$request->get('vias_resolucion');
+                $historia->hijos_vivos=$request->get('hijos_vivos');
+                $historia->hijos_muertos=$request->get('hijos_muertos');
+                $historia->complicaciones_neonatales=$request->get('complicaciones_neonatales');
+                $historia->complicaciones_obstetricos=$request->get('complicaciones_obstetricos');
+                $historia->abortos=$request->get('abortos');
+                $historia->causa=$request->get('causa');
+                //Antecedentes Ginecologicos
+                $historia->fur=$fur;
+                $historia->ciclos_cada=$request->get('ciclos_cada');
+                $historia->ciclos_por=$request->get('ciclos_por');
+                $historia->ciclos_dias=$request->get('ciclos_dias');
+                $historia->cantidad_hemorragia=$request->get('cantidad_hemorragia');
+                $historia->frecuencia=$request->get('frecuencia');
+                //Vida Sexual
+                $historia->activa=$request->get('activa');
+                $historia->edad=$request->get('edad');
+                $historia->parejas=$request->get('parejas');
+                $historia->metodo_anticonceptivo=$request->get('metodo_anticonceptivo');
+                $historia->metodo_si=$request->get('metodo_si');
+                $historia->tiempo_mes=$request->get('tiempo_mes');
+                $historia->tiempo_ano=$request->get('tiempo_ano');
+                $historia->efectos_secundarios=$request->get('efectos_secundarios');
+                //Historia Papanicolau
+                $historia->ultimo=$ultimo;
+                $historia->resultado=$request->get('resultado');
+                $historia->colposcopia=$request->get('colposcopia');
+                $historia->colposcopia_si=$request->get('colposcopia_si');
+                $historia->procedimientos=$request->get('procedimientos');
+                //Revision por sistemas
+                $historia->revision=$request->get('revision');
                 
                 $historia->save();
 
@@ -118,12 +154,12 @@ class HistoriaController extends Controller
 
                 $request->session()->flash('alert-success', "Se creo la historia de: ".$cli->nombre.", Fecha: ".$fechaHistoria);
 
-                DB::commit();
+                //DB::commit();
 
-            }catch(\Exception $e)
-            {
-                DB::rollback();
-            }
+            //}catch(\Exception $e)
+            //{
+                //DB::rollback();
+            //}
         }else
         {
             $cli=DB::table('paciente')->where('idpaciente','=',$idpaciente)->first();
@@ -159,7 +195,8 @@ class HistoriaController extends Controller
         //$zona_horaria = Auth::user()->zona_horaria;
         $fechaHistoria = $request->get('fecha');
         $fecha = date("Y-m-d", strtotime($fechaHistoria));
-        
+        $fur = date("Y-m-d", strtotime($request->get('fur')));
+        $ultimo = date("Y-m-d", strtotime($request->get('ultimo')));
         
 
         $historia=Historia::findOrFail($id);
@@ -206,6 +243,39 @@ class HistoriaController extends Controller
         $historia->hiperlipidemias_quien=$request->get('hiperlipidemias_quien');
         $historia->cancer_endometrial=$request->get('cancer_endometrial');
         $historia->cancer_endometrial_quien=$request->get('cancer_endometrial_quien');
+        //Antecedentes Obstetricos
+        $historia->gestas=$request->get('gestas');
+        $historia->vias_resolucion=$request->get('vias_resolucion');
+        $historia->hijos_vivos=$request->get('hijos_vivos');
+        $historia->hijos_muertos=$request->get('hijos_muertos');
+        $historia->complicaciones_neonatales=$request->get('complicaciones_neonatales');
+        $historia->complicaciones_obstetricos=$request->get('complicaciones_obstetricos');
+        $historia->abortos=$request->get('abortos');
+        $historia->causa=$request->get('causa');
+        //Antecedentes Ginecologicos
+        $historia->fur=$fur;
+        $historia->ciclos_cada=$request->get('ciclos_cada');
+        $historia->ciclos_por=$request->get('ciclos_por');
+        $historia->ciclos_dias=$request->get('ciclos_dias');
+        $historia->cantidad_hemorragia=$request->get('cantidad_hemorragia');
+        $historia->frecuencia=$request->get('frecuencia');
+        //Vida Sexual
+        $historia->activa=$request->get('activa');
+        $historia->edad=$request->get('edad');
+        $historia->parejas=$request->get('parejas');
+        $historia->metodo_anticonceptivo=$request->get('metodo_anticonceptivo');
+        $historia->metodo_si=$request->get('metodo_si');
+        $historia->tiempo_mes=$request->get('tiempo_mes');
+        $historia->tiempo_ano=$request->get('tiempo_ano');
+        $historia->efectos_secundarios=$request->get('efectos_secundarios');
+        //Historia Papanicolau
+        $historia->ultimo=$ultimo;
+        $historia->resultado=$request->get('resultado');
+        $historia->colposcopia=$request->get('colposcopia');
+        $historia->colposcopia_si=$request->get('colposcopia_si');
+        $historia->procedimientos=$request->get('procedimientos');
+        //Revision por sistemas
+        $historia->revision=$request->get('revision');
 
         $historia->save();
 

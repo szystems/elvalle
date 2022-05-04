@@ -442,6 +442,360 @@
                                                       </div>
                                                 </div>
 
+                                                <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                                                      <div class="form-group">
+                                                            <div class="form-group">
+                                                                  <label><b><u>Antecedentes Obstetricos</u></b></label>
+                                                            </div>
+                                                            <div class="table-responsive">
+                                                                  <table class="table table-sm table-striped table-bordered table-condensed table-hover">
+                                                                      
+                                                                        <tbody>
+                                                                              <tr>
+                                                                                    <td><strong>Gestas</strong></td>
+                                                                                    <td align="left">
+                                                                                          <input type="number" class="form-control" name="gestas" value="{{ $historia->gestas }}">
+                                                                                    </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                    <td><strong>Vias de resolucion</strong></td>
+                                                                                    <td align="left">
+                                                                                          <textarea class="form-control" name="vias_resolucion">{{ $historia->vias_resolucion }}</textarea>
+                                                                                    </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                    <td><strong>Hijos Vivos</strong></td>
+                                                                                    <td align="left">
+                                                                                          <input type="number" class="form-control" name="hijos_vivos" value="{{ $historia->hijos_vivos }}">
+                                                                                    </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                    <td><strong>Hijos Muertos</strong></td>
+                                                                                    <td align="left">
+                                                                                          <input type="number" class="form-control" name="hijos_muertos" value="{{ $historia->hijos_muertos }}">
+                                                                                    </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                    <td><strong>Complicaciones Neonatales</strong></td>
+                                                                                    <td align="left">
+                                                                                          <textarea class="form-control" name="complicaciones_neonatales">{{ $historia->complicaciones_neonatales }}</textarea>
+                                                                                    </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                    <td><strong>Complicaciones Obstetricos</strong></td>
+                                                                                    <td align="left">
+                                                                                          <textarea class="form-control" name="complicaciones_obstetricos">{{ $historia->complicaciones_obstetricos }}</textarea>
+                                                                                    </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                    <td><strong>Abortos</strong></td>
+                                                                                    <td align="left">
+                                                                                          <input type="number" class="form-control" name="abortos" value="{{ $historia->abortos }}">
+                                                                                    </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                    <td><strong>Causa</strong></td>
+                                                                                    <td align="left">
+                                                                                          <textarea class="form-control" name="causa">{{ $historia->causa }}</textarea>
+                                                                                    </td>
+                                                                              </tr>
+                                                                        </tbody>
+                                                                  </table>
+                                                            </div>
+                                                      </div>
+                                                </div>
+
+                                                <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                                                      <div class="form-group">
+                                                            <div class="form-group">
+                                                                  <label><b><u>Antecedentes Ginecologicos</u></b></label>
+                                                            </div>
+                                                            <div class="table-responsive">
+                                                                  <table class="table table-sm table-striped table-bordered table-condensed table-hover">
+                                                                        @php
+                                                                              $fur = date("d-m-Y", strtotime($historia->fur));
+                                                                              if($fur == '01-01-1970')
+                                                                              {
+                                                                                    $fur = date('d-m-Y', time());
+                                                                              }
+                                                                        @endphp
+                                                                        <tbody>
+                                                                              <tr>
+                                                                                    <td><strong>FUR</strong></td>
+                                                                                    <td align="left">
+                                                                                          <span class="form-icon-wrapper">
+                                                                                                <span class="form-icon form-icon--right">
+                                                                                                      <i class="fas fa-calendar-alt form-icon__item"></i>
+                                                                                                </span>
+                                                                                                <input type="text" id="fur" class="form-control datepicker" name="fur" value="{{ $fur }}">
+                                                                                                
+                                                                                          </span>
+                                                                                    </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                    <td><strong>Ciclos</strong></td>
+                                                                                    <td align="left">
+                                                                                          Cada:<input type="number" class="form-control" name="ciclos_cada" value="{{ $historia->ciclos_cada }}">
+                                                                                          Por:<input type="number" class="form-control" name="ciclos_por" value="{{ $historia->ciclos_por }}">
+                                                                                          Dias:<input type="number" class="form-control" name="ciclos_dias" value="{{ $historia->ciclos_dias }}">
+                                                                                    </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                    <td><strong>Cantidad de Hemorragia</strong></td>
+                                                                                    <td align="left">
+                                                                                          <select name="cantidad_hemorragia" class="form-control">
+                                                                                                @if ($historia->cantidad_hemorragia)
+                                                                                                      <option value="{{ $historia->cantidad_hemorragia }}" selected>{{ $historia->cantidad_hemorragia }}</option>
+                                                                                                      <option value="Abundante">Abundante</option>
+                                                                                                      <option value="Normal">Normal</option>
+                                                                                                      <option value="Escasa">Escasa</option>
+                                                                                                @else
+                                                                                                      <option value="Abundante">Abundante</option>
+                                                                                                      <option value="Normal">Normal</option>
+                                                                                                      <option value="Escasa">Escasa</option>
+                                                                                                @endif
+                                                                                          </select>
+                                                                                    </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                    <td><strong>Frecuencia</strong></td>
+                                                                                    <td align="left">
+                                                                                          <select name="frecuencia" class="form-control">
+                                                                                                @if ($historia->frecuencia)
+                                                                                                      <option value="{{ $historia->frecuencia }}" selected>{{ $historia->frecuencia }}</option>
+                                                                                                      <option value="Frecuente">Frecuente</option>
+                                                                                                      <option value="Infrecuente">Infrecuente</option>
+                                                                                                @else
+                                                                                                      <option value="Frecuente">Frecuente</option>
+                                                                                                      <option value="Infrecuente">Infrecuente</option>
+                                                                                                @endif
+                                                                                          </select>
+                                                                                    </td>
+                                                                              </tr>
+                                                                              
+                                                                        </tbody>
+                                                                  </table>
+                                                            </div>
+                                                      </div>
+                                                </div>
+
+                                                <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                                                      <div class="form-group">
+                                                            <div class="form-group">
+                                                                  <label><b><u>Vida Sexual</u></b></label>
+                                                            </div>
+                                                            <div class="table-responsive">
+                                                                  <table class="table table-sm table-striped table-bordered table-condensed table-hover">
+                                                                      
+                                                                        <tbody>
+                                                                              <tr>
+                                                                                    <td><strong>Activa</strong></td>
+                                                                                    <td align="left">
+                                                                                          <select name="activa" class="form-control">
+                                                                                                @if ( $historia->activa )
+                                                                                                      <option value="{{ $historia->activa }}" selected>{{ $historia->activa }}</option>
+                                                                                                      <option value="NO">NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @else
+                                                                                                      <option value="NO" selected>NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @endif
+                                                                                          </select>
+                                                                                    </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                    <td><strong>Edad de inicio de vida sexual</strong></td>
+                                                                                    <td align="left">
+                                                                                          <input type="number" class="form-control" name="edad" value="{{ $historia->edad }}">
+                                                                                    </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                    <td><strong>Parejas</strong></td>
+                                                                                    <td align="left">
+                                                                                          <input type="number" class="form-control" name="parejas" value="{{ $historia->parejas }}">
+                                                                                    </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                    <td><strong>Metodo Anticonceptivo</strong></td>
+                                                                                    <td align="left">
+                                                                                          <select name="metodo_anticonceptivo" class="form-control">
+                                                                                                @if ( $historia->metodo_anticonceptivo )
+                                                                                                      <option value="{{ $historia->metodo_anticonceptivo }}" selected>{{ $historia->metodo_anticonceptivo }}</option>
+                                                                                                      <option value="NO">NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @else
+                                                                                                      <option value="NO" selected>NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @endif
+                                                                                          </select>
+                                                                                    </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                    <td><strong>Metodo</strong></td>
+                                                                                    <td align="left">
+                                                                                          <input type="text" class="form-control" name="metodo_si" value="{{ $historia->metodo_si }}">
+                                                                                    </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                    <td><strong>Tiempo</strong></td>
+                                                                                    <td align="left">
+                                                                                          Año(s)<select name="tiempo_ano" class="form-control">
+                                                                                                @if ( $historia->tiempo_ano )
+                                                                                                      <option value="{{ $historia->tiempo_ano }}" selected>{{ $historia->tiempo_ano }}</option>
+                                                                                                      <option value="0">0</option>
+                                                                                                      <option value="1">1</option>
+                                                                                                      <option value="2">2</option>
+                                                                                                      <option value="3">3</option>
+                                                                                                      <option value="4">4</option>
+                                                                                                      <option value="5">5</option>
+                                                                                                      <option value="6">6</option>
+                                                                                                      <option value="7">7</option>
+                                                                                                      <option value="8">8</option>
+                                                                                                      <option value="9">9</option>
+                                                                                                      <option value="10">3</option>
+                                                                                                      <option value="10">10</option>
+                                                                                                @else
+                                                                                                      <option value="0">0</option>
+                                                                                                      <option value="1">1</option>
+                                                                                                      <option value="2">2</option>
+                                                                                                      <option value="3">3</option>
+                                                                                                      <option value="4">4</option>
+                                                                                                      <option value="5">5</option>
+                                                                                                      <option value="6">6</option>
+                                                                                                      <option value="7">7</option>
+                                                                                                      <option value="8">8</option>
+                                                                                                      <option value="9">9</option>
+                                                                                                      <option value="10">3</option>
+                                                                                                      <option value="10">10</option>
+                                                                                                @endif
+                                                                                          </select>
+                                                                                          Meses(s)<select name="tiempo_mes" class="form-control">
+                                                                                                @if ( $historia->tiempo_mes )
+                                                                                                      <option value="{{ $historia->tiempo_mes }}" selected>{{ $historia->tiempo_mes }}</option>
+                                                                                                      <option value="0">0</option>
+                                                                                                      <option value="1">1</option>
+                                                                                                      <option value="2">2</option>
+                                                                                                      <option value="3">3</option>
+                                                                                                      <option value="4">4</option>
+                                                                                                      <option value="5">5</option>
+                                                                                                      <option value="6">6</option>
+                                                                                                      <option value="7">7</option>
+                                                                                                      <option value="8">8</option>
+                                                                                                      <option value="9">9</option>
+                                                                                                      <option value="10">3</option>
+                                                                                                      <option value="10">10</option>
+                                                                                                      <option value="10">11</option>
+                                                                                                      <option value="10">12</option>
+                                                                                                @else
+                                                                                                      <option value="0">0</option>
+                                                                                                      <option value="1">1</option>
+                                                                                                      <option value="2">2</option>
+                                                                                                      <option value="3">3</option>
+                                                                                                      <option value="4">4</option>
+                                                                                                      <option value="5">5</option>
+                                                                                                      <option value="6">6</option>
+                                                                                                      <option value="7">7</option>
+                                                                                                      <option value="8">8</option>
+                                                                                                      <option value="9">9</option>
+                                                                                                      <option value="10">3</option>
+                                                                                                      <option value="10">10</option>
+                                                                                                      <option value="10">11</option>
+                                                                                                      <option value="10">12</option>
+                                                                                                @endif
+                                                                                          </select>
+                                                                                    </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                    <td><strong>Efectos Secundarios</strong></td>
+                                                                                    <td align="left">
+                                                                                          <textarea class="form-control" name="efectos_secundarios">{{ $historia->efectos_secundarios }}</textarea>
+                                                                                    </td>
+                                                                              </tr>
+                                                                              
+                                                                        </tbody>
+                                                                  </table>
+                                                            </div>
+                                                      </div>
+                                                </div>
+
+                                                <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                                                      <div class="form-group">
+                                                            <div class="form-group">
+                                                                  <label><b><u>Historia Papanicolau</u></b></label>
+                                                            </div>
+                                                            <div class="table-responsive">
+                                                                  <table class="table table-sm table-striped table-bordered table-condensed table-hover">
+                                                                        @php
+                                                                              $ultimo = date("d-m-Y", strtotime($historia->ultimo));
+                                                                        @endphp
+                                                                        <tbody>
+                                                                              <tr>
+                                                                                    <td><strong>Ultimo Papanicolau</strong></td>
+                                                                                    <td align="left">
+                                                                                          <span class="form-icon-wrapper">
+                                                                                                <span class="form-icon form-icon--right">
+                                                                                                      <i class="fas fa-calendar-alt form-icon__item"></i>
+                                                                                                </span>
+                                                                                                <input type="text" id="ultimo" class="form-control datepicker" name="ultimo" value="{{ $ultimo }}">
+                                                                                          </span>
+                                                                                    </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                    <td><strong>Resultado</strong></td>
+                                                                                    <td align="left">
+                                                                                          <textarea class="form-control" name="resultado">{{ $historia->resultado }}</textarea>
+                                                                                    </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                    <td><strong>Colonoscopia</strong></td>
+                                                                                    <td align="left">
+                                                                                          <select name="colposcopia" class="form-control">
+                                                                                                @if ( $historia->colposcopia )
+                                                                                                      <option value="{{ $historia->colposcopia }}" selected>{{ $historia->colposcopia }}</option>
+                                                                                                      <option value="NO">NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @else
+                                                                                                      <option value="NO" selected>NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @endif
+                                                                                          </select>
+                                                                                          <textarea class="form-control" name="colposcopia_si" placeholder="Colonoscopia si...">{{ $historia->colposcopia_si }}</textarea>
+                                                                                    </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                    <td><strong>Procedimientos</strong></td>
+                                                                                    <td align="left">
+                                                                                          <textarea class="form-control" name="procedimientos">{{ $historia->procedimientos }}</textarea>
+                                                                                    </td>
+                                                                              </tr>
+                                                                              
+                                                                        </tbody>
+                                                                  </table>
+                                                            </div>
+                                                      </div>
+                                                </div>
+
+                                                <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                                                      <div class="form-group">
+                                                            <div class="form-group">
+                                                                  <label><b><u>Revision por Sistemas</u></b></label>
+                                                            </div>
+                                                            <div class="table-responsive">
+                                                                  <table class="table table-sm table-striped table-bordered table-condensed table-hover">
+                                                                      
+                                                                        <tbody>
+                                                                              <tr>
+                                                                                    <td><strong>Revision</strong></td>
+                                                                                    <td align="left">
+                                                                                          <textarea class="form-control" name="revision" cols="30" rows="5">{{ $historia->revision }}</textarea>
+                                                                                    </td>
+                                                                              </tr>
+                                                                        </tbody>
+                                                                  </table>
+                                                            </div>
+                                                      </div>
+                                                </div>
+
                                           </div>     
                                     <!--cierre formulario abajo de boton guardar-->
                               </div>
@@ -477,6 +831,8 @@
                 todayBtn: "linked",
             };
             $( '#datepicker' ).datepicker( optSimple );
+            $( '#fur' ).datepicker( optSimple );
+            $( '#ultimo' ).datepicker( optSimple );
       </script>
 
       @push ('scripts')

@@ -127,7 +127,7 @@
 				<td><p align="left"><font color="black">{{ $historia->historia}}</font></p></td>	
 			</tr>
 			<tr>		
-				<th colspan="2"><p align="center">Antecedentes Personales: <b> {{ $paciente->nombre}}</b></p></th>
+				<th colspan="2"><p align="center">Antecedentes Personales:</p></th>
 			</tr>
 			<tr>
 				<td><p align="right"><strong>Ciclos Regulares:</strong></p></td>
@@ -198,7 +198,7 @@
 				<td><p align="left"><font color="black">{{ $historia->otros_texto}}</font></p></td>	
 			</tr>
 			<tr>		
-				<th colspan="2"><p align="center">Antecedentes Familiares: <b> {{ $paciente->nombre}}</b></p></th>
+				<th colspan="2"><p align="center">Antecedentes Familiares: </p></th>
 			</tr>
 			<tr>
 				<td><p align="right"><strong>Cardiopatias antes de 50 años:</strong></p></td>
@@ -262,6 +262,133 @@
 						<p align="left"><font color="black"><b> Quien? </b>{{ $historia->cancer_endometrial_quien}}</font></p>
 					@endif
 				</td>		
+			</tr>
+			<tr>		
+				<th colspan="2"><p align="center">Antecedentes Obstetricos: </p></th>
+			</tr>
+			<tr>
+				<td><p align="right"><strong>Gestas:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->gestas}}</font></p></td>	
+			</tr>
+			<tr>
+				<td><p align="right"><strong>Vias de resolucion:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->vias_resolucion}}</font></p></td>	
+			</tr>
+			<tr>
+				<td><p align="right"><strong>Hijos Vivos:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->hijos_vivos}}</font></p></td>	
+			</tr>
+			<tr>
+				<td><p align="right"><strong>Hijos Muertos:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->hijos_muertos}}</font></p></td>	
+			</tr>
+			<tr>
+				<td><p align="right"><strong>Complicaciones Neonatales:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->complicaciones_neonatales}}</font></p></td>	
+			</tr>
+			<tr>
+				<td><p align="right"><strong>Complicaciones Obstetricos:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->complicaciones_obstetricos}}</font></p></td>	
+			</tr>
+			<tr>
+				<td><p align="right"><strong>Abortos:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->abortos}}</font></p></td>	
+			</tr>
+			<tr>
+				<td><p align="right"><strong>Causa:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->causa}}</font></p></td>	
+			</tr>
+			<tr>		
+				<th colspan="2"><p align="center">Antecedentes Ginecologicos: </p></th>
+			</tr>
+			@php
+				$fur = date("d-m-Y", strtotime($historia->fur));
+				$fechaParto = date("d-m-Y", strtotime($historia->fur));
+				$fechaParto = date("d-m-Y", strtotime($fechaParto.'+ 280 days'));
+			@endphp
+			<tr>
+				<td><p align="right"><strong>FUR:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $fur }}</font></p></td>	
+			</tr>
+			<tr>
+				<td><p align="right"><strong>Fecha de Parto:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $fechaParto }}</font></p></td>	
+			</tr>
+			<tr>
+				<td><p align="right"><strong>Ciclo:</strong></p></td>
+				<td><p align="left"><font color="black">Cada: {{ $historia->ciclos_cada }}, por: {{ $historia->ciclos_por }}, dias: {{ $historia->ciclos_dias }}</font></p></td>	
+			</tr>
+			<tr>
+				<td><p align="right"><strong>Cantidad de Hemorragia:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->cantidad_hemorragia}}</font></p></td>	
+			</tr>
+			<tr>
+				<td><p align="right"><strong>Frecuencia:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->frecuencia}}</font></p></td>	
+			</tr>
+			<tr>		
+				<th colspan="2"><p align="center">Vida Sexual: </p></th>
+			</tr>
+			<tr>
+				<td><p align="right"><strong>Activa:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->activa}}</font></p></td>	
+			</tr>
+			<tr>
+				<td><p align="right"><strong>Edad:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->edad}}</font></p></td>	
+			</tr>
+			<tr>
+				<td><p align="right"><strong>Parejas:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->parejas}}</font></p></td>	
+			</tr>
+			<tr>
+				<td><p align="right"><strong>Metodo Anticonceptivo:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->metodo_anticonceptivo}}</font></p></td>	
+			</tr>
+			<tr>
+				<td><p align="right"><strong>Metodo:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->metodo_si}}</font></p></td>	
+			</tr>
+			<tr>
+				<td><p align="right"><strong>Tiempo:</strong></p></td>
+				<td><p align="left"><font color="black">Año(s):{{ $historia->tiempo_ano}}, Meses:{{ $historia->tiempo_mes }}</font></p></td>	
+			</tr>
+			<tr>
+				<td><p align="right"><strong>Efectos Secundarios:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->efectos_secundarios }}</font></p></td>	
+			</tr>
+			<tr>		
+				<th colspan="2"><p align="center">Historia Papanicolau: </p></th>
+			</tr>
+			@php
+				$ultimo = date("d-m-Y", strtotime($historia->ultimo));
+			@endphp
+			<tr>
+				<td><p align="right"><strong>Tiempo:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $ultimo }}</font></p></td>	
+			</tr>
+			<tr>
+				<td><p align="right"><strong>Resultado:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->resultado }}</font></p></td>	
+			</tr>
+			<tr>
+				<td><p align="right"><strong>Colposcopia:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->colposcopia }}</font></p></td>	
+			</tr>
+			<tr>
+				<td><p align="right"><strong>Colposcopia si:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->colposcopia_si }}</font></p></td>	
+			</tr>
+			<tr>
+				<td><p align="right"><strong>Procedimientos:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->procedimientos }}</font></p></td>	
+			</tr>
+			<tr>		
+				<th colspan="2"><p align="center">Revision por Sistemas: </p></th>
+			</tr>
+			<tr>
+				<td><p align="right"><strong>Revision:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->revision }}</font></p></td>	
 			</tr>
 
 		</table>

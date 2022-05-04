@@ -103,7 +103,7 @@
                                 </div>
                                 <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                     <div class="form-group">
-                                        <label for="paciente"><strong><u>Informacion General</u></strong></label>
+                                        <label for=""><strong><u>Informacion General</u></strong></label>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
@@ -173,7 +173,7 @@
 
                                 <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                     <div class="form-group">
-                                        <label for="paciente"><strong><u>Antecedentes Personales</u></strong></label>
+                                        <label for=""><strong><u>Antecedentes Personales</u></strong></label>
                                     </div>
                                 </div>
 
@@ -267,7 +267,7 @@
 
                                 <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                     <div class="form-group">
-                                        <label for="paciente"><strong><u>Antecedentes Familiares</u></strong></label>
+                                        <label for=""><strong><u>Antecedentes Familiares</u></strong></label>
                                     </div>
                                 </div>
 
@@ -314,6 +314,192 @@
                                                     <td><strong>Cancer Endometrial</strong></td>
                                                     <td align="center">{{ $historia->cancer_endometrial }}</td>
                                                     <td align="left">{{ $historia->cancer_endometrial_quien }}</td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label for=""><strong><u>Antecedentes Obstetricos</u></strong></label>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-striped table-bordered table-condensed table-hover">
+                                            
+                                            <tbody>
+                                                <tr>
+                                                    
+                                                    <td><strong>Gestas</strong></td>
+                                                    <td align="center">{{ $historia->gestas }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Vias de resolucion</strong></td>
+                                                    <td align="center">{{ $historia->vias_resolucion }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Hijos Vivos</strong></td>
+                                                    <td align="center">{{ $historia->hijos_vivos }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Hijos Muertos</strong></td>
+                                                    <td align="center">{{ $historia->hijos_muertos }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Complicaciones Neonatales</strong></td>
+                                                    <td align="center">{{ $historia->complicaciones_neonatales }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Complicaciones Obstetricos</strong></td>
+                                                    <td align="center">{{ $historia->complicaciones_obstetricos }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Abortos</strong></td>
+                                                    <td align="center">{{ $historia->abortos }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>causa</strong></td>
+                                                    <td align="center">{{ $historia->causa }}</td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="paciente"><strong><u>Antecedentes Ginecologicos</u></strong></label>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-striped table-bordered table-condensed table-hover">
+                                            
+                                            <tbody>
+                                                <tr>
+                                                    <?php
+                                                        $fur = date("d-m-Y", strtotime($historia->fur));
+                                                    ?>
+                                                    <td><strong>FUR</strong></td>
+                                                    <td align="center">
+                                                        @if ($fur != '01-01-1970')
+                                                            {{ $fur }}
+                                                        @endif
+                                                        
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <?php
+                                                        $fechaParto = date("d-m-Y", strtotime($historia->fur));
+                                                        $fechaParto = date("d-m-Y", strtotime($fechaParto.'+ 280 days'));
+                                                    ?>
+                                                    <td><strong>Fecha de parto</strong></td>
+                                                    <td align="center">
+                                                        @if ($fur != '01-01-1970')
+                                                        {{ $fechaParto }}
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Ciclos</strong></td>
+                                                    <td align="center">Cada: {{ $historia->ciclos_cada }}, por: {{ $historia->ciclos_por }}, dias: {{ $historia->ciclos_dias }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Cantidad Hemorragia</strong></td>
+                                                    <td align="center">{{ $historia->cantidad_hemorragia }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Frecuencia</strong></td>
+                                                    <td align="center">{{ $historia->frecuencia }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="paciente"><strong><u>Vida Sexual</u></strong></label>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-striped table-bordered table-condensed table-hover">
+                                            
+                                            <tbody>
+                                                
+                                                <tr>
+                                                    <td><strong>Activa</strong></td>
+                                                    <td align="center">{{ $historia->activa }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Edad de inicio de vida sexual</strong></td>
+                                                    <td align="center">{{ $historia->edad }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Parejas</strong></td>
+                                                    <td align="center">{{ $historia->parejas }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Motodo Anticonceptivo</strong></td>
+                                                    <td align="center">{{ $historia->metodo_anticonceptivo }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Metodo</strong></td>
+                                                    <td align="center">{{ $historia->metodo_si }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Tiempo</strong></td>
+                                                    <td align="center">Año(s): {{ $historia->tiempo_ano }}, Meses: {{ $historia->tiempo_mes }}</td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="paciente"><strong><u>Historia Papanicolau</u></strong></label>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-striped table-bordered table-condensed table-hover">
+                                            
+                                            <tbody>
+                                                    <?php
+                                                        $ultimo = date("d-m-Y", strtotime($historia->ultimo));
+                                                    ?>
+                                                <tr>
+                                                    <td><strong>Ultimo Papanicolau</strong></td>
+                                                    <td align="center">{{ $ultimo }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Resultado</strong></td>
+                                                    <td align="center">{{ $historia->resultado }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Colposcopia</strong></td>
+                                                    <td align="center">{{ $historia->colposcopia }} <textarea readonly class="form-control" placeholder="Colposcopia si...">{{ $historia->colposcopia_si }}</textarea></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Procedimientos Ginecologicos</strong></td>
+                                                    <td align="center"><textarea readonly class="form-control" placeholder="Procedimientos...">{{ $historia->procedimientos }}</textarea></td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="paciente"><strong><u>Revision por Sistemas</u></strong></label>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-striped table-bordered table-condensed table-hover">
+                                            
+                                            <tbody>
+                                                <tr>
+                                                    <td><strong>Revision</strong></td>
+                                                    <td align="center"><textarea readonly class="form-control" placeholder="Revision..." rows="5">{{ $historia->revision }}</textarea></td>
                                                 </tr>
                                                 
                                             </tbody>

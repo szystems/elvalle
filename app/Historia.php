@@ -55,11 +55,40 @@ class Historia extends Model
         'hiperlipidemias',
         'hiperlipidemias_quien',
         'cancer_endometrial',
-        'cancer_endometrial_quien'
+        'cancer_endometrial_quien',
 
+        'gestas',
+        'vias_resolucion',
+        'hijos_vivos',
+        'hijos_muertos',
+        'complicaciones_neonatales',
+        'complicaciones_obstetricos',
+        'abortos',
+        'causa',
 
+        'fur',
+        'ciclos_cada',
+        'ciclos_por',
+        'ciclos_dias',
+        'cantidad_hemorragia',
+        'frecuencia',
 
+        'activa',
+        'edad',
+        'parejas',
+        'metodo_anticonceptivo',
+        'metodo_si',
+        'tiempo_mes',
+        'tiempo_ano',
+        'efectos_secundarios',
 
+        'ultimo',
+        'resultado',
+        'colposcopia',
+        'colposcopia_si',
+        'procedimientos',
+
+        'revision'
     ];
 
     protected $guarded =[

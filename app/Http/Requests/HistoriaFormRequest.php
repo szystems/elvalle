@@ -66,7 +66,40 @@ class HistoriaFormRequest extends FormRequest
             'hiperlipidemias'=>'max:5',
             'hiperlipidemias_quien'=>'max:50',
             'cancer_endometrial'=>'max:5',
-            'cancer_endometrial_quien'=>'max:50'
+            'cancer_endometrial_quien'=>'max:50',
+
+            'gestas'=>'integer',
+            'vias_resolucion'=>'max:500',
+            'hijos_vivos'=>'integer',
+            'hijos_muertos'=>'integer',
+            'complicaciones_neonatales'=>'max:500',
+            'complicaciones_obstetricos'=>'max:1000',
+            'abortos'=>'integer',
+            'causa'=>'max:500',
+
+            'fur'=>'date',
+            'ciclos_cada'=>'integer',
+            'ciclos_por'=>'integer',
+            'ciclos_dias'=>'integer',
+            'cantidad_hemorragia'=>'max:15',
+            'frecuencia'=>'max:15',
+
+            'activa'=>'max:5',
+            'edad'=>'integer',
+            'parejas'=>'integer',
+            'metodo_anticonceptivo'=>'max:5',
+            'metodo_si'=>'max:50',
+            'tiempo_mes'=>'integer',
+            'tiempo_ano'=>'integer',
+            'efectos_secundarios'=>'max:500',
+
+            'ultimo'=>'date',
+            'resultado'=>'max:500',
+            'colposcopia'=>'max:5',
+            'colposcopia_si'=>'max:500',
+            'procedimientos'=>'max:500',
+
+            'revision'=>'max:1000'
         ];
     }
 }
