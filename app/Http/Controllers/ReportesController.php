@@ -2158,5 +2158,69 @@ class ReportesController extends Controller
         
     }
 
+    public function vistafisico(ReportesFormRequest $rrequest)
+    {  
+            if ($rrequest)
+            {
+                
+                $nombreusu = Auth::user()->name;
+                $empresa = Auth::user()->empresa;
+                $moneda = Auth::user()->moneda;
+                if (Auth::user()->logo == null)
+                {
+                    $logo = null;
+                    $imagen = null;
+                }
+                else
+                {
+                     $logo = Auth::user()->logo;
+                     $imagen = public_path('imagenes/logos/'.$logo);
+                     
+                }
+                $path = public_path('imagenes/articulos/');
+                $verpdf=trim($rrequest->get('pdf'));
+                $idfisico=trim($rrequest->get('rid'));
+                $idpaciente=trim($rrequest->get('ridpaciente'));
+
+                $zona_horaria = Auth::user()->zona_horaria;
+                $hoy = Carbon::now($zona_horaria);
+                $hoy = $hoy->format('d-m-Y');
+
+                $nompdf = Carbon::now($zona_horaria);
+                $nompdf = $nompdf->format('Y-m-d H:i:s');
+                
+                $fisico=DB::table('fisico as f')
+                ->join('paciente as p','f.idpaciente','=','p.idpaciente')
+                ->join('users as d','f.iddoctor','=','d.id')
+                ->join('users as u','f.idusuario','=','u.id')
+                ->select('f.idfisico','f.fecha','f.iddoctor','d.name as Doctor','d.especialidad','f.idpaciente','p.nombre as Paciente','f.idusuario','u.name as Usuario','u.tipo_usuario','f.motivo_consulta','f.peso','f.talla','f.perimetro_abdominal','f.presion_arterial','f.frecuencia_cardiaca','f.frecuencia_respiratoria','f.temperatura','f.saturacion_oxigeno','f.impresion_clinica','f.plan_diagnostico','f.plan_tratamiento','f.recomendaciones_generales','f.recomendaciones_especificas','f.cabeza_cuello','f.tiroides','f.mamas_axilas','f.cardiopulmonar','f.abdomen','f.genitales_externos','f.especuloscopia','f.tacto_bimanual','f.miembros_inferiores')
+                ->where('f.idfisico','=',$idfisico) 
+                ->first();
+
+                $paciente=DB::table('paciente')
+                ->where('idpaciente','=',$idpaciente)
+                ->first();
+
+                
+                if ( $verpdf == "Descargar" )
+                {
+                    $view = \View::make('pdf.fisicos.vistafisico', compact('fisico','paciente','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
+                    $pdf = \App::make('dompdf.wrapper');
+                    $pdf->loadHTML($view);
+                    //$pdf->setPaper('A4', 'landscape');
+                    return $pdf->download ('VistaExamenFisico'.'-'.$paciente->nombre.'-'.$fisico->fecha.'-'.$nompdf.'.pdf');
+                }
+                if ( $verpdf == "Navegador" )
+                {
+                    $view = \View::make('pdf.fisicos.vistafisico', compact('fisico','paciente','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
+                    $pdf = \App::make('dompdf.wrapper');
+                    $pdf->loadHTML($view);
+                    //$pdf->setPaper('A4', 'landscape');
+                    return $pdf->stream ('VistaExamenFisico'.'-'.$paciente->nombre.'-'.$fisico->fecha.'-'.$nompdf.'.pdf');
+                }
+            }
+        
+    }
+
     
 }

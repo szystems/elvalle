@@ -31,8 +31,7 @@
                   <div class="card-body">
                         <ul class="nav nav-tabs">
                               <li class="nav-item">
-                                    <a class="nav-link" aria-current="page"
-                                    href="{{ URL::action('HistorialController@show', $paciente->idpaciente) }}">Perfil</a>
+                                    <a class="nav-link" aria-current="page" href="{{ URL::action('HistorialController@show', $paciente->idpaciente) }}">Perfil</a>
                               </li>
                               <li class="nav-item">
                                     <a class="nav-link" href="{{URL::action('RecetaController@index','searchidpaciente='.$paciente->idpaciente)}}">Recetas</a>
@@ -41,7 +40,7 @@
                                     <a class="nav-link active" href="{{URL::action('HistoriaController@index','searchidpaciente='.$paciente->idpaciente)}}"><b><u>Historia</u></b></a>
                               </li>
                               <li class="nav-item">
-                                    <a class="nav-link" href="#">Fisico</a>
+                                    <a class="nav-link" href="{{URL::action('FisicoController@index','searchidpaciente='.$paciente->idpaciente)}}">Fisico</a>
                               </li>
                         </ul>
 

@@ -40,7 +40,7 @@
                         <a class="nav-link active" href="{{URL::action('HistoriaController@index','searchidpaciente='.$paciente->idpaciente)}}"><b><u>Historia</u></b></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Fisico</a>
+                        <a class="nav-link" href="{{URL::action('FisicoController@index','searchidpaciente='.$paciente->idpaciente)}}">Fisico</a>
                     </li>
                 </ul>
                 
