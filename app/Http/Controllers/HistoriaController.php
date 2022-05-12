@@ -20,6 +20,11 @@ use Illuminate\Support\Facades\Input;
 
 class HistoriaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index(Request $request)
     {
         $idpaciente=trim($request->get('searchidpaciente'));

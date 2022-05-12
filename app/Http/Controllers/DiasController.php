@@ -19,6 +19,11 @@ use Illuminate\Support\Facades\Input;
 
 class DiasController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function store(DiasFormRequest $request)
     {
         $iddoctor = $request->get('iddoctor');

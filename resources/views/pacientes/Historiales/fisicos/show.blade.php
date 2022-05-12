@@ -42,6 +42,9 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="{{URL::action('FisicoController@index','searchidpaciente='.$paciente->idpaciente)}}"><b><u>Fisico</u></b></a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{URL::action('EmbarazoController@index','searchidpaciente='.$paciente->idpaciente)}}">Embarazos</a>
+                    </li>
                 </ul>
                 
                 

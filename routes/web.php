@@ -60,9 +60,11 @@ Route::get('pacientes/historiales/recetas/editar', 'RecetaController@editarmedic
 Route::get('pacientes/historiales/recetas/agregar', 'RecetaController@agregar');
 Route::get('pacientes/historiales/recetas/eliminar', 'RecetaController@eliminarreceta');
 Route::get('pacientes/historiales/fisicos/eliminar', 'FisicoController@eliminarfisico');
+Route::get('pacientes/historiales/embarazos/eliminar', 'EmbarazoController@eliminarembarazo');
 Route::resource('pacientes/historiales/historias','HistoriaController');
 Route::resource('pacientes/historiales/recetas','RecetaController');
 Route::resource('pacientes/historiales/fisicos','FisicoController');
+Route::resource('pacientes/historiales/embarazos','EmbarazoController');
 
 Route::resource('pacientes/historiales','HistorialController');
 
@@ -85,7 +87,8 @@ Route::resource('reportes/ingresos','ReporteIngresosController');
 
     /*Historiales */
     Route::post('pdf/recetas','ReportesController@vistareceta');
-    Route::post('pdf/recetas','ReportesController@vistafisico');
+    Route::post('pdf/fisicos','ReportesController@vistafisico');
+    Route::post('pdf/embarazos','ReportesController@vistaembarazo');
 
     /*Historiales */
     Route::post('pdf/historias','ReportesController@vistahistoria');

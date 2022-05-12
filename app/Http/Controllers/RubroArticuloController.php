@@ -19,6 +19,11 @@ use Illuminate\Support\Facades\Input;
 
 class RubroArticuloController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function store(RubroArticuloFormRequest $request)
     {
         $idrubro = $request->get('idrubro');

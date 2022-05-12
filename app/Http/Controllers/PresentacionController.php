@@ -21,6 +21,7 @@ class PresentacionController extends Controller
     {
         $this->middleware('auth');
     }
+    
     public function index(Request $request)
     {
         if ($request)

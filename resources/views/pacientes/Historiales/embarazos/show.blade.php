@@ -31,7 +31,7 @@
             <div class="card-body">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{URL::action('HistorialController@show',$paciente->idpaciente)}}"><b><u>Perfil</u></b></a>
+                        <a class="nav-link" aria-current="page" href="{{URL::action('HistorialController@show',$paciente->idpaciente)}}">Perfil</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{URL::action('RecetaController@index','searchidpaciente='.$paciente->idpaciente)}}">Recetas</a>
@@ -43,7 +43,7 @@
                         <a class="nav-link" href="{{URL::action('FisicoController@index','searchidpaciente='.$paciente->idpaciente)}}">Fisico</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{URL::action('EmbarazoController@index','searchidpaciente='.$paciente->idpaciente)}}">Embarazos</a>
+                        <a class="nav-link active" href="{{URL::action('EmbarazoController@index','searchidpaciente='.$paciente->idpaciente)}}"><b><u>Embarazos</u></b></a>
                     </li>
                 </ul>
                 
@@ -51,17 +51,25 @@
                 <div class="card">
         
                     <header class="card-header">
-                        <h2 class="h3 card-header-title"><strong>Perfil: </strong></h2>
+                        <h2 class="h3 card-header-title"><strong>Embarazo: </strong></h2>
+                        @if (Auth::user()->tipo_usuario == "Doctor")
+                            <a href="" data-target="#modal-eliminar-{{$embarazo->idembarazo}}" data-toggle="modal">
+                                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Eliminar Embarazo">
+                                    <button class="btn btn-sm btn-danger" style="pointer-events: none;" type="button">
+                                            <i class="far fa-minus-square"></i> Eliminar
+                                    </button>
+                                </span>
+                            </a>
+                            @include('pacientes.historiales.embarazos.modaleliminar')
+                        @endif
                     </header> 
-        
-                    <div class="card-body">
-                        {{Form::open(array('action' => 'ReportesController@vistapaciente','method' => 'POST','role' => 'form', 'target' => '_blank'))}}
-
+                        {{Form::open(array('action' => 'ReportesController@vistaembarazo','method' => 'POST','role' => 'form', 'target' => '_blank'))}}
                         {{Form::token()}}		
                             <div class="card mb-4">
                                 <header class="card-header d-md-flex align-items-center">
-                                    <h4><strong>Imprimir Paciente </strong></h4>
-                                    <input type="hidden" id="rid" class="form-control datepicker" name="rid" value="{{$paciente->idpaciente}}">
+                                    <h4><strong>Imprimir embarazo </strong></h4>
+                                    <input type="hidden" id="rid" class="form-control datepicker" name="rid" value="{{$embarazo->idembarazo}}">
+                                    <input type="hidden" class="form-control datepicker" name="ridpaciente" value="{{$paciente->idpaciente}}">
                                 </header>
                                 <div class="card-body">
                                     <div class="row">
@@ -85,85 +93,95 @@
                                     </div>
                                 </div>
                             </div>
-                                        
+                            
                         {{Form::close()}}
-
-                        <a href="{{URL::action('PacienteController@edit',$paciente->idpaciente)}}">
-                            <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar Paciente">
-                                <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button"><i class="far fa-edit"></i> Editar</button>
-                            </span>
-                        </a>
+                    <div class="card-body">		
+                        
+                        
                         <div class="row">
-                            <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+                            <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                 <div class="form-group">
-                                    <label for="nombre"><strong>Nombre</strong></label>
-                                    <p>{{$paciente->nombre}}</p>
+                                    <label for="doctor"><strong><u>Cabecera</u></strong></label>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+                            <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                 <div class="form-group">
-                                    <label for="sexo"><strong>Sexo</strong></label>
-                                    <p>{{$paciente->sexo}}</p>
+                                    @if (Auth::user()->tipo_usuario == "Doctor")
+                                        <a href="{{URL::action('EmbarazoController@edit',$embarazo->idembarazo)}}">
+                                            <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar Embarazo">
+                                                <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button"><i class="far fa-edit"></i> Editar</button>
+                                            </span>
+                                        </a>
+                                        @include('pacientes.historiales.embarazos.modaleliminar')
+                                    @endif
                                 </div>
                             </div>
                             <?php
-                                $fecha_nacimiento = date("d-m-Y", strtotime($paciente->fecha_nacimiento));
-                    
-                                $cumpleanos = new DateTime($paciente->fecha_nacimiento);
-                                $hoy = new DateTime();
-                                $annos = $hoy->diff($cumpleanos);
-                                $edad = $annos->y;
+                                $fecha = date("d-m-Y", strtotime($embarazo->fecha));
+                                $fur = date("d-m-Y", strtotime($embarazo->fur));
+                                $fechaParto = date("d-m-Y", strtotime($embarazo->fur));
+                                $fechaParto = date("d-m-Y", strtotime($fechaParto.'+ 280 days'));
                             ?>
                             <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
                                 <div class="form-group">
-                                    <label for="fecha_nacimiento"><strong>Fecha Nacimiento</strong></label>
-                                    <p>{{$fecha_nacimiento}} (Edad: {{$edad}})</p>
+                                    <label for="fecha"><strong>Fecha</strong></label>
+                                    <p>{{$fecha}}</p>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
                                 <div class="form-group">
-                                    <label for="correo"><strong>Correo</strong></label>
-                                    <p>{{$paciente->correo}}</p>
+                                    <label for="paciente"><strong>Paciente</strong></label>
+                                    <p>{{$embarazo->Paciente}}</p>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
                                 <div class="form-group">
-                                    <label for="telefono"><strong>Teléfono</strong></label>
-                                    <p>{{$paciente->telefono}}</p>
+                                    <label for="doctor"><strong>Doctor</strong></label>
+                                    <p>{{$embarazo->Doctor}} ({{ $embarazo->especialidad }})</p>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
                                 <div class="form-group">
-                                    <label for="direccion"><strong>Dirección</strong></label>
-                                    <p>{{$paciente->direccion}}</p>
+                                    <label for="doctor"><strong>FUR</strong></label>
+                                    <p>{{$fur}}</p>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
                                 <div class="form-group">
-                                    <label for="dpi"><strong>DPI</strong></label>
-                                    <p>{{$paciente->dpi}}</p>
+                                    <label for="doctor"><strong>FPP</strong></label>
+                                    @if ($fur != '01-01-1970')
+                                    <p>{{$fechaParto}}</p>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+                            <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                 <div class="form-group">
-                                    <label for="nit"><strong>Nit</strong></label>
-                                    <p>{{$paciente->nit}}</p>
+                                    <label for="doctor"><strong><u>Seguimiento</u></strong></label>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+                            <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                 <div class="form-group">
-                                    <label for="estado"><strong>Estado</strong></label>
-                                    <p>{{$paciente->estado}}</p>
+                                    <label for="doctor"><strong>1er. Trimestre</strong></label>
+                                    <textarea readonly name="" id="" class="form-control" cols="30" rows="3">{{ $embarazo->trimestre1 }}</textarea>
                                 </div>
                             </div>
-                            @if ($paciente->foto != null)
-                                <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
-                                    <div class="form-group">
-                                        <label for="foto"><strong>Imagen</strong></label>
-                                        <p><img src="{{asset('imagenes/pacientes/'.$paciente->foto)}}" alt="{{ $paciente->nombre}}" height="300px"  class="img-thumbnail"></p>
-                                    </div>
+                            <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                                <div class="form-group">
+                                    <label for="doctor"><strong>2do. Trimestre</strong></label>
+                                    <textarea readonly name="" id="" class="form-control" cols="30"  rows="3">{{ $embarazo->trimestre2 }}</textarea>
                                 </div>
-                            @endif
+                            </div>
+                            <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                                <div class="form-group">
+                                    <label for="doctor"><strong>3er. Trimestre</strong></label>
+                                    <textarea readonly name="" id="" class="form-control" cols="30" rows="3">{{ $embarazo->trimestre3 }}</textarea>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                                <div class="form-group">
+                                    <label for="doctor"><strong><u>Controles</u></strong></label>
+                                </div>
+                            </div>
                         </div>
                     </div>
         
