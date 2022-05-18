@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use sisVentasWeb\Http\Requests;
 use sisVentasWeb\Paciente;
 use sisVentasWeb\Embarazo;
-use sisVentasWeb\DetalleReceta;
+use sisVentasWeb\control;
 use sisVentasWeb\Bitacora;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Redirect;
@@ -86,19 +86,17 @@ class EmbarazoController extends Controller
     		DB::rollback();
     	}
 
-    	$embarazo=DB::table('embarazo as e')
+    	
+        $embarazos=DB::table('embarazo as e')
         ->join('paciente as p','e.idpaciente','=','p.idpaciente')
         ->join('users as d','e.iddoctor','=','d.id')
         ->join('users as u','e.idusuario','=','u.id')
-        ->select('e.idembarazo','e.fecha','e.iddoctor','d.name as Doctor','d.foto as Imgdoctor','d.especialidad','e.idpaciente','p.nombre as Paciente','p.foto as Imgpaciente','e.idusuario','u.name as Usuario','u.tipo_usuario','e.fur','e.trimestre1','e.trimestre2','e.trimestre3')
-        ->where('e.idembarazo','=',$embarazo->idembarazo) 
-        ->first();
+        ->select('e.idembarazo','e.fecha','e.iddoctor','d.name as Doctor','d.foto as Imgdoctor','d.especialidad','e.idpaciente','p.nombre as Paciente','p.foto as Imgdpaciente','e.idusuario','u.name as Usuario','u.tipo_usuario')
+        ->where('e.idpaciente','=',$idpaciente) 
+        ->orderby('e.fecha','desc')
+        ->paginate(20);
 
-        $paciente=DB::table('paciente')
-        ->where('idpaciente','=',$embarazo->idpaciente)
-        ->first();
-
-        return view("pacientes.historiales.embarazos.show",["embarazo"=>$embarazo,"paciente"=>$paciente]);
+        return view("pacientes.historiales.embarazos.index",["paciente"=>Paciente::findOrFail($idpaciente),"embarazos"=>$embarazos]);
     }
 
     public function show($id)
@@ -115,7 +113,11 @@ class EmbarazoController extends Controller
         ->where('idpaciente','=',$embarazo->idpaciente)
         ->first();
 
-        return view("pacientes.historiales.embarazos.show",["embarazo"=>$embarazo,"paciente"=>$paciente]);
+        $controles=DB::table('control')
+        ->where('idembarazo','=',$embarazo->idembarazo)
+        ->get();
+
+        return view("pacientes.historiales.embarazos.show",["embarazo"=>$embarazo,"paciente"=>$paciente,"controles"=>$controles]);
     }
 
     public function edit($id)
@@ -182,7 +184,11 @@ class EmbarazoController extends Controller
         ->where('idpaciente','=',$embarazo->idpaciente)
         ->first();
 
-        return view("pacientes.historiales.embarazos.show",["embarazo"=>$embarazo,"paciente"=>$paciente]);
+        $controles=DB::table('control')
+        ->where('idembarazo','=',$embarazo->idembarazo)
+        ->get();
+
+        return view("pacientes.historiales.embarazos.show",["embarazo"=>$embarazo,"paciente"=>$paciente,"controles"=>$controles]);
     }
 
     public function eliminarembarazo(Request $request)
@@ -190,7 +196,7 @@ class EmbarazoController extends Controller
         $idembarazo = $request->get('idembarazo');
         $idpaciente = $request->get('idpaciente');
 
-        //$eliminarcontroles=DetalleReceta::where('idreceta',$idreceta)->delete();
+        $eliminarcontroles=Control::where('idembarazo',$idembarazo)->delete();
         
         $eliminarembarazo=Embarazo::findOrFail($idembarazo);
         $eliminarembarazo->delete();

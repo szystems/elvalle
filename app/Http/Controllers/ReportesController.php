@@ -2222,5 +2222,73 @@ class ReportesController extends Controller
         
     }
 
+    public function vistaembarazo(ReportesFormRequest $rrequest)
+    {  
+            if ($rrequest)
+            {
+                
+                $nombreusu = Auth::user()->name;
+                $empresa = Auth::user()->empresa;
+                $moneda = Auth::user()->moneda;
+                if (Auth::user()->logo == null)
+                {
+                    $logo = null;
+                    $imagen = null;
+                }
+                else
+                {
+                     $logo = Auth::user()->logo;
+                     $imagen = public_path('imagenes/logos/'.$logo);
+                     
+                }
+                $path = public_path('imagenes/articulos/');
+                $verpdf=trim($rrequest->get('pdf'));
+                $idembarazo=trim($rrequest->get('rid'));
+                $idpaciente=trim($rrequest->get('ridpaciente'));
+
+                $zona_horaria = Auth::user()->zona_horaria;
+                $hoy = Carbon::now($zona_horaria);
+                $hoy = $hoy->format('d-m-Y');
+
+                $nompdf = Carbon::now($zona_horaria);
+                $nompdf = $nompdf->format('Y-m-d H:i:s');
+                
+                $embarazo=DB::table('embarazo as e')
+                ->join('paciente as p','e.idpaciente','=','p.idpaciente')
+                ->join('users as d','e.iddoctor','=','d.id')
+                ->join('users as u','e.idusuario','=','u.id')
+                ->select('e.idembarazo','e.fecha','e.iddoctor','d.name as Doctor','d.foto as Imgdoctor','d.especialidad','e.idpaciente','p.nombre as Paciente','p.foto as Imgpaciente','e.idusuario','u.name as Usuario','u.tipo_usuario','e.fur','e.trimestre1','e.trimestre2','e.trimestre3')
+                ->where('e.idembarazo','=',$idembarazo) 
+                ->first();
+
+                $paciente=DB::table('paciente')
+                ->where('idpaciente','=',$embarazo->idpaciente)
+                ->first();
+
+                $controles=DB::table('control')
+                ->where('idembarazo','=',$embarazo->idembarazo)
+                ->get();
+
+                
+                if ( $verpdf == "Descargar" )
+                {
+                    $view = \View::make('pdf.embarazos.vistaembarazo', compact('embarazo','controles','paciente','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
+                    $pdf = \App::make('dompdf.wrapper');
+                    $pdf->loadHTML($view);
+                    $pdf->setPaper('A4', 'landscape');
+                    return $pdf->download ('VistaEmbarazo'.'-'.$paciente->nombre.'-'.$embarazo->fecha.'-'.$nompdf.'.pdf');
+                }
+                if ( $verpdf == "Navegador" )
+                {
+                    $view = \View::make('pdf.embarazos.vistaembarazo', compact('embarazo','controles','paciente','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
+                    $pdf = \App::make('dompdf.wrapper');
+                    $pdf->loadHTML($view);
+                    $pdf->setPaper('A4', 'landscape');
+                    return $pdf->stream ('VistaEmbarazo'.'-'.$paciente->nombre.'-'.$embarazo->fecha.'-'.$nompdf.'.pdf');
+                }
+            }
+        
+    }
+
     
 }

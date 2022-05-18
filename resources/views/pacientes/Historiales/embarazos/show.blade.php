@@ -154,6 +154,237 @@
                                     @endif
                                 </div>
                             </div>
+                            
+                            <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                                <div class="form-group">
+                                    <label for="doctor"><h2><strong><u>Controles</u></strong></h2></label>
+                                    @if(Auth::user()->tipo_usuario == "Doctor")
+                                        <a href="controles/create?idembarazo={{$embarazo->idembarazo}}">
+                                            <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Agregar Control ">
+                                                <button class="btn btn-sm btn-success" style="pointer-events: none;" type="button">
+                                                    <i class="far fa-plus-square"></i> Agregar Control
+                                                </button>
+                                            </span>
+                                        </a>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                                <div class="table-responsive">
+                                    <table class="table table-sm table-striped table-bordered table-condensed table-hover">
+                                        
+                                        <tbody>
+                                            <tr>
+                                                <td><strong><h2>Control</h2></strong></td>
+                                                @foreach ($controles as $control)
+                                                    <td align="left">
+                                                        <u><h2> #{{ $control->numero_control }}</h2></u> 
+                                                        @if (Auth::user()->tipo_usuario == "Doctor")
+                                                            <a href="{{URL::action('ControlController@edit',$control->idcontrol)}}">
+                                                                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar Control">
+                                                                    <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button"><i class="far fa-edit"></i> </button>
+                                                                </span>
+                                                            </a>
+                                                            <a href="" data-target="#modal-eliminar-{{$control->idcontrol}}" data-toggle="modal">
+                                                                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Eliminar Control">
+                                                                    <button class="btn btn-sm btn-danger" style="pointer-events: none;" type="button"><i class="far fa-minus-square"></i></button>
+                                                                </span>
+                                                            </a>
+                                                            @include('pacientes.historiales.embarazos.controles.modaleliminar')
+                                                        @endif
+                                                    </td>
+                                                @endforeach
+                                                
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Fecha</strong></td>
+                                                @foreach ($controles as $control)
+                                                    @php
+                                                        $fechaControl = date("d-m-Y", strtotime($control->fecha));
+                                                    @endphp
+                                                    <td align="left">{{ $fechaControl }}</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Semanas</strong></td>
+                                                @foreach ($controles as $control)
+                                                    <td align="left">{{ $control->semanas }}</td>
+                                                @endforeach
+                                                
+                                            </tr>
+                                            <tr>
+                                                <td><h2><strong><u>Sintomas</u></strong></h2></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Sueño</strong></td>
+                                                @foreach ($controles as $control)
+                                                    <td align="left">{{ $control->sueno }}</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Apetito</strong></td>
+                                                @foreach ($controles as $control)
+                                                    <td align="left">{{ $control->apetito }}</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Estreñimiento</strong></td>
+                                                @foreach ($controles as $control)
+                                                    <td align="left">{{ $control->estrenimiento }}</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Disuria</strong></td>
+                                                @foreach ($controles as $control)
+                                                    <td align="left">{{ $control->disuria }}</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Nauseas/Vomitos</strong></td>
+                                                @foreach ($controles as $control)
+                                                    <td align="left">{{ $control->nauseas_vomitos }}</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Flujo Vaginal</strong></td>
+                                                @foreach ($controles as $control)
+                                                    <td align="left">{{ $control->flujo_vaginal }}</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Dolor</strong></td>
+                                                @foreach ($controles as $control)
+                                                    <td align="left">{{ $control->dolor }}</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Otros</strong></td>
+                                                @foreach ($controles as $control)
+                                                    <td align="left">{{ $control->otros }}</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><h2><strong><u>Examen Fisico</u></strong></h2></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>peso</strong></td>
+                                                @foreach ($controles as $control)
+                                                    <td align="left">{{ $control->peso }} Lbs.</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Talla</strong></td>
+                                                @foreach ($controles as $control)
+                                                    <td align="left">{{ $control->talla }} Cms.</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><strong>IMC</strong></td>
+                                                @foreach ($controles as $control)
+                                                    @php
+                                                        $kilogramos = $control->peso / 2.2;
+                                                        $metros = $control->talla / 100;
+                                                        $imc = ($kilogramos /($metros*$metros))
+                                                    @endphp
+                                                    <td align="left">{{ $imc }} IMC</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Presion Arterial</strong></td>
+                                                @foreach ($controles as $control)
+                                                    <td align="left">{{ $control->presion_arterial }} mm Hg</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Temperatura</strong></td>
+                                                @foreach ($controles as $control)
+                                                    <td align="left">{{ $control->temperatura }} °C</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Frecuencia cardiaca Materna</strong></td>
+                                                @foreach ($controles as $control)
+                                                    <td align="left">{{ $control->frecuencia_cardiaca_materna }} /min</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Altura Uterina</strong></td>
+                                                @foreach ($controles as $control)
+                                                    <td align="left">{{ $control->altura_uterina }} Cms</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Frecuencia Cardiaca Fetal</strong></td>
+                                                @foreach ($controles as $control)
+                                                    <td align="left">{{ $control->frecuencia_cardiaca_fetal }} /min</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Presentacion Fetal</strong></td>
+                                                @foreach ($controles as $control)
+                                                    <td align="left">{{ $control->presentacion_fetal }}</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Movimientos Fetales</strong></td>
+                                                @foreach ($controles as $control)
+                                                    <td align="left">{{ $control->movimientos_fetales }}</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Edema en MI</strong></td>
+                                                @foreach ($controles as $control)
+                                                    <td align="left">{{ $control->edema_mi }}</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Varices</strong></td>
+                                                @foreach ($controles as $control)
+                                                    <td align="left">{{ $control->varices }}</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Flujo Vaginal (Ph)</strong></td>
+                                                @foreach ($controles as $control)
+                                                    <td align="left">{{ $control->flujo_vaginal_ph }} Ph</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><h2><strong><u>Tratamiento</u></strong></h2></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Medicamentos</strong></td>
+                                                @foreach ($controles as $control)
+                                                    <td align="left">{{ $control->medicamentos }}</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Especiales</strong></td>
+                                                @foreach ($controles as $control)
+                                                    <td align="left">{{ $control->especiales }}</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Proxima Cita</strong></td>
+                                                @foreach ($controles as $control)
+                                                    @php
+                                                        $proximaCita = date("d-m-Y", strtotime($control->proxima_cita));
+                                                    @endphp
+                                                    <td align="left">{{ $proximaCita }}</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Nota Adicional</strong></td>
+                                                @foreach ($controles as $control)
+                                                    <td align="left">{{ $control->nota }}</td>
+                                                @endforeach
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
                             <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                 <div class="form-group">
                                     <label for="doctor"><strong><u>Seguimiento</u></strong></label>
@@ -177,11 +408,7 @@
                                     <textarea readonly name="" id="" class="form-control" cols="30" rows="3">{{ $embarazo->trimestre3 }}</textarea>
                                 </div>
                             </div>
-                            <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
-                                <div class="form-group">
-                                    <label for="doctor"><strong><u>Controles</u></strong></label>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
         
