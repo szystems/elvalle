@@ -358,12 +358,19 @@
 								<a class="u-sidebar-nav-menu__link" href="#!"
 								   data-target="#subMenu4">
 									<i class="fas fa-users u-sidebar-nav-menu__item-icon"></i>
-									<span class="u-sidebar-nav-menu__item-title"><b>Acceso</b></span>
+									<span class="u-sidebar-nav-menu__item-title"><b>Seguridad</b></span>
 									<i class="fa fa-angle-right u-sidebar-nav-menu__item-arrow"></i>
 									<span class="u-sidebar-nav-menu__indicator"></span>
 								</a>
 
 								<ul id="subMenu4" class="u-sidebar-nav-menu u-sidebar-nav-menu--second-level" style="display: none;">
+
+									<li class="u-sidebar-nav-menu__item">
+										<a class="u-sidebar-nav-menu__link" href="{{url('reportes\bitacora')}}">
+											<span class="u-sidebar-nav-menu__item-icon">B</span>
+											<span class="u-sidebar-nav-menu__item-title">Bitácora</span>
+										</a>
+									</li>
 									<li class="u-sidebar-nav-menu__item">
 										<a class="u-sidebar-nav-menu__link" href="{{url('seguridad\doctor')}}">
 											<span class="u-sidebar-nav-menu__item-icon">D</span>
@@ -377,36 +384,10 @@
 										</a>
 									</li>
 									
-									
 								</ul>
 							</li>
 							
 							<!-- Fin Acceso -->
-
-							<!-- Reportes -->
-							
-							<li class="u-sidebar-nav-menu__item">
-								<a class="u-sidebar-nav-menu__link" href="#!"
-								   data-target="#subMenu5">
-									<i class="fas fa-chart-bar u-sidebar-nav-menu__item-icon"></i>
-									<span class="u-sidebar-nav-menu__item-title"><b>Reportes</b></span>
-									<i class="fa fa-angle-right u-sidebar-nav-menu__item-arrow"></i>
-									<span class="u-sidebar-nav-menu__indicator"></span>
-								</a>
-
-								<ul id="subMenu5" class="u-sidebar-nav-menu u-sidebar-nav-menu--second-level" style="display: none;">
-
-									<li class="u-sidebar-nav-menu__item">
-										<a class="u-sidebar-nav-menu__link" href="{{url('reportes\bitacora')}}">
-											<span class="u-sidebar-nav-menu__item-icon">B</span>
-											<span class="u-sidebar-nav-menu__item-title">Bitácora</span>
-										</a>
-									</li>
-									
-								</ul>
-							</li>
-							
-							<!-- Fin Reportes -->
 
 							<hr>
 

@@ -189,7 +189,7 @@
 						<div class="card-header">
 							<a class="card-link" data-toggle="collapse" href="#collapse4">
 								<i class="fas fa-users u-sidebar-nav-menu__item-icon" style="font-size:30px;color:lightblue;text-shadow:2px 2px 4px #000000;"></i>
-								<span class="u-sidebar-nav-menu__item-title"><font color="orange"><b>Acceso </b></font></span>
+								<span class="u-sidebar-nav-menu__item-title"><font color="orange"><b>Seguridad </b></font></span>
 								<i class="fa fa-angle-right u-sidebar-nav-menu__item-arrow"></i>
 								<span class="u-sidebar-nav-menu__indicator"></span>
 							</a>
@@ -197,7 +197,13 @@
 						<div id="collapse4" class="collapse" data-parent="#accordion">
 							<div class="card-body">
 								<ul>
-								<li class="u-sidebar-nav-menu__item">
+									<li class="u-sidebar-nav-menu__item">
+										<a class="u-sidebar-nav-menu__link" href="{{url('reportes\bitacora')}}">
+											<span class="u-sidebar-nav-menu__item-icon">B</span>
+											<span class="u-sidebar-nav-menu__item-title">Bitácora</span>
+										</a>
+									</li>
+									<li class="u-sidebar-nav-menu__item">
 										<a class="u-sidebar-nav-menu__link" href="{{url('seguridad\doctor')}}">
 											<span class="u-sidebar-nav-menu__item-icon">D</span>
 											<span class="u-sidebar-nav-menu__item-title">Doctores</span>
@@ -209,34 +215,12 @@
 											<span class="u-sidebar-nav-menu__item-title">Usuarios</span>
 										</a>
 									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="card">
-						<div class="card-header">
-							<a class="collapsed card-link" data-toggle="collapse" href="#collapse5">
-								<i class="fas fa-chart-bar u-sidebar-nav-menu__item-icon" style="font-size:30px;color:lightblue;text-shadow:2px 2px 4px #000000;"></i>
-								<span class="u-sidebar-nav-menu__item-title"><font color="orange"><b>Reportes </b></font></span>
-								<i class="fa fa-angle-right u-sidebar-nav-menu__item-arrow"></i>
-								<span class="u-sidebar-nav-menu__indicator"></span>
-							</a>
-						</div>
-						<div id="collapse5" class="collapse" data-parent="#accordion">
-							<div class="card-body">
-								<ul>
 									
-									<li class="u-sidebar-nav-menu__item">
-										<a class="u-sidebar-nav-menu__link" href="{{url('reportes\bitacora')}}">
-											<span class="u-sidebar-nav-menu__item-icon">B</span>
-											<span class="u-sidebar-nav-menu__item-title">Bitácora</span>
-										</a>
-									</li>
-
 								</ul>
 							</div>
 						</div>
 					</div>
+					
 					<div class="card">
 						<div class="card-header">
 							<a href="{{URL::action('ConfiguracionController@edit',Auth::user()->id)}}">
