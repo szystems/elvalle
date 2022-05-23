@@ -114,7 +114,7 @@
                             <select name="pidarticulo" class="form-control selectpicker" id="pidarticulo" data-live-search="true">
                                 <option value="" selected>Seleccione un articulo</option>
                                     @foreach($articulos as $articulo)
-                                <option value="{{$articulo->idarticulo}}_{{$articulo->articulo}}_{{$articulo->descripcion}}_{{$articulo->codigo}}_{{$articulo->nombre}}">{{$articulo->articulo}}</option>
+                                <option value="{{$articulo->idarticulo}}_{{$articulo->articulo}}_{{$articulo->descripcion}}_{{$articulo->codigo}}_{{$articulo->nombre}}">{{$articulo->articulo}} @if($articulo->codigo != null)- {{ $articulo->codigo }}@endif</option>
                                     @endforeach
                             </select>
                         </div>

@@ -41,14 +41,11 @@
 							<label for="tipo"></label>Tipo:</label>
 							<select name="tipo" class="form-control" value="{{ old('tipo') }}">
 								<option value="">Todos</option>
-								<option value="Artículo">Artículo</option>
-								<option value="Categoría">Categoría</option>
-								<option value="Ingreso">Ingreso</option>
-								<option value="Proveedor">Proveedor</option>
-								<option value="Cliente">Cliente</option>
-								<option value="Cotización">Cotización</option>
-								<option value="Venta">Venta</option>
-								<option value="Usuario">Usuario</option>
+								<option value="Almacen">Almacen</option>
+								<option value="Compras">Compras</option>
+								<option value="Citas">Citas</option>
+								<option value="Ventas">Ventas</option>
+								<option value="Seguridad">Seguridad</option>
 								<option value="Configuración">Configuración</option>
 
 							</select>

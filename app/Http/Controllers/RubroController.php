@@ -65,7 +65,7 @@ class RubroController extends Controller
         $bitacora->idempresa=Auth::user()->idempresa;
         $bitacora->idusuario=Auth::user()->id;
         $bitacora->fecha=$fechahora;
-        $bitacora->tipo="Ventas";
+        $bitacora->tipo="Almacen";
         $bitacora->descripcion="Se creo un nuevo rubro, Nombre: ".$rubro->nombre.", Nota: ".$rubro->nota;
         $bitacora->save();
 
@@ -132,7 +132,7 @@ class RubroController extends Controller
         $bitacora->idempresa=Auth::user()->idempresa;
         $bitacora->idusuario=Auth::user()->id;
         $bitacora->fecha=$fechahora;
-        $bitacora->tipo="Ventas";
+        $bitacora->tipo="Almacen";
         $bitacora->descripcion="Se elimino un rubro, Nombre: ".$rub->nombre;
         $bitacora->save();
 

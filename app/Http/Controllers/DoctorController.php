@@ -96,7 +96,7 @@ class DoctorController extends Controller
         $bitacora->idempresa=Auth::user()->idempresa;
         $bitacora->idusuario=Auth::user()->id;
         $bitacora->fecha=$fechahora;
-        $bitacora->tipo="Usuario";
+        $bitacora->tipo="Seguridad";
         $bitacora->descripcion="Se creo un usuario de Doctor, Nombre: ".$doctor->name.", Email: ".$doctor->email.", Dirección: ".$doctor->direccion.", Teléfono: ".$doctor->telefono.", tipo: ".$doctor->tipo_usuario.", Especialidad: ".$doctor->especialidad.", Fecha Nacimiento: ".$fecha_nacimiento.", Contacto Emergencia: ".$doctor->contacto_emergencia.", Telefono Emergencia: ".$doctor->telefono_emergencia.", Descuento maximo: ".$doctor->max_descuento;
         $bitacora->save();
 
@@ -153,7 +153,7 @@ class DoctorController extends Controller
             $bitacora->idempresa=Auth::user()->idempresa;
             $bitacora->idusuario=Auth::user()->id;
             $bitacora->fecha=$fechahora;
-            $bitacora->tipo="Usuario";
+            $bitacora->tipo="Seguridad";
             $bitacora->descripcion="Se edito un usuario doctor Nombre: ".$doctor->name.", Email: ".$doctor->email.", Dirección: ".$doctor->direccion.", Teléfono: ".$doctor->telefono.", tipo: ".$doctor->tipo_usuario.", Especialidad: ".$doctor->especialidad.", Fecha Nacimiento: ".$fecha_nacimiento.", Contacto Emergencia: ".$doctor->contacto_emergencia.", Telefono Emergencia: ".$doctor->telefono_emergencia.", Descuento maximo: ".$doctor->max_descuento;
             $bitacora->save();
 
@@ -194,7 +194,7 @@ class DoctorController extends Controller
             $bitacora->idempresa=Auth::user()->idempresa;
             $bitacora->idusuario=Auth::user()->id;
             $bitacora->fecha=$fechahora;
-            $bitacora->tipo="Usuario";
+            $bitacora->tipo="Seguridad";
             $bitacora->descripcion="Se elimino un doctor, Nombre: ".$usu->name;
             $bitacora->save();
 

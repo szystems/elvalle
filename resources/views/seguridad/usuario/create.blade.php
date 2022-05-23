@@ -29,7 +29,7 @@
                   <h3><strong><u>Datos Generales: </u></strong></h3>
                   <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                         <label for="name"><font color="orange">*</font>Nombre</label>
-                        <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Nombre del administrador">
+                        <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Nombre">
                         @if ($errors->has('name'))
                               <span class="help-block">
                                     <strong>
@@ -40,7 +40,7 @@
                   </div>
                   <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                         <label for="email"><font color="orange">*</font>Email</label>
-                        <input id="email" type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email del administrador">
+                        <input id="email" type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email">
                         @if ($errors->has('email'))
                               <span class="help-block">
                                     <strong>
@@ -60,7 +60,7 @@
                   </div>
                   <div class="form-group{{ $errors->has('telefono') ? ' has-error' : '' }}">
                         <label for="telefono">Teléfono</label>
-                        <input id="telefono" type="text" class="form-control" name="telefono" value="{{ old('telefono') }}" placeholder="Teléfono del administrador">
+                        <input id="telefono" type="text" class="form-control" name="telefono" value="{{ old('telefono') }}" placeholder="Teléfono">
                         @if ($errors->has('telefono'))
                               <span class="help-block">
                                     <strong>
@@ -71,7 +71,7 @@
                   </div>
                   <div class="form-group{{ $errors->has('direccion') ? ' has-error' : '' }}">
                         <label for="direccion">Dirección</label>
-                        <input id="direccion" type="text" class="form-control" name="direccion" value="{{ old('direccion') }}" placeholder="Dirección del administrador">
+                        <input id="direccion" type="text" class="form-control" name="direccion" value="{{ old('direccion') }}" placeholder="Dirección">
                         @if ($errors->has('direccion'))
                               <span class="help-block">
                                     <strong>

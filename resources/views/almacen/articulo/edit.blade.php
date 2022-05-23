@@ -47,7 +47,7 @@
                                           <input type="text" name="nombre" class="form-control" placeholder="Nombre..." value="{{$articulo->nombre}}">
                                     </div>
                                     <div class="form-group">
-                                          <label for="codigo"><font color="orange">*</font>Código</label>
+                                          <label for="codigo">Código</label>
                                           <input type="text" name="codigo" class="form-control" placeholder="Codigo..." value="{{$articulo->codigo}}">
                                     </div>
                                     <div class="form-group">

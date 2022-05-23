@@ -225,7 +225,7 @@ class OrdenController extends Controller
             $bitacora->idempresa=Auth::user()->idempresa;
             $bitacora->idusuario=Auth::user()->id;
             $bitacora->fecha=$fechahora;
-            $bitacora->tipo="Venta";
+            $bitacora->tipo="Ventas";
             $bitacora->descripcion="Se creo una orden nueva, Paciente: ".$pac->nombre.", Doctor: ".$doc->name.", Total:".$moneda.$total;
             $bitacora->save();
 
@@ -429,7 +429,7 @@ class OrdenController extends Controller
             $bitacora->idempresa=Auth::user()->idempresa;
             $bitacora->idusuario=Auth::user()->id;
             $bitacora->fecha=$fechahora;
-            $bitacora->tipo="Venta";
+            $bitacora->tipo="Ventas";
             $bitacora->descripcion="Se edito una orden, Paciente: ".$pac->nombre.", Doctor: ".$doc->name.", Total:".$moneda.$total;
             $bitacora->save();
 
@@ -642,7 +642,7 @@ class OrdenController extends Controller
             $bitacora->idempresa=Auth::user()->idempresa;
             $bitacora->idusuario=Auth::user()->id;
             $bitacora->fecha=$fechahora;
-            $bitacora->tipo="Venta";
+            $bitacora->tipo="Ventas";
             $bitacora->descripcion="Se creo una venta nueva desde una orden, Cliente: ".$cli->nombre.", Comprobante: ".$venta->tipo_comprobante." ".$venta->serie_comprobante."-".$venta->num_comprobante.", Fecha: ".$venta->fecha.", Total Venta: Q.".$venta->total_venta.", Abonado: ".$venta->abonado.", Estado Saldo: ".$venta->estadosaldo.", Estado Venta: ".$venta->estadoventa.", Tipo Pago: ".$venta->tipopago;
             $bitacora->save();
 
@@ -671,7 +671,7 @@ class OrdenController extends Controller
             $bitacora->idempresa=Auth::user()->idempresa;
             $bitacora->idusuario=Auth::user()->id;
             $bitacora->fecha=$fechahora;
-            $bitacora->tipo="Venta";
+            $bitacora->tipo="Ventas";
             $bitacora->descripcion="Se Cancelo una orden, Paciente: ".$pac->nombre.", Doctor: ".$doc->name.", Total:".$moneda.$orden->total;
             $bitacora->save();
 

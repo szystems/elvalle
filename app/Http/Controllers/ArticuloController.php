@@ -95,7 +95,7 @@ class ArticuloController extends Controller
         $bitacora->idempresa=Auth::user()->idempresa;
         $bitacora->idusuario=Auth::user()->id;
         $bitacora->fecha=$fechahora;
-        $bitacora->tipo="Artículo ";
+        $bitacora->tipo="Almacen ";
         $bitacora->descripcion="Se creo un artículo nuevo, Nombre: ".$articulo->nombre.", Código: ".$articulo->codigo.", Stock minimo: ".$articulo->minimo.", Descripción: ".$articulo->descripcion.", Bodega: ".$articulo->bodega.", Ubicación: ".$articulo->ubicacion;
         $bitacora->save();
 
@@ -164,7 +164,7 @@ class ArticuloController extends Controller
         $bitacora->idempresa=Auth::user()->idempresa;
         $bitacora->idusuario=Auth::user()->id;
         $bitacora->fecha=$fechahora;
-        $bitacora->tipo="Artículo ";
+        $bitacora->tipo="Almacen ";
         $bitacora->descripcion="Se edito un artículo, Nombre: ".$articulo->nombre.", Código: ".$articulo->codigo.", Stock minimo: ".$articulo->minimo.", Descripción: ".$articulo->descripcion.", Bodega: ".$articulo->bodega.", Ubicación: ".$articulo->ubicacion;
         $bitacora->save();
 
@@ -188,7 +188,7 @@ class ArticuloController extends Controller
             $bitacora->idempresa=Auth::user()->idempresa;
             $bitacora->idusuario=Auth::user()->id;
             $bitacora->fecha=$fechahora;
-            $bitacora->tipo="Artículo";
+            $bitacora->tipo="Almacen";
             $bitacora->descripcion="Se elimino un artículo, Nombre: ".$art->nombre;
             $bitacora->save();
 

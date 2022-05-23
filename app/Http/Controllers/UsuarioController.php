@@ -86,7 +86,7 @@ class UsuarioController extends Controller
         $bitacora->idempresa=Auth::user()->idempresa;
         $bitacora->idusuario=Auth::user()->id;
         $bitacora->fecha=$fechahora;
-        $bitacora->tipo="Usuario";
+        $bitacora->tipo="Seguridad";
         $bitacora->descripcion="Se creo un usuario , Nombre: ".$usuario->name.", Email: ".$usuario->email.", Dirección: ".$usuario->direccion.", Teléfono: ".$usuario->telefono.", Tipo: ".$usuario->tipo_usuario.", Fecha Nacimiento: ".$fecha_nacimiento.", Contacto Emergencia: ".$usuario->contacto_emergencia.", Telefono Emergencia: ".$usuario->telefono_emergencia.", Descuento maximo: ".$usuario->max_descuento;
         $bitacora->save();
 
@@ -144,7 +144,7 @@ class UsuarioController extends Controller
             $bitacora->idempresa=Auth::user()->idempresa;
             $bitacora->idusuario=Auth::user()->id;
             $bitacora->fecha=$fechahora;
-            $bitacora->tipo="Usuario";
+            $bitacora->tipo="Seguridad";
             $bitacora->descripcion="Se edito un usuario: Nombre: ".$usuario->name.", Email: ".$usuario->email.", Dirección: ".$usuario->direccion.", Teléfono: ".$usuario->telefono.", Tipo: ".$usuario->tipo_usuario.", Fecha Nacimiento: ".$fecha_nacimiento.", Contacto Emergencia: ".$usuario->contacto_emergencia.", Telefono Emergencia: ".$usuario->telefono_emergencia.", Descuento maximo: ".$usuario->max_descuento;
             $bitacora->save();
 
@@ -175,7 +175,7 @@ class UsuarioController extends Controller
             $bitacora->idempresa=Auth::user()->idempresa;
             $bitacora->idusuario=Auth::user()->id;
             $bitacora->fecha=$fechahora;
-            $bitacora->tipo="Usuario";
+            $bitacora->tipo="Seguridad";
             $bitacora->descripcion="Se elimino un Usuario, Nombre: ".$usu->name;
             $bitacora->save();
 

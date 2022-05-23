@@ -290,7 +290,7 @@ class VentaController extends Controller
             $bitacora->idempresa=Auth::user()->idempresa;
             $bitacora->idusuario=Auth::user()->id;
             $bitacora->fecha=$fechahora;
-            $bitacora->tipo="Venta";
+            $bitacora->tipo="Ventas";
             $bitacora->descripcion="Se creo una venta nueva, Cliente: ".$cli->nombre.", Comprobante: ".$venta->tipo_comprobante." ".$venta->serie_comprobante."-".$venta->num_comprobante.", Fecha: ".$venta->fecha.", Total Venta: Q.".$venta->total_venta.", Abonado: ".$venta->abonado.", Estado Saldo: ".$venta->estadosaldo.", Estado Venta: ".$venta->estadoventa.", Tipo Pago: ".$venta->tipopago;
             $bitacora->save();
 
@@ -541,7 +541,7 @@ class VentaController extends Controller
             $bitacora->idempresa=Auth::user()->idempresa;
             $bitacora->idusuario=Auth::user()->id;
             $bitacora->fecha=$fechahora;
-            $bitacora->tipo="Venta";
+            $bitacora->tipo="Ventas";
             $bitacora->descripcion="Se elimino una venta, Cliente: ".$cli->nombre.", Comprobante: ".$ven->tipo_comprobante." ".$ven->serie_comprobante."-".$ven->num_comprobante.", Fecha: ".$ven->fecha.", Total Venta: ".$moneda.$ven->total_venta.", Abonado: ".$moneda.$ven->abonado.", Estado Saldo: ".$ven->estadosaldo.", Estado Venta: ".$ven->estadoventa.", Tipo Pago: ".$ven->tipopago;
             $bitacora->save();
 
@@ -720,7 +720,7 @@ class VentaController extends Controller
         $bitacora->idempresa=Auth::user()->idempresa;
         $bitacora->idusuario=Auth::user()->id;
         $bitacora->fecha=$fechahora;
-        $bitacora->tipo="Venta";
+        $bitacora->tipo="Ventas";
         $bitacora->descripcion="Se cerro una venta, Cliente: ".$cli->nombre.", Comprobante: ".$ven->tipo_comprobante." ".$ven->serie_comprobante."-".$ven->num_comprobante.", Fecha: ".$ven->fecha.", Total Venta: ".$moneda.$ven->total_venta.", Total Abonado: ".$moneda.$venta->abonado.", Estado Saldo: ".$venta->estadosaldo.", Estado Venta: ".$venta->estadoventa.", Tipo Pago: ".$venta->tipopago;
         $bitacora->save();
 
@@ -767,7 +767,7 @@ class VentaController extends Controller
                 $bitacora->idempresa=Auth::user()->idempresa;
                 $bitacora->idusuario=Auth::user()->id;
                 $bitacora->fecha=$fechahora;
-                $bitacora->tipo="Venta";
+                $bitacora->tipo="Ventas";
                 $bitacora->descripcion="Se abono una venta, Cliente: ".$cli->nombre.", Comprobante: ".$ven->tipo_comprobante." ".$ven->serie_comprobante."-".$ven->num_comprobante.", Fecha: ".$ven->fecha.", Total Venta: ".$moneda.$ven->total_venta.", Nuevo Abono: ".$moneda.$totalabono.", Total Abonado: ".$moneda.$venta->abonado.", Estado Saldo: ".$venta->estadosaldo.", Estado Venta: ".$venta->estadoventa.", Tipo Pago: ".$venta->tipopago;
                 $bitacora->save();
 
@@ -923,7 +923,7 @@ class VentaController extends Controller
                 $bitacora->idempresa=Auth::user()->idempresa;
                 $bitacora->idusuario=Auth::user()->id;
                 $bitacora->fecha=$fechahora;
-                $bitacora->tipo="Venta";
+                $bitacora->tipo="Ventas";
                 $bitacora->descripcion="Se edito una venta, Cliente: ".$cli->nombre.", Comprobante: ".$venta->tipo_comprobante." ".$venta->serie_comprobante."-".$venta->num_comprobante.", Fecha: ".$venta->fecha.", Total Venta: ".$moneda.$venta->total_venta.", Abonado: ".$moneda.$venta->abonado.", Estado Saldo: ".$venta->estadosaldo.", Estado Venta: ".$venta->estadoventa.", Tipo Pago: ".$venta->tipopago;
                 $bitacora->save();
 

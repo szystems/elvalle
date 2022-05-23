@@ -130,7 +130,7 @@
                                             $subtotal=$subtotal+$det->sub_total_compra;
                                             $totaldescuento=$totaldescuento+$det->descuento;
                                         ?>
-                                        <td align="left">{{ $det->CodigoIngreso}} {{ $det->Articulo}}</td>
+                                        <td align="left">@if($det->CodigoIngreso != null){{ $det->CodigoIngreso}} /@endif {{ $det->Articulo}}</td>
                                         <td align="center">{{ $det->PresentacionCompra}}</td>
                                         <td align="center">{{ $det->cantidad_compra}}</td>
                                         <td align="center">{{ $det->bonificacion}}</td>
@@ -187,7 +187,7 @@
                                 <tbody>
                                     @foreach($detalles as $det)
                                         <tr>
-                                            <td align="left">{{ $det->CodigoInventario}} {{ $det->Articulo}}</td>
+                                            <td align="left">@if($det->CodigoInventario != null){{ $det->CodigoInventario}} /@endif  {{ $det->Articulo}}</td>
                                             <?php
                                                 $fecha_vencimiento = date("d-m-Y", strtotime($det->fecha_vencimiento));
                                             ?>

@@ -116,7 +116,7 @@ class IngresoController extends Controller
         ->where('idempresa','=',$idempresa)
         ->get();
     	$articulos=DB::table('articulo as art')
-    	->select(DB::raw('CONCAT(art.codigo, " ",art.nombre) AS articulo'),'art.idarticulo','art.descripcion','art.codigo','art.nombre')
+    	->select(DB::raw('art.nombre AS articulo'),'art.idarticulo','art.descripcion','art.codigo','art.nombre')
     	->where('art.estado','=','Activo')
         ->where('art.idempresa','=',$idempresa)
     	->get();
@@ -236,7 +236,7 @@ class IngresoController extends Controller
                 $bitacora->idempresa=Auth::user()->idempresa;
                 $bitacora->idusuario=Auth::user()->id;
                 $bitacora->fecha=$fechahora;
-                $bitacora->tipo="Ingreso";
+                $bitacora->tipo="Compras";
                 $bitacora->descripcion="Se creo un ingreso nuevo, Proveedor: ".$pro->nombre.", Comprobante: ".$ingreso->tipo_comprobante." ".$ingreso->serie_comprobante."-".$ingreso->num_comprobante.", Fecha: ".$ingreso->fecha.", Total Compra: ".$moneda.$total;
                 $bitacora->save();
 

@@ -66,7 +66,7 @@ class CategoriaController extends Controller
         $bitacora->idempresa=Auth::user()->idempresa;
         $bitacora->idusuario=Auth::user()->id;
         $bitacora->fecha=$fechahora;
-        $bitacora->tipo="Categoría";
+        $bitacora->tipo="Almacen";
         $bitacora->descripcion="Se creo una nueva categoría nueva, Nombre: ".$categoria->nombre.", Descripción: ".$categoria->descripcion;
         $bitacora->save();
 
@@ -102,7 +102,7 @@ class CategoriaController extends Controller
         $bitacora->idempresa=Auth::user()->idempresa;
         $bitacora->idusuario=Auth::user()->id;
         $bitacora->fecha=$fechahora;
-        $bitacora->tipo="Categoría";
+        $bitacora->tipo="Almacen";
         $bitacora->descripcion="Se edito una categoría, Nombre: ".$categoria->nombre.", Descripción: ".$categoria->descripcion;
         $bitacora->save();
 
@@ -122,7 +122,7 @@ class CategoriaController extends Controller
         $bitacora->idempresa=Auth::user()->idempresa;
         $bitacora->idusuario=Auth::user()->id;
         $bitacora->fecha=$fechahora;
-        $bitacora->tipo="Categoría";
+        $bitacora->tipo="Almacen";
         $bitacora->descripcion="Se elimino una categoría, Nombre: ".$cat->nombre;
         $bitacora->save();
 

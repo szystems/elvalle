@@ -25,7 +25,7 @@ class PacienteFormRequest extends FormRequest
     {
         return [
             'nombre'=>'required',
-            'correo'=>'string|email|max:255',
+            'correo'=>'email|nullable',
             'fecha_nacimiento'=>'required',
             'dpi'=>'required',
             'foto'=>'mimes:jpg,jpeg,bmp,png|max:10000'

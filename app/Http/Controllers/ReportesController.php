@@ -1580,7 +1580,7 @@ class ReportesController extends Controller
                     $view = \View::make('pdf.compras.vista.vistacompra', compact('ingreso','detalles','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
                     $pdf = \App::make('dompdf.wrapper');
                     $pdf->loadHTML($view);
-                    //$pdf->setPaper('A4', 'landscape');
+                    $pdf->setPaper('A4', 'landscape');
                     return $pdf->download ('Vistacompra'.'-'.$comprobante.'-'.$nompdf.'.pdf');
                 }
                 if ( $verpdf == "Navegador" )
@@ -1588,7 +1588,7 @@ class ReportesController extends Controller
                     $view = \View::make('pdf.compras.vista.vistacompra', compact('ingreso','detalles','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
                     $pdf = \App::make('dompdf.wrapper');
                     $pdf->loadHTML($view);
-                    //$pdf->setPaper('A4', 'landscape');
+                    $pdf->setPaper('A4', 'landscape');
                     return $pdf->stream ('Vistacompra'.'-'.$comprobante.'-'.$nompdf.'.pdf');
                 }
             }
