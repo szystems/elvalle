@@ -75,6 +75,7 @@
 						<thead>
 							<th><h5><STRONG>Opciones</STRONG></th>
 							<th><h5><STRONG>Nombre</STRONG></th>
+							<th><h5><STRONG>No. Colegiado</STRONG></th>
 							<th><h5><STRONG>Email</STRONG></th>
 							<th><h5><STRONG>Especialidad</STRONG></th>
 							
@@ -118,6 +119,7 @@
 									{{ $usu->name}} ({{ $usu->especialidad }})
 								</h5>
 							</td>
+							<td align="center"><h5>{{ $usu->no_colegiado}}</h5></td>
 							<td align="left"><h5>{{ $usu->email}}</h5></td>
 							<td align="center"><h5>{{ $usu->especialidad}}</h5></td>
 							

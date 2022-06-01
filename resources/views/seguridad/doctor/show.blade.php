@@ -59,6 +59,12 @@
                             <p>{{$doctor->name}}</p>
                         </div>
                     </div>
+                    <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+                        <div class="form-group">
+                            <label for="no_colegiado"><strong>No. Colegiado</strong></label>
+                            <p>{{$doctor->no_colegiado}}</p>
+                        </div>
+                    </div>
                     <?php
                         $fecha_nacimiento = date("d-m-Y", strtotime($doctor->fecha_nacimiento));
 

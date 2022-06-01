@@ -65,6 +65,7 @@ class DoctorController extends Controller
     	$doctor->password=bcrypt($request->get('password'));
     	$doctor->tipo_usuario=$request->get('tipo_usuario');
         $doctor->especialidad=$request->get('especialidad');
+        $doctor->no_colegiado=$request->get('no_colegiado');
     	$doctor->telefono=$request->get('telefono');
     	$doctor->direccion=$request->get('direccion');
         $fecha_nacimiento = date("Y-m-d", strtotime($request->get('fecha_nacimiento')));
@@ -130,6 +131,7 @@ class DoctorController extends Controller
             $doctor->telefono=$request->get('telefono');
             $doctor->direccion=$request->get('direccion');
             $doctor->especialidad=$request->get('especialidad');
+            $doctor->no_colegiado=$request->get('no_colegiado');
             $fecha_nacimiento = date("Y-m-d", strtotime($request->get('fecha_nacimiento')));
             $doctor->fecha_nacimiento=trim($fecha_nacimiento);
             $doctor->contacto_emergencia=$request->get('contacto_emergencia');

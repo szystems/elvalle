@@ -323,35 +323,35 @@
                                                                               <tr>
                                                                                     <td>
                                                                                           <strong>Impresion Clinica</strong>
-                                                                                          <textarea name="impresion_clinica" class="form-control">{{ old('impresion_clinica') }}</textarea>
+                                                                                          <textarea name="impresion_clinica" class="form-control" required>{{ old('impresion_clinica') }}</textarea>
                                                                                     </td>
                                                                               </tr>
 
                                                                               <tr>
                                                                                     <td>
                                                                                           <strong>Plan Diagnostico</strong>
-                                                                                          <textarea name="plan_diagnostico" class="form-control">{{ old('plan_diagnostico') }}</textarea>
+                                                                                          <textarea name="plan_diagnostico" class="form-control" required>{{ old('plan_diagnostico') }}</textarea>
                                                                                     </td>
                                                                               </tr>
 
                                                                               <tr>
                                                                                     <td>
                                                                                           <strong>Plan Tratamiento</strong>
-                                                                                          <textarea name="plan_tratamiento" class="form-control">{{ old('plan_tratamiento') }}</textarea>
+                                                                                          <textarea name="plan_tratamiento" class="form-control" required>{{ old('plan_tratamiento') }}</textarea>
                                                                                     </td>
                                                                               </tr>
 
                                                                               <tr>
                                                                                     <td>
                                                                                           <strong>Recomendaciones Generales</strong>
-                                                                                          <textarea name="recomendaciones_generales" class="form-control">{{ old('recomendaciones_generales') }}</textarea>
+                                                                                          <textarea name="recomendaciones_generales" class="form-control" required>{{ old('recomendaciones_generales') }}</textarea>
                                                                                     </td>
                                                                               </tr>
 
                                                                               <tr>
                                                                                     <td>
                                                                                           <strong>Recomendaciones Especificas</strong>
-                                                                                          <textarea name="recomendaciones_especificas" class="form-control">{{ old('recomendaciones_especificas') }}</textarea>
+                                                                                          <textarea name="recomendaciones_especificas" class="form-control" required>{{ old('recomendaciones_especificas') }}</textarea>
                                                                                     </td>
                                                                               </tr>
 

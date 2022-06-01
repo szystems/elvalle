@@ -2065,7 +2065,7 @@ class ReportesController extends Controller
                 ->join('paciente as p','r.idpaciente','=','p.idpaciente')
                 ->join('users as d','r.iddoctor','=','d.id')
                 ->join('users as u','r.idusuario','=','u.id')
-                ->select('r.idreceta','r.fecha','r.iddoctor','d.name as Doctor','d.foto as Imgdoctor','d.especialidad','r.idpaciente','p.nombre as Paciente','p.foto as Imgpaciente','r.idusuario','u.name as Usuario','u.tipo_usuario')
+                ->select('r.idreceta','r.fecha','r.iddoctor','d.name as Doctor','d.no_colegiado','d.foto as Imgdoctor','d.especialidad','r.idpaciente','p.nombre as Paciente','p.foto as Imgpaciente','r.idusuario','u.name as Usuario','u.tipo_usuario')
                 ->where('r.idreceta','=',$idreceta) 
                 ->first();
 

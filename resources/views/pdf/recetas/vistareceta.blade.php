@@ -53,8 +53,9 @@
 				$fecha = date("d-m-Y", strtotime($receta->fecha));
 			?>
 			<strong>Fecha:</strong><font color="Blue"> <strong>{{ $fecha}} </strong></font>
-			<br><strong>Doctor:</strong><font color="Blue"> <strong>{{ $receta->Paciente}}<strong></font>
-			<br><strong>Paciente:</strong><font color="Blue"> <strong>{{ $receta->Doctor}} ({{ $receta->especialidad }})<strong></font>
+			<br><strong>Paciente:</strong><font color="Blue"> <strong>{{ $receta->Paciente}}<strong></font>
+			<br><strong>Doctor:</strong><font color="Blue"> <strong>{{ $receta->Doctor}} ({{ $receta->especialidad }})<strong></font>
+			<br><strong>No. Colegiado:</strong><font color="Blue"> <strong>{{ $receta->no_colegiado}}<strong></font>
 		</h6>
 		<h4 align="left">
 			<strong><u>Detalle de Receta</u></strong>
@@ -76,7 +77,22 @@
             </tr>
             @endforeach
 		</table>
+		<br><br><br>
+		<table style="border: hidden">
+
+			<tbody style="border: hidden">
+			<tr style="border: hidden; text-align:center;">
+				<td style="border: hidden; text-align:center;">____________________________</td>
+				<td style="border: hidden; text-align:center;">____________________________</td>
+			</tr>
+			<tr style="border: hidden; text-align:center;">
+				<td style="border: hidden; text-align:center;">Firma</td>
+				<td style="border: hidden; text-align:center;">Sello</td>
+			</tr>
+			</tbody>
+		</table>
 		</div>
+
 		<br>
 		<h6>Reporte generado en: <a href="https://szystems.com/" target="_blank">SZ-Ventas Version 1.0</a> &copy; 2022 <a class="link-muted" href="https://szystems.com/" target="_blank">Szystems</a>. Todos los derechos reservados.</h6>
 	</body>

@@ -38,6 +38,17 @@
                               </span>
                         @endif
                   </div>
+                  <div class="form-group{{ $errors->has('no_colegiado') ? ' has-error' : '' }}">
+                        <label for="name">No. Colegiado</label>
+                        <input id="no_colegiado" type="text" class="form-control" name="no_colegiado" value="{{ old('no_colegiado') }}" placeholder="No. Colegiado" onkeypress="return validarentero(event,this.value)">
+                        @if ($errors->has('no_colegiado'))
+                              <span class="help-block">
+                                    <strong>
+                                          {{ $errors->first('no_colegiado') }}
+                                    </strong>
+                              </span>
+                        @endif
+                  </div>
                   <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                         <label for="email"><font color="orange">*</font>Email</label>
                         <input id="email" type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email del Doctor">
