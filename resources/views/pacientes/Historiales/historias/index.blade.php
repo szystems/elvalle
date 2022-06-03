@@ -220,7 +220,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td><strong>Observaciones</strong></td>
-                                                    <td align="center">{{ $historia->observaciones }}</td>
+                                                    <td align="left"><textarea readonly name="observaciones" id="" class="form-control" placeholder="Observaciones...">{{ $historia->observaciones }}</textarea></td>
                                                 </tr>
                                                 
                                             </tbody>
@@ -264,7 +264,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td><strong>Otros</strong></td>
-                                                    <td align="center">{{ $historia->otros }} <textarea readonly name="otros_texto" id="" class="form-control" placeholder="Si otros...">{{ $historia->otros_texto }}</textarea></td>
+                                                    <td align="center">{{ $historia->otros }} </td>
                                                 </tr>
                                                 
                                             </tbody>
