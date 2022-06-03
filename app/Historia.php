@@ -56,6 +56,7 @@ class Historia extends Model
         'hiperlipidemias_quien',
         'cancer_endometrial',
         'cancer_endometrial_quien',
+        'familiares_otros',
 
         'gestas',
         'vias_resolucion',
@@ -69,9 +70,10 @@ class Historia extends Model
         'fur',
         'ciclos_cada',
         'ciclos_por',
-        'ciclos_dias',
+        'observaciones',
         'cantidad_hemorragia',
         'frecuencia',
+        'dismenorrea',
 
         'activa',
         'edad',
@@ -87,6 +89,7 @@ class Historia extends Model
         'colposcopia',
         'colposcopia_si',
         'procedimientos',
+        'rendiciones',
 
         'revision'
     ];

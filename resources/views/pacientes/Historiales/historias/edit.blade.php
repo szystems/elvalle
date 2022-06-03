@@ -113,7 +113,7 @@
                                                 </div>
                                                 <div class="col-lg-4 col-sm-45 col-md-4 col-xs-12">
                                                       <div class="form-group">
-                                                            <label for="profesion"><strong>Profesion</strong></label>
+                                                            <label for="profesion"><strong>Ocupación</strong></label>
                                                             <input type="text" class="form-control" name="profesion" value="{{ $historia->profesion }}">
                                                       </div>
                                                 </div>
@@ -221,6 +221,19 @@
                                                                                           </select>
                                                                                     </td>
                                                                               </tr>
+                                                                              <tr>
+                                                                                    <td><strong>Observaciones</strong></td>
+                                                                                    <td>
+                                                                                          <div class="form-group{{ $errors->has('observaciones') ? ' has-error' : '' }}">
+                                                                                                <textarea class="form-control" name="observaciones">{{ $historia->observaciones }}</textarea>
+                                                                                                @if ($errors->has('observaciones'))
+                                                                                                    <span class="help-block">
+                                                                                                        <strong><font color="red">{{ $errors->first('observaciones') }}</font></strong>
+                                                                                                    </span>
+                                                                                                @endif
+                                                                                          </div>
+                                                                                    </td>
+                                                                              </tr>
                                                                               
                                                                         </tbody>
                                                                   </table>
@@ -236,7 +249,7 @@
                                                                         <tbody>
                                                                               <tr>
                                                                                     
-                                                                                    <td><strong>Affecciones Ginecologicas</strong></td>
+                                                                                    <td><strong>Afecciones Ginecologicas</strong></td>
                                                                                     <td align="left">
                                                                                           <select name="affecciones_ginecologicas" class="form-control">
                                                                                                 <option value="{{ $historia->affecciones_ginecologicas }}" selected>{{ $historia->affecciones_ginecologicas }}</option>
@@ -256,7 +269,7 @@
                                                                                     </td>
                                                                               </tr>
                                                                               <tr>
-                                                                                    <td><strong>Varices Trombosis</strong></td>
+                                                                                    <td><strong>Varices / Trombosis</strong></td>
                                                                                     <td align="left">
                                                                                           <select name="varices_trombosis" class="form-control">
                                                                                                 <option value="{{ $historia->varices_trombosis }}" selected>{{ $historia->varices_trombosis }}</option>
@@ -437,6 +450,20 @@
                                                                                           <input type="text" name="cancer_endometrial_quien" class="form-control" value="{{ $historia->cancer_endometrial_quien }}">
                                                                                     </td>
                                                                               </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>Otros</strong></td>
+                                                                                    <td>
+                                                                                          <div class="form-group{{ $errors->has('familiares_otros') ? ' has-error' : '' }}">
+                                                                                                <textarea class="form-control" name="familiares_otros">{{ $historia->familiares_otros }}</textarea>
+                                                                                                @if ($errors->has('familiares_otros'))
+                                                                                                    <span class="help-block">
+                                                                                                        <strong><font color="red">{{ $errors->first('familiares_otros') }}</font></strong>
+                                                                                                    </span>
+                                                                                                @endif
+                                                                                          </div>
+                                                                                    </td>
+                                                                              </tr>
                                                                               
                                                                         </tbody>
                                                                   </table>
@@ -456,7 +483,15 @@
                                                                               <tr>
                                                                                     <td><strong>Gestas</strong></td>
                                                                                     <td align="left">
-                                                                                          <input type="number" class="form-control" name="gestas" value="{{ $historia->gestas }}">
+                                                                                          <div class="form-group{{ $errors->has('gestas') ? ' has-error' : '' }}">
+                                                                                                    <input id="gestas" type="number" class="form-control" name="gestas" value="{{ $historia->gestas }}">
+                                                                    
+                                                                                                    @if ($errors->has('gestas'))
+                                                                                                        <span class="help-block">
+                                                                                                            <strong><font color="red">{{ $errors->first('gestas') }}</font></strong>
+                                                                                                        </span>
+                                                                                                    @endif
+                                                                                          </div>
                                                                                     </td>
                                                                               </tr>
                                                                               <tr>
@@ -468,13 +503,29 @@
                                                                               <tr>
                                                                                     <td><strong>Hijos Vivos</strong></td>
                                                                                     <td align="left">
-                                                                                          <input type="number" class="form-control" name="hijos_vivos" value="{{ $historia->hijos_vivos }}">
+                                                                                          <div class="form-group{{ $errors->has('hijos_vivos') ? ' has-error' : '' }}">
+                                                                                                    <input id="hijos_vivos" type="number" class="form-control" name="hijos_vivos" value="{{ $historia->hijos_vivos }}">
+                                                                    
+                                                                                                    @if ($errors->has('hijos_vivos'))
+                                                                                                        <span class="help-block">
+                                                                                                            <strong><font color="red">{{ $errors->first('hijos_vivos') }}</font></strong>
+                                                                                                        </span>
+                                                                                                    @endif
+                                                                                          </div>
                                                                                     </td>
                                                                               </tr>
                                                                               <tr>
                                                                                     <td><strong>Hijos Muertos</strong></td>
                                                                                     <td align="left">
-                                                                                          <input type="number" class="form-control" name="hijos_muertos" value="{{ $historia->hijos_muertos }}">
+                                                                                          <div class="form-group{{ $errors->has('hijos_muertos') ? ' has-error' : '' }}">
+                                                                                                    <input id="hijos_muertos" type="number" class="form-control" name="hijos_muertos" value="{{ $historia->hijos_muertos }}">
+                                                                    
+                                                                                                    @if ($errors->has('hijos_muertos'))
+                                                                                                        <span class="help-block">
+                                                                                                            <strong><font color="red">{{ $errors->first('hijos_muertos') }}</font></strong>
+                                                                                                        </span>
+                                                                                                    @endif
+                                                                                          </div>
                                                                                     </td>
                                                                               </tr>
                                                                               <tr>
@@ -492,7 +543,15 @@
                                                                               <tr>
                                                                                     <td><strong>Abortos</strong></td>
                                                                                     <td align="left">
-                                                                                          <input type="number" class="form-control" name="abortos" value="{{ $historia->abortos }}">
+                                                                                          <div class="form-group{{ $errors->has('abortos') ? ' has-error' : '' }}">
+                                                                                                    <input id="abortos" type="number" class="form-control" name="abortos" value="{{ $historia->abortos }}">
+                                                                    
+                                                                                                    @if ($errors->has('abortos'))
+                                                                                                        <span class="help-block">
+                                                                                                            <strong><font color="red">{{ $errors->first('abortos') }}</font></strong>
+                                                                                                        </span>
+                                                                                                    @endif
+                                                                                          </div>
                                                                                     </td>
                                                                               </tr>
                                                                               <tr>
@@ -537,9 +596,30 @@
                                                                               <tr>
                                                                                     <td><strong>Ciclos</strong></td>
                                                                                     <td align="left">
-                                                                                          Cada:<input type="number" class="form-control" name="ciclos_cada" value="{{ $historia->ciclos_cada }}">
-                                                                                          Por:<input type="number" class="form-control" name="ciclos_por" value="{{ $historia->ciclos_por }}">
-                                                                                          Dias:<input type="number" class="form-control" name="ciclos_dias" value="{{ $historia->ciclos_dias }}">
+                                                                                          Cada:
+                                                                                          <div class="form-group{{ $errors->has('ciclos_cada') ? ' has-error' : '' }}">
+                                                                                                <input id="ciclos_cada" type="number" class="form-control" name="ciclos_cada" value="{{ $historia->ciclos_cada }}">
+                                                                                                @if ($errors->has('ciclos_cada'))
+                                                                                                    <span class="help-block">
+                                                                                                        <strong><font color="red">{{ $errors->first('ciclos_cada') }}</font></strong>
+                                                                                                    </span>
+                                                                                                @endif
+                                                                                          </div>
+                                                                                          Por:
+                                                                                          <div class="form-group{{ $errors->has('ciclos_por') ? ' has-error' : '' }}">
+                                                                                                <input id="ciclos_por" type="number" class="form-control" name="ciclos_por" value="{{ $historia->ciclos_por }}">
+                                                                                                @if ($errors->has('ciclos_por'))
+                                                                                                    <span class="help-block">
+                                                                                                        <strong><font color="red">{{ $errors->first('ciclos_por') }}</font></strong>
+                                                                                                    </span>
+                                                                                                @endif
+                                                                                          </div>
+                                                                                          Dismenorrea:
+                                                                                          <select name="dismenorrea" class="form-control">
+                                                                                                <option value="{{ $historia->dismenorrea }}" selected>{{ $historia->dismenorrea }}</option>
+                                                                                                <option value="NO">NO</option>
+                                                                                                <option value="SI">SI</option>
+                                                                                          </select>
                                                                                     </td>
                                                                               </tr>
                                                                               <tr>
@@ -608,13 +688,29 @@
                                                                               <tr>
                                                                                     <td><strong>Edad de inicio de vida sexual</strong></td>
                                                                                     <td align="left">
-                                                                                          <input type="number" class="form-control" name="edad" value="{{ $historia->edad }}">
+                                                                                          <div class="form-group{{ $errors->has('edad') ? ' has-error' : '' }}">
+                                                                                                    <input id="edad" type="number" class="form-control" name="edad" value="{{ $historia->edad }}">
+                                                                    
+                                                                                                    @if ($errors->has('edad'))
+                                                                                                        <span class="help-block">
+                                                                                                            <strong><font color="red">{{ $errors->first('edad') }}</font></strong>
+                                                                                                        </span>
+                                                                                                    @endif
+                                                                                          </div>
                                                                                     </td>
                                                                               </tr>
                                                                               <tr>
                                                                                     <td><strong>Parejas</strong></td>
                                                                                     <td align="left">
-                                                                                          <input type="number" class="form-control" name="parejas" value="{{ $historia->parejas }}">
+                                                                                          <div class="form-group{{ $errors->has('parejas') ? ' has-error' : '' }}">
+                                                                                                    <input id="parejas" type="number" class="form-control" name="parejas" value="{{ $historia->parejas }}">
+                                                                    
+                                                                                                    @if ($errors->has('parejas'))
+                                                                                                        <span class="help-block">
+                                                                                                            <strong><font color="red">{{ $errors->first('parejas') }}</font></strong>
+                                                                                                        </span>
+                                                                                                    @endif
+                                                                                          </div>
                                                                                     </td>
                                                                               </tr>
                                                                               <tr>
@@ -751,9 +847,9 @@
                                                                               <tr>
                                                                                     <td><strong>Colonoscopia</strong></td>
                                                                                     <td align="left">
-                                                                                          <select name="colposcopia" class="form-control">
-                                                                                                @if ( $historia->colposcopia )
-                                                                                                      <option value="{{ $historia->colposcopia }}" selected>{{ $historia->colposcopia }}</option>
+                                                                                          <select name="colonoscopia" class="form-control">
+                                                                                                @if ( $historia->colonoscopia )
+                                                                                                      <option value="{{ $historia->colonoscopia }}" selected>{{ $historia->colonoscopia }}</option>
                                                                                                       <option value="NO">NO</option>
                                                                                                       <option value="SI">SI</option>
                                                                                                 @else
@@ -761,13 +857,19 @@
                                                                                                       <option value="SI">SI</option>
                                                                                                 @endif
                                                                                           </select>
-                                                                                          <textarea class="form-control" name="colposcopia_si" placeholder="Colonoscopia si...">{{ $historia->colposcopia_si }}</textarea>
+                                                                                          <textarea class="form-control" name="colonoscopia_si" placeholder="Colonoscopia si...">{{ $historia->colonoscopia_si }}</textarea>
                                                                                     </td>
                                                                               </tr>
                                                                               <tr>
                                                                                     <td><strong>Procedimientos</strong></td>
                                                                                     <td align="left">
                                                                                           <textarea class="form-control" name="procedimientos">{{ $historia->procedimientos }}</textarea>
+                                                                                    </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                    <td><strong>Rendiciones</strong></td>
+                                                                                    <td align="left">
+                                                                                          <textarea class="form-control" name="rendiciones">{{ $historia->rendiciones }}</textarea>
                                                                                     </td>
                                                                               </tr>
                                                                               

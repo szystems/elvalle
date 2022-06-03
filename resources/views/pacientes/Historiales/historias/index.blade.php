@@ -155,7 +155,7 @@
 
                                 <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
                                     <div class="form-group">
-                                        <label for="profesion"><strong>Profesion</strong></label>
+                                        <label for="profesion"><strong>Ocupación</strong></label>
                                         <p>{{$historia->profesion}}</p>
                                     </div>
                                 </div>
@@ -218,6 +218,10 @@
                                                     <td><strong>Ejercicio</strong></td>
                                                     <td align="center">{{ $historia->ejercicio }}</td>
                                                 </tr>
+                                                <tr>
+                                                    <td><strong>Observaciones</strong></td>
+                                                    <td align="center">{{ $historia->observaciones }}</td>
+                                                </tr>
                                                 
                                             </tbody>
                                         </table>
@@ -231,7 +235,7 @@
                                             <tbody>
                                                 <tr>
                                                     
-                                                    <td><strong>Affecciones Ginecologicas</strong></td>
+                                                    <td><strong>Afecciones Ginecologicas</strong></td>
                                                     <td align="center">{{ $historia->affecciones_ginecologicas }}</td>
                                                 </tr>
                                                 <tr>
@@ -239,7 +243,7 @@
                                                     <td align="center">{{ $historia->cancer }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td><strong>Varices Trombosis</strong></td>
+                                                    <td><strong>Varices / Trombosis</strong></td>
                                                     <td align="center">{{ $historia->varices_trombosis }}</td>
                                                 </tr>
                                                 <tr>
@@ -317,6 +321,10 @@
                                                     <td><strong>Cancer Endometrial</strong></td>
                                                     <td align="center">{{ $historia->cancer_endometrial }}</td>
                                                     <td align="left">{{ $historia->cancer_endometrial_quien }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Otros</strong></td>
+                                                    <td align="left" colspan="2"><textarea readonly name="familiares_otros" id="" class="form-control" placeholder="Otros...">{{ $historia->familiares_otros }}</textarea></td>
                                                 </tr>
                                                 
                                             </tbody>
@@ -405,7 +413,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td><strong>Ciclos</strong></td>
-                                                    <td align="center">Cada: {{ $historia->ciclos_cada }}, por: {{ $historia->ciclos_por }}, dias: {{ $historia->ciclos_dias }}</td>
+                                                    <td align="center">Cada: {{ $historia->ciclos_cada }}, por: {{ $historia->ciclos_por }} Dismenorrea: {{ $historia->dismenorrea }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td><strong>Cantidad Hemorragia</strong></td>
@@ -479,14 +487,18 @@
                                                     <td align="center">{{ $historia->resultado }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td><strong>Colposcopia</strong></td>
-                                                    <td align="center">{{ $historia->colposcopia }} <textarea readonly class="form-control" placeholder="Colposcopia si...">{{ $historia->colposcopia_si }}</textarea></td>
+                                                    <td><strong>Colonoscopia</strong></td>
+                                                    <td align="center">{{ $historia->colonoscopia }} <textarea readonly class="form-control" placeholder="colonoscopia si...">{{ $historia->colonoscopia_si }}</textarea></td>
                                                 </tr>
                                                 <tr>
                                                     <td><strong>Procedimientos Ginecologicos</strong></td>
                                                     <td align="center"><textarea readonly class="form-control" placeholder="Procedimientos...">{{ $historia->procedimientos }}</textarea></td>
                                                 </tr>
-                                                
+                                                <tr>
+                                                    <td><strong>Rendiciones</strong></td>
+                                                    <td align="center"><textarea readonly class="form-control" placeholder="Rendiciones...">{{ $historia->rendiciones }}</textarea></td>
+                                                </tr>
+
                                             </tbody>
                                         </table>
                                     </div>

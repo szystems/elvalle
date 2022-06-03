@@ -115,7 +115,7 @@
 				<td><p align="left"><font color="black">{{ $historia->tel_emergencia}}</font></p></td>	
 			</tr>
 			<tr>
-				<td><p align="right"><strong>Profesion:</strong></p></td>
+				<td><p align="right"><strong>Ocupación:</strong></p></td>
 				<td><p align="left"><font color="black">{{ $historia->profesion}}</font></p></td>	
 			</tr>
 			<tr>
@@ -162,7 +162,7 @@
 				<td><p align="left"><font color="black">{{ $historia->ejercicio}}</font></p></td>	
 			</tr>
 			<tr>
-				<td><p align="right"><strong>Affecciones Ginecologicas:</strong></p></td>
+				<td><p align="right"><strong>Afecciones Ginecologicas:</strong></p></td>
 				<td><p align="left"><font color="black">{{ $historia->affecciones_ginecologicas}}</font></p></td>	
 			</tr>
 			<tr>
@@ -170,7 +170,7 @@
 				<td><p align="left"><font color="black">{{ $historia->cancer}}</font></p></td>	
 			</tr>
 			<tr>
-				<td><p align="right"><strong>Varices Trombosis:</strong></p></td>
+				<td><p align="right"><strong>Varices / Trombosis:</strong></p></td>
 				<td><p align="left"><font color="black">{{ $historia->varices_trombosis}}</font></p></td>	
 			</tr>
 			<tr>
@@ -196,6 +196,10 @@
 			<tr>
 				<td><p align="right"><strong>Si otros:</strong></p></td>
 				<td><p align="left"><font color="black">{{ $historia->otros_texto}}</font></p></td>	
+			</tr>
+			<tr>
+				<td><p align="right"><strong>Observaciones:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->observaciones}}</font></p></td>	
 			</tr>
 			<tr>		
 				<th colspan="2"><p align="center">Antecedentes Familiares: </p></th>
@@ -263,6 +267,12 @@
 					@endif
 				</td>		
 			</tr>
+			<tr>
+				<td><p align="right"><strong>Otros:</strong></p></td>
+				<td>
+					<p align="left"><font color="black">{{ $historia->familiares_otros}} </font></p>
+				</td>		
+			</tr>
 			<tr>		
 				<th colspan="2"><p align="center">Antecedentes Obstetricos: </p></th>
 			</tr>
@@ -316,7 +326,7 @@
 			</tr>
 			<tr>
 				<td><p align="right"><strong>Ciclo:</strong></p></td>
-				<td><p align="left"><font color="black">Cada: {{ $historia->ciclos_cada }}, por: {{ $historia->ciclos_por }}, dias: {{ $historia->ciclos_dias }}</font></p></td>	
+				<td><p align="left"><font color="black">Cada: {{ $historia->ciclos_cada }}, por: {{ $historia->ciclos_por }}, Dismenorrea: {{ $historia->dismenorrea }}</font></p></td>	
 			</tr>
 			<tr>
 				<td><p align="right"><strong>Cantidad de Hemorragia:</strong></p></td>
@@ -372,16 +382,20 @@
 				<td><p align="left"><font color="black">{{ $historia->resultado }}</font></p></td>	
 			</tr>
 			<tr>
-				<td><p align="right"><strong>Colposcopia:</strong></p></td>
-				<td><p align="left"><font color="black">{{ $historia->colposcopia }}</font></p></td>	
+				<td><p align="right"><strong>Colonoscopia:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->colonoscopia }}</font></p></td>	
 			</tr>
 			<tr>
-				<td><p align="right"><strong>Colposcopia si:</strong></p></td>
-				<td><p align="left"><font color="black">{{ $historia->colposcopia_si }}</font></p></td>	
+				<td><p align="right"><strong>Colonoscopia si:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->colonoscopia_si }}</font></p></td>	
 			</tr>
 			<tr>
 				<td><p align="right"><strong>Procedimientos:</strong></p></td>
 				<td><p align="left"><font color="black">{{ $historia->procedimientos }}</font></p></td>	
+			</tr>
+			<tr>
+				<td><p align="right"><strong>Rendiciones:</strong></p></td>
+				<td><p align="left"><font color="black">{{ $historia->rendiciones }}</font></p></td>	
 			</tr>
 			<tr>		
 				<th colspan="2"><p align="center">Revision por Sistemas: </p></th>

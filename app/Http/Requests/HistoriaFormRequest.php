@@ -67,6 +67,7 @@ class HistoriaFormRequest extends FormRequest
             'hiperlipidemias_quien'=>'max:50',
             'cancer_endometrial'=>'max:5',
             'cancer_endometrial_quien'=>'max:50',
+            'familiares_otros'=>'max:300',
 
             'gestas'=>'integer',
             'vias_resolucion'=>'max:500',
@@ -80,9 +81,10 @@ class HistoriaFormRequest extends FormRequest
             'fur'=>'date',
             'ciclos_cada'=>'integer',
             'ciclos_por'=>'integer',
-            'ciclos_dias'=>'integer',
+            'observaciones'=>'max:500',
             'cantidad_hemorragia'=>'max:15',
             'frecuencia'=>'max:15',
+            'dismenorrea'=>'max:5',
 
             'activa'=>'max:5',
             'edad'=>'integer',
@@ -98,6 +100,7 @@ class HistoriaFormRequest extends FormRequest
             'colposcopia'=>'max:5',
             'colposcopia_si'=>'max:500',
             'procedimientos'=>'max:500',
+            'rendiciones'=>'max:300',
 
             'revision'=>'max:1000'
         ];

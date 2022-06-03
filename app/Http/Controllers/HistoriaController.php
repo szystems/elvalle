@@ -93,6 +93,7 @@ class HistoriaController extends Controller
                 $historia->trh=$request->get('trh');
                 $historia->otros=$request->get('otros');
                 $historia->otros_texto=$request->get('otros_texto');
+                $historia->observaciones=$request->get('observaciones');
                 //Antecedentes Familiarea
                 $historia->cardiopatias_50anos=$request->get('cardiopatias_50anos');
                 $historia->cardiopatias_50anos_quien=$request->get('cardiopatias_50anos_quien');
@@ -108,6 +109,7 @@ class HistoriaController extends Controller
                 $historia->hiperlipidemias_quien=$request->get('hiperlipidemias_quien');
                 $historia->cancer_endometrial=$request->get('cancer_endometrial');
                 $historia->cancer_endometrial_quien=$request->get('cancer_endometrial_quien');
+                $historia->familiares_otros=$request->get('familiares_otros');
                 //Antecedentes Obstetricos
                 $historia->gestas=$request->get('gestas');
                 $historia->vias_resolucion=$request->get('vias_resolucion');
@@ -121,9 +123,9 @@ class HistoriaController extends Controller
                 $historia->fur=$fur;
                 $historia->ciclos_cada=$request->get('ciclos_cada');
                 $historia->ciclos_por=$request->get('ciclos_por');
-                $historia->ciclos_dias=$request->get('ciclos_dias');
                 $historia->cantidad_hemorragia=$request->get('cantidad_hemorragia');
                 $historia->frecuencia=$request->get('frecuencia');
+                $historia->dismenorrea=$request->get('dismenorrea');
                 //Vida Sexual
                 $historia->activa=$request->get('activa');
                 $historia->edad=$request->get('edad');
@@ -136,9 +138,10 @@ class HistoriaController extends Controller
                 //Historia Papanicolau
                 $historia->ultimo=$ultimo;
                 $historia->resultado=$request->get('resultado');
-                $historia->colposcopia=$request->get('colposcopia');
-                $historia->colposcopia_si=$request->get('colposcopia_si');
+                $historia->colonoscopia=$request->get('colonoscopia');
+                $historia->colonoscopia_si=$request->get('colonoscopia_si');
                 $historia->procedimientos=$request->get('procedimientos');
+                $historia->rendiciones=$request->get('rendiciones');
                 //Revision por sistemas
                 $historia->revision=$request->get('revision');
                 
@@ -233,7 +236,8 @@ class HistoriaController extends Controller
         $historia->trh=$request->get('trh');
         $historia->otros=$request->get('otros');
         $historia->otros_texto=$request->get('otros_texto');
-        //Antecedentes Familiarea
+        $historia->observaciones=$request->get('observaciones');
+        //Antecedentes Familiares
         $historia->cardiopatias_50anos=$request->get('cardiopatias_50anos');
         $historia->cardiopatias_50anos_quien=$request->get('cardiopatias_50anos_quien');
         $historia->osteoporosis=$request->get('osteoporosis');
@@ -248,6 +252,7 @@ class HistoriaController extends Controller
         $historia->hiperlipidemias_quien=$request->get('hiperlipidemias_quien');
         $historia->cancer_endometrial=$request->get('cancer_endometrial');
         $historia->cancer_endometrial_quien=$request->get('cancer_endometrial_quien');
+        $historia->familiares_otros=$request->get('familiares_otros');
         //Antecedentes Obstetricos
         $historia->gestas=$request->get('gestas');
         $historia->vias_resolucion=$request->get('vias_resolucion');
@@ -261,9 +266,9 @@ class HistoriaController extends Controller
         $historia->fur=$fur;
         $historia->ciclos_cada=$request->get('ciclos_cada');
         $historia->ciclos_por=$request->get('ciclos_por');
-        $historia->ciclos_dias=$request->get('ciclos_dias');
         $historia->cantidad_hemorragia=$request->get('cantidad_hemorragia');
         $historia->frecuencia=$request->get('frecuencia');
+        $historia->dismenorrea=$request->get('dismenorrea');
         //Vida Sexual
         $historia->activa=$request->get('activa');
         $historia->edad=$request->get('edad');
@@ -276,9 +281,10 @@ class HistoriaController extends Controller
         //Historia Papanicolau
         $historia->ultimo=$ultimo;
         $historia->resultado=$request->get('resultado');
-        $historia->colposcopia=$request->get('colposcopia');
-        $historia->colposcopia_si=$request->get('colposcopia_si');
+        $historia->colonoscopia=$request->get('colonoscopia');
+        $historia->colonoscopia_si=$request->get('colonoscopia_si');
         $historia->procedimientos=$request->get('procedimientos');
+        $historia->rendiciones=$request->get('rendiciones');
         //Revision por sistemas
         $historia->revision=$request->get('revision');
 
