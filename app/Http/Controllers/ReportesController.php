@@ -2269,10 +2269,14 @@ class ReportesController extends Controller
                 ->where('idembarazo','=',$embarazo->idembarazo)
                 ->get();
 
+                $historia = DB::table('historia')
+                ->where('idpaciente','=',$embarazo->idpaciente)
+                ->first();
+
                 
                 if ( $verpdf == "Descargar" )
                 {
-                    $view = \View::make('pdf.embarazos.vistaembarazo', compact('embarazo','controles','paciente','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
+                    $view = \View::make('pdf.embarazos.vistaembarazo', compact('embarazo','historia','controles','paciente','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
                     $pdf = \App::make('dompdf.wrapper');
                     $pdf->loadHTML($view);
                     $pdf->setPaper('A4', 'landscape');
@@ -2280,7 +2284,7 @@ class ReportesController extends Controller
                 }
                 if ( $verpdf == "Navegador" )
                 {
-                    $view = \View::make('pdf.embarazos.vistaembarazo', compact('embarazo','controles','paciente','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
+                    $view = \View::make('pdf.embarazos.vistaembarazo', compact('embarazo','historia','controles','paciente','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
                     $pdf = \App::make('dompdf.wrapper');
                     $pdf->loadHTML($view);
                     $pdf->setPaper('A4', 'landscape');

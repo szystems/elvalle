@@ -95,7 +95,7 @@
                                                 <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                                       <div class="form-group">
                                                             <label for="motivo_consulta">Motivo de Consulta</label>
-                                                            <textarea name="motivo_consulta" class="form-control" id="" cols="30" rows="5">{{ old('motivo_consulta') }}</textarea>
+                                                            <textarea name="motivo_consulta" class="form-control" id="" cols="30" rows="5" required>{{ old('motivo_consulta') }}</textarea>
                                                       </div>
                                                 </div>
 
@@ -238,7 +238,7 @@
                                                                               <tr>
                                                                                     <td><strong>Cabeza y cuello</strong></td>
                                                                                     <td align="left">
-                                                                                          <textarea name="cabeza_cuello" class="form-control">{{ old('cabeza_cuello') }}</textarea>
+                                                                                          <textarea name="cabeza_cuello" class="form-control" >{{ old('cabeza_cuello') }}</textarea>
                                                                                     </td>
                                                                               </tr>
 

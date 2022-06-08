@@ -43,7 +43,11 @@ class ControlController extends Controller
         ->where('idpaciente','=',$embarazo->idpaciente)
         ->first(); 
 
-    	return view("pacientes.historiales.embarazos.controles.create",["paciente"=>$paciente,"embarazo"=>$embarazo]);
+        $historia = DB::table('historia')
+        ->where('idpaciente','=',$embarazo->idpaciente)
+        ->first();
+
+    	return view("pacientes.historiales.embarazos.controles.create",["paciente"=>$paciente,"embarazo"=>$embarazo, "historia"=>$historia]);
     }
 
     public function store (ControlFormRequest $request)
@@ -152,9 +156,13 @@ class ControlController extends Controller
         ->where('idembarazo','=',$embarazo->idembarazo)
         ->get();
 
+        $historia = DB::table('historia')
+        ->where('idpaciente','=',$embarazo->idpaciente)
+        ->first();
+
         $request->session()->flash('alert-success', "Se creo un control de embarazo del paciente: ".$cli->nombre.", Fecha: ".$fechaControl);
 
-        return view("pacientes.historiales.embarazos.show",["embarazo"=>$embarazo,"paciente"=>$paciente,"controles"=>$controles]);
+        return view("pacientes.historiales.embarazos.show",["embarazo"=>$embarazo,"paciente"=>$paciente,"controles"=>$controles, "historia"=>$historia]);
     }
 
     public function edit($id)
@@ -174,9 +182,13 @@ class ControlController extends Controller
         $paciente=DB::table('paciente')
         ->where('idpaciente','=',$embarazo->idpaciente)
         ->first();
+
+        $historia = DB::table('historia')
+        ->where('idpaciente','=',$embarazo->idpaciente)
+        ->first();
         
        
-        return view("pacientes.historiales.embarazos.controles.edit",["control"=>$control,"embarazo"=>$embarazo,"paciente"=>$paciente]);
+        return view("pacientes.historiales.embarazos.controles.edit",["control"=>$control,"embarazo"=>$embarazo,"paciente"=>$paciente, "historia"=>$historia]);
     }
 
     public function update(ControlFormRequest $request,$id)
@@ -268,9 +280,13 @@ class ControlController extends Controller
         ->where('idembarazo','=',$embarazo->idembarazo)
         ->get();
 
+        $historia = DB::table('historia')
+        ->where('idpaciente','=',$embarazo->idpaciente)
+        ->first();
+
         $request->session()->flash('alert-success', "Se edito un control de embarazo del paciente: ".$cli->nombre.", Fecha: ".$fechaControl);
 
-        return view("pacientes.historiales.embarazos.show",["embarazo"=>$embarazo,"paciente"=>$paciente,"controles"=>$controles]);
+        return view("pacientes.historiales.embarazos.show",["embarazo"=>$embarazo,"paciente"=>$paciente,"controles"=>$controles, "historia"=>$historia]);
     }
 
     public function eliminarcontrol(Request $request)
@@ -301,6 +317,10 @@ class ControlController extends Controller
         ->where('idembarazo','=',$embarazo->idembarazo)
         ->get();
 
-        return view("pacientes.historiales.embarazos.show",["embarazo"=>$embarazo,"paciente"=>$paciente,"controles"=>$controles]);
+        $historia = DB::table('historia')
+        ->where('idpaciente','=',$embarazo->idpaciente)
+        ->first();
+
+        return view("pacientes.historiales.embarazos.show",["embarazo"=>$embarazo,"paciente"=>$paciente,"controles"=>$controles, "historia"=>$historia]);
     }
 }

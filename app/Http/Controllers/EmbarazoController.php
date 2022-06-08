@@ -36,6 +36,8 @@ class EmbarazoController extends Controller
         ->where('e.idpaciente','=',$idpaciente) 
         ->orderby('e.fecha','desc')
         ->paginate(20);
+        
+        
 
         return view("pacientes.historiales.embarazos.index",["paciente"=>Paciente::findOrFail($idpaciente),"embarazos"=>$embarazos]);
     }
@@ -117,7 +119,11 @@ class EmbarazoController extends Controller
         ->where('idembarazo','=',$embarazo->idembarazo)
         ->get();
 
-        return view("pacientes.historiales.embarazos.show",["embarazo"=>$embarazo,"paciente"=>$paciente,"controles"=>$controles]);
+        $historia = DB::table('historia')
+        ->where('idpaciente','=',$embarazo->idpaciente)
+        ->first();
+
+        return view("pacientes.historiales.embarazos.show",["embarazo"=>$embarazo,"paciente"=>$paciente,"controles"=>$controles, "historia"=>$historia]);
     }
 
     public function edit($id)

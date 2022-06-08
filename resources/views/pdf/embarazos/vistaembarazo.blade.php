@@ -85,6 +85,41 @@
 		<div style="text-align:center;">
 			<table>
 				<tr>		
+					<th colspan="3"><p align="center">Antecedentes Obstetricos: </p></th>
+				</tr>
+				<tr>
+					<td><p align="right"><strong>Gestas:</strong></p></td>
+					<td colspan="2"><p align="left"><font color="black">{{ $historia->gestas}}</font></p></td>	
+				</tr>
+				<tr>
+					<td><p align="right"><strong>Vias de resolucion:</strong></p></td>
+					<td colspan="2"><p align="left"><font color="black">{{ $historia->vias_resolucion}}</font></p></td>	
+				</tr>
+				<tr>
+					<td><p align="right"><strong>Hijos Vivos:</strong></p></td>
+					<td colspan="2"><p align="left"><font color="black">{{ $historia->hijos_vivos}}</font></p></td>	
+				</tr>
+				<tr>
+					<td><p align="right"><strong>Hijos Muertos:</strong></p></td>
+					<td colspan="2"><p align="left"><font color="black">{{ $historia->hijos_muertos}}</font></p></td>	
+				</tr>
+				<tr>
+					<td><p align="right"><strong>Complicaciones Neonatales:</strong></p></td>
+					<td colspan="2"><p align="left"><font color="black">{{ $historia->complicaciones_neonatales}}</font></p></td>	
+				</tr>
+				<tr>
+					<td><p align="right"><strong>Complicaciones Obstetricos:</strong></p></td>
+					<td colspan="2"><p align="left"><font color="black">{{ $historia->complicaciones_obstetricos}}</font></p></td>	
+				</tr>
+				<tr>
+					<td><p align="right"><strong>Abortos:</strong></p></td>
+					<td colspan="2"><p align="left"><font color="black">{{ $historia->abortos}}</font></p></td>	
+				</tr>
+				<tr>
+					<td><p align="right"><strong>Causa:</strong></p></td>
+					<td colspan="2"><p align="left"><font color="black">{{ $historia->causa}}</font></p></td>	
+				</tr>
+				<tr>		
 					<th colspan="{{ $numControles }}"><h4 align="center">Controles:</h4></th>
 				</tr>
 				<tr>
