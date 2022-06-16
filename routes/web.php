@@ -67,6 +67,10 @@ Route::resource('pacientes/historiales/recetas','RecetaController');
 Route::resource('pacientes/historiales/fisicos','FisicoController');
 Route::resource('pacientes/historiales/embarazos','EmbarazoController');
 Route::resource('pacientes/historiales/embarazos/controles','ControlController');
+Route::resource('pacientes/historiales/radiofrecuencias','RadiofrecuenciaController');
+Route::resource('pacientes/historiales/radiofrecuencias/sesiones','RadiofrecuenciaSesionController');
+Route::resource('pacientes/historiales/radiofrecuencias/fotomodulaciones','RadiofrecuenciaFotomodulacionController');
+Route::resource('pacientes/historiales/sillaselectromagneticas','SillaElectromagneticaController');
 Route::resource('pacientes/historiales','HistorialController');
 
 
@@ -89,6 +93,7 @@ Route::resource('reportes/ingresos','ReporteIngresosController');
     /*Historiales */
     Route::post('pdf/recetas','ReportesController@vistareceta');
     Route::post('pdf/fisicos','ReportesController@vistafisico');
+    Route::post('pdf/embarazos','ReportesController@vistaembarazo');
     Route::post('pdf/embarazos','ReportesController@vistaembarazo');
 
     /*Historiales */
