@@ -448,7 +448,177 @@
                             
 
                             <!--Sesiones fotomodulacion-->
-
+                            <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                                <div class="form-group">
+                                    <label for="doctor"><h2><strong><u>Sesiones Fotomodulacion</u></strong></h2></label>
+                                    @if(Auth::user()->tipo_usuario == "Doctor")
+                                        <a href="fotomodulaciones/create?idradiofrecuencia={{$radiofrecuencia->idradiofrecuencia}}">
+                                            <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Agregar sesion ">
+                                                <button class="btn btn-sm btn-success" style="pointer-events: none;" type="button">
+                                                    <i class="far fa-plus-square"></i> Agregar sesion
+                                                </button>
+                                            </span>
+                                        </a>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                                <div class="table-responsive">
+                                    <table class="table table-sm table-striped table-bordered table-condensed table-hover">
+                                        
+                                        <tbody>
+                                            <tr>
+                                                <td><strong><h2>sesion</h2></strong></td>
+                                                @foreach ($sesionesFotomodulacion as $sesionFotomodulacion)
+                                                    <td align="left">
+                                                        <u><h2> #{{ $sesionFotomodulacion->numero_sesion }}</h2></u> 
+                                                        @if (Auth::user()->tipo_usuario == "Doctor")
+                                                            <a href="{{URL::action('RadiofrecuenciaFotomodulacionController@edit',$sesionFotomodulacion->idradiofrecuencia_fotomodulacion)}}">
+                                                                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar sesion">
+                                                                    <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button"><i class="far fa-edit"></i> </button>
+                                                                </span>
+                                                            </a>
+                                                            <a href="" data-target="#modal-eliminar-{{$sesionFotomodulacion->idradiofrecuencia_fotomodulacion}}" data-toggle="modal">
+                                                                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Eliminar sesion">
+                                                                    <button class="btn btn-sm btn-danger" style="pointer-events: none;" type="button"><i class="far fa-minus-square"></i></button>
+                                                                </span>
+                                                            </a>
+                                                            @include('pacientes.historiales.radiofrecuencias.fotomodulaciones.modaleliminar')
+                                                        @endif
+                                                    </td>
+                                                @endforeach
+                                                
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Fecha</strong></td>
+                                                @foreach ($sesionesFotomodulacion as $sesionFotomodulacion)
+                                                    @php
+                                                        $fechaSesion = date("d-m-Y", strtotime($sesionFotomodulacion->fecha));
+                                                    @endphp
+                                                    <td align="left">{{ $fechaSesion }}</td>
+                                                @endforeach
+                                            </tr>
+                                            <!-- monopolar-->
+                                            <tr>
+                                                <td><h2><strong><u>Azul</u></strong></h2></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Área</strong></td>
+                                                @foreach ($sesionesFotomodulacion as $sesionFotomodulacion)
+                                                    <td align="left">{{ $sesionFotomodulacion->azul_area }}</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Zonas Tratadas</strong></td>
+                                                @foreach ($sesionesFotomodulacion as $sesionFotomodulacion)
+                                                    <td align="left">{{ $sesionFotomodulacion->azul_zona }}</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><strong>J/m2</strong></td>
+                                                @foreach ($sesionesFotomodulacion as $sesionFotomodulacion)
+                                                    <td align="left">{{ $sesionFotomodulacion->azul_jm2 }} J/m2</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Tiempo</strong></td>
+                                                @foreach ($sesionesFotomodulacion as $sesionFotomodulacion)
+                                                    <td align="left">{{ $sesionFotomodulacion->azul_tiempo}} Minutos</td>
+                                                @endforeach
+                                            </tr>
+                                            
+                                            <!-- bipolar-->
+                                            <tr>
+                                                <td><h2><strong><u>Infralight</u></strong></h2></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Área</strong></td>
+                                                @foreach ($sesionesFotomodulacion as $sesionFotomodulacion)
+                                                    <td align="left">{{ $sesionFotomodulacion->infralight_area }}</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Zonas Tratadas</strong></td>
+                                                @foreach ($sesionesFotomodulacion as $sesionFotomodulacion)
+                                                    <td align="left">{{ $sesionFotomodulacion->infralight_zona }}</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><strong>J/m2</strong></td>
+                                                @foreach ($sesionesFotomodulacion as $sesionFotomodulacion)
+                                                    <td align="left">{{ $sesionFotomodulacion->infralight_jm2 }} J/m2</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Tiempo</strong></td>
+                                                @foreach ($sesionesFotomodulacion as $sesionFotomodulacion)
+                                                    <td align="left">{{ $sesionFotomodulacion->infralight_tiempo }} Minutos</td>
+                                                @endforeach
+                                            </tr>
+                                            
+                                            <!-- tetrapolar-->
+                                            <tr>
+                                                <td><h2><strong><u>Ambar</u></strong></h2></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Áreas</strong></td>
+                                                @foreach ($sesionesFotomodulacion as $sesionFotomodulacion)
+                                                    <td align="left">{{ $sesionFotomodulacion->ambar_area }}</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Zonas Tratadas</strong></td>
+                                                @foreach ($sesionesFotomodulacion as $sesionFotomodulacion)
+                                                    <td align="left">{{ $sesionFotomodulacion->ambar_zona }}</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><strong>J/m2</strong></td>
+                                                @foreach ($sesionesFotomodulacion as $sesionFotomodulacion)
+                                                    <td align="left">{{ $sesionFotomodulacion->ambar_jm2 }} J/m2</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Tiempo</strong></td>
+                                                @foreach ($sesionesFotomodulacion as $sesionFotomodulacion)
+                                                    <td align="left">{{ $sesionFotomodulacion->ambar_tiempo }} Minutos</td>
+                                                @endforeach
+                                            </tr>
+                                            
+                                            <!-- hexapolar-->
+                                            <tr>
+                                                <td><h2><strong><u>Hexapolar</u></strong></h2></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Área</strong></td>
+                                                @foreach ($sesionesFotomodulacion as $sesionFotomodulacion)
+                                                    <td align="left">{{ $sesionFotomodulacion->rubylight_area }}</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Zonas Tratadas</strong></td>
+                                                @foreach ($sesionesFotomodulacion as $sesionFotomodulacion)
+                                                    <td align="left">{{ $sesionFotomodulacion->rubylight_zona }}</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><strong>J/m2</strong></td>
+                                                @foreach ($sesionesFotomodulacion as $sesionFotomodulacion)
+                                                    <td align="left">{{ $sesionFotomodulacion->rubylight_jm2 }} J/m2</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Tiempo</strong></td>
+                                                @foreach ($sesionesFotomodulacion as $sesionFotomodulacion)
+                                                    <td align="left">{{ $sesionFotomodulacion->rubylight_tiempo }} Minutos</td>
+                                                @endforeach
+                                            </tr>
+                                            
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                             <!--Fin sesiones fotomodulacion-->
                             
                             

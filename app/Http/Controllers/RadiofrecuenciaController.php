@@ -118,11 +118,15 @@ class RadiofrecuenciaController extends Controller
         ->where('idradiofrecuencia','=',$radiofrecuencia->idradiofrecuencia)
         ->get();
 
+        $sesionesFotomodulacion=DB::table('radiofrecuencia_fotomodulacion')
+        ->where('idradiofrecuencia','=',$radiofrecuencia->idradiofrecuencia)
+        ->get();
+
         $historia = DB::table('historia')
         ->where('idpaciente','=',$radiofrecuencia->idpaciente)
         ->first();
 
-        return view("pacientes.historiales.radiofrecuencias.show",["radiofrecuencia"=>$radiofrecuencia,"paciente"=>$paciente,"sesiones"=>$sesiones, "historia"=>$historia]);
+        return view("pacientes.historiales.radiofrecuencias.show",["radiofrecuencia"=>$radiofrecuencia,"paciente"=>$paciente,"sesiones"=>$sesiones,"sesionesFotomodulacion"=>$sesionesFotomodulacion,"historia"=>$historia]);
     }
 
     public function edit($id)

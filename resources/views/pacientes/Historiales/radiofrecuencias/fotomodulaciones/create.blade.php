@@ -58,63 +58,19 @@
                         <div class="card">
 
                               <header class="card-header">
-                                    <h2 class="h3 card-header-title"><strong>Editar sesion: </strong></h2>
+                                    <h2 class="h3 card-header-title"><strong>Nueva sesion de fotomodulacion: </strong></h2>
                               </header>
 
                               <div class="card-body">
-                                    <!--<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                                          <div class="form-group">
-                                              <label for=""><strong><u>Antecedentes Obstetricos</u></strong></label>
-                                          </div>
-                                          <div class="table-responsive">
-                                              <table class="table table-sm table-striped table-bordered table-condensed table-hover">
-                                                  
-                                                  <tbody>
-                                                      <tr>
-                                                          
-                                                          <td><strong>Gestas</strong></td>
-                                                          <td align="center">{{ $historia->gestas }}</td>
-                                                      </tr>
-                                                      <tr>
-                                                          <td><strong>Vias de resolucion</strong></td>
-                                                          <td align="center">{{ $historia->vias_resolucion }}</td>
-                                                      </tr>
-                                                      <tr>
-                                                          <td><strong>Hijos Vivos</strong></td>
-                                                          <td align="center">{{ $historia->hijos_vivos }}</td>
-                                                      </tr>
-                                                      <tr>
-                                                          <td><strong>Hijos Muertos</strong></td>
-                                                          <td align="center">{{ $historia->hijos_muertos }}</td>
-                                                      </tr>
-                                                      <tr>
-                                                          <td><strong>Complicaciones Neonatales</strong></td>
-                                                          <td align="center">{{ $historia->complicaciones_neonatales }}</td>
-                                                      </tr>
-                                                      <tr>
-                                                          <td><strong>Complicaciones Obstetricos</strong></td>
-                                                          <td align="center">{{ $historia->complicaciones_obstetricos }}</td>
-                                                      </tr>
-                                                      <tr>
-                                                          <td><strong>Abortos</strong></td>
-                                                          <td align="center">{{ $historia->abortos }}</td>
-                                                      </tr>
-                                                      <tr>
-                                                          <td><strong>causa</strong></td>
-                                                          <td align="center">{{ $historia->causa }}</td>
-                                                      </tr>
-                                                      
-                                                  </tbody>
-                                              </table>
-                                          </div>
-                                    </div>-->
-                                    {!!Form::model($sesion,['method'=>'PATCH','route'=>['sesiones.update',$sesion->idradiofrecuencia_sesion]])!!}
-                                    {{Form::token()}}
+                                    {!! Form::open(['url' => 'pacientes/historiales/radiofrecuencias/fotomodulaciones', 'method' => 'POST', 'autocomplete' => 'off']) !!}
+                                    {{ Form::token() }}
+                                    
                                           <div class="row">
                                                 <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                                       <div class="form-group">
                                                             <label for="doctor"><strong><u>Cabecera</u></strong></label>
                                                             <input type="hidden" name="idradiofrecuencia" value="{{ $radiofrecuencia->idradiofrecuencia }}">
+                                                            <input type="hidden" name="idpaciente" value="{{ $radiofrecuencia->idpaciente }}">
                                                       </div>
                                                 </div>
                                                 <?php
@@ -138,21 +94,65 @@
                                                             <p>{{$radiofrecuencia->Doctor}} ({{ $radiofrecuencia->especialidad }})</p>
                                                       </div>
                                                 </div>
+                                                <!--<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                                                      <div class="form-group">
+                                                          <label for=""><strong><u>Antecedentes Obstetricos</u></strong></label>
+                                                      </div>
+                                                      <div class="table-responsive">
+                                                          <table class="table table-sm table-striped table-bordered table-condensed table-hover">
+                                                              
+                                                              <tbody>
+                                                                  <tr>
+                                                                      
+                                                                      <td><strong>Gestas</strong></td>
+                                                                      <td align="center">{{ $historia->gestas }}</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                      <td><strong>Vias de resolucion</strong></td>
+                                                                      <td align="center">{{ $historia->vias_resolucion }}</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                      <td><strong>Hijos Vivos</strong></td>
+                                                                      <td align="center">{{ $historia->hijos_vivos }}</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                      <td><strong>Hijos Muertos</strong></td>
+                                                                      <td align="center">{{ $historia->hijos_muertos }}</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                      <td><strong>Complicaciones Neonatales</strong></td>
+                                                                      <td align="center">{{ $historia->complicaciones_neonatales }}</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                      <td><strong>Complicaciones Obstetricos</strong></td>
+                                                                      <td align="center">{{ $historia->complicaciones_obstetricos }}</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                      <td><strong>Abortos</strong></td>
+                                                                      <td align="center">{{ $historia->abortos }}</td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                      <td><strong>causa</strong></td>
+                                                                      <td align="center">{{ $historia->causa }}</td>
+                                                                  </tr>
+                                                                  
+                                                              </tbody>
+                                                          </table>
+                                                      </div>
+                                                </div>-->
                                                 <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                                       <div class="form-group">
-                                                            <label for="doctor"><h2><u><strong>Editar datos de sesion de radiofrecuencia:</strong></u></h2></label>
+                                                            <label for="doctor"><h2><u><strong>Datos de nueva sesion de fotomodulacion:</strong></u></h2></label>
                                                       </div>
                                                 </div>
 
-                                                <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                                                <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                                       <div class="form-group">
                                                             <div class="table-responsive">
                                                                   <table class="table table-sm table-striped table-bordered table-condensed table-hover">
                                                                       
                                                                         <tbody>
-                                                                              @php
-                                                                                    $fechaSesion = date("d-m-Y", strtotime($sesion->fecha));
-                                                                              @endphp
+
                                                                               <tr>
                                                                                     <td><strong>Fecha</strong></td>
                                                                                     <td align="left">
@@ -160,41 +160,46 @@
                                                                                                 <span class="form-icon form-icon--right">
                                                                                                       <i class="fas fa-calendar-alt form-icon__item"></i>
                                                                                                 </span>
-                                                                                                <input type="text" id="datepicker" class="form-control datepicker" name="fecha" value="{{ $fechaSesion }}">
+                                                                                                <input type="text" id="datepicker" class="form-control datepicker" name="fecha" value="">
                                                                                           </span>
                                                                                     </td>
                                                                               </tr>
 
-                                                                              <!--Monopolar-->
+                                                                              <!--azul-->
                                                                               <tr>
-                                                                                    <td colspan="2"><h2><strong><u>Monopolar</u></strong></h2></td>
+                                                                                    <td colspan="2"><h2><strong><u>Azul</u></strong></h2></td>
                                                                               </tr>
 
                                                                               <tr>
                                                                                     <td><strong>Áreas</strong></td>
                                                                                     <td align="left">
                                                                                           <div class="input-group">
-                                                                                                <textarea class="form-control" name="monopolar_areas" cols="30" rows="2">{{ $sesion->monopolar_areas }}</textarea>
+                                                                                                <textarea class="form-control" name="azul_area" cols="30" rows="2">{{ old('azul_area') }}</textarea>
                                                                                           </div>
                                                                                     </td>
                                                                               </tr>
 
                                                                               <tr>
-                                                                                    <td><strong>Indicación</strong></td>
+                                                                                    <td><strong>Zonas tratadas</strong></td>
                                                                                     <td align="left">
                                                                                           <div class="input-group">
-                                                                                                <textarea class="form-control" name="monopolar_indicacion" cols="30" rows="2">{{ $sesion->monopolar_indicacion }}</textarea>
+                                                                                                <input type="text" name="azul_zona" class="form-control" value="{{ old('azul_zona') }}" placeholder="">
+                                                                                                
                                                                                           </div>
                                                                                     </td>
                                                                               </tr>
 
                                                                               <tr>
-                                                                                    <td><strong>Temperatura</strong></td>
+                                                                                    <td><strong>J/m2</strong></td>
                                                                                     <td align="left">
                                                                                           <div class="input-group">
-                                                                                                <input type="text" name="monopolar_temperatura" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="{{ $sesion->monopolar_temperatura }}" value="0" onkeypress="return validarentero(event,this.value)">
+                                                                                                @if(old('azul_jm2') != null)
+                                                                                                      <input type="text" name="azul_temperatura" class="form-control text-right" aria-label="Amount (to the nearest dollar)"  value="{{ old('azul_jm2') }}"   onkeypress="return validarentero(event,this.value)">
+                                                                                                @else
+                                                                                                <input type="text" name="azul_jm2" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="0" onkeypress="return validarentero(event,this.value)">
+                                                                                                @endif
                                                                                                 <div class="input-group-prepend">
-                                                                                                      <span class="input-group-text">°C</span>
+                                                                                                      <span class="input-group-text">J/m2</span>
                                                                                                 </div>
                                                                                           </div>
                                                                                     </td>
@@ -204,55 +209,54 @@
                                                                                     <td><strong>Tiempo</strong></td>
                                                                                     <td align="left">
                                                                                           <div class="input-group">
-                                                                                                <input type="text" name="monopolar_tiempo" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="{{ $sesion->monopolar_tiempo }}" value="0" onkeypress="return validarentero(event,this.value)">
+                                                                                                @if(old('azul_tiempo') != null)
+                                                                                                      <input type="text" name="azul_tiempo" class="form-control text-right" aria-label="Amount (to the nearest dollar)"  value="{{ old('azul_tiempo') }}"   onkeypress="return validarentero(event,this.value)">
+                                                                                                @else
+                                                                                                <input type="text" name="azul_tiempo" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="0" onkeypress="return validarentero(event,this.value)">
+                                                                                                @endif
                                                                                                 <div class="input-group-prepend">
                                                                                                       <span class="input-group-text">/min</span>
                                                                                                 </div>
                                                                                           </div>
                                                                                     </td>
                                                                               </tr>
-
-                                                                              <tr>
-                                                                                    <td><strong>Zonas tratadas</strong></td>
-                                                                                    <td align="left">
-                                                                                          <div class="input-group">
-                                                                                                <input type="text" name="monopolar_zonas_tratadas" class="form-control" value="{{ $sesion->monopolar_zonas_tratadas }}" placeholder="">
-                                                                                                
-                                                                                          </div>
-                                                                                    </td>
-                                                                              </tr>
-                                                                              <!--Fin Monopolar-->
+                                                                              <!--Fin azul-->
                                                                              
-                                                                              <!--Bipolar-->
+                                                                              <!--infralight-->
                                                                               <tr>
-                                                                                    <td colspan="2"><h2><strong><u>Bipolar</u></strong></h2></td>
+                                                                                    <td colspan="2"><h2><strong><u>Infralight</u></strong></h2></td>
                                                                               </tr>
 
                                                                               <tr>
                                                                                     <td><strong>Áreas</strong></td>
                                                                                     <td align="left">
                                                                                           <div class="input-group">
-                                                                                                <textarea class="form-control" name="bipolar_areas" cols="30" rows="2">{{ $sesion->bipolar_areas }}</textarea>
+                                                                                                <textarea class="form-control" name="infralight_area" cols="30" rows="2">{{ old('infralight_area') }}</textarea>
                                                                                           </div>
                                                                                     </td>
                                                                               </tr>
 
                                                                               <tr>
-                                                                                    <td><strong>Indicación</strong></td>
+                                                                                    <td><strong>Zonas tratadas</strong></td>
                                                                                     <td align="left">
                                                                                           <div class="input-group">
-                                                                                                <textarea class="form-control" name="bipolar_indicacion" cols="30" rows="2">{{ $sesion->bipolar_indicacion }}</textarea>
+                                                                                                <input type="text" name="infralight_zona" class="form-control" value="{{ old('infralight_zona') }}" placeholder="">
+                                                                                                
                                                                                           </div>
                                                                                     </td>
                                                                               </tr>
 
                                                                               <tr>
-                                                                                    <td><strong>Temperatura</strong></td>
+                                                                                    <td><strong>J/m2</strong></td>
                                                                                     <td align="left">
                                                                                           <div class="input-group">
-                                                                                                <input type="text" name="bipolar_temperatura" class="form-control text-right"  aria-label="Amount (to the nearest dollar)" value="{{ $sesion->bipolar_temperatura }}" value="0" onkeypress="return validarentero(event,this.value)">
+                                                                                                @if(old('infralight_jm2') != null)
+                                                                                                      <input type="text" name="infralight_jm2" class="form-control text-right" aria-label="Amount (to the nearest dollar)"  value="{{ old('infralight_jm2') }}"   onkeypress="return validarentero(event,this.value)">
+                                                                                                @else
+                                                                                                <input type="text" name="infralight_jm2" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="0" onkeypress="return validarentero(event,this.value)">
+                                                                                                @endif
                                                                                                 <div class="input-group-prepend">
-                                                                                                      <span class="input-group-text">°C</span>
+                                                                                                      <span class="input-group-text">J/m2</span>
                                                                                                 </div>
                                                                                           </div>
                                                                                     </td>
@@ -262,55 +266,54 @@
                                                                                     <td><strong>Tiempo</strong></td>
                                                                                     <td align="left">
                                                                                           <div class="input-group">
-                                                                                                <input type="text" name="bipolar_tiempo" class="form-control text-right"  aria-label="Amount (to the nearest dollar)" value="{{ $sesion->bipolar_tiempo }}" value="0" onkeypress="return validarentero(event,this.value)">
+                                                                                                @if(old('infralight_tiempo') != null)
+                                                                                                      <input type="text" name="infralight_tiempo" class="form-control text-right" aria-label="Amount (to the nearest dollar)"  value="{{ old('infralight_tiempo') }}"   onkeypress="return validarentero(event,this.value)">
+                                                                                                @else
+                                                                                                <input type="text" name="infralight_tiempo" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="0" onkeypress="return validarentero(event,this.value)">
+                                                                                                @endif
                                                                                                 <div class="input-group-prepend">
                                                                                                       <span class="input-group-text">/min</span>
                                                                                                 </div>
                                                                                           </div>
                                                                                     </td>
                                                                               </tr>
-
-                                                                              <tr>
-                                                                                    <td><strong>Zonas tratadas</strong></td>
-                                                                                    <td align="left">
-                                                                                          <div class="input-group">
-                                                                                                <input type="text" name="bipolar_zonas_tratadas" class="form-control" value="{{ $sesion->bipolar_zonas_tratadas }}" placeholder="">
-                                                                                                
-                                                                                          </div>
-                                                                                    </td>
-                                                                              </tr>
-                                                                              <!--Fin Bipolar-->
+                                                                              <!--Fin infralight-->
                                                                               
-                                                                              <!--Tetrapolar-->
+                                                                              <!--ambar-->
                                                                               <tr>
-                                                                                    <td colspan="2"><h2><strong><u>Tetrapolar</u></strong></h2></td>
+                                                                                    <td colspan="2"><h2><strong><u>Ambar</u></strong></h2></td>
                                                                               </tr>
 
                                                                               <tr>
                                                                                     <td><strong>Áreas</strong></td>
                                                                                     <td align="left">
                                                                                           <div class="input-group">
-                                                                                                <textarea class="form-control" name="tetrapolar_areas" cols="30" rows="2">{{ $sesion->tetrapolar_areas }}</textarea>
+                                                                                                <textarea class="form-control" name="ambar_area" cols="30" rows="2">{{ old('ambar_area') }}</textarea>
                                                                                           </div>
                                                                                     </td>
                                                                               </tr>
 
                                                                               <tr>
-                                                                                    <td><strong>Indicación</strong></td>
+                                                                                    <td><strong>Zonas tratadas</strong></td>
                                                                                     <td align="left">
                                                                                           <div class="input-group">
-                                                                                                <textarea class="form-control" name="tetrapolar_indicacion" cols="30" rows="2">{{ $sesion->tetrapolar_indicacion }}</textarea>
+                                                                                                <input type="text" name="ambar_zona" class="form-control" value="{{ old('ambar_zona') }}" placeholder="">
+                                                                                                
                                                                                           </div>
                                                                                     </td>
                                                                               </tr>
 
                                                                               <tr>
-                                                                                    <td><strong>Temperatura</strong></td>
+                                                                                    <td><strong>J/m2</strong></td>
                                                                                     <td align="left">
                                                                                           <div class="input-group">
-                                                                                                <input type="text" name="tetrapolar_temperatura" class="form-control text-right"  aria-label="Amount (to the nearest dollar)" value="{{ $sesion->tetrapolar_temperatura }}" value="0" onkeypress="return validarentero(event,this.value)">
+                                                                                                @if(old('ambar_jm2') != null)
+                                                                                                      <input type="text" name="ambar_jm2" class="form-control text-right" aria-label="Amount (to the nearest dollar)"  value="{{ old('ambar_jm2') }}"   onkeypress="return validarentero(event,this.value)">
+                                                                                                @else
+                                                                                                <input type="text" name="ambar_jm2" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="0" onkeypress="return validarentero(event,this.value)">
+                                                                                                @endif
                                                                                                 <div class="input-group-prepend">
-                                                                                                      <span class="input-group-text">°C</span>
+                                                                                                      <span class="input-group-text">J/m2</span>
                                                                                                 </div>
                                                                                           </div>
                                                                                     </td>
@@ -320,10 +323,29 @@
                                                                                     <td><strong>Tiempo</strong></td>
                                                                                     <td align="left">
                                                                                           <div class="input-group">
-                                                                                                <input type="text" name="tetrapolar_tiempo" class="form-control text-right"  aria-label="Amount (to the nearest dollar)" value="{{ $sesion->tetrapolar_tiempo }}" value="0" onkeypress="return validarentero(event,this.value)">
+                                                                                                @if(old('ambar_tiempo') != null)
+                                                                                                      <input type="text" name="ambar_tiempo" class="form-control text-right" aria-label="Amount (to the nearest dollar)"  value="{{ old('ambar_tiempo') }}"   onkeypress="return validarentero(event,this.value)">
+                                                                                                @else
+                                                                                                <input type="text" name="ambar_tiempo" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="0" onkeypress="return validarentero(event,this.value)">
+                                                                                                @endif
                                                                                                 <div class="input-group-prepend">
                                                                                                       <span class="input-group-text">/min</span>
                                                                                                 </div>
+                                                                                          </div>
+                                                                                    </td>
+                                                                              </tr>
+                                                                              <!--Fin ambar-->
+
+                                                                              <!--rubylight-->
+                                                                              <tr>
+                                                                                    <td colspan="2"><h2><strong><u>Rubylight</u></strong></h2></td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>Áreas</strong></td>
+                                                                                    <td align="left">
+                                                                                          <div class="input-group">
+                                                                                                <textarea class="form-control" name="rubylight_area" cols="30" rows="2">{{ old('rubylight_area') }}</textarea>
                                                                                           </div>
                                                                                     </td>
                                                                               </tr>
@@ -332,43 +354,23 @@
                                                                                     <td><strong>Zonas tratadas</strong></td>
                                                                                     <td align="left">
                                                                                           <div class="input-group">
-                                                                                                <input type="text" name="tetrapolar_zonas_tratadas" class="form-control" value="{{ $sesion->tetrapolar_zonas_tratadas }}" placeholder="">
+                                                                                                <input type="text" name="rubylight_zona" class="form-control" value="{{ old('rubylight_zona') }}" placeholder="">
                                                                                                 
                                                                                           </div>
                                                                                     </td>
                                                                               </tr>
-                                                                              <!--Fin Tetrapolar-->
-
-                                                                              <!--Hexapolar-->
-                                                                              <tr>
-                                                                                    <td colspan="2"><h2><strong><u>Hexapolar</u></strong></h2></td>
-                                                                              </tr>
 
                                                                               <tr>
-                                                                                    <td><strong>Áreas</strong></td>
+                                                                                    <td><strong>J/m2</strong></td>
                                                                                     <td align="left">
                                                                                           <div class="input-group">
-                                                                                                <textarea class="form-control" name="hexapolar_areas" cols="30" rows="2">{{ $sesion->hexapolar_areas }}</textarea>
-                                                                                          </div>
-                                                                                    </td>
-                                                                              </tr>
-
-                                                                              <tr>
-                                                                                    <td><strong>Indicación</strong></td>
-                                                                                    <td align="left">
-                                                                                          <div class="input-group">
-                                                                                                <textarea class="form-control" name="hexapolar_indicacion" cols="30" rows="2">{{ $sesion->hexapolar_indicacion }}</textarea>
-                                                                                          </div>
-                                                                                    </td>
-                                                                              </tr>
-
-                                                                              <tr>
-                                                                                    <td><strong>Temperatura</strong></td>
-                                                                                    <td align="left">
-                                                                                          <div class="input-group">
-                                                                                                <input type="text" name="hexapolar_temperatura" class="form-control text-right"  aria-label="Amount (to the nearest dollar)" value="{{ $sesion->hexapolar_temperatura }}" value="0" onkeypress="return validarentero(event,this.value)">
+                                                                                                @if(old('rubylight_jm2') != null)
+                                                                                                      <input type="text" name="rubylight_jm2" class="form-control text-right" aria-label="Amount (to the nearest dollar)"  value="{{ old('rubylight_jm2') }}"   onkeypress="return validarentero(event,this.value)">
+                                                                                                @else
+                                                                                                <input type="text" name="rubylight_jm2" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="0" onkeypress="return validarentero(event,this.value)">
+                                                                                                @endif
                                                                                                 <div class="input-group-prepend">
-                                                                                                      <span class="input-group-text">°C</span>
+                                                                                                      <span class="input-group-text">J/m2</span>
                                                                                                 </div>
                                                                                           </div>
                                                                                     </td>
@@ -378,83 +380,19 @@
                                                                                     <td><strong>Tiempo</strong></td>
                                                                                     <td align="left">
                                                                                           <div class="input-group">
-                                                                                                <input type="text" name="hexapolar_tiempo" class="form-control text-right"  aria-label="Amount (to the nearest dollar)" value="{{ $sesion->hexapolar_tiempo }}" value="0" onkeypress="return validarentero(event,this.value)">
+                                                                                                @if(old('rubylight_tiempo') != null)
+                                                                                                      <input type="text" name="rubylight_tiempo" class="form-control text-right" aria-label="Amount (to the nearest dollar)"  value="{{ old('rubylight_tiempo') }}"   onkeypress="return validarentero(event,this.value)">
+                                                                                                @else
+                                                                                                <input type="text" name="rubylight_tiempo" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="0" onkeypress="return validarentero(event,this.value)">
+                                                                                                @endif
                                                                                                 <div class="input-group-prepend">
                                                                                                       <span class="input-group-text">/min</span>
                                                                                                 </div>
                                                                                           </div>
                                                                                     </td>
                                                                               </tr>
+                                                                              <!--Fin rubylight-->
 
-                                                                              <tr>
-                                                                                    <td><strong>Zonas tratadas</strong></td>
-                                                                                    <td align="left">
-                                                                                          <div class="input-group">
-                                                                                                <input type="text" name="hexapolar_zonas_tratadas" class="form-control" value="{{ $sesion->hexapolar_zonas_tratadas }}" placeholder="">
-                                                                                                
-                                                                                          </div>
-                                                                                    </td>
-                                                                              </tr>
-                                                                              <!--Fin Hexapolar-->
-
-                                                                              <!--Ginecológico-->
-                                                                              <tr>
-                                                                                    <td colspan="2"><h2><strong><u>Ginecológico</u></strong></h2></td>
-                                                                              </tr>
-
-                                                                              <tr>
-                                                                                    <td><strong>Áreas</strong></td>
-                                                                                    <td align="left">
-                                                                                          <div class="input-group">
-                                                                                                <textarea class="form-control" name="ginecologico_areas" cols="30" rows="2">{{ $sesion->ginecologico_areas }}</textarea>
-                                                                                          </div>
-                                                                                    </td>
-                                                                              </tr>
-
-                                                                              <tr>
-                                                                                    <td><strong>Indicación</strong></td>
-                                                                                    <td align="left">
-                                                                                          <div class="input-group">
-                                                                                                <textarea class="form-control" name="ginecologico_indicacion" cols="30" rows="2">{{ $sesion->ginecologico_indicacion }}</textarea>
-                                                                                          </div>
-                                                                                    </td>
-                                                                              </tr>
-
-                                                                              <tr>
-                                                                                    <td><strong>Temperatura</strong></td>
-                                                                                    <td align="left">
-                                                                                          <div class="input-group">
-                                                                                                <input type="text" name="ginecologico_temperatura" class="form-control text-right"  aria-label="Amount (to the nearest dollar)" value="{{ $sesion->ginecologico_temperatura }}" value="0" onkeypress="return validarentero(event,this.value)">
-                                                                                                <div class="input-group-prepend">
-                                                                                                      <span class="input-group-text">°C</span>
-                                                                                                </div>
-                                                                                          </div>
-                                                                                    </td>
-                                                                              </tr>
-
-                                                                              <tr>
-                                                                                    <td><strong>Tiempo</strong></td>
-                                                                                    <td align="left">
-                                                                                          <div class="input-group">
-                                                                                                <input type="text" name="ginecologico_tiempo" class="form-control text-right"  aria-label="Amount (to the nearest dollar)" value="{{ $sesion->ginecologico_tiempo }}" value="0" onkeypress="return validarentero(event,this.value)">
-                                                                                                <div class="input-group-prepend">
-                                                                                                      <span class="input-group-text">/min</span>
-                                                                                                </div>
-                                                                                          </div>
-                                                                                    </td>
-                                                                              </tr>
-
-                                                                              <tr>
-                                                                                    <td><strong>Zonas tratadas</strong></td>
-                                                                                    <td align="left">
-                                                                                          <div class="input-group">
-                                                                                                <input type="text" name="ginecologico_zonas_tratadas" class="form-control" value="{{ $sesion->ginecologico_zonas_tratadas }}" placeholder="">
-                                                                                                
-                                                                                          </div>
-                                                                                    </td>
-                                                                              </tr>
-                                                                              <!--Fin Ginecológico-->
-                                                                              
                                                                         </tbody>
                                                                   </table>
                                                             </div>
@@ -499,6 +437,8 @@
             $( '#datepicker' ).datepicker( optSimple );
             $( '#proxima_cita' ).datepicker( optSimple );
     
+            $( '#datepicker' ).datepicker( 'setDate', today );
+            $( '#proxima_cita' ).datepicker( 'setDate', today );
       </script>
 
       @push ('scripts')

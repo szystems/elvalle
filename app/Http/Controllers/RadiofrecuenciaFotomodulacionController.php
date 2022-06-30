@@ -7,20 +7,20 @@ use Illuminate\Http\Request;
 use sisVentasWeb\Http\Requests;
 use sisVentasWeb\Paciente;
 use sisVentasWeb\Radiofrecuencia;
-use sisVentasWeb\RadiofrecuenciaSesion;
+use sisVentasWeb\RadiofrecuenciaFotomodulacion;
 use sisVentasWeb\Bitacora;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Support\Facades\Redirect;
 use sisVentasWeb\Http\Requests\RadiofrecuenciaFormRequest;
-use sisVentasWeb\Http\Requests\RadiofrecuenciaSesionFormRequest;
+use sisVentasWeb\Http\Requests\RadiofrecuenciaFotomodulacionFormRequest;
 use sisVentasWeb\Http\Requests\BitacoraFormRequest;
 use DB;
 use Auth;
 use sisVentasWeb\User;
 use Illuminate\Support\Facades\Input;
 
-class RadiofrecuenciaSesionController extends Controller
+class RadiofrecuenciaFotomodulacionController extends Controller
 {
     public function __construct()
     {
@@ -47,10 +47,10 @@ class RadiofrecuenciaSesionController extends Controller
         ->where('idpaciente','=',$radiofrecuencia->idpaciente)
         ->first();
 
-    	return view("pacientes.historiales.radiofrecuencias.sesiones.create",["paciente"=>$paciente,"radiofrecuencia"=>$radiofrecuencia, "historia"=>$historia]);
+    	return view("pacientes.historiales.radiofrecuencias.fotomodulaciones.create",["paciente"=>$paciente,"radiofrecuencia"=>$radiofrecuencia, "historia"=>$historia]);
     }
 
-    public function store (RadiofrecuenciaSesionFormRequest $request)
+    public function store (RadiofrecuenciaFotomodulacionFormRequest $request)
     {
     	try
     	{ 
@@ -62,7 +62,7 @@ class RadiofrecuenciaSesionController extends Controller
             $idradiofrecuencia=$request->get('idradiofrecuencia');
 
             //numero_sesion
-            $ultimaSesion = DB::table('radiofrecuencia_sesion')
+            $ultimaSesion = DB::table('radiofrecuencia_fotomodulacion')
             ->where('idradiofrecuencia','=',$idradiofrecuencia)
             ->max('numero_sesion');
             if(isset($ultimaSesion))
@@ -83,41 +83,31 @@ class RadiofrecuenciaSesionController extends Controller
 
     		DB::beginTransaction();
 
-            $sesion=new RadiofrecuenciaSesion;
+            $sesion=new RadiofrecuenciaFotomodulacion;
             $sesion->idradiofrecuencia=$request->get('idradiofrecuencia');
             $sesion->numero_sesion=$numero_sesion;
             $sesion->fecha=$fecha;
 
-            $sesion->monopolar_areas=$request->get('monopolar_areas');
-            $sesion->monopolar_indicacion=$request->get('monopolar_indicacion');
-            $sesion->monopolar_temperatura=$request->get('monopolar_temperatura');
-            $sesion->monopolar_tiempo=$request->get('monopolar_tiempo');
-            $sesion->monopolar_zonas_tratadas=$request->get('monopolar_zonas_tratadas');
+            $sesion->azul_area=$request->get('azul_area');
+            $sesion->azul_zona=$request->get('azul_zona');
+            $sesion->azul_jm2=$request->get('azul_jm2');
+            $sesion->azul_tiempo=$request->get('azul_tiempo');
             
-            $sesion->bipolar_areas=$request->get('bipolar_areas');
-            $sesion->bipolar_indicacion=$request->get('bipolar_indicacion');
-            $sesion->bipolar_temperatura=$request->get('bipolar_temperatura');
-            $sesion->bipolar_tiempo=$request->get('bipolar_tiempo');
-            $sesion->bipolar_zonas_tratadas=$request->get('bipolar_zonas_tratadas');
-
-            $sesion->tetrapolar_areas=$request->get('tetrapolar_areas');
-            $sesion->tetrapolar_indicacion=$request->get('tetrapolar_indicacion');
-            $sesion->tetrapolar_temperatura=$request->get('tetrapolar_temperatura');
-            $sesion->tetrapolar_tiempo=$request->get('tetrapolar_tiempo');
-            $sesion->tetrapolar_zonas_tratadas=$request->get('tetrapolar_zonas_tratadas');
-
-            $sesion->hexapolar_areas=$request->get('hexapolar_areas');
-            $sesion->hexapolar_indicacion=$request->get('hexapolar_indicacion');
-            $sesion->hexapolar_temperatura=$request->get('hexapolar_temperatura');
-            $sesion->hexapolar_tiempo=$request->get('hexapolar_tiempo');
-            $sesion->hexapolar_zonas_tratadas=$request->get('hexapolar_zonas_tratadas');
-
-            $sesion->ginecologico_areas=$request->get('ginecologico_areas');
-            $sesion->ginecologico_indicacion=$request->get('ginecologico_indicacion');
-            $sesion->ginecologico_temperatura=$request->get('ginecologico_temperatura');
-            $sesion->ginecologico_tiempo=$request->get('ginecologico_tiempo');
-            $sesion->ginecologico_zonas_tratadas=$request->get('ginecologico_zonas_tratadas');
-
+            $sesion->infralight_area=$request->get('infralight_area');
+            $sesion->infralight_zona=$request->get('infralight_zona');
+            $sesion->infralight_jm2=$request->get('infralight_jm2');
+            $sesion->infralight_tiempo=$request->get('infralight_tiempo');
+            
+            $sesion->ambar_area=$request->get('ambar_area');
+            $sesion->ambar_zona=$request->get('ambar_zona');
+            $sesion->ambar_jm2=$request->get('ambar_jm2');
+            $sesion->ambar_tiempo=$request->get('ambar_tiempo');
+            
+            $sesion->rubylight_area=$request->get('rubylight_area');
+            $sesion->rubylight_zona=$request->get('rubylight_zona');
+            $sesion->rubylight_jm2=$request->get('rubylight_jm2');
+            $sesion->rubylight_tiempo=$request->get('rubylight_tiempo');
+            
     		$sesion->save();
             
             $cli=DB::table('paciente')->where('idpaciente','=',$idpaciente)->first();
@@ -130,7 +120,7 @@ class RadiofrecuenciaSesionController extends Controller
             $bitacora->idusuario=Auth::user()->id;
             $bitacora->fecha=$fechahora;
             $bitacora->tipo="Paciente";
-            $bitacora->descripcion="Se creo un nueva nueva sesion de radiofrecuencia para el paciente:".$cli->nombre.", Fecha: ".$fechaSesion;
+            $bitacora->descripcion="Se creo un nueva nueva sesion de fotomodulacion para el paciente:".$cli->nombre.", Fecha: ".$fechaSesion;
             $bitacora->save();
 
     		DB::commit();
@@ -156,15 +146,15 @@ class RadiofrecuenciaSesionController extends Controller
         ->where('idpaciente','=',$idpaciente)
         ->first();
 
-        $request->session()->flash('alert-success', "Se creo una sesion de radiofrecuencia del paciente: ".$cli->nombre.", Fecha: ".$fechaSesion);
+        $request->session()->flash('alert-success', "Se creo una sesion de fotomodulacion del paciente: ".$cli->nombre.", Fecha: ".$fechaSesion);
 
         return view("pacientes.historiales.radiofrecuencias.show",["radiofrecuencia"=>$radiofrecuencia,"paciente"=>$paciente,"sesiones"=>$sesiones,"sesionesFotomodulacion"=>$sesionesFotomodulacion, "historia"=>$historia]);
     }
 
     public function edit($id)
     {
-        $sesion=DB::table('radiofrecuencia_sesion')
-        ->where('idradiofrecuencia_sesion','=',$id)
+        $sesion=DB::table('radiofrecuencia_fotomodulacion')
+        ->where('idradiofrecuencia_fotomodulacion','=',$id)
         ->first();
 
         $radiofrecuencia=DB::table('radiofrecuencia as r')
@@ -184,10 +174,10 @@ class RadiofrecuenciaSesionController extends Controller
         ->first();
         
        
-        return view("pacientes.historiales.radiofrecuencias.sesiones.edit",["sesion"=>$sesion,"radiofrecuencia"=>$radiofrecuencia,"paciente"=>$paciente, "historia"=>$historia]);
+        return view("pacientes.historiales.radiofrecuencias.fotomodulaciones.edit",["sesion"=>$sesion,"radiofrecuencia"=>$radiofrecuencia,"paciente"=>$paciente, "historia"=>$historia]);
     }
 
-    public function update(RadiofrecuenciaSesionFormRequest $request,$id)
+    public function update(RadiofrecuenciaFotomodulacionFormRequest $request,$id)
     {
         $fechaSesion=trim($request->get('fecha'));
         $fecha = date("Y-m-d", strtotime($fechaSesion));
@@ -203,38 +193,28 @@ class RadiofrecuenciaSesionController extends Controller
             ->where('r.idradiofrecuencia','=',$idradiofrecuencia) 
             ->first();
 
-        $sesion=RadiofrecuenciaSesion::findOrFail($id);
+        $sesion=RadiofrecuenciaFotomodulacion::findOrFail($id);
         
-        $sesion->monopolar_areas=$request->get('monopolar_areas');
-        $sesion->monopolar_indicacion=$request->get('monopolar_indicacion');
-        $sesion->monopolar_temperatura=$request->get('monopolar_temperatura');
-        $sesion->monopolar_tiempo=$request->get('monopolar_tiempo');
-        $sesion->monopolar_zonas_tratadas=$request->get('monopolar_zonas_tratadas');
-            
-        $sesion->bipolar_areas=$request->get('bipolar_areas');
-        $sesion->bipolar_indicacion=$request->get('bipolar_indicacion');
-        $sesion->bipolar_temperatura=$request->get('bipolar_temperatura');
-        $sesion->bipolar_tiempo=$request->get('bipolar_tiempo');
-        $sesion->bipolar_zonas_tratadas=$request->get('bipolar_zonas_tratadas');
-
-        $sesion->tetrapolar_areas=$request->get('tetrapolar_areas');
-        $sesion->tetrapolar_indicacion=$request->get('tetrapolar_indicacion');
-        $sesion->tetrapolar_temperatura=$request->get('tetrapolar_temperatura');
-        $sesion->tetrapolar_tiempo=$request->get('tetrapolar_tiempo');
-        $sesion->tetrapolar_zonas_tratadas=$request->get('tetrapolar_zonas_tratadas');
-
-        $sesion->hexapolar_areas=$request->get('hexapolar_areas');
-        $sesion->hexapolar_indicacion=$request->get('hexapolar_indicacion');
-        $sesion->hexapolar_temperatura=$request->get('hexapolar_temperatura');
-        $sesion->hexapolar_tiempo=$request->get('hexapolar_tiempo');
-        $sesion->hexapolar_zonas_tratadas=$request->get('hexapolar_zonas_tratadas');
-
-        $sesion->ginecologico_areas=$request->get('ginecologico_areas');
-        $sesion->ginecologico_indicacion=$request->get('ginecologico_indicacion');
-        $sesion->ginecologico_temperatura=$request->get('ginecologico_temperatura');
-        $sesion->ginecologico_tiempo=$request->get('ginecologico_tiempo');
-        $sesion->ginecologico_zonas_tratadas=$request->get('ginecologico_zonas_tratadas');
-
+        $sesion->azul_area=$request->get('azul_area');
+        $sesion->azul_zona=$request->get('azul_zona');
+        $sesion->azul_jm2=$request->get('azul_jm2');
+        $sesion->azul_tiempo=$request->get('azul_tiempo');
+                   
+        $sesion->infralight_area=$request->get('infralight_area');
+        $sesion->infralight_zona=$request->get('infralight_zona');
+        $sesion->infralight_jm2=$request->get('infralight_jm2');
+        $sesion->infralight_tiempo=$request->get('infralight_tiempo');
+        
+        $sesion->ambar_area=$request->get('ambar_area');
+        $sesion->ambar_zona=$request->get('ambar_zona');
+        $sesion->ambar_jm2=$request->get('ambar_jm2');
+        $sesion->ambar_tiempo=$request->get('ambar_tiempo');
+        
+        $sesion->rubylight_area=$request->get('rubylight_area');
+        $sesion->rubylight_zona=$request->get('rubylight_zona');
+        $sesion->rubylight_jm2=$request->get('rubylight_jm2');
+        $sesion->rubylight_tiempo=$request->get('rubylight_tiempo');
+        
         $sesion->save();
 
         $cli=DB::table('paciente')->where('idpaciente','=',$radiofrecuencia->idpaciente)->first();
@@ -247,10 +227,10 @@ class RadiofrecuenciaSesionController extends Controller
         $bitacora->idusuario=Auth::user()->id;
         $bitacora->fecha=$fechahora;
         $bitacora->tipo="Paciente";
-        $bitacora->descripcion="Se creo una nueva sesion de radiofrecuencia para el paciente:".$cli->nombre.", Fecha: ".$fechaSesion;
+        $bitacora->descripcion="Se creo una nueva sesion de fotomodulacion para el paciente:".$cli->nombre.", Fecha: ".$fechaSesion;
         $bitacora->save();
 
-        $request->session()->flash('alert-success', "Se edito una sesion de radiofrecuencia del paciente: ".$cli->nombre.", Fecha: ".$fechaSesion);
+        $request->session()->flash('alert-success', "Se edito una sesion de fotomodulacion del paciente: ".$cli->nombre.", Fecha: ".$fechaSesion);
 
         $paciente=DB::table('paciente')
         ->where('idpaciente','=',$radiofrecuencia->idpaciente)
@@ -268,7 +248,7 @@ class RadiofrecuenciaSesionController extends Controller
         ->where('idpaciente','=',$radiofrecuencia->idpaciente)
         ->first();
 
-        $request->session()->flash('alert-success', "Se edito una sesion de radiofrecuencia del paciente: ".$cli->nombre.", Fecha: ".$fechaSesion);
+        $request->session()->flash('alert-success', "Se edito una sesion de fotomodulacion del paciente: ".$cli->nombre.", Fecha: ".$fechaSesion);
 
         return view("pacientes.historiales.radiofrecuencias.show",["radiofrecuencia"=>$radiofrecuencia,"paciente"=>$paciente,"sesiones"=>$sesiones,"sesionesFotomodulacion"=>$sesionesFotomodulacion, "historia"=>$historia]);
     }
@@ -277,12 +257,12 @@ class RadiofrecuenciaSesionController extends Controller
     {
         $idradiofrecuencia = $request->get('idradiofrecuencia');
         $idpaciente = $request->get('idpaciente');
-        $idradiofrecuencia_sesion = $request->get('idradiofrecuencia_sesion');
+        $idradiofrecuencia_fotomodulacion = $request->get('idradiofrecuencia_fotomodulacion');
         
-        $eliminarsesion=RadiofrecuenciaSesion::findOrFail($idradiofrecuencia_sesion);
+        $eliminarsesion=RadiofrecuenciaFotomodulacion::findOrFail($idradiofrecuencia_fotomodulacion);
         $eliminarsesion->delete();
 
-        $request->session()->flash('alert-success', 'Se elimino la sesion de radiofrecuencia.');  
+        $request->session()->flash('alert-success', 'Se elimino la sesion de fotomodulacion.');  
         
         
         $radiofrecuencia=DB::table('radiofrecuencia as r')
@@ -297,11 +277,11 @@ class RadiofrecuenciaSesionController extends Controller
             ->where('idpaciente','=',$radiofrecuencia->idpaciente)
             ->first();
     
-            $sesiones=DB::table('radiofrecuencia_sesion')
+        $sesiones=DB::table('radiofrecuencia_sesion')
             ->where('idradiofrecuencia','=',$radiofrecuencia->idradiofrecuencia)
             ->get();
     
-            $sesionesFotomodulacion=DB::table('radiofrecuencia_fotomodulacion')
+        $sesionesFotomodulacion=DB::table('radiofrecuencia_fotomodulacion')
             ->where('idradiofrecuencia','=',$radiofrecuencia->idradiofrecuencia)
             ->get();
     
