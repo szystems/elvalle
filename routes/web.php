@@ -62,6 +62,8 @@ Route::get('pacientes/historiales/recetas/eliminar', 'RecetaController@eliminarr
 Route::get('pacientes/historiales/fisicos/eliminar', 'FisicoController@eliminarfisico');
 Route::get('pacientes/historiales/embarazos/eliminar', 'EmbarazoController@eliminarembarazo');
 Route::get('pacientes/historiales/embarazos/controles/eliminar', 'ControlController@eliminarcontrol');
+Route::get('pacientes/historiales/radiofrecuencias/eliminar', 'RadiofrecuenciaController@eliminarradiofrecuencia');
+Route::get('pacientes/historiales/radiofrecuencias/sesiones/eliminar', 'RadiofrecuenciaSesionController@eliminarsesion');
 Route::resource('pacientes/historiales/historias','HistoriaController');
 Route::resource('pacientes/historiales/recetas','RecetaController');
 Route::resource('pacientes/historiales/fisicos','FisicoController');

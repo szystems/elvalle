@@ -5,7 +5,7 @@
       <div>
             <div class="card mb-4">
                   <header class="card-header">
-                        <h2 class="h3 card-header-title"><strong>embarazol Paciente: {{ $paciente->nombre }}</strong></h2>
+                        <h2 class="h3 card-header-title"><strong>embarazo Paciente: {{ $paciente->nombre }}</strong></h2>
                   </header>
 
                   @if (count($errors) > 0)
