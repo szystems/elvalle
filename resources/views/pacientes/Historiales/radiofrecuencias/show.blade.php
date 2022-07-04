@@ -69,7 +69,7 @@
                             @include('pacientes.historiales.radiofrecuencias.modaleliminar')
                         @endif
                     </header> 
-                        {{Form::open(array('action' => 'ReportesController@vistaembarazo','method' => 'POST','role' => 'form', 'target' => '_blank'))}}
+                        {{Form::open(array('action' => 'ReportesController@vistaradiofrecuencia','method' => 'POST','role' => 'form', 'target' => '_blank'))}}
                         {{Form::token()}}		
                             <div class="card mb-4">
                                 <header class="card-header d-md-flex align-items-center">
@@ -498,7 +498,7 @@
                                                     <td align="left">{{ $fechaSesion }}</td>
                                                 @endforeach
                                             </tr>
-                                            <!-- monopolar-->
+                                            <!-- Azul-->
                                             <tr>
                                                 <td><h2><strong><u>Azul</u></strong></h2></td>
                                             </tr>
@@ -527,7 +527,7 @@
                                                 @endforeach
                                             </tr>
                                             
-                                            <!-- bipolar-->
+                                            <!-- Infralight-->
                                             <tr>
                                                 <td><h2><strong><u>Infralight</u></strong></h2></td>
                                             </tr>
@@ -556,7 +556,7 @@
                                                 @endforeach
                                             </tr>
                                             
-                                            <!-- tetrapolar-->
+                                            <!-- Ambar-->
                                             <tr>
                                                 <td><h2><strong><u>Ambar</u></strong></h2></td>
                                             </tr>
@@ -585,9 +585,9 @@
                                                 @endforeach
                                             </tr>
                                             
-                                            <!-- hexapolar-->
+                                            <!-- Rubylight-->
                                             <tr>
-                                                <td><h2><strong><u>Hexapolar</u></strong></h2></td>
+                                                <td><h2><strong><u>Rubylight</u></strong></h2></td>
                                             </tr>
                                             <tr>
                                                 <td><strong>Área</strong></td>

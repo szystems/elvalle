@@ -97,7 +97,7 @@ Route::resource('reportes/ingresos','ReporteIngresosController');
     Route::post('pdf/recetas','ReportesController@vistareceta');
     Route::post('pdf/fisicos','ReportesController@vistafisico');
     Route::post('pdf/embarazos','ReportesController@vistaembarazo');
-    Route::post('pdf/embarazos','ReportesController@vistaembarazo');
+    Route::post('pdf/radiofrecuencias','ReportesController@vistaradiofrecuencia');
 
     /*Historiales */
     Route::post('pdf/historias','ReportesController@vistahistoria');

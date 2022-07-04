@@ -2315,7 +2315,7 @@ class ReportesController extends Controller
                 }
                 $path = public_path('imagenes/articulos/');
                 $verpdf=trim($rrequest->get('pdf'));
-                $idembarazo=trim($rrequest->get('rid'));
+                $idradiofrecuencia=trim($rrequest->get('rid'));
                 $idpaciente=trim($rrequest->get('ridpaciente'));
 
                 $zona_horaria = Auth::user()->zona_horaria;
@@ -2325,42 +2325,46 @@ class ReportesController extends Controller
                 $nompdf = Carbon::now($zona_horaria);
                 $nompdf = $nompdf->format('Y-m-d H:i:s');
                 
-                $embarazo=DB::table('embarazo as e')
-                ->join('paciente as p','e.idpaciente','=','p.idpaciente')
-                ->join('users as d','e.iddoctor','=','d.id')
-                ->join('users as u','e.idusuario','=','u.id')
-                ->select('e.idembarazo','e.fecha','e.iddoctor','d.name as Doctor','d.foto as Imgdoctor','d.especialidad','e.idpaciente','p.nombre as Paciente','p.foto as Imgpaciente','e.idusuario','u.name as Usuario','u.tipo_usuario','e.fur','e.trimestre1','e.trimestre2','e.trimestre3')
-                ->where('e.idembarazo','=',$idembarazo) 
+                $radiofrecuencia=DB::table('radiofrecuencia as r')
+                ->join('paciente as p','r.idpaciente','=','p.idpaciente')
+                ->join('users as d','r.iddoctor','=','d.id')
+                ->join('users as u','r.idusuario','=','u.id')
+                ->select('r.idradiofrecuencia','r.fecha','r.iddoctor','d.name as Doctor','d.foto as Imgdoctor','d.especialidad','r.idpaciente','p.nombre as Paciente','p.foto as Imgpaciente','r.idusuario','u.name as Usuario','u.tipo_usuario','r.fototipo_piel','r.implantes','r.implantes_tipo','r.marcapasos','r.periodo_gestacion','r.glaucoma','r.neoplasias_procesos_tumorales','r.portador_epilepsia','r.antecedentes_fotosensibilidad','r.tratamientos_acidos','r.medicamentos_fotosensibles','r.resumen')
+                ->where('r.idradiofrecuencia','=',$idradiofrecuencia) 
                 ->first();
 
                 $paciente=DB::table('paciente')
-                ->where('idpaciente','=',$embarazo->idpaciente)
+                ->where('idpaciente','=',$radiofrecuencia->idpaciente)
                 ->first();
 
-                $controles=DB::table('control')
-                ->where('idembarazo','=',$embarazo->idembarazo)
+                $sesiones=DB::table('radiofrecuencia_sesion')
+                ->where('idradiofrecuencia','=',$radiofrecuencia->idradiofrecuencia)
+                ->get();
+
+                $sesionesFotomodulacion=DB::table('radiofrecuencia_fotomodulacion')
+                ->where('idradiofrecuencia','=',$radiofrecuencia->idradiofrecuencia)
                 ->get();
 
                 $historia = DB::table('historia')
-                ->where('idpaciente','=',$embarazo->idpaciente)
+                ->where('idpaciente','=',$radiofrecuencia->idpaciente)
                 ->first();
 
                 
                 if ( $verpdf == "Descargar" )
                 {
-                    $view = \View::make('pdf.embarazos.vistaembarazo', compact('embarazo','historia','controles','paciente','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
+                    $view = \View::make('pdf.radiofrecuencias.vistaradiofrecuencia', compact('radiofrecuencia','historia','sesiones','sesionesFotomodulacion','paciente','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
                     $pdf = \App::make('dompdf.wrapper');
                     $pdf->loadHTML($view);
                     $pdf->setPaper('A4', 'landscape');
-                    return $pdf->download ('VistaEmbarazo'.'-'.$paciente->nombre.'-'.$embarazo->fecha.'-'.$nompdf.'.pdf');
+                    return $pdf->download ('VistaRadiofrecuencia'.'-'.$paciente->nombre.'-'.$radiofrecuencia->fecha.'-'.$nompdf.'.pdf');
                 }
                 if ( $verpdf == "Navegador" )
                 {
-                    $view = \View::make('pdf.embarazos.vistaembarazo', compact('embarazo','historia','controles','paciente','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
+                    $view = \View::make('pdf.radiofrecuencias.vistaradiofrecuencia', compact('radiofrecuencia','historia','sesiones','sesionesFotomodulacion','paciente','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
                     $pdf = \App::make('dompdf.wrapper');
                     $pdf->loadHTML($view);
                     $pdf->setPaper('A4', 'landscape');
-                    return $pdf->stream ('VistaEmbarazo'.'-'.$paciente->nombre.'-'.$embarazo->fecha.'-'.$nompdf.'.pdf');
+                    return $pdf->stream ('VistaRadiofrecuencia'.'-'.$paciente->nombre.'-'.$radiofrecuencia->fecha.'-'.$nompdf.'.pdf');
                 }
             }
         
