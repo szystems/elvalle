@@ -200,11 +200,19 @@ class RadiofrecuenciaController extends Controller
         ->where('idpaciente','=',$radiofrecuencia->idpaciente)
         ->first();
 
+        $sesionesFotomodulacion=DB::table('radiofrecuencia_fotomodulacion')
+        ->where('idradiofrecuencia','=',$radiofrecuencia->idradiofrecuencia)
+        ->get();
+
         $sesiones=DB::table('radiofrecuencia_sesion')
         ->where('idradiofrecuencia','=',$radiofrecuencia->idradiofrecuencia)
         ->get();
 
-        return view("pacientes.historiales.radiofrecuencias.show",["radiofrecuencia"=>$radiofrecuencia,"paciente"=>$paciente,"sesiones"=>$sesiones]);
+        $historia = DB::table('historia')
+        ->where('idpaciente','=',$radiofrecuencia->idpaciente)
+        ->first();
+
+        return view("pacientes.historiales.radiofrecuencias.show",["radiofrecuencia"=>$radiofrecuencia,"paciente"=>$paciente,"sesiones"=>$sesiones,"sesionesFotomodulacion"=>$sesionesFotomodulacion,"historia"=>$historia]);
     }
 
     public function eliminarradiofrecuencia(Request $request)
