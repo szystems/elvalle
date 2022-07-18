@@ -2370,5 +2370,77 @@ class ReportesController extends Controller
         
     }
 
+    public function vistasillaciclo(ReportesFormRequest $rrequest)
+    {  
+            if ($rrequest)
+            {
+                
+                $nombreusu = Auth::user()->name;
+                $empresa = Auth::user()->empresa;
+                $moneda = Auth::user()->moneda;
+                if (Auth::user()->logo == null)
+                {
+                    $logo = null;
+                    $imagen = null;
+                }
+                else
+                {
+                     $logo = Auth::user()->logo;
+                     $imagen = public_path('imagenes/logos/'.$logo);
+                     
+                }
+                $path = public_path('imagenes/articulos/');
+                $verpdf=trim($rrequest->get('pdf'));
+                $idSillaCiclo=trim($rrequest->get('rid'));
+                $idpaciente=trim($rrequest->get('ridpaciente'));
+
+                $zona_horaria = Auth::user()->zona_horaria;
+                $hoy = Carbon::now($zona_horaria);
+                $hoy = $hoy->format('d-m-Y');
+
+                $nompdf = Carbon::now($zona_horaria);
+                $nompdf = $nompdf->format('Y-m-d H:i:s');
+                
+                $sillaCiclo=DB::table('sillae_ciclo as s')
+                ->join('paciente as p','s.idpaciente','=','p.idpaciente')
+                ->join('users as d','s.iddoctor','=','d.id')
+                ->join('users as u','s.idusuario','=','u.id')
+                ->select('s.idsillae_ciclo','s.fecha','s.ciclo_numero','s.iddoctor','d.name as Doctor','d.foto as Imgdoctor','d.especialidad','s.idpaciente','p.nombre as Paciente','p.foto as Imgpaciente','s.idusuario','u.name as Usuario','u.tipo_usuario')
+                ->where('s.idsillae_ciclo','=',$idSillaCiclo) 
+                ->first();
+
+                $paciente=DB::table('paciente')
+                ->where('idpaciente','=',$sillaCiclo->idpaciente)
+                ->first();
+
+                $sesiones=DB::table('sillae_ciclo_sesion')
+                ->where('idsillae_ciclo','=',$sillaCiclo->idsillae_ciclo)
+                ->get();
+
+                $historia = DB::table('historia')
+                ->where('idpaciente','=',$sillaCiclo->idpaciente)
+                ->first();
+
+                
+                if ( $verpdf == "Descargar" )
+                {
+                    $view = \View::make('pdf.sillas.vistasillaciclo', compact('sillaCiclo','historia','sesiones','paciente','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
+                    $pdf = \App::make('dompdf.wrapper');
+                    $pdf->loadHTML($view);
+                    $pdf->setPaper('A4', 'landscape');
+                    return $pdf->download ('VistaSillaElectromagnetica'.'-'.$paciente->nombre.'-'.$sillaCiclo->fecha.'-'.$nompdf.'.pdf');
+                }
+                if ( $verpdf == "Navegador" )
+                {
+                    $view = \View::make('pdf.sillas.vistasillaciclo', compact('sillaCiclo','historia','sesiones','paciente','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
+                    $pdf = \App::make('dompdf.wrapper');
+                    $pdf->loadHTML($view);
+                    $pdf->setPaper('A4', 'landscape');
+                    return $pdf->stream ('VistaSillaElectromagnetica'.'-'.$paciente->nombre.'-'.$sillaCiclo->fecha.'-'.$nompdf.'.pdf');
+                }
+            }
+        
+    }
+
     
 }

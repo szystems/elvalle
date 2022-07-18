@@ -137,12 +137,12 @@ class SillaElectromagneticaSesionController extends Controller
         ->first();
 
         $sillaCiclo=DB::table('sillae_ciclo as s')
-            ->join('paciente as p','s.idpaciente','=','p.idpaciente')
-            ->join('users as d','s.iddoctor','=','d.id')
-            ->join('users as u','s.idusuario','=','u.id')
-            ->select('s.idsillae_ciclo','s.fecha','s.ciclo_numero','s.iddoctor','d.name as Doctor','d.foto as Imgdoctor','d.especialidad','s.idpaciente','p.nombre as Paciente','p.foto as Imgpaciente','s.idusuario','u.name as Usuario','u.tipo_usuario')
-            ->where('s.idsillae_ciclo','=',$sesion->idsillae_ciclo) 
-            ->first();
+        ->join('paciente as p','s.idpaciente','=','p.idpaciente')
+        ->join('users as d','s.iddoctor','=','d.id')
+        ->join('users as u','s.idusuario','=','u.id')
+        ->select('s.idsillae_ciclo','s.fecha','s.ciclo_numero','s.iddoctor','d.name as Doctor','d.foto as Imgdoctor','d.especialidad','s.idpaciente','p.nombre as Paciente','p.foto as Imgpaciente','s.idusuario','u.name as Usuario','u.tipo_usuario')
+        ->where('s.idsillae_ciclo','=',$sesion->idsillae_ciclo) 
+        ->first();
 
         $paciente=DB::table('paciente')
         ->where('idpaciente','=',$sillaCiclo->idpaciente)
@@ -163,6 +163,7 @@ class SillaElectromagneticaSesionController extends Controller
 
         $idpaciente=$request->get('idpaciente');
         $idSillaCiclo=$request->get('idsillae_ciclo');
+        $numeroSesion=$request->get('numero_sesion');
 
         $sillaCiclo=DB::table('sillae_ciclo as s')
             ->join('paciente as p','s.idpaciente','=','p.idpaciente')
@@ -172,13 +173,15 @@ class SillaElectromagneticaSesionController extends Controller
             ->where('s.idsillae_ciclo','=',$idSillaCiclo) 
             ->first();
 
-        $sesion=new SillaElectromagneticaSesion;
+        $sesion=SillaElectromagneticaSesion::findOrFail($id);
+        $sesion->idsillae_ciclo=$idSillaCiclo;
+        $sesion->numero_sesion=$numeroSesion;
         $sesion->tesla=$request->get('tesla');
         $sesion->minutos=$request->get('minutos');
         $sesion->observaciones=$request->get('observaciones');
-    	$sesion->save();
+    	$sesion->update();
 
-        $cli=DB::table('paciente')->where('idpaciente','=',$radiofrecuencia->idpaciente)->first();
+        $cli=DB::table('paciente')->where('idpaciente','=',$sillaCiclo->idpaciente)->first();
 
         $zonahoraria = Auth::user()->zona_horaria;
         $moneda = Auth::user()->moneda;
@@ -198,7 +201,7 @@ class SillaElectromagneticaSesionController extends Controller
         ->first();
 
         $sesiones=DB::table('sillae_ciclo_sesion')
-        ->where('idsillae_ciclo_sesion','=',$sillaCiclo->idsillae_ciclo)
+        ->where('idsillae_ciclo','=',$sillaCiclo->idsillae_ciclo)
         ->get();
 
         $historia = DB::table('historia')
@@ -235,7 +238,7 @@ class SillaElectromagneticaSesionController extends Controller
         ->first();
 
         $sesiones=DB::table('sillae_ciclo_sesion')
-        ->where('idsillae_ciclo_sesion','=',$sillaCiclo->idsillae_ciclo)
+        ->where('idsillae_ciclo','=',$sillaCiclo->idsillae_ciclo)
         ->get();
 
         $historia = DB::table('historia')

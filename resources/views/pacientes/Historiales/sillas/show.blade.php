@@ -184,7 +184,7 @@
                                             <tr>
                                                 <td>
                                                     
-                                                    <a href="{{URL::action('SillaElectromagneticaController@edit',$sesion->idsillae_ciclo_sesion)}}">
+                                                    <a href="{{URL::action('SillaElectromagneticaSesionController@edit',$sesion->idsillae_ciclo_sesion)}}">
                                                         <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar sesion">
                                                             <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button"><i class="far fa-edit"></i> </button>
                                                         </span>
