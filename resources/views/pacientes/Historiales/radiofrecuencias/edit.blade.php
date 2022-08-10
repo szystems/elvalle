@@ -116,16 +116,16 @@
                                                 </div>
 
                                                 <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                                                </div>
+
+                                                <div class="col-lg-8 col-sm-12 col-md-12 col-xs-12">
                                                       <div class="form-group">
-                                                          <label for=""><strong><u>Contraindicaciones</u></strong></label>
+                                                          <label for=""><strong><u>Contraindicaciones de Radiofrecuencia</u></strong></label>
                                                       </div>
                                                       <div class="table-responsive">
                                                           <table class="table table-sm table-striped table-bordered table-condensed table-hover">
                                                               
                                                               <tbody>
-                                                                  <tr>
-                                                                      <td colspan="2"><strong>Radiofrecuencia:</strong></td>
-                                                                  </tr>
                                                                   <tr>
                                                                         <td><strong>¿Tiene algun tipo de implantes en su cuerpo?</strong></td>
                                                                         <td align="center">
@@ -148,38 +148,92 @@
                                                                               <option value="SI">SI</option>
                                                                               <option value="NO">NO</option>
                                                                         </select>
-                                                                  </td>
+                                                                      </td>
                                                                   </tr>
-                                                                  <tr>
-                                                                      <td><strong>Fototerapia:</strong></td>
-                                                                  </tr>
+                                                                  
+                                                              </tbody>
+                                                          </table>
+                                                      </div>
+                                                </div>
+
+                                                <div class="col-lg-8 col-sm-12 col-md-12 col-xs-12">
+                                                      <div class="form-group">
+                                                          <label for=""><strong><u>Contraindicaciones de Fototerapia</u></strong></label>
+                                                      </div>
+                                                      <div class="table-responsive">
+                                                          <table class="table table-sm table-striped table-bordered table-condensed table-hover">
+                                                              
+                                                              <tbody>
+                                                                  
                                                                   <tr>
                                                                       <td><strong>Periodo de gestación</strong></td>
-                                                                      <td align="center"><textarea name="periodo_gestacion" cols="50" rows="3">{{ $radiofrecuencia->periodo_gestacion }}</textarea></td>
+                                                                      <td>
+                                                                        <select name="periodo_gestacion" class="form-control">
+                                                                              <option value="{{ $radiofrecuencia->periodo_gestacion }}">{{ $radiofrecuencia->periodo_gestacion }}</option>
+                                                                              <option value="SI">SI</option>
+                                                                              <option value="NO">NO</option>
+                                                                        </select>
+                                                                      </td>
                                                                   </tr>
                                                                   <tr>
                                                                       <td><strong>Glaucoma</strong></td>
-                                                                      <td align="center"><textarea name="glaucoma" cols="50" rows="3">{{ $radiofrecuencia->glaucoma }}</textarea></td>
+                                                                      <td>
+                                                                        <select name="glaucoma" class="form-control">
+                                                                              <option value="{{ $radiofrecuencia->glaucoma }}">{{ $radiofrecuencia->glaucoma }}</option>
+                                                                              <option value="SI">SI</option>
+                                                                              <option value="NO">NO</option>
+                                                                        </select>
+                                                                      </td>
                                                                   </tr>
                                                                   <tr>
                                                                       <td><strong>Neoplasias y procesos tumorales</strong></td>
-                                                                      <td align="center"><textarea name="neoplasias_procesos_tumorales" cols="50" rows="3">{{ $radiofrecuencia->neoplasias_procesos_tumorales }}</textarea></td>
+                                                                      <td>
+                                                                        <select name="neoplasias_procesos_tumorales" class="form-control">
+                                                                              <option value="{{ $radiofrecuencia->neoplasias_procesos_tumorales }}">{{ $radiofrecuencia->neoplasias_procesos_tumorales }}</option>
+                                                                              <option value="SI">SI</option>
+                                                                              <option value="NO">NO</option>
+                                                                        </select>
+                                                                      </td>
                                                                   </tr>
                                                                   <tr>
                                                                       <td><strong>Portador de epilepsia</strong></td>
-                                                                      <td align="center"><textarea name="portador_epilepsia" cols="50" rows="3">{{ $radiofrecuencia->portador_epilepsia }}</textarea></td>
+                                                                      <td>
+                                                                        <select name="portador_epilepsia" class="form-control">
+                                                                              <option value="{{ $radiofrecuencia->portador_epilepsia }}">{{ $radiofrecuencia->portador_epilepsia }}</option>
+                                                                              <option value="SI">SI</option>
+                                                                              <option value="NO">NO</option>
+                                                                        </select>
+                                                                      </td>
                                                                   </tr>
                                                                   <tr>
                                                                       <td><strong>Antecedentes de fotosensibilidad</strong></td>
-                                                                      <td align="center"><textarea name="antecedentes_fotosensibilidad" cols="50" rows="3">{{ $radiofrecuencia->antecedentes_fotosensibilidad }}</textarea></td>
+                                                                      <td>
+                                                                        <select name="antecedentes_fotosensibilidad" class="form-control">
+                                                                              <option value="{{ $radiofrecuencia->antecedentes_fotosensibilidad }}">{{ $radiofrecuencia->antecedentes_fotosensibilidad }}</option>
+                                                                              <option value="SI">SI</option>
+                                                                              <option value="NO">NO</option>
+                                                                        </select>
+                                                                      </td>
                                                                   </tr>
                                                                   <tr>
                                                                       <td><strong>Tratamientos con ácidos</strong></td>
-                                                                      <td align="center"><textarea name="tratamientos_acidos" cols="50" rows="3">{{ $radiofrecuencia->tratamientos_acidos }}</textarea></td>
+                                                                      <td>
+                                                                        <select name="tratamientos_acidos" class="form-control">
+                                                                              <option value="{{ $radiofrecuencia->tratamientos_acidos }}">{{ $radiofrecuencia->tratamientos_acidos }}</option>
+                                                                              <option value="SI">SI</option>
+                                                                              <option value="NO">NO</option>
+                                                                        </select>
+                                                                      </td>
                                                                   </tr>
                                                                   <tr>
                                                                       <td><strong>Medicamentos fotosensibles</strong></td>
-                                                                      <td align="center"><textarea name="medicamentos_fotosensibles" cols="50" rows="3">{{ $radiofrecuencia->medicamentos_fotosensibles }}</textarea></td>
+                                                                      <td>
+                                                                        <select name="medicamentos_fotosensibles" class="form-control">
+                                                                              <option value="{{ $radiofrecuencia->medicamentos_fotosensibles }}">{{ $radiofrecuencia->medicamentos_fotosensibles }}</option>
+                                                                              <option value="SI">SI</option>
+                                                                              <option value="NO">NO</option>
+                                                                        </select>
+                                                                      </td>
                                                                   </tr>
                                                                   
                                                               </tbody>

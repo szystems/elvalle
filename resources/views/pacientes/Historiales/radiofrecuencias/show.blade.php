@@ -152,15 +152,13 @@
 
                             <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                 <div class="form-group">
-                                    <label for=""><strong><u>Contraindicaciones</u></strong></label>
+                                    <label for=""><strong><u>Contraindicaciones de Radiofrecuencia</u></strong></label>
                                 </div>
                                 <div class="table-responsive">
                                     <table class="table table-sm table-striped table-bordered table-condensed table-hover">
                                         
                                         <tbody>
-                                            <tr>
-                                                <td colspan="2"><strong>Radiofrecuencia:</strong></td>
-                                            </tr>
+
                                             <tr>
                                                 <td><strong>¿Tiene algun tipo de implantes en su cuerpo?</strong></td>
                                                 <td align="center">{{ $radiofrecuencia->implantes }}</td>
@@ -176,9 +174,21 @@
                                                 <td><strong>¿Tiene marcapasos?</strong></td>
                                                 <td align="center">{{ $radiofrecuencia->marcapasos }}</td>
                                             </tr>
-                                            <tr>
-                                                <td><strong>Fototerapia:</strong></td>
-                                            </tr>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                                <div class="form-group">
+                                    <label for=""><strong><u>Contraindicaciones de Fototerapia</u></strong></label>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-sm table-striped table-bordered table-condensed table-hover">
+                                        
+                                        <tbody>
+                                            
                                             <tr>
                                                 <td><strong>Periodo de gestación</strong></td>
                                                 <td align="center">{{ $radiofrecuencia->periodo_gestacion }}</td>
