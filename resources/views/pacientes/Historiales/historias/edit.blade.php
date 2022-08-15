@@ -51,6 +51,12 @@
                               <li class="nav-item">
                                     <a class="nav-link" href="{{URL::action('SillaElectromagneticaController@index','searchidpaciente='.$paciente->idpaciente)}}">Silla Electromagnetica</a>
                               </li>
+                              <li class="nav-item">
+                                    <a class="nav-link" href="{{URL::action('ClimaymenoController@index','searchidpaciente='.$paciente->idpaciente)}}">Climaterio / Menopausea</a>
+                              </li>
+                              <li class="nav-item">
+                                    <a class="nav-link" href="{{URL::action('IncontinenciauController@index','searchidpaciente='.$paciente->idpaciente)}}">Incontinencia Urinaria</a>
+                              </li>
                         </ul>
 
 

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use sisVentasWeb\Http\Requests;
 use sisVentasWeb\Paciente;
 use sisVentasWeb\Embarazo;
-use sisVentasWeb\control;
+use sisVentasWeb\Control;
 use sisVentasWeb\Bitacora;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Redirect;

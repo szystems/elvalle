@@ -44,7 +44,7 @@
                                     <a class="nav-link" href="{{URL::action('FisicoController@index','searchidpaciente='.$paciente->idpaciente)}}">Fisico</a>
                               </li>
                               <li class="nav-item">
-                                    <a class="nav-link active" href="{{URL::action('EmbarazoController@index','searchidpaciente='.$paciente->idpaciente)}}"><b><u>Embarazos</u></b></a>
+                                    <a class="nav-link" href="{{URL::action('EmbarazoController@index','searchidpaciente='.$paciente->idpaciente)}}">Embarazos</a>
                               </li>
                               <li class="nav-item">
                                     <a class="nav-link" href="{{URL::action('RadiofrecuenciaController@index','searchidpaciente='.$paciente->idpaciente)}}">Radiofrecuencias</a>
@@ -53,7 +53,7 @@
                                     <a class="nav-link" href="{{URL::action('SillaElectromagneticaController@index','searchidpaciente='.$paciente->idpaciente)}}">Silla Electromagnetica</a>
                               </li>
                               <li class="nav-item">
-                                    <a class="nav-link" href="{{URL::action('ClimaymenoController@index','searchidpaciente='.$paciente->idpaciente)}}">Climaterio / Menopausea</a>
+                                    <a class="nav-link active" aria-current="page" href="{{URL::action('ClimaymenoController@index','searchidpaciente='.$paciente->idpaciente)}}"><b><u>Climaterio / Menopausea</u></b></a>
                               </li>
                               <li class="nav-item">
                                     <a class="nav-link" href="{{URL::action('IncontinenciauController@index','searchidpaciente='.$paciente->idpaciente)}}">Incontinencia Urinaria</a>
@@ -64,13 +64,58 @@
                         <div class="card">
 
                               <header class="card-header">
-                                    <h2 class="h3 card-header-title"><strong>Nuevo Control: </strong></h2>
+                                    <h2 class="h3 card-header-title"><strong>Editar Control: </strong></h2>
                               </header>
 
                               <div class="card-body">
-                                    {!! Form::open(['url' => 'pacientes/historiales/embarazos/controles', 'method' => 'POST', 'autocomplete' => 'off']) !!}
-                                    {{ Form::token() }}
-                                    
+                                    <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                                          <div class="form-group">
+                                              <label for=""><strong><u>Antecedentes Obstetricos</u></strong></label>
+                                          </div>
+                                          <div class="table-responsive">
+                                              <table class="table table-sm table-striped table-bordered table-condensed table-hover">
+                                                  
+                                                  <tbody>
+                                                      <tr>
+                                                          
+                                                          <td><strong>Gestas</strong></td>
+                                                          <td align="center">{{ $historia->gestas }}</td>
+                                                      </tr>
+                                                      <tr>
+                                                          <td><strong>Vias de resolucion</strong></td>
+                                                          <td align="center">{{ $historia->vias_resolucion }}</td>
+                                                      </tr>
+                                                      <tr>
+                                                          <td><strong>Hijos Vivos</strong></td>
+                                                          <td align="center">{{ $historia->hijos_vivos }}</td>
+                                                      </tr>
+                                                      <tr>
+                                                          <td><strong>Hijos Muertos</strong></td>
+                                                          <td align="center">{{ $historia->hijos_muertos }}</td>
+                                                      </tr>
+                                                      <tr>
+                                                          <td><strong>Complicaciones Neonatales</strong></td>
+                                                          <td align="center">{{ $historia->complicaciones_neonatales }}</td>
+                                                      </tr>
+                                                      <tr>
+                                                          <td><strong>Complicaciones Obstetricos</strong></td>
+                                                          <td align="center">{{ $historia->complicaciones_obstetricos }}</td>
+                                                      </tr>
+                                                      <tr>
+                                                          <td><strong>Abortos</strong></td>
+                                                          <td align="center">{{ $historia->abortos }}</td>
+                                                      </tr>
+                                                      <tr>
+                                                          <td><strong>causa</strong></td>
+                                                          <td align="center">{{ $historia->causa }}</td>
+                                                      </tr>
+                                                      
+                                                  </tbody>
+                                              </table>
+                                          </div>
+                                    </div>
+                                    {!!Form::model($control,['method'=>'PATCH','route'=>['controles.update',$control->idcontrol]])!!}
+                                    {{Form::token()}}
                                           <div class="row">
                                                 <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                                       <div class="form-group">
@@ -116,55 +161,9 @@
                                                             @endif
                                                       </div>
                                                 </div>
-                                                <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                                                      <div class="form-group">
-                                                          <label for=""><strong><u>Antecedentes Obstetricos</u></strong></label>
-                                                      </div>
-                                                      <div class="table-responsive">
-                                                          <table class="table table-sm table-striped table-bordered table-condensed table-hover">
-                                                              
-                                                              <tbody>
-                                                                  <tr>
-                                                                      
-                                                                      <td><strong>Gestas</strong></td>
-                                                                      <td align="center">{{ $historia->gestas }}</td>
-                                                                  </tr>
-                                                                  <tr>
-                                                                      <td><strong>Vias de resolucion</strong></td>
-                                                                      <td align="center">{{ $historia->vias_resolucion }}</td>
-                                                                  </tr>
-                                                                  <tr>
-                                                                      <td><strong>Hijos Vivos</strong></td>
-                                                                      <td align="center">{{ $historia->hijos_vivos }}</td>
-                                                                  </tr>
-                                                                  <tr>
-                                                                      <td><strong>Hijos Muertos</strong></td>
-                                                                      <td align="center">{{ $historia->hijos_muertos }}</td>
-                                                                  </tr>
-                                                                  <tr>
-                                                                      <td><strong>Complicaciones Neonatales</strong></td>
-                                                                      <td align="center">{{ $historia->complicaciones_neonatales }}</td>
-                                                                  </tr>
-                                                                  <tr>
-                                                                      <td><strong>Complicaciones Obstetricos</strong></td>
-                                                                      <td align="center">{{ $historia->complicaciones_obstetricos }}</td>
-                                                                  </tr>
-                                                                  <tr>
-                                                                      <td><strong>Abortos</strong></td>
-                                                                      <td align="center">{{ $historia->abortos }}</td>
-                                                                  </tr>
-                                                                  <tr>
-                                                                      <td><strong>causa</strong></td>
-                                                                      <td align="center">{{ $historia->causa }}</td>
-                                                                  </tr>
-                                                                  
-                                                              </tbody>
-                                                          </table>
-                                                      </div>
-                                                </div>
                                                 <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                                       <div class="form-group">
-                                                            <label for="doctor"><h2><u><strong>Datos de nuevo control de embarazo:</strong></u></h2></label>
+                                                            <label for="doctor"><h2><u><strong>Editar datos de control de embarazo:</strong></u></h2></label>
                                                       </div>
                                                 </div>
 
@@ -174,7 +173,9 @@
                                                                   <table class="table table-sm table-striped table-bordered table-condensed table-hover">
                                                                       
                                                                         <tbody>
-
+                                                                              @php
+                                                                                    $fechaControl = date("d-m-Y", strtotime($control->fecha));
+                                                                              @endphp
                                                                               <tr>
                                                                                     <td><strong>Fecha</strong></td>
                                                                                     <td align="left">
@@ -182,7 +183,7 @@
                                                                                                 <span class="form-icon form-icon--right">
                                                                                                       <i class="fas fa-calendar-alt form-icon__item"></i>
                                                                                                 </span>
-                                                                                                <input type="text" id="datepicker" class="form-control datepicker" name="fecha" value="">
+                                                                                                <input type="text" id="datepicker" class="form-control datepicker" name="fecha" value="{{ $fechaControl }}">
                                                                                           </span>
                                                                                     </td>
                                                                               </tr>
@@ -194,56 +195,56 @@
                                                                               <tr>
                                                                                     <td><strong>Sueño</strong></td>
                                                                                     <td align="left">
-                                                                                          <textarea class="form-control" name="sueno" cols="30" rows="2">{{ old('sueno') }}</textarea>
+                                                                                          <textarea class="form-control" name="sueno" cols="30" rows="2">{{ $control->sueno }}</textarea>
                                                                                     </td>
                                                                               </tr>
 
                                                                               <tr>
                                                                                     <td><strong>Apetito</strong></td>
                                                                                     <td align="left">
-                                                                                          <textarea class="form-control" name="apetito" cols="30" rows="2">{{ old('apetito') }}</textarea>
+                                                                                          <textarea class="form-control" name="apetito" cols="30" rows="2">{{ $control->apetito }}</textarea>
                                                                                     </td>
                                                                               </tr>
 
                                                                               <tr>
                                                                                     <td><strong>Estreñimiento</strong></td>
                                                                                     <td align="left">
-                                                                                          <textarea class="form-control" name="estrenimiento" cols="30" rows="2">{{ old('estrenimiento') }}</textarea>
+                                                                                          <textarea class="form-control" name="estrenimiento" cols="30" rows="2">{{ $control->estrenimiento }}</textarea>
                                                                                     </td>
                                                                               </tr>
 
                                                                               <tr>
                                                                                     <td><strong>Disuria</strong></td>
                                                                                     <td align="left">
-                                                                                          <textarea class="form-control" name="disuria" cols="30" rows="2">{{ old('disuria') }}</textarea>
+                                                                                          <textarea class="form-control" name="disuria" cols="30" rows="2">{{ $control->disuria }}</textarea>
                                                                                     </td>
                                                                               </tr>
 
                                                                               <tr>
                                                                                     <td><strong>Nauseas/Vomitos</strong></td>
                                                                                     <td align="left">
-                                                                                          <textarea class="form-control" name="nauseas_vomitos" cols="30" rows="2">{{ old('nauseas_vomitos') }}</textarea>
+                                                                                          <textarea class="form-control" name="nauseas_vomitos" cols="30" rows="2">{{ $control->nauseas_vomitos }}</textarea>
                                                                                     </td>
                                                                               </tr>
 
                                                                               <tr>
                                                                                     <td><strong>Flujo Vaginal</strong></td>
                                                                                     <td align="left">
-                                                                                          <textarea class="form-control" name="flujo_vaginal" cols="30" rows="2">{{ old('flujo_vaginal') }}</textarea>
+                                                                                          <textarea class="form-control" name="flujo_vaginal" cols="30" rows="2">{{ $control->flujo_vaginal }}</textarea>
                                                                                     </td>
                                                                               </tr>
 
                                                                               <tr>
                                                                                     <td><strong>Dolor</strong></td>
                                                                                     <td align="left">
-                                                                                          <textarea class="form-control" name="dolor" cols="30" rows="2">{{ old('dolor') }}</textarea>
+                                                                                          <textarea class="form-control" name="dolor" cols="30" rows="2">{{ $control->dolor }}</textarea>
                                                                                     </td>
                                                                               </tr>
 
                                                                               <tr>
                                                                                     <td><strong>Otros</strong></td>
                                                                                     <td align="left">
-                                                                                          <textarea class="form-control" name="otros" cols="30" rows="2">{{ old('otros') }}</textarea>
+                                                                                          <textarea class="form-control" name="otros" cols="30" rows="2">{{ $control->otros }}</textarea>
                                                                                     </td>
                                                                               </tr>
 
@@ -255,7 +256,7 @@
                                                                                     <td><strong>Peso</strong></td>
                                                                                     <td align="left">
                                                                                           <div class="input-group">
-                                                                                                <input type="text" name="peso" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="{{ old('peso') }}" placeholder="0.00" onkeypress="return validardecimal(event,this.value)" required>
+                                                                                                <input type="text" name="peso" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="{{ $control->peso }}" placeholder="0.00" onkeypress="return validardecimal(event,this.value)" required>
                                                                                                 <div class="input-group-prepend">
                                                                                                       <span class="input-group-text">Lbs.</span>
                                                                                                 </div>
@@ -267,7 +268,7 @@
                                                                                     <td><strong>Talla</strong></td>
                                                                                     <td align="left">
                                                                                           <div class="input-group">
-                                                                                                <input type="text" name="talla" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="{{ old('talla') }}" placeholder="0.00" onkeypress="return validardecimal(event,this.value)" required>
+                                                                                                <input type="text" name="talla" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="{{ $control->talla }}" placeholder="0.00" onkeypress="return validardecimal(event,this.value)" required>
                                                                                                 <div class="input-group-prepend">
                                                                                                       <span class="input-group-text">Cms.</span>
                                                                                                 </div>
@@ -279,15 +280,9 @@
                                                                                     <td><strong>Presion Arterial</strong></td>
                                                                                     <td align="left">
                                                                                           <div class="input-group">
-                                                                                                <input type="text" name="presion_arterial1" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="{{ old('presion_arterial1') }}" placeholder="0" onkeypress="return validarentero(event,this.value)" required>
+                                                                                                <input type="text" name="presion_arterial" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="{{ $control->presion_arterial }}" placeholder="0" onkeypress="return validarentero(event,this.value)" required>
                                                                                                 <div class="input-group-prepend">
-                                                                                                      <span class="input-group-text">mm/</span>
-                                                                                                </div>
-                                                                                          </div>
-                                                                                          <div class="input-group">
-                                                                                                <input type="text" name="presion_arterial2" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="{{ old('presion_arterial2') }}" placeholder="0" onkeypress="return validarentero(event,this.value)" required>
-                                                                                                <div class="input-group-prepend">
-                                                                                                      <span class="input-group-text">/Hg</span>
+                                                                                                      <span class="input-group-text">mm Hg</span>
                                                                                                 </div>
                                                                                           </div>
                                                                                     </td>
@@ -297,7 +292,7 @@
                                                                                     <td><strong>Temperatura</strong></td>
                                                                                     <td align="left">
                                                                                           <div class="input-group">
-                                                                                                <input type="text" name="temperatura" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="{{ old('temperatura') }}" placeholder="0" onkeypress="return validarentero(event,this.value)" required>
+                                                                                                <input type="text" name="temperatura" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="{{ $control->temperatura }}" placeholder="0" onkeypress="return validarentero(event,this.value)" required>
                                                                                                 <div class="input-group-prepend">
                                                                                                       <span class="input-group-text">°C</span>
                                                                                                 </div>
@@ -309,7 +304,7 @@
                                                                                     <td><strong>Frecuencia Cardiaca Materna</strong></td>
                                                                                     <td align="left">
                                                                                           <div class="input-group">
-                                                                                                <input type="text" name="frecuencia_cardiaca_materna" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="{{ old('frecuencia_cardiaca_materna') }}" placeholder="0" onkeypress="return validarentero(event,this.value)" required>
+                                                                                                <input type="text" name="frecuencia_cardiaca_materna" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="{{ $control->frecuencia_cardiaca_materna }}" placeholder="0" onkeypress="return validarentero(event,this.value)" required>
                                                                                                 <div class="input-group-prepend">
                                                                                                       <span class="input-group-text">/min</span>
                                                                                                 </div>
@@ -321,7 +316,7 @@
                                                                                     <td><strong>Altura Uterina</strong></td>
                                                                                     <td align="left">
                                                                                           <div class="input-group">
-                                                                                                <input type="text" name="altura_uterina" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="{{ old('altura_uterina') }}" placeholder="0" onkeypress="return validardecimal(event,this.value)" required>
+                                                                                                <input type="text" name="altura_uterina" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="{{ $control->altura_uterina }}" placeholder="0" onkeypress="return validardecimal(event,this.value)" required>
                                                                                                 <div class="input-group-prepend">
                                                                                                       <span class="input-group-text">/min</span>
                                                                                                 </div>
@@ -335,7 +330,7 @@
                                                                                     <td><strong>Frecuencia Cardiaca Fetal</strong></td>
                                                                                     <td align="left">
                                                                                           <div class="input-group">
-                                                                                                <input type="text" name="frecuencia_cardiaca_fetal" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="{{ old('frecuencia_cardiaca_fetal') }}" placeholder="0" onkeypress="return validarentero(event,this.value)" required>
+                                                                                                <input type="text" name="frecuencia_cardiaca_fetal" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="{{ $control->frecuencia_cardiaca_fetal }}" placeholder="0" onkeypress="return validarentero(event,this.value)" required>
                                                                                                 <div class="input-group-prepend">
                                                                                                       <span class="input-group-text">/min</span>
                                                                                                 </div>
@@ -347,8 +342,8 @@
                                                                                     <td><strong>Presentacion Fetal</strong></td>
                                                                                     <td align="left">
                                                                                           <select name="presentacion_fetal" class="form-control">
-                                                                                                @if (old('presentacion_fetal'))
-                                                                                                      <option value="{{ old('presentacion_fetal') }}" selected>{{ old('presentacion_fetal') }}</option>
+                                                                                                @if ($control->presentacion_fetal)
+                                                                                                      <option value="{{ $control->presentacion_fetal }}" selected>{{ $control->presentacion_fetal }}</option>
                                                                                                       <option value="Cefalica">Cefalica</option>
                                                                                                       <option value="Podalica">Podalica</option>
                                                                                                       <option value="Oblicua">Oblicua</option>
@@ -369,8 +364,8 @@
                                                                                     <td><strong>Movimientos Fetales</strong></td>
                                                                                     <td align="left">
                                                                                           <select name="movimientos_fetales" class="form-control">
-                                                                                                @if (old('presentacion_fetal'))
-                                                                                                      <option value="{{ old('movimientos_fetales') }}" selected>{{ old('movimientos_fetales') }}</option>
+                                                                                                @if ($control->movimientos_fetales)
+                                                                                                      <option value="{{ $control->movimientos_fetales }}" selected>{{$control->movimientos_fetales }}</option>
                                                                                                       <option value="+">+</option>
                                                                                                       <option value="++">++</option>
                                                                                                       <option value="+++">+++</option>
@@ -387,8 +382,8 @@
                                                                                     <td><strong>Edema en MI</strong></td>
                                                                                     <td align="left">
                                                                                           <select name="edema_mi" class="form-control">
-                                                                                                @if (old('edema_mi'))
-                                                                                                      <option value="{{ old('edema_mi') }}" selected>{{ old('edema_mi') }}</option>
+                                                                                                @if ($control->edema_mi)
+                                                                                                      <option value="{{ $control->edema_mi }}" selected>{{ $control->edema_mi }}</option>
                                                                                                       <option value="NO">NO</option>
                                                                                                       <option value="SI">SI</option>
                                                                                                 @else
@@ -403,8 +398,8 @@
                                                                                     <td><strong>Varices</strong></td>
                                                                                     <td align="left">
                                                                                           <select name="varices" class="form-control">
-                                                                                                @if (old('varices'))
-                                                                                                      <option value="{{ old('varices') }}" selected>{{ old('varices') }}</option>
+                                                                                                @if ($control->sueno)
+                                                                                                      <option value="{{ $control->varices }}" selected>{{ $control->varices }}</option>
                                                                                                       <option value="NO">NO</option>
                                                                                                       <option value="SI">SI</option>
                                                                                                 @else
@@ -419,7 +414,7 @@
                                                                                     <td><strong>Flujo Vaginal (Ph)</strong></td>
                                                                                     <td align="left">
                                                                                           <div class="input-group">
-                                                                                                <input type="text" name="flujo_vaginal_ph" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="{{ old('flujo_vaginal_ph') }}" required>
+                                                                                                <input type="text" name="flujo_vaginal_ph" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="{{ $control->flujo_vaginal_ph }}" required>
                                                                                                 <div class="input-group-prepend">
                                                                                                       <span class="input-group-text">Ph</span>
                                                                                                 </div>
@@ -434,25 +429,28 @@
                                                                               <tr>
                                                                                     <td><strong>Medicamentos</strong></td>
                                                                                     <td align="left">
-                                                                                          <textarea class="form-control" name="medicamentos" cols="30" rows="2">{{ old('medicamentos') }}</textarea>
+                                                                                          <textarea class="form-control" name="medicamentos" cols="30" rows="2">{{ $control->medicamentos }}</textarea>
                                                                                     </td>
                                                                               </tr>
 
                                                                               <tr>
                                                                                     <td><strong>Especiales</strong></td>
                                                                                     <td align="left">
-                                                                                          <textarea class="form-control" name="especiales" cols="30" rows="2">{{ old('especiales') }}</textarea>
+                                                                                          <textarea class="form-control" name="especiales" cols="30" rows="2">{{ $control->especiales }}</textarea>
                                                                                     </td>
                                                                               </tr>
 
                                                                               <tr>
+                                                                                    @php
+                                                                                          $proximaCita = date("d-m-Y", strtotime($control->proxima_cita));
+                                                                                    @endphp
                                                                                     <td><strong>Proxima Cita</strong></td>
                                                                                     <td align="left">
                                                                                           <span class="form-icon-wrapper">
                                                                                                 <span class="form-icon form-icon--right">
                                                                                                       <i class="fas fa-calendar-alt form-icon__item"></i>
                                                                                                 </span>
-                                                                                                <input type="text" id="proxima_cita" class="form-control datepicker" name="proxima_cita" value="">
+                                                                                                <input type="text" id="proxima_cita" class="form-control datepicker" name="proxima_cita" value="{{ $proximaCita }}">
                                                                                           </span>
                                                                                     </td>
                                                                               </tr>
@@ -460,7 +458,7 @@
                                                                               <tr>
                                                                                     <td><strong>Nota Adicional</strong></td>
                                                                                     <td align="left">
-                                                                                          <textarea class="form-control" name="nota" cols="30" rows="2">{{ old('nota') }}</textarea>
+                                                                                          <textarea class="form-control" name="nota" cols="30" rows="2">{{ $control->nota }}</textarea>
                                                                                     </td>
                                                                               </tr>
                                                                               
@@ -508,8 +506,6 @@
             $( '#datepicker' ).datepicker( optSimple );
             $( '#proxima_cita' ).datepicker( optSimple );
     
-            $( '#datepicker' ).datepicker( 'setDate', today );
-            $( '#proxima_cita' ).datepicker( 'setDate', today );
       </script>
 
       @push ('scripts')

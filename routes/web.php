@@ -77,6 +77,8 @@ Route::resource('pacientes/historiales/radiofrecuencias/sesiones','Radiofrecuenc
 Route::resource('pacientes/historiales/radiofrecuencias/fotomodulaciones','RadiofrecuenciaFotomodulacionController');
 Route::resource('pacientes/historiales/sillas','SillaElectromagneticaController');
 Route::resource('pacientes/historiales/sillas/sesiones','SillaElectromagneticaSesionController');
+Route::resource('pacientes/historiales/climaymenos','ClimaymenoController');
+Route::resource('pacientes/historiales/incontinencias','IncontinenciauController');
 Route::resource('pacientes/historiales','HistorialController');
 
 
@@ -100,6 +102,7 @@ Route::resource('reportes/ingresos','ReporteIngresosController');
     Route::post('pdf/recetas','ReportesController@vistareceta');
     Route::post('pdf/fisicos','ReportesController@vistafisico');
     Route::post('pdf/embarazos','ReportesController@vistaembarazo');
+    Route::post('pdf/climaymenos','ReportesController@vistaclimaymeno');
     Route::post('pdf/radiofrecuencias','ReportesController@vistaradiofrecuencia');
     Route::post('pdf/sillas','ReportesController@vistasillaciclo');
 
