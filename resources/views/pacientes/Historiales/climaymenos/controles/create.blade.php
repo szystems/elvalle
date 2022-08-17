@@ -31,8 +31,7 @@
                   <div class="card-body">
                         <ul class="nav nav-tabs">
                               <li class="nav-item">
-                                    <a class="nav-link" aria-current="page"
-                                    href="{{ URL::action('HistorialController@show', $paciente->idpaciente) }}">Perfil</a>
+                                    <a class="nav-link" href="{{ URL::action('HistorialController@show', $paciente->idpaciente) }}">Perfil</a>
                               </li>
                               <li class="nav-item">
                                     <a class="nav-link" href="{{URL::action('RecetaController@index','searchidpaciente='.$paciente->idpaciente)}}">Recetas</a>
@@ -44,7 +43,7 @@
                                     <a class="nav-link" href="{{URL::action('FisicoController@index','searchidpaciente='.$paciente->idpaciente)}}">Fisico</a>
                               </li>
                               <li class="nav-item">
-                                    <a class="nav-link active" href="{{URL::action('EmbarazoController@index','searchidpaciente='.$paciente->idpaciente)}}"><b><u>Embarazos</u></b></a>
+                                    <a class="nav-link" href="{{URL::action('EmbarazoController@index','searchidpaciente='.$paciente->idpaciente)}}">Embarazos</a>
                               </li>
                               <li class="nav-item">
                                     <a class="nav-link" href="{{URL::action('RadiofrecuenciaController@index','searchidpaciente='.$paciente->idpaciente)}}">Radiofrecuencias</a>
@@ -53,7 +52,7 @@
                                     <a class="nav-link" href="{{URL::action('SillaElectromagneticaController@index','searchidpaciente='.$paciente->idpaciente)}}">Silla Electromagnetica</a>
                               </li>
                               <li class="nav-item">
-                                    <a class="nav-link" href="{{URL::action('ClimaymenoController@index','searchidpaciente='.$paciente->idpaciente)}}">Climaterio / Menopausea</a>
+                                    <a class="nav-link active" aria-current="page" href="{{URL::action('ClimaymenoController@index','searchidpaciente='.$paciente->idpaciente)}}"><b><u>Climaterio / Menopausea</u></b></a>
                               </li>
                               <li class="nav-item">
                                     <a class="nav-link" href="{{URL::action('IncontinenciauController@index','searchidpaciente='.$paciente->idpaciente)}}">Incontinencia Urinaria</a>
@@ -68,21 +67,18 @@
                               </header>
 
                               <div class="card-body">
-                                    {!! Form::open(['url' => 'pacientes/historiales/embarazos/controles', 'method' => 'POST', 'autocomplete' => 'off']) !!}
+                                    {!! Form::open(['url' => 'pacientes/historiales/climaymenos/controles', 'method' => 'POST', 'autocomplete' => 'off']) !!}
                                     {{ Form::token() }}
                                     
                                           <div class="row">
                                                 <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                                       <div class="form-group">
                                                             <label for="doctor"><strong><u>Cabecera</u></strong></label>
-                                                            <input type="hidden" name="idembarazo" value="{{ $embarazo->idembarazo }}">
+                                                            <input type="hidden" name="idclimaymeno" value="{{ $climaymeno->idclimaymeno }}">
                                                       </div>
                                                 </div>
                                                 <?php
-                                                      $fecha = date("d-m-Y", strtotime($embarazo->fecha));
-                                                      $fur = date("d-m-Y", strtotime($embarazo->fur));
-                                                      $fechaParto = date("d-m-Y", strtotime($embarazo->fur));
-                                                      $fechaParto = date("d-m-Y", strtotime($fechaParto.'+ 280 days'));
+                                                      $fecha = date("d-m-Y", strtotime($climaymeno->fecha));
                                                 ?>
                                                 <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
                                                       <div class="form-group">
@@ -93,30 +89,16 @@
                                                 <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
                                                       <div class="form-group">
                                                             <label for="paciente"><strong>Paciente</strong></label>
-                                                            <p>{{$embarazo->Paciente}}</p>
+                                                            <p>{{$climaymeno->Paciente}}</p>
                                                       </div>
                                                 </div>
                                                 <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
                                                       <div class="form-group">
                                                             <label for="doctor"><strong>Doctor</strong></label>
-                                                            <p>{{$embarazo->Doctor}} ({{ $embarazo->especialidad }})</p>
+                                                            <p>{{$climaymeno->Doctor}} ({{ $climaymeno->especialidad }})</p>
                                                       </div>
                                                 </div>
-                                                <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
-                                                      <div class="form-group">
-                                                            <label for="doctor"><strong>FUR</strong></label>
-                                                            <p>{{$fur}}</p>
-                                                      </div>
-                                                </div>
-                                                <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
-                                                      <div class="form-group">
-                                                            <label for="doctor"><strong>FPP</strong></label>
-                                                            @if ($fur != '01-01-1970')
-                                                            <p>{{$fechaParto}}</p>
-                                                            @endif
-                                                      </div>
-                                                </div>
-                                                <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+                                                <!--<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                                                       <div class="form-group">
                                                           <label for=""><strong><u>Antecedentes Obstetricos</u></strong></label>
                                                       </div>
@@ -161,10 +143,10 @@
                                                               </tbody>
                                                           </table>
                                                       </div>
-                                                </div>
+                                                </div>-->
                                                 <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                                       <div class="form-group">
-                                                            <label for="doctor"><h2><u><strong>Datos de nuevo control de embarazo:</strong></u></h2></label>
+                                                            <label for="doctor"><h2><u><strong>Datos de nuevo control de climaterio y menopausea:</strong></u></h2></label>
                                                       </div>
                                                 </div>
 
@@ -192,60 +174,389 @@
                                                                               </tr>
 
                                                                               <tr>
-                                                                                    <td><strong>Sueño</strong></td>
+                                                                                    <td><strong>Bochornos</strong></td>
                                                                                     <td align="left">
-                                                                                          <textarea class="form-control" name="sueno" cols="30" rows="2">{{ old('sueno') }}</textarea>
+                                                                                          <select name="bochornos" class="form-control">
+                                                                                                @if (old('bochornos'))
+                                                                                                      <option value="{{ old('bochornos') }}" selected>{{ old('bochornos') }}</option>
+                                                                                                      <option value="NO">NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @else
+                                                                                                      <option value="NO" selected>NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @endif
+                                                                                          </select>
                                                                                     </td>
                                                                               </tr>
 
                                                                               <tr>
-                                                                                    <td><strong>Apetito</strong></td>
+                                                                                    <td><strong>Bochornos escala</strong></td>
                                                                                     <td align="left">
-                                                                                          <textarea class="form-control" name="apetito" cols="30" rows="2">{{ old('apetito') }}</textarea>
+                                                                                          <select name="bochornos_escala" class="form-control">
+                                                                                                @if (old('bochornos_escala'))
+                                                                                                      <option value="{{ old('bochornos_escala') }}" selected>{{ old('bochornos_escala') }}</option>
+                                                                                                      <option value=""></option>
+                                                                                                      <option value="+">+</option>
+                                                                                                      <option value="++">++</option>
+                                                                                                      <option value="+++">+++</option>
+                                                                                                @else
+                                                                                                      <option value=""></option>
+                                                                                                      <option value="+">+</option>
+                                                                                                      <option value="++">++</option>
+                                                                                                      <option value="+++">+++</option>
+                                                                                                @endif
+                                                                                          </select>
                                                                                     </td>
                                                                               </tr>
 
                                                                               <tr>
-                                                                                    <td><strong>Estreñimiento</strong></td>
+                                                                                    <td><strong>Depresion</strong></td>
                                                                                     <td align="left">
-                                                                                          <textarea class="form-control" name="estrenimiento" cols="30" rows="2">{{ old('estrenimiento') }}</textarea>
+                                                                                          <select name="depresion" class="form-control">
+                                                                                                @if (old('depresion'))
+                                                                                                      <option value="{{ old('depresion') }}" selected>{{ old('depresion') }}</option>
+                                                                                                      <option value="NO">NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @else
+                                                                                                      <option value="NO" selected>NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @endif
+                                                                                          </select>
                                                                                     </td>
                                                                               </tr>
 
                                                                               <tr>
-                                                                                    <td><strong>Disuria</strong></td>
+                                                                                    <td><strong>Depresion escala</strong></td>
                                                                                     <td align="left">
-                                                                                          <textarea class="form-control" name="disuria" cols="30" rows="2">{{ old('disuria') }}</textarea>
+                                                                                          <select name="depresion_escala" class="form-control">
+                                                                                                @if (old('depresion_escala'))
+                                                                                                      <option value="{{ old('depresion_escala') }}" selected>{{ old('depresion_escala') }}</option>
+                                                                                                      <option value=""></option>
+                                                                                                      <option value="+">+</option>
+                                                                                                      <option value="++">++</option>
+                                                                                                      <option value="+++">+++</option>
+                                                                                                @else
+                                                                                                      <option value=""></option>
+                                                                                                      <option value="+">+</option>
+                                                                                                      <option value="++">++</option>
+                                                                                                      <option value="+++">+++</option>
+                                                                                                @endif
+                                                                                          </select>
                                                                                     </td>
                                                                               </tr>
 
                                                                               <tr>
-                                                                                    <td><strong>Nauseas/Vomitos</strong></td>
+                                                                                    <td><strong>Irritabilidad</strong></td>
                                                                                     <td align="left">
-                                                                                          <textarea class="form-control" name="nauseas_vomitos" cols="30" rows="2">{{ old('nauseas_vomitos') }}</textarea>
+                                                                                          <select name="irritabilidad" class="form-control">
+                                                                                                @if (old('irritabilidad'))
+                                                                                                      <option value="{{ old('irritabilidad') }}" selected>{{ old('irritabilidad') }}</option>
+                                                                                                      <option value="NO">NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @else
+                                                                                                      <option value="NO" selected>NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @endif
+                                                                                          </select>
                                                                                     </td>
                                                                               </tr>
 
                                                                               <tr>
-                                                                                    <td><strong>Flujo Vaginal</strong></td>
+                                                                                    <td><strong>Irritabilidad escala</strong></td>
                                                                                     <td align="left">
-                                                                                          <textarea class="form-control" name="flujo_vaginal" cols="30" rows="2">{{ old('flujo_vaginal') }}</textarea>
+                                                                                          <select name="irritabilidad_escala" class="form-control">
+                                                                                                @if (old('irritabilidad_escala'))
+                                                                                                      <option value="{{ old('irritabilidad_escala') }}" selected>{{ old('irritabilidad_escala') }}</option>
+                                                                                                      <option value=""></option>
+                                                                                                      <option value="+">+</option>
+                                                                                                      <option value="++">++</option>
+                                                                                                      <option value="+++">+++</option>
+                                                                                                @else
+                                                                                                      <option value=""></option>
+                                                                                                      <option value="+">+</option>
+                                                                                                      <option value="++">++</option>
+                                                                                                      <option value="+++">+++</option>
+                                                                                                @endif
+                                                                                          </select>
                                                                                     </td>
                                                                               </tr>
 
                                                                               <tr>
-                                                                                    <td><strong>Dolor</strong></td>
+                                                                                    <td><strong>Perdida de libido</strong></td>
                                                                                     <td align="left">
-                                                                                          <textarea class="form-control" name="dolor" cols="30" rows="2">{{ old('dolor') }}</textarea>
+                                                                                          <select name="perdida_libido" class="form-control">
+                                                                                                @if (old('perdida_libido'))
+                                                                                                      <option value="{{ old('perdida_libido') }}" selected>{{ old('perdida_libido') }}</option>
+                                                                                                      <option value="NO">NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @else
+                                                                                                      <option value="NO" selected>NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @endif
+                                                                                          </select>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>Irritabilidad escala</strong></td>
+                                                                                    <td align="left">
+                                                                                          <select name="perdida_libido_escala" class="form-control">
+                                                                                                @if (old('perdida_libido_escala'))
+                                                                                                      <option value="{{ old('perdida_libido_escala') }}" selected>{{ old('perdida_libido_escala') }}</option>
+                                                                                                      <option value=""></option>
+                                                                                                      <option value="+">+</option>
+                                                                                                      <option value="++">++</option>
+                                                                                                      <option value="+++">+++</option>
+                                                                                                @else
+                                                                                                      <option value=""></option>
+                                                                                                      <option value="+">+</option>
+                                                                                                      <option value="++">++</option>
+                                                                                                      <option value="+++">+++</option>
+                                                                                                @endif
+                                                                                          </select>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>Sequedad vaginal</strong></td>
+                                                                                    <td align="left">
+                                                                                          <select name="sequedad_vaginal" class="form-control">
+                                                                                                @if (old('sequedad_vaginal'))
+                                                                                                      <option value="{{ old('sequedad_vaginal') }}" selected>{{ old('sequedad_vaginal') }}</option>
+                                                                                                      <option value="NO">NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @else
+                                                                                                      <option value="NO" selected>NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @endif
+                                                                                          </select>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>Sequedad vaginal escala</strong></td>
+                                                                                    <td align="left">
+                                                                                          <select name="sequedad_vaginal_escala" class="form-control">
+                                                                                                @if (old('sequedad_vaginal_escala'))
+                                                                                                      <option value="{{ old('sequedad_vaginal_escala') }}" selected>{{ old('sequedad_vaginal_escala') }}</option>
+                                                                                                      <option value=""></option>
+                                                                                                      <option value="+">+</option>
+                                                                                                      <option value="++">++</option>
+                                                                                                      <option value="+++">+++</option>
+                                                                                                @else
+                                                                                                      <option value=""></option>
+                                                                                                      <option value="+">+</option>
+                                                                                                      <option value="++">++</option>
+                                                                                                      <option value="+++">+++</option>
+                                                                                                @endif
+                                                                                          </select>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>Insomnio</strong></td>
+                                                                                    <td align="left">
+                                                                                          <select name="insomnio" class="form-control">
+                                                                                                @if (old('insomnio'))
+                                                                                                      <option value="{{ old('insomnio') }}" selected>{{ old('insomnio') }}</option>
+                                                                                                      <option value="NO">NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @else
+                                                                                                      <option value="NO" selected>NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @endif
+                                                                                          </select>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>Insomnio escala</strong></td>
+                                                                                    <td align="left">
+                                                                                          <select name="insomnio_escala" class="form-control">
+                                                                                                @if (old('insomnio_escala'))
+                                                                                                      <option value="{{ old('insomnio_escala') }}" selected>{{ old('insomnio_escala') }}</option>
+                                                                                                      <option value=""></option>
+                                                                                                      <option value="+">+</option>
+                                                                                                      <option value="++">++</option>
+                                                                                                      <option value="+++">+++</option>
+                                                                                                @else
+                                                                                                      <option value=""></option>
+                                                                                                      <option value="+">+</option>
+                                                                                                      <option value="++">++</option>
+                                                                                                      <option value="+++">+++</option>
+                                                                                                @endif
+                                                                                          </select>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>Cefalea</strong></td>
+                                                                                    <td align="left">
+                                                                                          <select name="cefalea" class="form-control">
+                                                                                                @if (old('cefalea'))
+                                                                                                      <option value="{{ old('cefalea') }}" selected>{{ old('cefalea') }}</option>
+                                                                                                      <option value="NO">NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @else
+                                                                                                      <option value="NO" selected>NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @endif
+                                                                                          </select>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>Cefalea escala</strong></td>
+                                                                                    <td align="left">
+                                                                                          <select name="cefalea_escala" class="form-control">
+                                                                                                @if (old('cefalea_escala'))
+                                                                                                      <option value="{{ old('cefalea_escala') }}" selected>{{ old('cefalea_escala') }}</option>
+                                                                                                      <option value=""></option>
+                                                                                                      <option value="+">+</option>
+                                                                                                      <option value="++">++</option>
+                                                                                                      <option value="+++">+++</option>
+                                                                                                @else
+                                                                                                      <option value=""></option>
+                                                                                                      <option value="+">+</option>
+                                                                                                      <option value="++">++</option>
+                                                                                                      <option value="+++">+++</option>
+                                                                                                @endif
+                                                                                          </select>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>Fatiga</strong></td>
+                                                                                    <td align="left">
+                                                                                          <select name="fatiga" class="form-control">
+                                                                                                @if (old('fatiga'))
+                                                                                                      <option value="{{ old('fatiga') }}" selected>{{ old('fatiga') }}</option>
+                                                                                                      <option value="NO">NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @else
+                                                                                                      <option value="NO" selected>NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @endif
+                                                                                          </select>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>Fatiga escala</strong></td>
+                                                                                    <td align="left">
+                                                                                          <select name="fatiga_escala" class="form-control">
+                                                                                                @if (old('fatiga_escala'))
+                                                                                                      <option value="{{ old('fatiga_escala') }}" selected>{{ old('fatiga_escala') }}</option>
+                                                                                                      <option value=""></option>
+                                                                                                      <option value="+">+</option>
+                                                                                                      <option value="++">++</option>
+                                                                                                      <option value="+++">+++</option>
+                                                                                                @else
+                                                                                                      <option value=""></option>
+                                                                                                      <option value="+">+</option>
+                                                                                                      <option value="++">++</option>
+                                                                                                      <option value="+++">+++</option>
+                                                                                                @endif
+                                                                                          </select>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>Artralgias mialgias</strong></td>
+                                                                                    <td align="left">
+                                                                                          <select name="artralgias_mialgias" class="form-control">
+                                                                                                @if (old('artralgias_mialgias'))
+                                                                                                      <option value="{{ old('artralgias_mialgias') }}" selected>{{ old('artralgias_mialgias') }}</option>
+                                                                                                      <option value="NO">NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @else
+                                                                                                      <option value="NO" selected>NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @endif
+                                                                                          </select>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>Artralgias mialgias escala</strong></td>
+                                                                                    <td align="left">
+                                                                                          <select name="artralgias_mialgias_escala" class="form-control">
+                                                                                                @if (old('artralgias_mialgias_escala'))
+                                                                                                      <option value="{{ old('artralgias_mialgias_escala') }}" selected>{{ old('artralgias_mialgias_escala') }}</option>
+                                                                                                      <option value=""></option>
+                                                                                                      <option value="+">+</option>
+                                                                                                      <option value="++">++</option>
+                                                                                                      <option value="+++">+++</option>
+                                                                                                @else
+                                                                                                      <option value=""></option>
+                                                                                                      <option value="+">+</option>
+                                                                                                      <option value="++">++</option>
+                                                                                                      <option value="+++">+++</option>
+                                                                                                @endif
+                                                                                          </select>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>Trastornos miccionales</strong></td>
+                                                                                    <td align="left">
+                                                                                          <select name="trastornos_miccionales" class="form-control">
+                                                                                                @if (old('trastornos_miccionales'))
+                                                                                                      <option value="{{ old('trastornos_miccionales') }}" selected>{{ old('trastornos_miccionales') }}</option>
+                                                                                                      <option value="NO">NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @else
+                                                                                                      <option value="NO" selected>NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @endif
+                                                                                          </select>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>Trastornos miccionales escala</strong></td>
+                                                                                    <td align="left">
+                                                                                          <select name="trastornos_miccionales_escala" class="form-control">
+                                                                                                @if (old('trastornos_miccionales_escala'))
+                                                                                                      <option value="{{ old('trastornos_miccionales_escala') }}" selected>{{ old('trastornos_miccionales_escala') }}</option>
+                                                                                                      <option value=""></option>
+                                                                                                      <option value="+">+</option>
+                                                                                                      <option value="++">++</option>
+                                                                                                      <option value="+++">+++</option>
+                                                                                                @else
+                                                                                                      <option value=""></option>
+                                                                                                      <option value="+">+</option>
+                                                                                                      <option value="++">++</option>
+                                                                                                      <option value="+++">+++</option>
+                                                                                                @endif
+                                                                                          </select>
                                                                                     </td>
                                                                               </tr>
 
                                                                               <tr>
                                                                                     <td><strong>Otros</strong></td>
                                                                                     <td align="left">
-                                                                                          <textarea class="form-control" name="otros" cols="30" rows="2">{{ old('otros') }}</textarea>
+                                                                                          <select name="otros" class="form-control">
+                                                                                                @if (old('otros'))
+                                                                                                      <option value="{{ old('otros') }}" selected>{{ old('otros') }}</option>
+                                                                                                      <option value="NO">NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @else
+                                                                                                      <option value="NO" selected>NO</option>
+                                                                                                      <option value="SI">SI</option>
+                                                                                                @endif
+                                                                                          </select>
                                                                                     </td>
                                                                               </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>Otros si</strong></td>
+                                                                                    <td align="left">
+                                                                                          <textarea class="form-control" name="otros_si" cols="30" rows="2">{{ old('otros_si') }}</textarea>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              
 
                                                                               <tr>
                                                                                     <td colspan="2"><h2><strong><u>Examen Fisico</u></strong></h2></td>
@@ -279,15 +590,9 @@
                                                                                     <td><strong>Presion Arterial</strong></td>
                                                                                     <td align="left">
                                                                                           <div class="input-group">
-                                                                                                <input type="text" name="presion_arterial1" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="{{ old('presion_arterial1') }}" placeholder="0" onkeypress="return validarentero(event,this.value)" required>
+                                                                                                <input type="text" name="presion_arterial" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="{{ old('presion_arterial') }}" placeholder="0" onkeypress="return validarentero(event,this.value)" required>
                                                                                                 <div class="input-group-prepend">
                                                                                                       <span class="input-group-text">mm/</span>
-                                                                                                </div>
-                                                                                          </div>
-                                                                                          <div class="input-group">
-                                                                                                <input type="text" name="presion_arterial2" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="{{ old('presion_arterial2') }}" placeholder="0" onkeypress="return validarentero(event,this.value)" required>
-                                                                                                <div class="input-group-prepend">
-                                                                                                      <span class="input-group-text">/Hg</span>
                                                                                                 </div>
                                                                                           </div>
                                                                                     </td>
@@ -306,10 +611,10 @@
                                                                               </tr>
 
                                                                               <tr>
-                                                                                    <td><strong>Frecuencia Cardiaca Materna</strong></td>
+                                                                                    <td><strong>Frecuencia Cardiaca</strong></td>
                                                                                     <td align="left">
                                                                                           <div class="input-group">
-                                                                                                <input type="text" name="frecuencia_cardiaca_materna" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="{{ old('frecuencia_cardiaca_materna') }}" placeholder="0" onkeypress="return validarentero(event,this.value)" required>
+                                                                                                <input type="text" name="frecuencia_cardiaca" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="{{ old('frecuencia_cardiaca') }}" placeholder="0" onkeypress="return validarentero(event,this.value)" required>
                                                                                                 <div class="input-group-prepend">
                                                                                                       <span class="input-group-text">/min</span>
                                                                                                 </div>
@@ -318,151 +623,278 @@
                                                                               </tr>
 
                                                                               <tr>
-                                                                                    <td><strong>Altura Uterina</strong></td>
+                                                                                    <td><strong>Cara</strong></td>
                                                                                     <td align="left">
-                                                                                          <div class="input-group">
-                                                                                                <input type="text" name="altura_uterina" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="{{ old('altura_uterina') }}" placeholder="0" onkeypress="return validardecimal(event,this.value)" required>
-                                                                                                <div class="input-group-prepend">
-                                                                                                      <span class="input-group-text">/min</span>
-                                                                                                </div>
-                                                                                          </div>
-                                                                                    </td>
-                                                                              </tr>
-
-                                                                             
-
-                                                                              <tr>
-                                                                                    <td><strong>Frecuencia Cardiaca Fetal</strong></td>
-                                                                                    <td align="left">
-                                                                                          <div class="input-group">
-                                                                                                <input type="text" name="frecuencia_cardiaca_fetal" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="{{ old('frecuencia_cardiaca_fetal') }}" placeholder="0" onkeypress="return validarentero(event,this.value)" required>
-                                                                                                <div class="input-group-prepend">
-                                                                                                      <span class="input-group-text">/min</span>
-                                                                                                </div>
-                                                                                          </div>
+                                                                                          <textarea class="form-control" name="cara" cols="30" rows="2">{{ old('cara') }}</textarea>
                                                                                     </td>
                                                                               </tr>
 
                                                                               <tr>
-                                                                                    <td><strong>Presentacion Fetal</strong></td>
+                                                                                    <td><strong>Mamas</strong></td>
                                                                                     <td align="left">
-                                                                                          <select name="presentacion_fetal" class="form-control">
-                                                                                                @if (old('presentacion_fetal'))
-                                                                                                      <option value="{{ old('presentacion_fetal') }}" selected>{{ old('presentacion_fetal') }}</option>
-                                                                                                      <option value="Cefalica">Cefalica</option>
-                                                                                                      <option value="Podalica">Podalica</option>
-                                                                                                      <option value="Oblicua">Oblicua</option>
-                                                                                                      <option value="Transversa">Transversa</option>
-                                                                                                      <option value="No aplica">No aplica</option>
-                                                                                                @else
-                                                                                                      <option value="Cefalica">Cefalica</option>
-                                                                                                      <option value="Podalica">Podalica</option>
-                                                                                                      <option value="Oblicua">Oblicua</option>
-                                                                                                      <option value="Transversa">Transversa</option>
-                                                                                                      <option value="No aplica">No aplica</option>
-                                                                                                @endif
-                                                                                          </select>
+                                                                                          <textarea class="form-control" name="mamas" cols="30" rows="2">{{ old('mamas') }}</textarea>
                                                                                     </td>
                                                                               </tr>
 
                                                                               <tr>
-                                                                                    <td><strong>Movimientos Fetales</strong></td>
+                                                                                    <td><strong>Torax</strong></td>
                                                                                     <td align="left">
-                                                                                          <select name="movimientos_fetales" class="form-control">
-                                                                                                @if (old('presentacion_fetal'))
-                                                                                                      <option value="{{ old('movimientos_fetales') }}" selected>{{ old('movimientos_fetales') }}</option>
-                                                                                                      <option value="+">+</option>
-                                                                                                      <option value="++">++</option>
-                                                                                                      <option value="+++">+++</option>
-                                                                                                @else
-                                                                                                      <option value="+">+</option>
-                                                                                                      <option value="++">++</option>
-                                                                                                      <option value="+++">+++</option>
-                                                                                                @endif
-                                                                                          </select>
+                                                                                          <textarea class="form-control" name="torax" cols="30" rows="2">{{ old('torax') }}</textarea>
                                                                                     </td>
                                                                               </tr>
 
                                                                               <tr>
-                                                                                    <td><strong>Edema en MI</strong></td>
+                                                                                    <td><strong>Abdomen</strong></td>
                                                                                     <td align="left">
-                                                                                          <select name="edema_mi" class="form-control">
-                                                                                                @if (old('edema_mi'))
-                                                                                                      <option value="{{ old('edema_mi') }}" selected>{{ old('edema_mi') }}</option>
-                                                                                                      <option value="NO">NO</option>
-                                                                                                      <option value="SI">SI</option>
-                                                                                                @else
-                                                                                                      <option value="NO" selected>NO</option>
-                                                                                                      <option value="SI">SI</option>
-                                                                                                @endif
-                                                                                          </select>
+                                                                                          <textarea class="form-control" name="abdomen" cols="30" rows="2">{{ old('abdomen') }}</textarea>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>Vulva</strong></td>
+                                                                                    <td align="left">
+                                                                                          <textarea class="form-control" name="vulva" cols="30" rows="2">{{ old('vulva') }}</textarea>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>Útero y Anexos</strong></td>
+                                                                                    <td align="left">
+                                                                                          <textarea class="form-control" name="utero_anexos" cols="30" rows="2">{{ old('utero_anexos') }}</textarea>
                                                                                     </td>
                                                                               </tr>
 
                                                                               <tr>
                                                                                     <td><strong>Varices</strong></td>
                                                                                     <td align="left">
-                                                                                          <select name="varices" class="form-control">
-                                                                                                @if (old('varices'))
-                                                                                                      <option value="{{ old('varices') }}" selected>{{ old('varices') }}</option>
-                                                                                                      <option value="NO">NO</option>
-                                                                                                      <option value="SI">SI</option>
-                                                                                                @else
-                                                                                                      <option value="NO" selected>NO</option>
-                                                                                                      <option value="SI">SI</option>
-                                                                                                @endif
-                                                                                          </select>
+                                                                                          <textarea class="form-control" name="varices" cols="30" rows="2">{{ old('varices') }}</textarea>
                                                                                     </td>
                                                                               </tr>
 
                                                                               <tr>
-                                                                                    <td><strong>Flujo Vaginal (Ph)</strong></td>
+                                                                                    <td><strong>Flujo vaginal (ph)</strong></td>
                                                                                     <td align="left">
-                                                                                          <div class="input-group">
-                                                                                                <input type="text" name="flujo_vaginal_ph" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="{{ old('flujo_vaginal_ph') }}" required>
-                                                                                                <div class="input-group-prepend">
-                                                                                                      <span class="input-group-text">Ph</span>
-                                                                                                </div>
-                                                                                          </div>
+                                                                                          <textarea class="form-control" name="flujo_vaginal_ph" cols="30" rows="2">{{ old('flujo_vaginal_ph') }}</textarea>
                                                                                     </td>
                                                                               </tr>
 
                                                                               <tr>
-                                                                                    <td colspan="2"><h2><strong><u>Tratamiento</u></strong></h2></td>
-                                                                              </tr>
-
-                                                                              <tr>
-                                                                                    <td><strong>Medicamentos</strong></td>
+                                                                                    <td><strong>Hallazgos</strong></td>
                                                                                     <td align="left">
-                                                                                          <textarea class="form-control" name="medicamentos" cols="30" rows="2">{{ old('medicamentos') }}</textarea>
+                                                                                          <textarea class="form-control" name="hallazgos" cols="30" rows="5">{{ old('hallazgos') }}</textarea>
                                                                                     </td>
                                                                               </tr>
 
                                                                               <tr>
-                                                                                    <td><strong>Especiales</strong></td>
-                                                                                    <td align="left">
-                                                                                          <textarea class="form-control" name="especiales" cols="30" rows="2">{{ old('especiales') }}</textarea>
-                                                                                    </td>
+                                                                                    <td colspan="2"><h2><strong><u>Examenes de laboratorio</u></strong></h2></td>
                                                                               </tr>
 
                                                                               <tr>
-                                                                                    <td><strong>Proxima Cita</strong></td>
+                                                                                    <td><strong>Fecha</strong></td>
                                                                                     <td align="left">
                                                                                           <span class="form-icon-wrapper">
                                                                                                 <span class="form-icon form-icon--right">
                                                                                                       <i class="fas fa-calendar-alt form-icon__item"></i>
                                                                                                 </span>
-                                                                                                <input type="text" id="proxima_cita" class="form-control datepicker" name="proxima_cita" value="">
+                                                                                                <input type="text" id="datepicker2" class="form-control datepicker" name="fecha_laboratorios" value="">
                                                                                           </span>
                                                                                     </td>
                                                                               </tr>
 
                                                                               <tr>
-                                                                                    <td><strong>Nota Adicional</strong></td>
+                                                                                    <td><strong>Hemograma</strong></td>
                                                                                     <td align="left">
-                                                                                          <textarea class="form-control" name="nota" cols="30" rows="2">{{ old('nota') }}</textarea>
+                                                                                          <textarea class="form-control" name="hemograma" cols="30" rows="2">{{ old('hemograma') }}</textarea>
                                                                                     </td>
                                                                               </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>Examen orina</strong></td>
+                                                                                    <td align="left">
+                                                                                          <textarea class="form-control" name="examen_orina" cols="30" rows="2">{{ old('examen_orina') }}</textarea>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>Glicemia y curva glicemica</strong></td>
+                                                                                    <td align="left">
+                                                                                          <textarea class="form-control" name="glicemia_curva_glicemica" cols="30" rows="2">{{ old('glicemia_curva_glicemica') }}</textarea>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>Insulina</strong></td>
+                                                                                    <td align="left">
+                                                                                          <textarea class="form-control" name="insulina" cols="30" rows="2">{{ old('insulina') }}</textarea>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>Panel de lipidos (Colesterol, trigliceridos)</strong></td>
+                                                                                    <td align="left">
+                                                                                          <textarea class="form-control" name="panel_lipidos" cols="30" rows="2">{{ old('panel_lipidos') }}</textarea>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>Transaminasas</strong></td>
+                                                                                    <td align="left">
+                                                                                          <textarea class="form-control" name="transaminasas" cols="30" rows="2">{{ old('transaminasas') }}</textarea>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>Citología cervicovaginal</strong></td>
+                                                                                    <td align="left">
+                                                                                          <textarea class="form-control" name="citologia_cervicovaginal" cols="30" rows="2">{{ old('citologia_cervicovaginal') }}</textarea>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>Mamografía</strong></td>
+                                                                                    <td align="left">
+                                                                                          <textarea class="form-control" name="mamografia" cols="30" rows="2">{{ old('mamografia') }}</textarea>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>FSH</strong></td>
+                                                                                    <td align="left">
+                                                                                          <textarea class="form-control" name="fsh" cols="30" rows="2">{{ old('fsh') }}</textarea>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>LH</strong></td>
+                                                                                    <td align="left">
+                                                                                          <textarea class="form-control" name="lh" cols="30" rows="2">{{ old('lh') }}</textarea>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>Pruebas tiroideas</strong></td>
+                                                                                    <td align="left">
+                                                                                          <textarea class="form-control" name="pruebas_tiroideas" cols="30" rows="2">{{ old('pruebas_tiroideas') }}</textarea>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>Prolactina</strong></td>
+                                                                                    <td align="left">
+                                                                                          <textarea class="form-control" name="prolactina" cols="30" rows="2">{{ old('prolactina') }}</textarea>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>Densitometria osea</strong></td>
+                                                                                    <td align="left">
+                                                                                          <textarea class="form-control" name="densitometria_osea" cols="30" rows="2">{{ old('densitometria_osea') }}</textarea>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>Ultrasonografía pélvica</strong></td>
+                                                                                    <td align="left">
+                                                                                          <textarea class="form-control" name="ultrasonografia_pelvica" cols="30" rows="2">{{ old('ultrasonografia_pelvica') }}</textarea>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>Escala homa</strong></td>
+                                                                                    <td align="left">
+                                                                                          <textarea class="form-control" name="escala_homa" cols="30" rows="2">{{ old('escala_homa') }}</textarea>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>Otros</strong></td>
+                                                                                    <td align="left">
+                                                                                          <textarea class="form-control" name="otros_laboratorio" cols="30" rows="2">{{ old('otros_laboratorio') }}</textarea>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td colspan="2"><h2><strong><u>Tratamientos</u></strong></h2></td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>ACO's</strong></td>
+                                                                                    <td align="left">
+                                                                                          <textarea class="form-control" name="acos" cols="30" rows="2">{{ old('acos') }}</textarea>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>Tratamiento para infecciones locales </strong></td>
+                                                                                    <td align="left">
+                                                                                          <textarea class="form-control" name="tratamiento_infecciones" cols="30" rows="2">{{ old('tratamiento_infecciones') }}</textarea>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>TRH TIPO Y DOSIS</strong></td>
+                                                                                    <td align="left">
+                                                                                          <textarea class="form-control" name="trh_tipo_dosis" cols="30" rows="2">{{ old('trh_tipo_dosis') }}</textarea>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>Tratamiento para Osteoporosis</strong></td>
+                                                                                    <td align="left">
+                                                                                          <textarea class="form-control" name="tratamiento_osteoporosis" cols="30" rows="2">{{ old('tratamiento_osteoporosis') }}</textarea>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>Calcio</strong></td>
+                                                                                    <td align="left">
+                                                                                          <textarea class="form-control" name="calcio" cols="30" rows="2">{{ old('calcio') }}</textarea>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>Vitamina D</strong></td>
+                                                                                    <td align="left">
+                                                                                          <textarea class="form-control" name="vitamina_d" cols="30" rows="2">{{ old('vitamina_d') }}</textarea>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>Aspirina</strong></td>
+                                                                                    <td align="left">
+                                                                                          <textarea class="form-control" name="aspirina" cols="30" rows="2">{{ old('aspirina') }}</textarea>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>Tratamiento para HTA</strong></td>
+                                                                                    <td align="left">
+                                                                                          <textarea class="form-control" name="tratamiento_hta" cols="30" rows="2">{{ old('tratamiento_hta') }}</textarea>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>Tratamiento para Diabetes</strong></td>
+                                                                                    <td align="left">
+                                                                                          <textarea class="form-control" name="tratamiento_diabetes" cols="30" rows="2">{{ old('tratamiento_diabetes') }}</textarea>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>Jabones íntimos</strong></td>
+                                                                                    <td align="left">
+                                                                                          <textarea class="form-control" name="jabones_intimos" cols="30" rows="2">{{ old('jabones_intimos') }}</textarea>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>Nota Adicionales</strong></td>
+                                                                                    <td align="left">
+                                                                                          <textarea class="form-control" name="nota_adicionales" cols="30" rows="2">{{ old('nota_adicionales') }}</textarea>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              
                                                                               
                                                                         </tbody>
                                                                   </table>
@@ -506,10 +938,10 @@
                 todayBtn: "linked",
             };
             $( '#datepicker' ).datepicker( optSimple );
-            $( '#proxima_cita' ).datepicker( optSimple );
+            $( '#datepicker2' ).datepicker( optSimple );
     
             $( '#datepicker' ).datepicker( 'setDate', today );
-            $( '#proxima_cita' ).datepicker( 'setDate', today );
+            $( '#datepicker2' ).datepicker( 'setDate', today );
       </script>
 
       @push ('scripts')

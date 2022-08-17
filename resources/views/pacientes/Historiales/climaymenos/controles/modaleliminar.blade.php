@@ -1,8 +1,8 @@
 <!-- Basic Modals -->
-<div class="modal fade" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="modal-eliminar-{{$control->idcontrol}}">
+<div class="modal fade" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="modal-eliminar-control-{{$control->idclimaymeno_control}}">
 	{{Form::open(array
 		(
-			'action' => 'ControlController@eliminarcontrol',
+			'action' => 'ClimaymenoControlController@eliminarcontrol',
 			'method' => 'GET',
 			'role' => 'form',
 		))
@@ -23,9 +23,9 @@
 			<div class="modal-footer">
 				<button type="button" class="btn btn-info" data-dismiss="modal"><i class="fas fa-ban"></i> Cancelar</button>
 				<button type="submit" class="btn btn-danger"><i class="fas fa-eraser"></i> Confirmar</button>
-				<input type="hidden" name="idcontrol" value="{{$control->idcontrol}}">
-				<input type="hidden" name="idembarazo" value="{{$control->idembarazo}}">
-				<input type="hidden" name="idpaciente" value="{{$embarazo->idpaciente}}">
+				<input type="hidden" name="idcontrol" value="{{$control->idclimaymeno_control}}">
+				<input type="hidden" name="idclimaymeno" value="{{$control->idclimaymeno}}">
+				<input type="hidden" name="idpaciente" value="{{$climaymeno->idpaciente}}">
 			</div>
 		</div>
 	</div>

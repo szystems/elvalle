@@ -369,7 +369,7 @@
                                                                                     <td><strong>Movimientos Fetales</strong></td>
                                                                                     <td align="left">
                                                                                           <select name="movimientos_fetales" class="form-control">
-                                                                                                @if (old('presentacion_fetal'))
+                                                                                                @if (old('movimientos_fetales'))
                                                                                                       <option value="{{ old('movimientos_fetales') }}" selected>{{ old('movimientos_fetales') }}</option>
                                                                                                       <option value="+">+</option>
                                                                                                       <option value="++">++</option>

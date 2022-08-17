@@ -2,7 +2,7 @@
 <div class="modal fade" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="modal-eliminar-{{$climaymeno->idclimaymeno}}">
 	{{Form::open(array
 		(
-			'action' => 'EmbarazoController@eliminarembarazo',
+			'action' => 'ClimaymenoController@eliminarclimaymeno',
 			'method' => 'GET',
 			'role' => 'form',
 		))
@@ -23,7 +23,7 @@
 			<div class="modal-footer">
 				<button type="button" class="btn btn-info" data-dismiss="modal"><i class="fas fa-ban"></i> Cancelar</button>
 				<button type="submit" class="btn btn-danger"><i class="fas fa-eraser"></i> Confirmar</button>
-				<input type="hidden" name="idembarazo" value="{{$climaymeno->idclimaymeno}}">
+				<input type="hidden" name="idclimaymeno" value="{{$climaymeno->idclimaymeno}}">
 				<input type="hidden" name="idpaciente" value="{{$climaymeno->idpaciente}}">
 			</div>
 		</div>

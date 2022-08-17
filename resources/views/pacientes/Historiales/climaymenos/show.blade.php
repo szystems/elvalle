@@ -164,12 +164,12 @@
                                                     <td align="left">
                                                         <u><h2> #{{ $control->numero_control }}</h2></u> 
                                                         @if (Auth::user()->tipo_usuario == "Doctor")
-                                                            <a href="{{URL::action('ControlController@edit',$control->idclimaymeno_control)}}">
+                                                            <a href="{{URL::action('ClimaymenoControlController@edit',$control->idclimaymeno_control)}}">
                                                                 <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar Control">
                                                                     <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button"><i class="far fa-edit"></i> </button>
                                                                 </span>
                                                             </a>
-                                                            <a href="" data-target="#modal-eliminar-{{$control->climaymeno_control}}" data-toggle="modal">
+                                                            <a href="" data-target="#modal-eliminar-control-{{$control->idclimaymeno_control}}" data-toggle="modal">
                                                                 <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Eliminar Control">
                                                                     <button class="btn btn-sm btn-danger" style="pointer-events: none;" type="button"><i class="far fa-minus-square"></i></button>
                                                                 </span>
@@ -201,13 +201,13 @@
                                             <tr>
                                                 <td><strong>Depresión </strong></td>
                                                 @foreach ($controles as $control)
-                                                    <td align="left">{{ $control->Depresion  }} / {{ $control->Depresion_escala  }}</td>
+                                                    <td align="left">{{ $control->depresion  }} / {{ $control->depresion_escala  }}</td>
                                                 @endforeach
                                             </tr>
                                             <tr>
                                                 <td><strong>Irritabilidad</strong></td>
                                                 @foreach ($controles as $control)
-                                                    <td align="left">{{ $control->irriutabilidad }} / {{ $control->irriutabilidad_escala }}</td>
+                                                    <td align="left">{{ $control->irritabilidad }} / {{ $control->irritabilidad_escala }}</td>
                                                 @endforeach
                                             </tr>
                                             <tr>
@@ -339,9 +339,21 @@
                                                 @endforeach
                                             </tr>
                                             <tr>
+                                                <td><strong>Varices</strong></td>
+                                                @foreach ($controles as $control)
+                                                    <td align="left">{{ $control->varices }}</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
                                                 <td><strong>Flujo Vaginal (Ph)</strong></td>
                                                 @foreach ($controles as $control)
                                                     <td align="left">{{ $control->flujo_vaginal_ph }} Ph</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Hallazgos</strong></td>
+                                                @foreach ($controles as $control)
+                                                    <td align="left">{{ $control->hallazgos }} Ph</td>
                                                 @endforeach
                                             </tr>
                                             <tr>
@@ -472,6 +484,12 @@
                                                 <td><strong>TRH TIPO Y DOSIS</strong></td>
                                                 @foreach ($controles as $control)
                                                     <td align="left">{{ $control->trh_tipo_dosis }}</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Tratamiento para osteoporosis</strong></td>
+                                                @foreach ($controles as $control)
+                                                    <td align="left">{{ $control->tratamiento_osteoporosis }}</td>
                                                 @endforeach
                                             </tr>
                                             <tr>

@@ -2463,7 +2463,7 @@ class ReportesController extends Controller
                 }
                 $path = public_path('imagenes/articulos/');
                 $verpdf=trim($rrequest->get('pdf'));
-                $idembarazo=trim($rrequest->get('rid'));
+                $idclimaymeno=trim($rrequest->get('rid'));
                 $idpaciente=trim($rrequest->get('ridpaciente'));
 
                 $zona_horaria = Auth::user()->zona_horaria;
@@ -2473,42 +2473,43 @@ class ReportesController extends Controller
                 $nompdf = Carbon::now($zona_horaria);
                 $nompdf = $nompdf->format('Y-m-d H:i:s');
                 
-                $embarazo=DB::table('embarazo as e')
-                ->join('paciente as p','e.idpaciente','=','p.idpaciente')
-                ->join('users as d','e.iddoctor','=','d.id')
-                ->join('users as u','e.idusuario','=','u.id')
-                ->select('e.idembarazo','e.fecha','e.iddoctor','d.name as Doctor','d.foto as Imgdoctor','d.especialidad','e.idpaciente','p.nombre as Paciente','p.foto as Imgpaciente','e.idusuario','u.name as Usuario','u.tipo_usuario','e.fur','e.trimestre1','e.trimestre2','e.trimestre3')
-                ->where('e.idembarazo','=',$idembarazo) 
+                $climaymeno=DB::table('climaymeno as c')
+                ->join('paciente as p','c.idpaciente','=','p.idpaciente')
+                ->join('users as d','c.iddoctor','=','d.id')
+                ->join('users as u','c.idusuario','=','u.id')
+                ->select('c.idclimaymeno','c.fecha','c.iddoctor','d.name as Doctor','d.foto as Imgdoctor','d.especialidad','c.idpaciente','p.nombre as Paciente','p.sexo','p.foto as Imgdpaciente','c.idusuario','u.name as Usuario','u.tipo_usuario')
+                ->where('c.idclimaymeno','=',$idclimaymeno) 
+                ->orderby('c.fecha','desc')
                 ->first();
 
                 $paciente=DB::table('paciente')
-                ->where('idpaciente','=',$embarazo->idpaciente)
+                ->where('idpaciente','=',$climaymeno->idpaciente)
                 ->first();
 
-                $controles=DB::table('control')
-                ->where('idembarazo','=',$embarazo->idembarazo)
+                $controles=DB::table('climaymeno_control')
+                ->where('idclimaymeno','=',$climaymeno->idclimaymeno)
                 ->get();
 
                 $historia = DB::table('historia')
-                ->where('idpaciente','=',$embarazo->idpaciente)
+                ->where('idpaciente','=',$climaymeno->idpaciente)
                 ->first();
 
                 
                 if ( $verpdf == "Descargar" )
                 {
-                    $view = \View::make('pdf.embarazos.vistaembarazo', compact('embarazo','historia','controles','paciente','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
+                    $view = \View::make('pdf.climaymenos.vistaclimaymeno', compact('climaymeno','historia','controles','paciente','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
                     $pdf = \App::make('dompdf.wrapper');
                     $pdf->loadHTML($view);
                     $pdf->setPaper('A4', 'landscape');
-                    return $pdf->download ('VistaEmbarazo'.'-'.$paciente->nombre.'-'.$embarazo->fecha.'-'.$nompdf.'.pdf');
+                    return $pdf->download ('Vista_Climaterio_Menopausea'.'-'.$paciente->nombre.'-'.$climaymeno->fecha.'-'.$nompdf.'.pdf');
                 }
                 if ( $verpdf == "Navegador" )
                 {
-                    $view = \View::make('pdf.embarazos.vistaembarazo', compact('embarazo','historia','controles','paciente','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
+                    $view = \View::make('pdf.climaymenos.vistaclimaymeno', compact('climaymeno','historia','controles','paciente','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
                     $pdf = \App::make('dompdf.wrapper');
                     $pdf->loadHTML($view);
                     $pdf->setPaper('A4', 'landscape');
-                    return $pdf->stream ('VistaEmbarazo'.'-'.$paciente->nombre.'-'.$embarazo->fecha.'-'.$nompdf.'.pdf');
+                    return $pdf->stream ('Vista_Climaterio_Menopausea'.'-'.$paciente->nombre.'-'.$climaymeno->fecha.'-'.$nompdf.'.pdf');
                 }
             }
         

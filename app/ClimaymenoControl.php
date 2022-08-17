@@ -36,7 +36,7 @@ class ClimaymenoControl extends Model
         'artralgias_mialgias',
         'artralgias_mialgias_escala',
         'trastornos_miccionales',
-        'trastornos_miccionales',
+        'trastornos_miccionalesescala',
         'otros',
         'otros_si',
 

@@ -67,6 +67,9 @@ Route::get('pacientes/historiales/radiofrecuencias/sesiones/eliminar', 'Radiofre
 Route::get('pacientes/historiales/radiofrecuencias/fotomodulaciones/eliminar', 'RadiofrecuenciaFotomodulacionController@eliminarsesion');
 Route::get('pacientes/historiales/sillas/eliminar', 'SillaElectromagneticaController@eliminarsillaciclo');
 Route::get('pacientes/historiales/sillas/sesiones/eliminar', 'SillaElectromagneticaSesionController@eliminarsesion');
+Route::get('pacientes/historiales/climaymenos/eliminar', 'ClimaymenoController@eliminarclimaymeno');
+Route::get('pacientes/historiales/climaymenos/controles/eliminar', 'ClimaymenoControlController@eliminarcontrol');
+
 Route::resource('pacientes/historiales/historias','HistoriaController');
 Route::resource('pacientes/historiales/recetas','RecetaController');
 Route::resource('pacientes/historiales/fisicos','FisicoController');
@@ -78,6 +81,7 @@ Route::resource('pacientes/historiales/radiofrecuencias/fotomodulaciones','Radio
 Route::resource('pacientes/historiales/sillas','SillaElectromagneticaController');
 Route::resource('pacientes/historiales/sillas/sesiones','SillaElectromagneticaSesionController');
 Route::resource('pacientes/historiales/climaymenos','ClimaymenoController');
+Route::resource('pacientes/historiales/climaymenos/controles','ClimaymenoControlController');
 Route::resource('pacientes/historiales/incontinencias','IncontinenciauController');
 Route::resource('pacientes/historiales','HistorialController');
 

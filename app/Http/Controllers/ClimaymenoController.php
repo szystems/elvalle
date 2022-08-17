@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use sisVentasWeb\Http\Requests;
 use sisVentasWeb\Paciente;
 use sisVentasWeb\Climaymeno;
-//use sisVentasWeb\ClimaymenoControl;
+use sisVentasWeb\ClimaymenoControl;
 use sisVentasWeb\Bitacora;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Redirect;
@@ -123,5 +123,30 @@ class ClimaymenoController extends Controller
         ->first();
 
         return view("pacientes.historiales.climaymenos.show",["climaymeno"=>$climaymeno,"paciente"=>$paciente,"controles"=>$controles, "historia"=>$historia]);
+    }
+
+    public function eliminarclimaymeno(Request $request)
+    {
+        $idclimaymeno = $request->get('idclimaymeno');
+        $idpaciente = $request->get('idpaciente');
+
+        $eliminarcontroles=ClimaymenoControl::where('idclimaymeno',$idclimaymeno)->delete();
+        
+        $eliminarclimaymeno=Climaymeno::findOrFail($idclimaymeno);
+        $eliminarclimaymeno->delete();
+
+        $request->session()->flash('alert-success', 'Se elimino el estudio de climaterio y embarazo.');  
+        
+        
+        $climaymenos=DB::table('climaymeno as c')
+        ->join('paciente as p','c.idpaciente','=','p.idpaciente')
+        ->join('users as d','c.iddoctor','=','d.id')
+        ->join('users as u','c.idusuario','=','u.id')
+        ->select('c.idclimaymeno','c.fecha','c.iddoctor','d.name as Doctor','d.foto as Imgdoctor','d.especialidad','c.idpaciente','p.nombre as Paciente','p.sexo','p.foto as Imgdpaciente','c.idusuario','u.name as Usuario','u.tipo_usuario')
+        ->where('c.idpaciente','=',$idpaciente) 
+        ->orderby('c.fecha','desc')
+        ->paginate(20);
+
+        return view("pacientes.historiales.climaymenos.index",["paciente"=>Paciente::findOrFail($idpaciente),"climaymenos"=>$climaymenos]);
     }
 }
