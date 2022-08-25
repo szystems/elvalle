@@ -69,6 +69,8 @@ Route::get('pacientes/historiales/sillas/eliminar', 'SillaElectromagneticaContro
 Route::get('pacientes/historiales/sillas/sesiones/eliminar', 'SillaElectromagneticaSesionController@eliminarsesion');
 Route::get('pacientes/historiales/climaymenos/eliminar', 'ClimaymenoController@eliminarclimaymeno');
 Route::get('pacientes/historiales/climaymenos/controles/eliminar', 'ClimaymenoControlController@eliminarcontrol');
+Route::get('pacientes/historiales/incontinencias/cuestionarios/eliminar', 'IncontinenciauCuestionarioController@eliminarcuestionario');
+Route::get('pacientes/historiales/incontinencias/eliminar', 'IncontinenciauController@eliminarincontinencia');
 
 Route::resource('pacientes/historiales/historias','HistoriaController');
 Route::resource('pacientes/historiales/recetas','RecetaController');
@@ -83,6 +85,7 @@ Route::resource('pacientes/historiales/sillas/sesiones','SillaElectromagneticaSe
 Route::resource('pacientes/historiales/climaymenos','ClimaymenoController');
 Route::resource('pacientes/historiales/climaymenos/controles','ClimaymenoControlController');
 Route::resource('pacientes/historiales/incontinencias','IncontinenciauController');
+Route::resource('pacientes/historiales/incontinencias/cuestionarios','IncontinenciauCuestionarioController');
 Route::resource('pacientes/historiales','HistorialController');
 
 
@@ -107,6 +110,7 @@ Route::resource('reportes/ingresos','ReporteIngresosController');
     Route::post('pdf/fisicos','ReportesController@vistafisico');
     Route::post('pdf/embarazos','ReportesController@vistaembarazo');
     Route::post('pdf/climaymenos','ReportesController@vistaclimaymeno');
+    Route::post('pdf/incontinencias','ReportesController@vistaincontinencia');
     Route::post('pdf/radiofrecuencias','ReportesController@vistaradiofrecuencia');
     Route::post('pdf/sillas','ReportesController@vistasillaciclo');
 

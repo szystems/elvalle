@@ -2515,5 +2515,77 @@ class ReportesController extends Controller
         
     }
 
+    public function vistaincontinencia(ReportesFormRequest $rrequest)
+    {  
+            if ($rrequest)
+            {
+                
+                $nombreusu = Auth::user()->name;
+                $empresa = Auth::user()->empresa;
+                $moneda = Auth::user()->moneda;
+                if (Auth::user()->logo == null)
+                {
+                    $logo = null;
+                    $imagen = null;
+                }
+                else
+                {
+                     $logo = Auth::user()->logo;
+                     $imagen = public_path('imagenes/logos/'.$logo);
+                     
+                }
+                $path = public_path('imagenes/articulos/');
+                $verpdf=trim($rrequest->get('pdf'));
+                $idincontinencia=trim($rrequest->get('rid'));
+                $idpaciente=trim($rrequest->get('ridpaciente'));
+
+                $zona_horaria = Auth::user()->zona_horaria;
+                $hoy = Carbon::now($zona_horaria);
+                $hoy = $hoy->format('d-m-Y');
+
+                $nompdf = Carbon::now($zona_horaria);
+                $nompdf = $nompdf->format('Y-m-d H:i:s');
+                
+                $incontinencia=DB::table('incontinenciau as i')
+                ->join('paciente as p','i.idpaciente','=','p.idpaciente')
+                ->join('users as d','i.iddoctor','=','d.id')
+                ->join('users as u','i.idusuario','=','u.id')
+                ->select('i.idincontinenciau','i.fecha','i.iddoctor','d.name as Doctor','d.foto as Imgdoctor','d.especialidad','i.idpaciente','p.sexo','p.nombre as Paciente','p.sexo','p.foto as Imgdpaciente','i.idusuario','u.name as Usuario','u.tipo_usuario')
+                ->where('i.idincontinenciau','=',$idincontinencia) 
+                ->first();
+
+                $paciente=DB::table('paciente')
+                ->where('idpaciente','=',$incontinencia->idpaciente)
+                ->first();
+
+                $cuestionarios=DB::table('incontinenciau_cuestionario')
+                ->where('idincontinenciau','=',$incontinencia->idincontinenciau)
+                ->get();
+
+                $historia = DB::table('historia')
+                ->where('idpaciente','=',$incontinencia->idpaciente)
+                ->first();
+
+                
+                if ( $verpdf == "Descargar" )
+                {
+                    $view = \View::make('pdf.incontinencias.vistaincontinencia', compact('incontinencia','historia','cuestionarios','paciente','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
+                    $pdf = \App::make('dompdf.wrapper');
+                    $pdf->loadHTML($view);
+                    $pdf->setPaper('A4', 'landscape');
+                    return $pdf->download ('Vista_Incontinencia_Urinaria'.'-'.$paciente->nombre.'-'.$incontinencia->fecha.'-'.$nompdf.'.pdf');
+                }
+                if ( $verpdf == "Navegador" )
+                {
+                    $view = \View::make('pdf.incontinencias.vistaincontinencia', compact('incontinencia','historia','cuestionarios','paciente','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
+                    $pdf = \App::make('dompdf.wrapper');
+                    $pdf->loadHTML($view);
+                    $pdf->setPaper('A4', 'landscape');
+                    return $pdf->stream ('Vista_Incontinencia_Urinaria'.'-'.$paciente->nombre.'-'.$incontinencia->fecha.'-'.$nompdf.'.pdf');
+                }
+            }
+        
+    }
+
     
 }

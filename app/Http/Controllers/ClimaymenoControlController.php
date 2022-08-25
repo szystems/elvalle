@@ -338,7 +338,7 @@ class ClimaymenoControlController extends Controller
         $bitacora->idusuario=Auth::user()->id;
         $bitacora->fecha=$fechahora;
         $bitacora->tipo="Paciente";
-        $bitacora->descripcion="Se creo un nuevo control de climaterio y menopausea para el paciente:".$cli->nombre.", Fecha: ".$fechaControl;
+        $bitacora->descripcion="Se edito un control de climaterio y menopausea para el paciente:".$cli->nombre.", Fecha: ".$fechaControl;
         $bitacora->save();
 
         $request->session()->flash('alert-success', "Se edito un control de climaterio y menopausea del paciente: ".$cli->nombre.", Fecha: ".$fechaControl);
