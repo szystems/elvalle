@@ -1,5 +1,5 @@
 <!-- Basic Modals -->
-<div class="modal fade" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="modal-eliminar-{{$control->idcontrol}}">
+<div class="modal fade" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="modal-eliminar-control-{{$control->idcontrol}}">
 	{{Form::open(array
 		(
 			'action' => 'ControlController@eliminarcontrol',

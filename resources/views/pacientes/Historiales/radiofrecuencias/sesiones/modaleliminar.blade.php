@@ -1,5 +1,5 @@
 <!-- Basic Modals -->
-<div class="modal fade" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="modal-eliminar-{{$sesion->idradiofrecuencia_sesion}}">
+<div class="modal fade" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id="modal-eliminar-radiofrecuencia-{{$sesion->idradiofrecuencia_sesion}}">
 	{{Form::open(array
 		(
 			'action' => 'RadiofrecuenciaSesionController@eliminarsesion',

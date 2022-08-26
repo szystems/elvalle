@@ -266,7 +266,7 @@
                                                                     <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button"><i class="far fa-edit"></i> </button>
                                                                 </span>
                                                             </a>
-                                                            <a href="" data-target="#modal-eliminar-{{$sesion->idradiofrecuencia_sesion}}" data-toggle="modal">
+                                                            <a href="" data-target="#modal-eliminar-radiofrecuencia-{{$sesion->idradiofrecuencia_sesion}}" data-toggle="modal">
                                                                 <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Eliminar sesion">
                                                                     <button class="btn btn-sm btn-danger" style="pointer-events: none;" type="button"><i class="far fa-minus-square"></i></button>
                                                                 </span>
@@ -494,7 +494,7 @@
                                                                     <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button"><i class="far fa-edit"></i> </button>
                                                                 </span>
                                                             </a>
-                                                            <a href="" data-target="#modal-eliminar-{{$sesionFotomodulacion->idradiofrecuencia_fotomodulacion}}" data-toggle="modal">
+                                                            <a href="" data-target="#modal-eliminar-fotomodulacion-{{$sesionFotomodulacion->idradiofrecuencia_fotomodulacion}}" data-toggle="modal">
                                                                 <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Eliminar sesion">
                                                                     <button class="btn btn-sm btn-danger" style="pointer-events: none;" type="button"><i class="far fa-minus-square"></i></button>
                                                                 </span>
