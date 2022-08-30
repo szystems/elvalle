@@ -53,6 +53,7 @@ Route::resource('seguridad/dias','DiasController');
 /*Rutas Pacientes */
     /*Pacientes */
 
+//Eliminar y editar historiales
 Route::resource('pacientes/paciente','PacienteController');
 Route::resource('pacientes/cita','CitaController');
 Route::get('pacientes/historiales/recetas/quitar', 'RecetaController@quitar');
@@ -72,6 +73,11 @@ Route::get('pacientes/historiales/climaymenos/controles/eliminar', 'ClimaymenoCo
 Route::get('pacientes/historiales/incontinencias/cuestionarios/eliminar', 'IncontinenciauCuestionarioController@eliminarcuestionario');
 Route::get('pacientes/historiales/incontinencias/eliminar', 'IncontinenciauController@eliminarincontinencia');
 
+//imagenes de historiales
+Route::get('pacientes/historiales/fisicos/imagenes/eliminar', 'FisicoImgController@eliminarimagen');
+Route::resource('pacientes/historiales/fisicos/imagenes','FisicoImgController');
+
+//historiales
 Route::resource('pacientes/historiales/historias','HistoriaController');
 Route::resource('pacientes/historiales/recetas','RecetaController');
 Route::resource('pacientes/historiales/fisicos','FisicoController');
@@ -87,6 +93,7 @@ Route::resource('pacientes/historiales/climaymenos/controles','ClimaymenoControl
 Route::resource('pacientes/historiales/incontinencias','IncontinenciauController');
 Route::resource('pacientes/historiales/incontinencias/cuestionarios','IncontinenciauCuestionarioController');
 Route::resource('pacientes/historiales','HistorialController');
+
 
 
 

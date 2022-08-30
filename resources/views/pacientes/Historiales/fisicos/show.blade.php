@@ -116,6 +116,15 @@
                                     </button>
                                 </span>
                             </a>
+
+                            <a href="{{URL::action('FisicoImgController@index','searchidfisico='.$fisico->idfisico)}}">
+                              <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar Imagenes">
+                                  <button class="btn btn-sm btn-warning" style="pointer-events: none;" type="button">
+                                      <i class="far fa-images"></i> Imagenes
+                                  </button>
+                              </span>
+                            </a>
+
                         @endif
                         <!--modaleliminar-->
                         <div class="row">
@@ -419,7 +428,55 @@
                                       </div>
                                 </div>
                             </div>
-                            
+                            <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                              <div class="form-group">
+                                    <label for="datos"><strong><u>Imagenes de examen fisico({{ $fisicoimgs->count() }})</u></strong></label>
+                                    <a href="{{URL::action('FisicoImgController@index','searchidfisico='.$fisico->idfisico)}}">
+                                          <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar Imagenes">
+                                              <button class="btn btn-sm btn-warning" style="pointer-events: none;" type="button">
+                                                  <i class="far fa-images"></i> Imagenes
+                                              </button>
+                                          </span>
+                                    </a>
+                                    <div class="row">
+                                          @if ($fisicoimgs->count() != null)
+                                                <div class="table-responsive">
+                                                      <table class="table table-striped table-bordered table-condensed table-hover">
+                                                          <thead>
+                                                                  <th><h5><STRONG>Imagen</STRONG></th>
+                                                                  <th><h5><STRONG>Fecha</STRONG></th>
+                                                                  <th><h5><STRONG>Descripcion</STRONG></th>
+                                                          </thead>
+                                                          @foreach ($fisicoimgs as $imagen)
+                                                              <tr>
+                                                                  <td align="center">
+                                                                        @if ($imagen->imagen != null)
+                                                                          <div class="thumbnail">
+                                                                                <a target="_blank" href="{{asset('imagenes/fisicos/'.$imagen->imagen)}}" >
+                                                                                      <img src="{{asset('imagenes/fisicos/'.$imagen->imagen)}}" alt="Lights" height="250px">
+                                                                                </a>
+                                                                          </div>
+                                                                        @else
+                                                                            "No hay imagen"
+                                                                        @endif
+                                                                    </td>
+                                                                  <?php
+                                                                      $fecha = date("d-m-Y", strtotime($imagen->fecha));
+                                                                  ?>
+                                                                  <td align="center"><h5>{{ $fecha}}</h5></td>
+                                                                  <td align="center"><h5>{{ $imagen->descripcion}}</h5></td>
+                                                                  
+                                                              </tr>
+                                                          @endforeach
+                                                      </table>
+                                                </div>
+                                          @else
+                                                <h3>Aun no se han insertado imagenes.</h3>
+                                          @endif
+                                          
+                                    </div>
+                              </div>
+                            </div>
                         </div>
                     </div>
         

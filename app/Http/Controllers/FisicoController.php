@@ -57,8 +57,8 @@ class FisicoController extends Controller
 
     public function store (FisicoFormRequest $request)
     {
-    	//try
-    	//{ 
+    	try
+    	{ 
             $fechaFisico=trim($request->get('fecha'));
             $fecha = date("Y-m-d", strtotime($fechaFisico));
             $iddoctor=$request->get('iddoctor');
@@ -69,7 +69,7 @@ class FisicoController extends Controller
             $presion_arterial2=$request->get('presion_arterial2');
             $presion_arterial=$presion_arterial1."/".$presion_arterial2;
 
-    		//DB::beginTransaction();
+    		DB::beginTransaction();
 
             $fisico=new Fisico;
             $fisico->fecha=$fecha;
@@ -121,12 +121,12 @@ class FisicoController extends Controller
             $bitacora->descripcion="Se creo un examen fisico para el paciente:".$cli->nombre.", Fecha: ".$fechaFisico;
             $bitacora->save();
 
-    		//DB::commit();
+    		DB::commit();
 
-    	//}catch(\Exception $e)
-    	//{
-    		//DB::rollback();
-    	//}
+    	}catch(\Exception $e)
+    	{
+    		DB::rollback();
+    	}
 
 
     	$idpaciente=$idpaciente;
@@ -155,8 +155,12 @@ class FisicoController extends Controller
         $paciente=DB::table('paciente')
         ->where('idpaciente','=',$fisico->idpaciente)
         ->first();
+        
+        $fisicoimgs=DB::table('fisico_img')
+        ->where('idfisico','=',$id) 
+        ->get();
 
-        return view("pacientes.historiales.fisicos.show",["fisico"=>$fisico,"paciente"=>$paciente]);
+        return view("pacientes.historiales.fisicos.show",["fisico"=>$fisico,"paciente"=>$paciente,"fisicoimgs"=>$fisicoimgs]);
     }
 
     public function edit($id)
@@ -244,7 +248,11 @@ class FisicoController extends Controller
         ->where('idpaciente','=',$idpaciente)
         ->first();
 
-        return view("pacientes.historiales.fisicos.show",["fisico"=>$fisico,"paciente"=>$paciente]);
+        $fisicoimgs=DB::table('fisico_img')
+        ->where('idfisico','=',$id) 
+        ->get();
+
+        return view("pacientes.historiales.fisicos.show",["fisico"=>$fisico,"paciente"=>$paciente,"fisicoimgs"=>$fisicoimgs]);
     }
 
     public function eliminarfisico(Request $request)

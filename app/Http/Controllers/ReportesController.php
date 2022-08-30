@@ -2177,7 +2177,7 @@ class ReportesController extends Controller
                      $imagen = public_path('imagenes/logos/'.$logo);
                      
                 }
-                $path = public_path('imagenes/articulos/');
+                $path = public_path('imagenes/fisicos/');
                 $verpdf=trim($rrequest->get('pdf'));
                 $idfisico=trim($rrequest->get('rid'));
                 $idpaciente=trim($rrequest->get('ridpaciente'));
@@ -2201,10 +2201,14 @@ class ReportesController extends Controller
                 ->where('idpaciente','=',$idpaciente)
                 ->first();
 
+                $fisicoimgs=DB::table('fisico_img')
+                ->where('idfisico','=',$idfisico) 
+                ->get();
+
                 
                 if ( $verpdf == "Descargar" )
                 {
-                    $view = \View::make('pdf.fisicos.vistafisico', compact('fisico','paciente','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
+                    $view = \View::make('pdf.fisicos.vistafisico', compact('fisico','paciente','fisicoimgs','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
                     $pdf = \App::make('dompdf.wrapper');
                     $pdf->loadHTML($view);
                     //$pdf->setPaper('A4', 'landscape');
@@ -2212,7 +2216,7 @@ class ReportesController extends Controller
                 }
                 if ( $verpdf == "Navegador" )
                 {
-                    $view = \View::make('pdf.fisicos.vistafisico', compact('fisico','paciente','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
+                    $view = \View::make('pdf.fisicos.vistafisico', compact('fisico','paciente','fisicoimgs','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
                     $pdf = \App::make('dompdf.wrapper');
                     $pdf->loadHTML($view);
                     //$pdf->setPaper('A4', 'landscape');

@@ -22,6 +22,7 @@
         <meta name="keywords" content="Bootstrap Theme, Freebies, Dashboard, MIT license">
         <meta name="description" content="SZ-Ventas - Recuperar Contraseña">
         <meta name="author" content="szystems.com">
+		
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="{{asset('favico.ico')}}" type="image/x-icon">
