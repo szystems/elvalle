@@ -126,6 +126,14 @@
                                         </a>
                                         @include('pacientes.historiales.embarazos.modaleliminar')
                                     @endif
+
+                                    <a href="{{URL::action('EmbarazoImgController@index','searchidembarazo='.$embarazo->idembarazo)}}">
+                                        <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar Imagenes">
+                                            <button class="btn btn-sm btn-warning" style="pointer-events: none;" type="button">
+                                                <i class="far fa-images"></i> Imagenes
+                                            </button>
+                                        </span>
+                                    </a>
                                 </div>
                             </div>
                             <?php
@@ -465,6 +473,56 @@
                                 <div class="form-group">
                                     <label for="doctor"><strong>3er. Trimestre</strong></label>
                                     <textarea readonly name="" id="" class="form-control" cols="30" rows="3">{{ $embarazo->trimestre3 }}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                                <div class="form-group">
+                                      <label for="datos"><strong><u>Imagenes de embarazo({{ $embarazoimgs->count() }})</u></strong></label>
+                                      <a href="{{URL::action('EmbarazoImgController@index','searchidembarazo='.$embarazo->idembarazo)}}">
+                                            <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar Imagenes">
+                                                <button class="btn btn-sm btn-warning" style="pointer-events: none;" type="button">
+                                                    <i class="far fa-images"></i> Imagenes
+                                                </button>
+                                            </span>
+                                      </a>
+                                      <div class="row">
+                                            @if ($embarazoimgs->count() != null)
+                                                  <div class="table-responsive">
+                                                        <table class="table table-striped table-bordered table-condensed table-hover">
+                                                            <thead>
+                                                                    <th><h5><STRONG>Imagen</STRONG></th>
+                                                                    <th><h5><STRONG>Fecha</STRONG></th>
+                                                                    <th><h5><STRONG>Descripcion</STRONG></th>
+                                                            </thead>
+                                                            @foreach ($embarazoimgs as $imagen)
+                                                                <tr>
+                                                                    <td align="center">
+                                                                          @if ($imagen->imagen != null)
+                                                                            <div class="thumbnail">
+                                                                                  <a target="_blank" href="{{asset('imagenes/embarazos/'.$imagen->imagen)}}" >
+                                                                                        <img src="{{asset('imagenes/embarazos/'.$imagen->imagen)}}" alt="Lights" height="250px">
+                                                                                  </a>
+                                                                            </div>
+                                                                          @else
+                                                                              "No hay imagen"
+                                                                          @endif
+                                                                      </td>
+                                                                    <?php
+                                                                        $fecha = date("d-m-Y", strtotime($imagen->fecha));
+                                                                    ?>
+                                                                    <td align="center"><h5>{{ $fecha}}</h5></td>
+                                                                    <td align="center"><h5>{{ $imagen->descripcion}}</h5></td>
+                                                                    
+                                                                </tr>
+                                                            @endforeach
+                                                        </table>
+                                                  </div>
+                                            @else
+                                                  <h3>Aun no se han insertado imagenes.</h3>
+                                            @endif
+                                            
+                                      </div>
                                 </div>
                             </div>
                             

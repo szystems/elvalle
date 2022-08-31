@@ -76,6 +76,8 @@ Route::get('pacientes/historiales/incontinencias/eliminar', 'IncontinenciauContr
 //imagenes de historiales
 Route::get('pacientes/historiales/fisicos/imagenes/eliminar', 'FisicoImgController@eliminarimagen');
 Route::resource('pacientes/historiales/fisicos/imagenes','FisicoImgController');
+Route::get('pacientes/historiales/embarazos/imagenes/eliminar', 'EmbarazoImgController@eliminarimagen');
+Route::resource('pacientes/historiales/embarazos/imagenes','EmbarazoImgController');
 
 //historiales
 Route::resource('pacientes/historiales/historias','HistoriaController');

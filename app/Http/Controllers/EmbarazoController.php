@@ -123,7 +123,11 @@ class EmbarazoController extends Controller
         ->where('idpaciente','=',$embarazo->idpaciente)
         ->first();
 
-        return view("pacientes.historiales.embarazos.show",["embarazo"=>$embarazo,"paciente"=>$paciente,"controles"=>$controles, "historia"=>$historia]);
+        $embarazoimgs=DB::table('embarazo_img')
+        ->where('idembarazo','=',$id) 
+        ->get();
+
+        return view("pacientes.historiales.embarazos.show",["embarazo"=>$embarazo,"paciente"=>$paciente,"controles"=>$controles,"historia"=>$historia,"embarazoimgs"=>$embarazoimgs]);
     }
 
     public function edit($id)
@@ -194,7 +198,11 @@ class EmbarazoController extends Controller
         ->where('idembarazo','=',$embarazo->idembarazo)
         ->get();
 
-        return view("pacientes.historiales.embarazos.show",["embarazo"=>$embarazo,"paciente"=>$paciente,"controles"=>$controles]);
+        $embarazoimgs=DB::table('embarazo_img')
+        ->where('idembarazo','=',$embarazo->idembarazo) 
+        ->get();
+
+        return view("pacientes.historiales.embarazos.show",["embarazo"=>$embarazo,"paciente"=>$paciente,"controles"=>$controles,"embarazoimgs"=>$embarazoimgs]);
     }
 
     public function eliminarembarazo(Request $request)
