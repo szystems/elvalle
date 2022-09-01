@@ -122,7 +122,11 @@ class ClimaymenoController extends Controller
         ->where('idpaciente','=',$climaymeno->idpaciente)
         ->first();
 
-        return view("pacientes.historiales.climaymenos.show",["climaymeno"=>$climaymeno,"paciente"=>$paciente,"controles"=>$controles, "historia"=>$historia]);
+        $climaymenoimgs=DB::table('climaymeno_img')
+        ->where('idclimaymeno','=',$climaymeno->idclimaymeno) 
+        ->get();
+
+        return view("pacientes.historiales.climaymenos.show",["climaymeno"=>$climaymeno,"paciente"=>$paciente,"controles"=>$controles, "historia"=>$historia,"climaymenoimgs"=>$climaymenoimgs]);
     }
 
     public function eliminarclimaymeno(Request $request)

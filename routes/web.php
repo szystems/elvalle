@@ -78,6 +78,8 @@ Route::get('pacientes/historiales/fisicos/imagenes/eliminar', 'FisicoImgControll
 Route::resource('pacientes/historiales/fisicos/imagenes','FisicoImgController');
 Route::get('pacientes/historiales/embarazos/imagenes/eliminar', 'EmbarazoImgController@eliminarimagen');
 Route::resource('pacientes/historiales/embarazos/imagenes','EmbarazoImgController');
+Route::get('pacientes/historiales/climaymenos/imagenes/eliminar', 'ClimaymenoImgController@eliminarimagen');
+Route::resource('pacientes/historiales/climaymenos/imagenes','ClimaymenoImgController');
 
 //historiales
 Route::resource('pacientes/historiales/historias','HistoriaController');

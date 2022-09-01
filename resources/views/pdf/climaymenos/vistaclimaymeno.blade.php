@@ -424,6 +424,24 @@
 				</tr>
 			</table>
 		</div>
+		<div style="text-align:center;">
+			<table>
+				<tr>		
+					<th colspan="2"><p align="center">Imagenes: </p></th>
+				</tr>
+				@foreach ($climaymenoimgs as $imagen)
+	
+				<tr>
+					<td><img src="{{$path.$imagen->imagen}}" alt="" height="200"></td>
+					<?php
+						$fechaimagen = date("d-m-Y", strtotime($imagen->fecha));
+					?>
+					<td><p align="left"><font color="black">{{ $fechaimagen }} - {{ $imagen->descripcion}}</font></p></td>	
+				</tr>
+					
+				@endforeach
+			</table>
+		</div>
 		<br>
 		<h6>Reporte generado en: <a href="https://szystems.com/" target="_blank">Szystems Version 1.0</a> &copy; 2022 <a class="link-muted" href="https://szystems.com/" target="_blank">Szystems</a>. Todos los derechos reservados.</h6>
 	</body>

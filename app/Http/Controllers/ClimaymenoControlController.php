@@ -194,9 +194,13 @@ class ClimaymenoControlController extends Controller
         ->where('idpaciente','=',$climaymeno->idpaciente)
         ->first();
 
+        $climaymenoimgs=DB::table('climaymeno_img')
+        ->where('idclimaymeno','=',$idclimaymeno) 
+        ->get();
+
         $request->session()->flash('alert-success', "Se creo un control de climaterio y menopausea del paciente: ".$cli->nombre.", Fecha: ".$fechaControl);
 
-        return view("pacientes.historiales.climaymenos.show",["climaymeno"=>$climaymeno,"paciente"=>$paciente,"controles"=>$controles, "historia"=>$historia]);
+        return view("pacientes.historiales.climaymenos.show",["climaymeno"=>$climaymeno,"paciente"=>$paciente,"controles"=>$controles, "historia"=>$historia,"climaymenoimgs"=>$climaymenoimgs]);
     }
 
     public function edit($id)
@@ -355,9 +359,13 @@ class ClimaymenoControlController extends Controller
         ->where('idpaciente','=',$climaymeno->idpaciente)
         ->first();
 
+        $climaymenoimgs=DB::table('climaymeno_img')
+        ->where('idclimaymeno','=',$idclimaymeno) 
+        ->get();
+
         $request->session()->flash('alert-success', "Se edito un control de climaterio y menopausea del paciente: ".$cli->nombre.", Fecha: ".$fechaControl);
 
-        return view("pacientes.historiales.climaymenos.show",["climaymeno"=>$climaymeno,"paciente"=>$paciente,"controles"=>$controles, "historia"=>$historia]);
+        return view("pacientes.historiales.climaymenos.show",["climaymeno"=>$climaymeno,"paciente"=>$paciente,"controles"=>$controles, "historia"=>$historia,"climaymenoimgs"=>$climaymenoimgs]);
     }
 
     public function eliminarcontrol(Request $request)
@@ -392,6 +400,10 @@ class ClimaymenoControlController extends Controller
         ->where('idpaciente','=',$climaymeno->idpaciente)
         ->first();
 
-        return view("pacientes.historiales.climaymenos.show",["climaymeno"=>$climaymeno,"paciente"=>$paciente,"controles"=>$controles, "historia"=>$historia]);
+        $climaymenoimgs=DB::table('climaymeno_img')
+        ->where('idclimaymeno','=',$idclimaymeno) 
+        ->get();
+
+        return view("pacientes.historiales.climaymenos.show",["climaymeno"=>$climaymeno,"paciente"=>$paciente,"controles"=>$controles, "historia"=>$historia,"climaymenoimgs"=>$climaymenoimgs]);
     }
 }

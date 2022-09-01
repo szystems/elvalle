@@ -2469,7 +2469,7 @@ class ReportesController extends Controller
                      $imagen = public_path('imagenes/logos/'.$logo);
                      
                 }
-                $path = public_path('imagenes/articulos/');
+                $path = public_path('imagenes/climaymenos/');
                 $verpdf=trim($rrequest->get('pdf'));
                 $idclimaymeno=trim($rrequest->get('rid'));
                 $idpaciente=trim($rrequest->get('ridpaciente'));
@@ -2502,10 +2502,14 @@ class ReportesController extends Controller
                 ->where('idpaciente','=',$climaymeno->idpaciente)
                 ->first();
 
+                $climaymenoimgs=DB::table('climaymeno_img')
+                ->where('idclimaymeno','=',$climaymeno->idclimaymeno) 
+                ->get();
+
                 
                 if ( $verpdf == "Descargar" )
                 {
-                    $view = \View::make('pdf.climaymenos.vistaclimaymeno', compact('climaymeno','historia','controles','paciente','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
+                    $view = \View::make('pdf.climaymenos.vistaclimaymeno', compact('climaymeno','historia','controles','climaymenoimgs','paciente','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
                     $pdf = \App::make('dompdf.wrapper');
                     $pdf->loadHTML($view);
                     $pdf->setPaper('A4', 'landscape');
@@ -2513,7 +2517,7 @@ class ReportesController extends Controller
                 }
                 if ( $verpdf == "Navegador" )
                 {
-                    $view = \View::make('pdf.climaymenos.vistaclimaymeno', compact('climaymeno','historia','controles','paciente','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
+                    $view = \View::make('pdf.climaymenos.vistaclimaymeno', compact('climaymeno','historia','controles','climaymenoimgs','paciente','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
                     $pdf = \App::make('dompdf.wrapper');
                     $pdf->loadHTML($view);
                     $pdf->setPaper('A4', 'landscape');
