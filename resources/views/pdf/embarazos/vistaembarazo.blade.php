@@ -85,40 +85,45 @@
 		<div style="text-align:center;">
 			<table>
 				<tr>		
-					<th colspan="3"><p align="center">Antecedentes Obstetricos: </p></th>
+					<th colspan="2"><p align="center">Antecedentes Obstetricos: </p></th>
 				</tr>
 				<tr>
 					<td><p align="right"><strong>Gestas:</strong></p></td>
-					<td colspan="2"><p align="left"><font color="black">{{ $historia->gestas}}</font></p></td>	
+					<td><p align="left"><font color="black">{{ $historia->gestas}}</font></p></td>	
 				</tr>
 				<tr>
 					<td><p align="right"><strong>Vias de resolucion:</strong></p></td>
-					<td colspan="2"><p align="left"><font color="black">{{ $historia->vias_resolucion}}</font></p></td>	
+					<td><p align="left"><font color="black">{{ $historia->vias_resolucion}}</font></p></td>	
 				</tr>
 				<tr>
 					<td><p align="right"><strong>Hijos Vivos:</strong></p></td>
-					<td colspan="2"><p align="left"><font color="black">{{ $historia->hijos_vivos}}</font></p></td>	
+					<td><p align="left"><font color="black">{{ $historia->hijos_vivos}}</font></p></td>	
 				</tr>
 				<tr>
 					<td><p align="right"><strong>Hijos Muertos:</strong></p></td>
-					<td colspan="2"><p align="left"><font color="black">{{ $historia->hijos_muertos}}</font></p></td>	
+					<td><p align="left"><font color="black">{{ $historia->hijos_muertos}}</font></p></td>	
 				</tr>
 				<tr>
 					<td><p align="right"><strong>Complicaciones Neonatales:</strong></p></td>
-					<td colspan="2"><p align="left"><font color="black">{{ $historia->complicaciones_neonatales}}</font></p></td>	
+					<td><p align="left"><font color="black">{{ $historia->complicaciones_neonatales}}</font></p></td>	
 				</tr>
 				<tr>
 					<td><p align="right"><strong>Complicaciones Obstetricos:</strong></p></td>
-					<td colspan="2"><p align="left"><font color="black">{{ $historia->complicaciones_obstetricos}}</font></p></td>	
+					<td><p align="left"><font color="black">{{ $historia->complicaciones_obstetricos}}</font></p></td>	
 				</tr>
 				<tr>
 					<td><p align="right"><strong>Abortos:</strong></p></td>
-					<td colspan="2"><p align="left"><font color="black">{{ $historia->abortos}}</font></p></td>	
+					<td><p align="left"><font color="black">{{ $historia->abortos}}</font></p></td>	
 				</tr>
 				<tr>
 					<td><p align="right"><strong>Causa:</strong></p></td>
-					<td colspan="2"><p align="left"><font color="black">{{ $historia->causa}}</font></p></td>	
+					<td><p align="left"><font color="black">{{ $historia->causa}}</font></p></td>	
 				</tr>
+				
+			</table>
+		</div>
+		<div style="text-align:center;">
+			<table>
 				<tr>		
 					<th colspan="{{ $numControles }}"><h4 align="center">Controles:</h4></th>
 				</tr>
@@ -342,6 +347,26 @@
 				</tr>
 			</table>
 		</div>
+
+		<div style="text-align:center;">
+			<table>
+				<tr>		
+					<th colspan="2"><p align="center">Imagenes: </p></th>
+				</tr>
+				@foreach ($embarazoimgs as $imagen)
+	
+				<tr>
+					<td><img src="{{$path.$imagen->imagen}}" alt="" height="200"></td>
+					<?php
+						$fechaimagen = date("d-m-Y", strtotime($imagen->fecha));
+					?>
+					<td><p align="left"><font color="black">{{ $fechaimagen }} - {{ $imagen->descripcion}}</font></p></td>	
+				</tr>
+					
+				@endforeach
+			</table>
+		</div>
+
 		<br>
 		<h6>Reporte generado en: <a href="https://szystems.com/" target="_blank">SZ-Ventas Version 1.0</a> &copy; 2022 <a class="link-muted" href="https://szystems.com/" target="_blank">Szystems</a>. Todos los derechos reservados.</h6>
 	</body>

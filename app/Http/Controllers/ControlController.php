@@ -160,9 +160,13 @@ class ControlController extends Controller
         ->where('idpaciente','=',$embarazo->idpaciente)
         ->first();
 
+        $embarazoimgs=DB::table('embarazo_img')
+        ->where('idembarazo','=',$embarazo->idembarazo) 
+        ->get();
+
         $request->session()->flash('alert-success', "Se creo un control de embarazo del paciente: ".$cli->nombre.", Fecha: ".$fechaControl);
 
-        return view("pacientes.historiales.embarazos.show",["embarazo"=>$embarazo,"paciente"=>$paciente,"controles"=>$controles, "historia"=>$historia]);
+        return view("pacientes.historiales.embarazos.show",["embarazo"=>$embarazo,"paciente"=>$paciente,"controles"=>$controles, "historia"=>$historia,"embarazoimgs"=>$embarazoimgs]);
     }
 
     public function edit($id)
@@ -284,9 +288,13 @@ class ControlController extends Controller
         ->where('idpaciente','=',$embarazo->idpaciente)
         ->first();
 
+        $embarazoimgs=DB::table('embarazo_img')
+        ->where('idembarazo','=',$embarazo->idembarazo) 
+        ->get();
+
         $request->session()->flash('alert-success', "Se edito un control de embarazo del paciente: ".$cli->nombre.", Fecha: ".$fechaControl);
 
-        return view("pacientes.historiales.embarazos.show",["embarazo"=>$embarazo,"paciente"=>$paciente,"controles"=>$controles, "historia"=>$historia]);
+        return view("pacientes.historiales.embarazos.show",["embarazo"=>$embarazo,"paciente"=>$paciente,"controles"=>$controles, "historia"=>$historia,"embarazoimgs"=>$embarazoimgs]);
     }
 
     public function eliminarcontrol(Request $request)
@@ -321,6 +329,10 @@ class ControlController extends Controller
         ->where('idpaciente','=',$embarazo->idpaciente)
         ->first();
 
-        return view("pacientes.historiales.embarazos.show",["embarazo"=>$embarazo,"paciente"=>$paciente,"controles"=>$controles, "historia"=>$historia]);
+        $embarazoimgs=DB::table('embarazo_img')
+        ->where('idembarazo','=',$embarazo->idembarazo) 
+        ->get();
+
+        return view("pacientes.historiales.embarazos.show",["embarazo"=>$embarazo,"paciente"=>$paciente,"controles"=>$controles, "historia"=>$historia,"embarazoimgs"=>$embarazoimgs]);
     }
 }
