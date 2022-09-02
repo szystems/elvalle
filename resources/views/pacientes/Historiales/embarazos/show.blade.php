@@ -64,7 +64,7 @@
         
                     <header class="card-header">
                         <h2 class="h3 card-header-title"><strong>Embarazo: </strong></h2>
-                        @if (Auth::user()->tipo_usuario == "Doctor")
+                        @if(Auth::user()->tipo_usuario != "Administrador")
                             <a href="" data-target="#modal-eliminar-{{$embarazo->idembarazo}}" data-toggle="modal">
                                 <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Eliminar Embarazo">
                                     <button class="btn btn-sm btn-danger" style="pointer-events: none;" type="button">
@@ -118,22 +118,23 @@
                             </div>
                             <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                 <div class="form-group">
-                                    @if (Auth::user()->tipo_usuario == "Doctor")
+
+                                    @if(Auth::user()->tipo_usuario != "Administrador")
                                         <a href="{{URL::action('EmbarazoController@edit',$embarazo->idembarazo)}}">
                                             <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar Embarazo">
                                                 <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button"><i class="far fa-edit"></i> Editar</button>
                                             </span>
                                         </a>
                                         @include('pacientes.historiales.embarazos.modaleliminar')
+                                        <a href="{{URL::action('EmbarazoImgController@index','searchidembarazo='.$embarazo->idembarazo)}}">
+                                            <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar Imagenes">
+                                                <button class="btn btn-sm btn-warning" style="pointer-events: none;" type="button">
+                                                    <i class="far fa-images"></i> Imagenes
+                                                </button>
+                                            </span>
+                                        </a>
                                     @endif
 
-                                    <a href="{{URL::action('EmbarazoImgController@index','searchidembarazo='.$embarazo->idembarazo)}}">
-                                        <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar Imagenes">
-                                            <button class="btn btn-sm btn-warning" style="pointer-events: none;" type="button">
-                                                <i class="far fa-images"></i> Imagenes
-                                            </button>
-                                        </span>
-                                    </a>
                                 </div>
                             </div>
                             <?php
@@ -225,7 +226,7 @@
                             <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                 <div class="form-group">
                                     <label for="doctor"><h2><strong><u>Controles</u></strong></h2></label>
-                                    @if(Auth::user()->tipo_usuario == "Doctor")
+                                    @if(Auth::user()->tipo_usuario != "Administrador")
                                         <a href="controles/create?idembarazo={{$embarazo->idembarazo}}">
                                             <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Agregar Control ">
                                                 <button class="btn btn-sm btn-success" style="pointer-events: none;" type="button">
@@ -246,7 +247,7 @@
                                                 @foreach ($controles as $control)
                                                     <td align="left">
                                                         <u><h2> #{{ $control->numero_control }}</h2></u> 
-                                                        @if (Auth::user()->tipo_usuario == "Doctor")
+                                                        @if(Auth::user()->tipo_usuario != "Administrador")
                                                             <a href="{{URL::action('ControlController@edit',$control->idcontrol)}}">
                                                                 <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar Control">
                                                                     <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button"><i class="far fa-edit"></i> </button>
@@ -479,6 +480,7 @@
                             <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                 <div class="form-group">
                                       <label for="datos"><strong><u>Imagenes de embarazo({{ $embarazoimgs->count() }})</u></strong></label>
+                                      @if(Auth::user()->tipo_usuario != "Administrador")
                                       <a href="{{URL::action('EmbarazoImgController@index','searchidembarazo='.$embarazo->idembarazo)}}">
                                             <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar Imagenes">
                                                 <button class="btn btn-sm btn-warning" style="pointer-events: none;" type="button">
@@ -486,6 +488,7 @@
                                                 </button>
                                             </span>
                                       </a>
+                                      @endif
                                       <div class="row">
                                             @if ($embarazoimgs->count() != null)
                                                   <div class="table-responsive">

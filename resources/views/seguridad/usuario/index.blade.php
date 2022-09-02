@@ -8,7 +8,7 @@
 	<header class="card-header d-md-flex align-items-center">
 		
 		<h4><strong>Administradores </strong>
-
+			@if(Auth::user()->tipo_usuario == "Administrador")
 			<a href="usuario/create">
                 <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Nuevo Administrador ">
                     <button class="btn btn-sm btn-success" style="pointer-events: none;" type="button">
@@ -16,6 +16,7 @@
                     </button>
                 </span>
 			</a>
+			@endif
 
 		</h4>
 
@@ -93,6 +94,7 @@
 									</span>
 								</a>
 
+								@if(Auth::user()->tipo_usuario == "Administrador")
 								<a href="{{URL::action('UsuarioController@edit',$usu->id)}}">
                                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar Usuario">
                                           <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button">
@@ -109,6 +111,7 @@
 										</span>
 									</a>
 								@endif 
+								@endif
 							</td>
 							<td align="left">
 								<h5>

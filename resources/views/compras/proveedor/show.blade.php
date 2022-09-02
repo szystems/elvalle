@@ -52,17 +52,19 @@
 					
 				{{Form::close()}}
             <div class="card-body">
-                <a href="{{URL::action('ProveedorController@edit',$persona->idpersona)}}">
+                @if(Auth::user()->tipo_usuario == "Administrador")
+                  <a href="{{URL::action('ProveedorController@edit',$persona->idpersona)}}">
                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar Proveedor">
                         <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button"><i class="far fa-edit"></i> Editar</button>
                     </span>
-                  </a>
-								
+                  </a>			
 				  <a href="" data-target="#modaleliminarshow-delete-{{$persona->idpersona}}" data-toggle="modal">
                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Eliminar Articulo">
                         <button class="btn btn-sm btn-danger" style="pointer-events: none;" type="button"><i class="far fa-minus-square"></i> Eliminar</button>
                     </span>
 				  </a>
+                @endif'
+
                   <div class="row">
                     <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
                         <div class="form-group">

@@ -107,7 +107,7 @@
                                 </div>
                                 <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                     <div class="form-group">
-                                        @if (Auth::user()->tipo_usuario == "Doctor")
+                                        @if (Auth::user()->tipo_usuario != "Administrador")
                                             <a href="{{URL::action('HistoriaController@edit',$paciente->idpaciente)}}">
                                                 <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar Historia">
                                                     <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button"><i class="far fa-edit"></i> Editar</button>

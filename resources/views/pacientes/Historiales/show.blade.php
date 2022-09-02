@@ -99,12 +99,13 @@
                             </div>
                                         
                         {{Form::close()}}
-
+                        @if(Auth::user()->tipo_usuario != "Administrador")
                         <a href="{{URL::action('PacienteController@edit',$paciente->idpaciente)}}">
                             <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar Paciente">
                                 <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button"><i class="far fa-edit"></i> Editar</button>
                             </span>
                         </a>
+                        @endif
                         <div class="row">
                             <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
                                 <div class="form-group">

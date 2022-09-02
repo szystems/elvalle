@@ -92,8 +92,10 @@
 
             <footer class="card-footer">
                   <div class="form-group">
+                        @if(Auth::user()->tipo_usuario == "Administrador")
                         <button class="btn btn-danger" type="reset"><i class="fas fa-ban"></i> Borrar</button>
                         <button class="btn btn-info" type="submit"><i class="far fa-save"></i> Guardar</button>
+                        @endif
                   </div>
 
                   {!!Form::close()!!}

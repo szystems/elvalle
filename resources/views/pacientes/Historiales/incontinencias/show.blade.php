@@ -64,7 +64,7 @@
         
                     <header class="card-header">
                         <h2 class="h3 card-header-title"><strong>Estudio de incontinencia urinaria: </strong></h2>
-                        @if (Auth::user()->tipo_usuario == "Doctor")
+                        @if(Auth::user()->tipo_usuario != "Administrador")
                             <a href="" data-target="#modal-eliminar-{{$incontinencia->idincontinenciau}}" data-toggle="modal">
                                 <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Eliminar Estudio">
                                     <button class="btn btn-sm btn-danger" style="pointer-events: none;" type="button">
@@ -148,7 +148,7 @@
                             <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                 <div class="form-group">
                                     <label for="doctor"><h2><strong><u>Cuestionarios</u></strong></h2></label>
-                                    @if(Auth::user()->tipo_usuario == "Doctor")
+                                    @if(Auth::user()->tipo_usuario != "Administrador")
                                         <a href="cuestionarios/create?idincontinenciau={{$incontinencia->idincontinenciau}}">
                                             <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Agregar Cuestionario ">
                                                 <button class="btn btn-sm btn-success" style="pointer-events: none;" type="button">
@@ -172,7 +172,7 @@
                                                 @foreach ($cuestionarios as $cuestionario)
                                                     <td align="center" colspan="2">
                                                         <u><h2> #{{ $cuestionario->numero_cuestionario }}</h2></u> 
-                                                        @if (Auth::user()->tipo_usuario == "Doctor")
+                                                        @if(Auth::user()->tipo_usuario != "Administrador")
                                                             <a href="{{URL::action('IncontinenciauCuestionarioController@edit',$cuestionario->idincontinenciau_cuestionario)}}">
                                                                 <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar cuestionario">
                                                                     <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button"><i class="far fa-edit"></i> </button>

@@ -21,7 +21,7 @@
 		?> 
 		{!!Form::open(array('url'=>'pacientes/cita','method'=>'POST','autocomplete'=>'off'))!!}
 		{{Form::token()}}
-		<h4><strong>Crear Reservación </strong>
+		<h4><strong>Crear Cita </strong>
 		<div class="card-body">
 			<div class="row">
 				<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
@@ -144,8 +144,8 @@
 				{{Form::open(array('action' => 'ReportesController@reportecitas','method' => 'POST','role' => 'form', 'target' => '_blank'))}}
 
                 {{Form::token()}}
-					<input type="" id="rfecha" class="form-control datepicker" name="rfecha" value="{{$fechaImprimir}}">
-					<input type="" id="rdoctor" class="form-control datepicker" name="rdoctor" @if($iddoctorBuscar != null) value="{{ $iddoctorBuscar }}" @else value="" @endif>
+					<input type="hidden" id="rfecha" class="form-control datepicker" name="rfecha" value="{{$fechaImprimir}}">
+					<input type="hidden" id="rdoctor" class="form-control datepicker" name="rdoctor" @if($iddoctorBuscar != null) value="{{ $iddoctorBuscar }}" @else value="" @endif>
 					
 					<div class="card mb-4">
 						<div class="card-body">

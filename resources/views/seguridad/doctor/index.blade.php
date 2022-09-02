@@ -7,7 +7,7 @@
 						<!-- Card Header -->
 	<header class="card-header d-md-flex align-items-center">
 		<h4><strong>Doctores </strong>
-
+			@if(Auth::user()->tipo_usuario == "Administrador")
 			<a href="doctor/create">
                 <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Nuevo Doctor ">
                     <button class="btn btn-sm btn-success" style="pointer-events: none;" type="button">
@@ -15,6 +15,7 @@
                     </button>
                 </span>
 			</a>
+			@endif
 
 		</h4>
 
@@ -92,6 +93,7 @@
 									</span>
 								</a>
 
+								@if(Auth::user()->tipo_usuario == "Administrador")
 								<a href="{{URL::action('DoctorController@edit',$usu->id)}}">
                                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar Doctor">
                                           <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button">
@@ -108,6 +110,8 @@
 										</span>
 									</a>
 								@endif 
+								@endif
+								
 							</td>
 							<td align="left">
 								<h5>

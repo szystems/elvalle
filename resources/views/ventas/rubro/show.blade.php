@@ -9,11 +9,13 @@
                   
             </header>
             <div class="card-body">
-                <a href="{{URL::action('RubroController@edit',$rubro->idrubro)}}">
+                @if(Auth::user()->tipo_usuario == "Administrador")
+                  <a href="{{URL::action('RubroController@edit',$rubro->idrubro)}}">
                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar Rubro">
                         <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button"><i class="far fa-edit"></i> Editar</button>
                     </span>
                   </a>
+                @endif
 								
 				  <a href="" data-target="#modaleliminarshow-delete-{{$rubro->idrubro}}" data-toggle="modal">
                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Eliminar Categoría">
@@ -68,9 +70,10 @@
                         @endforeach
                     </div> 
                 <!-- fin .flash-message -->
+                @if(Auth::user()->tipo_usuario == "Administrador")
                 {!!Form::open(array('url'=>'ventas/rubroarticulo','method'=>'POST','autocomplete'=>'off'))!!}
                 {{Form::token()}}
-                <h4><strong>Agregar articulo a rubro</strong>
+                <h4><strong>Agregar articulo a rubro</strong></h4>
                 <div class="card-body">
                     <div class="row">
                         <input  id="idrubro" type="hidden" class="form-control" name="idrubro" value="{{$rubro->idrubro}}" >
@@ -120,8 +123,8 @@
                         </div>
                     </div>
                 </div>
-                </h4>
                 {{Form::close()}}
+                @endif
 
                 <h2 class="h3 card-header-title"><strong>Artículos del Rubro:</strong></h2>
                 <div class="table-responsive">
@@ -139,6 +142,7 @@
                             <td align="center"><h5>{{ Auth::user()->moneda }}{{number_format($rubroarticulo->precio_costo,2, '.', ',')}}</h5></td>
                             <td align="center"><h5>{{ Auth::user()->moneda }}{{number_format($rubroarticulo->precio_venta,2, '.', ',')}}</h5></td>
 							<td>
+                                @if(Auth::user()->tipo_usuario == "Administrador")
                                 <a href="" data-target="#modal-editar-articulo{{$rubroarticulo->idrubro_articulo}}" data-toggle="modal">
                                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar Articulo">
                                         <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button">
@@ -153,6 +157,7 @@
 										</button>
 									</span>
 								</a>
+                                @endif
 							</td>
 							
 							

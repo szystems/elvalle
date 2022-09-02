@@ -98,7 +98,8 @@
                             </div>
                             
                         {{Form::close()}}
-                    <div class="card-body">		
+                    <div class="card-body">	
+                        @if(Auth::user()->tipo_usuario == "Doctor")
                         <a href="" data-target="#modal-eliminar-{{$receta->idreceta}}" data-toggle="modal">
                             <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Eliminar Receta">
                                 <button class="btn btn-sm btn-danger" style="pointer-events: none;" type="button">
@@ -106,6 +107,7 @@
                                 </button>
                             </span>
                         </a>
+                        @endif
                         @include('pacientes.historiales.recetas.modaleliminar')
                         <div class="row">
                             <?php
@@ -130,6 +132,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                                @if(Auth::user()->tipo_usuario == "Doctor")
                                 <a href="" data-target="#modal-agregar-{{$receta->idreceta}}" data-toggle="modal">
                                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Agregar Medicamento">
                                         <button class="btn btn-sm btn-success" style="pointer-events: none;" type="button">
@@ -138,6 +141,7 @@
                                     </span>
                                 </a>
                                 @include('pacientes.historiales.recetas.modalagregar')
+                                @endif
                                 <?php
                                     $detalles=DB::table('receta_medicamento as rm')
                                     ->join('presentacion as p','rm.presentacion','=','p.idpresentacion')
@@ -157,6 +161,7 @@
                                         @foreach ($detalles as $detalle)
                                             <tbody>
                                                 <th>
+                                                    @if(Auth::user()->tipo_usuario == "Doctor")
                                                     <a href="" data-target="#modal-quitar-{{$detalle->idreceta_medicamento}}" data-toggle="modal">
                                                         <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Quitar Medicamento">
                                                             <button class="btn btn-sm btn-danger" style="pointer-events: none;" type="button">
@@ -171,6 +176,7 @@
                                                             </button>
                                                         </span>
                                                     </a>
+                                                    @endif
                                                 </th>
                                                 <th align="center">{{ $detalle->cantidad }}</th>
                                                 <th align="center">{{ $detalle->nombre }}</th>

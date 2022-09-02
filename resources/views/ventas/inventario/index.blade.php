@@ -34,12 +34,14 @@
 								
 				?>
 				@include('ventas.inventario.search')
+
+				@if(Auth::user()->tipo_usuario == "Administrador")
 				{{Form::open(array('action' => 'ReportesController@reporteinventario','method' => 'POST','role' => 'form', 'target' => '_blank'))}}
 
                 {{Form::token()}}		
 					<div class="card mb-4">
 						<header class="card-header d-md-flex align-items-center">
-							<h4><strong>Imprimir Listado de Ingresos </strong></h4>
+							<h4><strong>Imprimir Listado de Inventario </strong></h4>
 							<input type="hidden" name="searchDesde" value="{{ $desdeReporte }}">
 							<input type="hidden" name="searchHasta" value="{{ $hastaReporte }}">
 							<input type="hidden" name="searchArticulo" value="{{ $articulof }}">
@@ -78,6 +80,8 @@
 					</div>
 					
 				{{Form::close()}}
+				@endif
+
 				<h6><strong>Filtros:</strong><font color="Blue"> <strong>Desde:</strong> {{$desde}},<strong>Hasta:</strong> {{$hasta}},<strong>Articulo:</strong> {{$articulof}}, <strong>Proveedor:</strong> {{$proveedorf}}, <strong>Presentacion:</strong> {{$presentacionf}}, <strong>Oferta:</strong> {{$estadoOfertaf}}, <strong>Estado:</strong> {{$estadof}}, <strong>Stock:</strong> {{$stockf}}, <strong>Vigencia:</strong> {{$vigenciaf}}</font></h6>
 				<div class="table-responsive">
 					<table class="table table-striped table-bordered table-condensed table-hover">
@@ -91,8 +95,10 @@
 							<th><small><strong>Presentacion</strong></small></th>
 							<th><small><strong>Unds.</strong></small></th>
 							<th><small><strong>Stock</strong></small></th>
-							<th><small><strong>CostoU.</strong></small></th>
-							<th><small><strong>%Uti.</strong></small></th>
+							@if(Auth::user()->tipo_usuario == "Administrador")
+								<th><small><strong>CostoU.</strong></small></th>
+								<th><small><strong>%Uti.</strong></small></th>
+							@endif
 							<th><small><strong>P.Venta</strong></small></th>
 							<th><small><strong>%Oferta</strong></small></th>
 							<th><small><strong>Oferta</strong></small></th>
@@ -123,9 +129,11 @@
 							?>
 							<td align="left">
 								<!-- Button trigger modal -->
+								@if(Auth::user()->tipo_usuario == "Administrador")
 								<button type="button" class="btn btn-sm btn-info" data-toggle="modal" title="Editar Articulo" data-target="#modaleditar-{{$det->iddetalle_ingreso}}">
 									<i class="far fa-edit"></i>
 								</button>
+								@endif
 							</td>
 							<td align="center"><small><a href="{{URL::action('IngresoController@show',$det->idingreso)}}" target="_blanc">{{ $fecha_ingreso}}</a></small></td>
 							<td align="center"><small><a href="{{URL::action('ProveedorController@show',$det->idproveedor)}}" target="_blanc">{{ $det->Proveedor}}</a></small></td>
@@ -166,8 +174,10 @@
                                     <td align="center"><del><font color="red"><b>{{$det->stock}} </b></font></del></td>
                                 @endif
                             @endif
-							<td align="right"><h5><font color="orange">{{ Auth::user()->moneda }}{{ number_format($det->costo_unidad_inventario,2, '.', ',')}}</font></h5></td>
-							<td align="center"><h5>{{$det->porcentaje_utilidad}}%</h5></td>
+							@if(Auth::user()->tipo_usuario == "Administrador")
+								<td align="right"><h5><font color="orange">{{ Auth::user()->moneda }}{{ number_format($det->costo_unidad_inventario,2, '.', ',')}}</font></h5></td>
+								<td align="center"><h5>{{$det->porcentaje_utilidad}}%</h5></td>
+							@endif
 							<td align="right"><h5><font color="blue">{{ Auth::user()->moneda }}{{ number_format($det->precio_venta,2, '.', ',')}}</font></h5> <small> P.S:{{ Auth::user()->moneda }}{{ number_format($det->precio_sugerido,2, '.', ',')}}</small></td>
 							<?php
                                 $precio_descuento= ($det->precio_venta-(($det->precio_oferta*$det->precio_venta)/(100)));
@@ -208,8 +218,10 @@
 							<thead>
 								<th><h3><strong><b>Total Unidades</b></strong></h3></th>
 								<th><h3><strong><b>Total Stock</b></strong></h3></th>
-								<th><h3><strong><b>Promedio Costo</b></strong></h3></th>
-								<th><h3><strong><b>Promedio %Utilidad</b></strong></h3></th>
+								@if(Auth::user()->tipo_usuario == "Administrador")
+									<th><h3><strong><b>Promedio Costo</b></strong></h3></th>
+									<th><h3><strong><b>Promedio %Utilidad</b></strong></h3></th>
+								@endif
 								<th><h3><strong><b>Promedio Precio</b></strong></h3></th>
 								<th><h3><strong><b>Promedio Descuento</b></strong></h3></th>
 							</thead>
@@ -225,8 +237,10 @@
 							<tr>
 								<td align="center"><h3><b><font color="blue">{{$totalUnidades}}</font></b></h3></td>
 								<td align="center"><h3><b><font color="limegreen">{{$totalStock}} </font></b></h3></td>
-								<td align="center"><h3><b><font color="orange">{{ Auth::user()->moneda }}{{number_format($promedioCosto,2, '.', ',')}} </font></b></h3></td>
-								<td align="center"><h3><b><font color="green">{{number_format($promedioUtilidad,2, '.', ',')}}% </font></b></h3></td>
+								@if(Auth::user()->tipo_usuario == "Administrador")
+									<td align="center"><h3><b><font color="orange">{{ Auth::user()->moneda }}{{number_format($promedioCosto,2, '.', ',')}} </font></b></h3></td>
+									<td align="center"><h3><b><font color="green">{{number_format($promedioUtilidad,2, '.', ',')}}% </font></b></h3></td>
+								@endif
 								<td align="center"><h3><b><font color="blue">{{ Auth::user()->moneda }}{{number_format($promedioPrecioVenta,2, '.', ',')}}</font> ({{ Auth::user()->moneda }}{{number_format($promedioPrecioSugerido,2, '.', ',')}})</b></h3></td>
 								<td align="center"><h3><b><font color="limegreen">{{$promedioPorcentajeDescuento}}% ({{ Auth::user()->moneda }}{{number_format($promedioPrecioDescuento,2, '.', ',')}})</font></b></h3></td>
 							</tr>

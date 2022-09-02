@@ -4,7 +4,7 @@
 						<!-- Card Header -->
 	<header class="card-header d-md-flex align-items-center">
 		<h4><strong>Listado de Rubros </strong>
-
+			@if(Auth::user()->tipo_usuario == "Administrador")
 			<a href="rubro/create">
                 <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Crear Rubro ">
                     <button class="btn btn-sm btn-success" style="pointer-events: none;" type="button">
@@ -12,6 +12,7 @@
                     </button>
                 </span>
 			</a>
+			@endif
 		</h4>
 		
 	</header>
@@ -41,6 +42,7 @@
 									</span>
 								</a>
 
+								@if(Auth::user()->tipo_usuario == "Administrador")
 								<a href="{{URL::action('RubroController@edit',$rubro->idrubro)}}">
                                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar Rubro">
                                           <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button">
@@ -56,6 +58,7 @@
                                           </button>
                                     </span>
 								</a>
+								@endif
 								  
 							</td>
 							<td align="center"><h5>{{ $rubro->nombre}}</h5></td>

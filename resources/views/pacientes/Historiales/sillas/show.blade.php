@@ -64,7 +64,7 @@
         
                     <header class="card-header">
                         <h2 class="h3 card-header-title"><strong>Ciclo silla electromagnetica: </strong></h2>
-                        @if (Auth::user()->tipo_usuario == "Doctor")
+                        @if(Auth::user()->tipo_usuario != "Administrador")
                             <a href="" data-target="#modal-eliminar-{{$sillaCiclo->idsillae_ciclo}}" data-toggle="modal">
                                 <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Eliminar ciclo">
                                     <button class="btn btn-sm btn-danger" style="pointer-events: none;" type="button">
@@ -118,7 +118,7 @@
                             </div>
                             <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                 <div class="form-group">
-                                    @if (Auth::user()->tipo_usuario == "Doctor")
+                                    @if(Auth::user()->tipo_usuario != "Administrador")
                                         <a href="{{URL::action('SillaElectromagneticaController@edit',$sillaCiclo->idsillae_ciclo)}}">
                                             <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar ciclo">
                                                 <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button"><i class="far fa-edit"></i> Editar</button>
@@ -162,7 +162,7 @@
                             <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                 <div class="form-group">
                                     <label for="doctor"><h2><strong><u>Sesiones de ciclo de silla electromagnetica</u></strong></h2></label>
-                                    @if(Auth::user()->tipo_usuario == "Doctor")
+                                    @if(Auth::user()->tipo_usuario != "Administrador")
                                         <a href="sesiones/create?idsillae_ciclo={{$sillaCiclo->idsillae_ciclo}}&idpaciente={{$sillaCiclo->idpaciente}}">
                                             <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Agregar sesion ">
                                                 <button class="btn btn-sm btn-success" style="pointer-events: none;" type="button">
@@ -189,13 +189,13 @@
                                         @foreach ($sesiones as $sesion)
                                             <tr>
                                                 <td>
+                                                    @if(Auth::user()->tipo_usuario != "Administrador")
+                                                        <a href="{{URL::action('SillaElectromagneticaSesionController@edit',$sesion->idsillae_ciclo_sesion)}}">
+                                                            <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar sesion">
+                                                                <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button"><i class="far fa-edit"></i> </button>
+                                                            </span>
+                                                        </a>
                                                     
-                                                    <a href="{{URL::action('SillaElectromagneticaSesionController@edit',$sesion->idsillae_ciclo_sesion)}}">
-                                                        <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar sesion">
-                                                            <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button"><i class="far fa-edit"></i> </button>
-                                                        </span>
-                                                    </a>
-                                                    @if(Auth::user()->tipo_usuario == "Doctor")
                                                         <a href="" data-target="#modal-eliminar-sesion-{{$sesion->idsillae_ciclo_sesion}}" data-toggle="modal">
                                                             <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Eliminar sesion">
                                                                 <button class="btn btn-sm btn-danger" style="pointer-events: none;" type="button"><i class="far fa-minus-square"></i></button>

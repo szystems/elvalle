@@ -5,7 +5,7 @@
 	<header class="card-header d-md-flex align-items-center">
 		<h4>
 			<strong>Listado de Ingresos </strong>
-
+			@if(Auth::user()->tipo_usuario == "Administrador")
 			<a href="ingreso/create">
                 <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Nuevo Ingreso ">
                     <button class="btn btn-sm btn-success" style="pointer-events: none;" type="button">
@@ -13,7 +13,7 @@
                     </button>
                 </span>
 			</a>
-
+			@endif
 		</h4>
 		
 	</header>
@@ -123,7 +123,7 @@
 		               @foreach ($ingresos as $ing)
 						<tr>
 							<td align="left">
-
+								@if(Auth::user()->tipo_usuario == "Administrador")
 								<a href="{{URL::action('IngresoController@show',$ing->idingreso)}}">
 									<span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Ver Ingreso">
 										<button class="btn btn-sm btn-info" style="pointer-events: none;" type="button">
@@ -141,6 +141,7 @@
 									</span>
 		                        </a>
 		                        @endif 
+								@endif
 							</td>
 							
 							<?php

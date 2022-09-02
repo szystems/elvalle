@@ -4,7 +4,7 @@
 						<!-- Card Header -->
 	<header class="card-header d-md-flex align-items-center">
 		<h4><strong>Listado de Presentaciones </strong>
-
+			@if(Auth::user()->tipo_usuario != "Doctor")
 			<a href="presentacion/create">
                 <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Crear Presentación ">
                     <button class="btn btn-sm btn-success" style="pointer-events: none;" type="button">
@@ -12,6 +12,7 @@
                     </button>
                 </span>
 			</a>
+			@endif
 		</h4>
 		
 	</header>
@@ -49,6 +50,7 @@
 									</span>
 								</a>
 
+								@if(Auth::user()->tipo_usuario != "Doctor")
 								<a href="{{URL::action('PresentacionController@edit',$presentacion->idpresentacion)}}">
                                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar Presentación">
                                           <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button">
@@ -64,6 +66,7 @@
                                           </button>
                                     </span>
 								</a>
+								@endif
 								  
 							</td>
 							<td align="left"><h5>{{ $presentacion->nombre}}</h5></td>

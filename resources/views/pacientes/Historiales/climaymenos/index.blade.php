@@ -65,7 +65,7 @@
                     <header class="card-header">
                         <h2 class="h3 card-header-title"><strong>Nuevo Estudio: </strong></h2>
 
-                        @if(Auth::user()->tipo_usuario == "Doctor")
+                        @if(Auth::user()->tipo_usuario != "Administrador")
                         
                         {!!Form::open(array('url'=>'pacientes/historiales/climaymenos','method'=>'POST','autocomplete'=>'off'))!!}
                         {{Form::token()}}
@@ -116,7 +116,7 @@
                                                     </button>
                                                 </span>
                                             </a>
-                                            @if(Auth::user()->tipo_usuario == "Doctor")
+                                            @if(Auth::user()->tipo_usuario != "Administrador")
                                                 <a href="" data-target="#modal-eliminar-{{$climaymeno->idclimaymeno}}" data-toggle="modal">
                                                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Eliminar estudio">
                                                         <button class="btn btn-sm btn-danger" style="pointer-events: none;" type="button">

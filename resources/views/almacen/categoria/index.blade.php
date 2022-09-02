@@ -4,7 +4,7 @@
 						<!-- Card Header -->
 	<header class="card-header d-md-flex align-items-center">
 		<h4><strong>Listado de Categorías </strong>
-
+			@if(Auth::user()->tipo_usuario != "Doctor")
 			<a href="categoria/create">
                 <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Crear Categoría ">
                     <button class="btn btn-sm btn-success" style="pointer-events: none;" type="button">
@@ -12,6 +12,7 @@
                     </button>
                 </span>
 			</a>
+			@endif
 		</h4>
 		
 	</header>
@@ -75,7 +76,8 @@
 										</button>
 									</span>
 								</a>
-
+								
+								@if(Auth::user()->tipo_usuario != "Doctor")
 								<a href="{{URL::action('CategoriaController@edit',$cat->idcategoria)}}">
                                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar Categoria">
                                           <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button">
@@ -91,7 +93,8 @@
                                           </button>
                                     </span>
 								</a>
-								  
+								@endif
+								
 							</td>
 							<td align="left"><h5>{{ $cat->nombre}}</h5></td>
 							<td align="left"><h5>{{ $cat->descripcion}}</h5></td>

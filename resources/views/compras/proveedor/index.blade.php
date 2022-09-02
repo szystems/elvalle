@@ -4,7 +4,7 @@
 						<!-- Card Header -->
 	<header class="card-header d-md-flex align-items-center">
 		<h4><strong>Listado de Proveedores </strong>
-
+			@if(Auth::user()->tipo_usuario == "Administrador")
 			<a href="proveedor/create">
                 <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Crear Proveedor ">
                     <button class="btn btn-sm btn-success" style="pointer-events: none;" type="button">
@@ -12,7 +12,7 @@
                     </button>
                 </span>
 			</a>
-
+			@endif
 		</h4>
 		
 	</header>
@@ -78,6 +78,7 @@
 									</span>
 								</a>
 
+								@if(Auth::user()->tipo_usuario == "Administrador")
 								<a href="{{URL::action('ProveedorController@edit',$per->idpersona)}}">
                                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar Proveedor">
                                           <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button">
@@ -93,6 +94,7 @@
                                           </button>
                                     </span>
 								</a>
+								@endif
 
 							</td>
 							<td align="left"><h5>{{ $per->nombre}}</h5></td>

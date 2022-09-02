@@ -55,6 +55,8 @@
 								
 				?>
 				@include('ventas.venta.search')
+
+				@if(Auth::user()->tipo_usuario == "Administrador")
 				{{Form::open(array('action' => 'ReportesController@reporteventas','method' => 'POST','role' => 'form', 'target' => '_blank'))}}
 
                 {{Form::token()}}		
@@ -105,6 +107,8 @@
 					</div>
 					
 				{{Form::close()}}
+				@endif
+
 				<h6>
 					<strong>Filtros:</strong>
 					<font color="Blue"> 
@@ -224,9 +228,13 @@
 				<div class="table-responsive">
 					<table class="table table-striped table-bordered table-condensed table-hover">
 						<thead>
-							<th><h5 align="center"><strong>Total Costo</strong></h5></th>
+							@if(Auth::user()->tipo_usuario == "Administrador")
+								<th><h5 align="center"><strong>Total Costo</strong></h5></th>
+							@endif
 							<th><h5 align="center"><strong>Total Ventas</strong></h5></th>
-							<th><h5 align="center"><strong>Diferncia</strong></h5></th>
+							@if(Auth::user()->tipo_usuario == "Administrador")
+								<th><h5 align="center"><strong>Diferncia</strong></h5></th>
+							@endif
 							<th><h5 align="center"><strong>Total Saldo</strong></h5></th>
 						</thead>
 		               

@@ -41,12 +41,14 @@
 					
 			    {{Form::close()}}
                 <div class="card-body">
+                    @if(Auth::user()->tipo_usuario == "Administrador")
                     @if ($ingreso->estado == 'Activo')
                         <a href="" data-target="#modaleliminarshow-delete-{{$ingreso->idingreso}}" data-toggle="modal">
                             <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Cancelar Ingreso">
                                 <button class="btn btn-sm btn-danger" style="pointer-events: none;" type="button"><i class="far fa-minus-square"></i> Cancelar</button>
                             </span>
                         </a>
+                    @endif
                     @endif
                   <div class="row">
                     <br>

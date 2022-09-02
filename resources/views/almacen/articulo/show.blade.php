@@ -43,6 +43,7 @@
 					
 				{{Form::close()}}
             <div class="card-body">
+                @if(Auth::user()->tipo_usuario != "Doctor")
                   <a href="{{URL::action('ArticuloController@edit',$articulo->idarticulo)}}">
                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar Articulo">
                         <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button"><i class="far fa-edit"></i> Editar</button>
@@ -54,6 +55,7 @@
                         <button class="btn btn-sm btn-danger" style="pointer-events: none;" type="button"><i class="far fa-minus-square"></i> Eliminar</button>
                     </span>
 				  </a>
+                @endif
                   <div class="row">
                     <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
                         <div class="form-group">
