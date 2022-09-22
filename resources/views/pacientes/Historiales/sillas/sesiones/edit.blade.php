@@ -57,6 +57,12 @@
                               <li class="nav-item">
                                     <a class="nav-link" href="{{URL::action('IncontinenciauController@index','searchidpaciente='.$paciente->idpaciente)}}">Incontinencia Urinaria</a>
                               </li>
+                              <li class="nav-item">
+                                    <a class="nav-link" href="{{URL::action('ColposcopiaController@index','searchidpaciente='.$paciente->idpaciente)}}">Colposcopia</a>
+                              </li>
+                              <li class="nav-item">
+                                    <a class="nav-link" href="{{URL::action('UltrasonidoObstetricoController@index','searchidpaciente='.$paciente->idpaciente)}}">Ultrasonido Obstetrico</a>
+                              </li>
                         </ul>
 
 
