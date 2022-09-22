@@ -61,6 +61,7 @@ Route::get('pacientes/historiales/recetas/editar', 'RecetaController@editarmedic
 Route::get('pacientes/historiales/recetas/agregar', 'RecetaController@agregar');
 Route::get('pacientes/historiales/recetas/eliminar', 'RecetaController@eliminarreceta');
 Route::get('pacientes/historiales/fisicos/eliminar', 'FisicoController@eliminarfisico');
+Route::get('pacientes/historiales/colposcopias/eliminar', 'ColposcopiaController@eliminarcolposcopia');
 Route::get('pacientes/historiales/embarazos/eliminar', 'EmbarazoController@eliminarembarazo');
 Route::get('pacientes/historiales/embarazos/controles/eliminar', 'ControlController@eliminarcontrol');
 Route::get('pacientes/historiales/radiofrecuencias/eliminar', 'RadiofrecuenciaController@eliminarradiofrecuencia');
@@ -74,6 +75,8 @@ Route::get('pacientes/historiales/incontinencias/cuestionarios/eliminar', 'Incon
 Route::get('pacientes/historiales/incontinencias/eliminar', 'IncontinenciauController@eliminarincontinencia');
 
 //imagenes de historiales
+Route::get('pacientes/historiales/colposcopias/imagenes/eliminar', 'ColposcopiaImgController@eliminarimagen');
+Route::resource('pacientes/historiales/colposcopias/imagenes','ColposcopiaImgController');
 Route::get('pacientes/historiales/fisicos/imagenes/eliminar', 'FisicoImgController@eliminarimagen');
 Route::resource('pacientes/historiales/fisicos/imagenes','FisicoImgController');
 Route::get('pacientes/historiales/embarazos/imagenes/eliminar', 'EmbarazoImgController@eliminarimagen');
@@ -84,6 +87,7 @@ Route::resource('pacientes/historiales/climaymenos/imagenes','ClimaymenoImgContr
 //historiales
 Route::resource('pacientes/historiales/historias','HistoriaController');
 Route::resource('pacientes/historiales/recetas','RecetaController');
+Route::resource('pacientes/historiales/colposcopias','ColposcopiaController');
 Route::resource('pacientes/historiales/fisicos','FisicoController');
 Route::resource('pacientes/historiales/embarazos','EmbarazoController');
 Route::resource('pacientes/historiales/embarazos/controles','ControlController');
@@ -119,6 +123,7 @@ Route::resource('reportes/ingresos','ReporteIngresosController');
     /*Historiales */
     Route::post('pdf/recetas','ReportesController@vistareceta');
     Route::post('pdf/fisicos','ReportesController@vistafisico');
+    Route::post('pdf/colposcopias','ReportesController@vistaColposcopia');
     Route::post('pdf/embarazos','ReportesController@vistaembarazo');
     Route::post('pdf/climaymenos','ReportesController@vistaclimaymeno');
     Route::post('pdf/incontinencias','ReportesController@vistaincontinencia');
