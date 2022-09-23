@@ -132,7 +132,8 @@
                             </a>
 
                         @endif
-                        <!--modaleliminar-->
+                        <br><br>
+                        <div class="row"><b><u> Cuestionario de Colposcopia</u></b></div>
                         <div class="row">
                             <?php
                                 $fecha = date("d-m-Y", strtotime($colposcopia->fecha));
@@ -156,277 +157,249 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
-                                <div class="form-group">
-                                      <label for="datos"><strong><u>Datos Generales</u></strong></label>
-                                </div>
-                            </div>
+                            <div class="col-lg-8 col-sm-8 col-md-8 col-xs-12">
+                                    <div class="form-group">
+                                          <div class="table-responsive">
+                                                <table class="table table-sm table-striped table-bordered table-condensed table-hover">
+                                                      <thead align="center">
+                                                            <th><b><u>Pregunta</u></b></th>
+                                                            <th><b><u>Respuesta</u></b></th>
+                                                      </thead>
+                                                      <tbody>
 
-                            <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                                <div class="form-group">
-                                      <div class="table-responsive">
-                                            <table class="table table-sm table-striped table-bordered table-condensed table-hover">
-                                                
-                                                  <tbody>
+                                                            <tr>
+                                                                  <td><strong>¿Vio toda la Unión escamoso-cilíndrica (UEC)?</strong><span>(En caso negativo, sopese la posibilidad de legrado endocervical)</span></td>
+                                                                  <td align="left">
+                                                                        {{ $colposcopia->union_escamoso_cilindrica }}
+                                                                  </td>
+                                                            </tr>
 
-                                                        <tr>
-                                                              <td><strong>Peso</strong></td>
-                                                              <td align="left">
-                                                                    <div class="input-group">
-                                                                        <input type="text" readonly name="peso" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="{{ $colposcopia->peso }}">
-                                                                        <div class="input-group-prepend">
-                                                                            <span class="input-group-text">Lbs.</span>
-                                                                        </div>
-                                                                    </div>
-                                                              </td>
-                                                        </tr>
+                                                            <tr>
+                                                                  <td><strong>Colposcopia insatisfactoria:</strong></td>
+                                                                  <td align="left">
+                                                                        {{ $colposcopia->colposcopia_insatisfactoria }}
+                                                                  </td>
+                                                            </tr>
 
-                                                        <tr>
-                                                              <td><strong>Talla</strong></td>
-                                                              <td align="left">
-                                                                    <div class="input-group">
-                                                                          <input type="text" readonly name="talla" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="{{ $colposcopia->talla }}" placeholder="0.00" onkeypress="return validardecimal(event,this.value)" required>
-                                                                          <div class="input-group-prepend">
-                                                                                <span class="input-group-text">Cms.</span>
-                                                                          </div>
-                                                                    </div>
-                                                              </td>
-                                                        </tr>
+                                                            <tr>
+                                                                  <td colspan="2"><strong><u>Hallazgos colposcópicos dentro de la zona de transformación</u></strong></td>
+                                                            </tr>
 
-                                                        <tr>
-                                                            <td><strong>IMC</strong></td>
-                                                            @php
-                                                                $kilogramos = $colposcopia->peso / 2.2;
-                                                                $metros = $colposcopia->talla / 100;
-                                                                $imc = ($kilogramos /($metros*$metros))
-                                                            @endphp
-                                                            <td align="left">
-                                                                  <div class="input-group">
-                                                                        <input type="text" readonly name="imc" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="{{ number_format($imc,2, '.', ',') }}" placeholder="0.00" onkeypress="return validardecimal(event,this.value)" required>
-                                                                        <div class="input-group-prepend">
-                                                                              <span class="input-group-text">IMC</span>
-                                                                        </div>
-                                                                  </div>
-                                                            </td>
-                                                        </tr>
+                                                            <tr>
+                                                                  <td><strong>- Epitelio acetoblanco plano</strong></td>
+                                                                  <td align="left">
+                                                                        @if ($colposcopia->hd_eap == 1)
+                                                                              <div class="primary-checkbox">
+                                                                                    <input type="checkbox" name="hd_eap" checked disabled>
+                                                                              </div>
+                                                                        @else
+                                                                              <div class="primary-checkbox">
+                                                                                    <input type="checkbox" name="hd_eap" disabled>
+                                                                              </div>
+                                                                        @endif
+                                                                  </td>
+                                                            </tr>
 
-                                                        <tr>
-                                                              <td><strong>Perimetro Abdominal</strong></td>
-                                                              <td align="left"> 
-                                                                    <div class="input-group">
-                                                                          <input type="text" readonly name="perimetro_abdominal" class="form-control text-right " aria-label="Amount (to the nearest dollar)" value="{{ $colposcopia->perimetro_abdominal }}" placeholder="0.00" onkeypress="return validardecimal(event,this.value)" required>
-                                                                          <div class="input-group-prepend">
-                                                                                <span class="input-group-text">Cms.</span>
-                                                                          </div>
-                                                                    </div>
-                                                              </td>
-                                                        </tr>
-                                                        <tr>
-                                                              <td><strong>Presion Arterial</strong></td>
-                                                              <td align="left">
-                                                                    <div class="input-group">
-                                                                          <input type="text" readonly name="presion_arterial" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="{{ $colposcopia->presion_arterial }}" placeholder="0" onkeypress="return validarentero(event,this.value)" required>
-                                                                          <div class="input-group-prepend">
-                                                                                <span class="input-group-text">mm Hg</span>
-                                                                          </div>
-                                                                    </div>
-                                                              </td>
-                                                        </tr>
+                                                            <tr>
+                                                                  <td><strong>- Epitelio acetoblanco mícropapilar o cerebroide</strong></td>
+                                                                  <td align="left">
+                                                                        @if ($colposcopia->hd_eam == 1)
+                                                                              <div class="primary-checkbox">
+                                                                                    <input type="checkbox" name="hd_eap" checked disabled>
+                                                                              </div>
+                                                                        @else
+                                                                              <div class="primary-checkbox">
+                                                                                    <input type="checkbox" name="hd_eap" disabled>
+                                                                              </div>
+                                                                        @endif
+                                                                  </td>
+                                                            </tr>
 
-                                                        <tr>
-                                                              <td><strong>Frecuencia Cardiaca</strong></td>
-                                                              <td align="left">
-                                                                    <div class="input-group">
-                                                                          <input type="text" readonly name="frecuencia_cardiaca" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="{{ $colposcopia->frecuencia_cardiaca }}" placeholder="0" onkeypress="return validarentero(event,this.value)" required>
-                                                                          <div class="input-group-prepend">
-                                                                                <span class="input-group-text">/min</span>
-                                                                          </div>
-                                                                    </div>
-                                                              </td>
-                                                        </tr>
+                                                            <tr>
+                                                                  <td><strong>- Leucoplasia</strong></td>
+                                                                  <td align="left">
+                                                                        @if ($colposcopia->hd_leucoplasia == 1)
+                                                                              <div class="primary-checkbox">
+                                                                                    <input type="checkbox" name="hd_eap" checked disabled>
+                                                                              </div>
+                                                                        @else
+                                                                              <div class="primary-checkbox">
+                                                                                    <input type="checkbox" name="hd_eap" disabled>
+                                                                              </div>
+                                                                        @endif
+                                                                  </td>
+                                                            </tr>
 
-                                                        <tr>
-                                                              <td><strong>Frecuencia Respiratoria</strong></td>
-                                                              <td align="left">
-                                                                    <div class="input-group">
-                                                                          <input type="text" readonly name="frecuencia_respiratoria" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="{{ $colposcopia->frecuencia_respiratoria }}" placeholder="0" onkeypress="return validarentero(event,this.value)" required>
-                                                                          <div class="input-group-prepend">
-                                                                                <span class="input-group-text">/min</span>
-                                                                          </div>
-                                                                    </div>
-                                                              </td>
-                                                        </tr>
+                                                            <tr>
+                                                                  <td><strong>- Punteando</strong></td>
+                                                                  <td align="left">
+                                                                        @if ($colposcopia->hd_punteando == 1)
+                                                                              <div class="primary-checkbox">
+                                                                                    <input type="checkbox" name="hd_eap" checked disabled>
+                                                                              </div>
+                                                                        @else
+                                                                              <div class="primary-checkbox">
+                                                                                    <input type="checkbox" name="hd_eap" disabled>
+                                                                              </div>
+                                                                        @endif
+                                                                  </td>
+                                                            </tr>
 
-                                                        <tr>
-                                                              <td><strong>Temperatura</strong></td>
-                                                              <td align="left">
-                                                                    <div class="input-group">
-                                                                          <input type="text" readonly name="temperatura" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="{{ $colposcopia->temperatura }}" placeholder="0" onkeypress="return validarentero(event,this.value)" required>
-                                                                          <div class="input-group-prepend">
-                                                                                <span class="input-group-text">°C</span>
-                                                                          </div>
-                                                                    </div>
-                                                              </td>
-                                                        </tr>
+                                                            <tr>
+                                                                  <td><strong>- Mosaico</strong></td>
+                                                                  <td align="left">
+                                                                        @if ($colposcopia->hd_mosaico == 1)
+                                                                              <div class="primary-checkbox">
+                                                                                    <input type="checkbox" name="hd_eap" checked disabled>
+                                                                              </div>
+                                                                        @else
+                                                                              <div class="primary-checkbox">
+                                                                                    <input type="checkbox" name="hd_eap" disabled>
+                                                                              </div>
+                                                                        @endif
+                                                                  </td>
+                                                            </tr>
 
-                                                        <tr>
-                                                              <td><strong>Saturacion de Oxigeno</strong></td>
-                                                              <td align="left">
-                                                                    <div class="input-group">
-                                                                          <input type="text" readonly name="saturacion_oxigeno" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="{{ $colposcopia->saturacion_oxigeno }}" placeholder="0" onkeypress="return validarentero(event,this.value)" required>
-                                                                          <div class="input-group-prepend">
-                                                                                <span class="input-group-text">%</span>
-                                                                          </div>
-                                                                    </div>
-                                                              </td>
-                                                        </tr>
-                                                        
-                                                  </tbody>
-                                            </table>
-                                      </div>
-                                </div>
-                            </div>
+                                                            <tr>
+                                                                  <td><strong>- Vasos atípicos</strong></td>
+                                                                  <td align="left">
+                                                                        @if ($colposcopia->hd_vasos == 1)
+                                                                              <div class="primary-checkbox">
+                                                                                    <input type="checkbox" name="hd_eap" checked disabled>
+                                                                              </div>
+                                                                        @else
+                                                                              <div class="primary-checkbox">
+                                                                                    <input type="checkbox" name="hd_eap" disabled>
+                                                                              </div>
+                                                                        @endif
+                                                                  </td>
+                                                            </tr>
 
-                            <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
-                                <div class="form-group">
-                                      <label for="datos"><strong><u>Componentes</u></strong></label>
-                                </div>
-                            </div>
+                                                            <tr>
+                                                                  <td><strong>- Área yodonegativas</strong></td>
+                                                                  <td align="left">
+                                                                        @if ($colposcopia->hd_area == 1)
+                                                                              <div class="primary-checkbox">
+                                                                                    <input type="checkbox" name="hd_eap" checked disabled>
+                                                                              </div>
+                                                                        @else
+                                                                              <div class="primary-checkbox">
+                                                                                    <input type="checkbox" name="hd_eap" disabled>
+                                                                              </div>
+                                                                        @endif
+                                                                  </td>
+                                                            </tr>
 
-                            <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
-                                <div class="form-group">
-                                      <div class="table-responsive">
-                                            <table class="table table-sm table-striped table-bordered table-condensed table-hover">
-                                                  <thead align="center">
-                                                        <th><b><u>Componente</u></b></th>
-                                                        <th><b><u>Descripcion</u></b></th>
-                                                  </thead>
-                                                  <tbody>
+                                                            <tr>
+                                                                  <td><strong>- Otros</strong></td>
+                                                                  <td align="left">
+                                                                        @if ($colposcopia->hd_otros == 1)
+                                                                              <div class="primary-checkbox">
+                                                                                    <input type="checkbox" name="hd_eap" checked disabled>
+                                                                              </div>
+                                                                        @else
+                                                                              <div class="primary-checkbox">
+                                                                                    <input type="checkbox" name="hd_eap" disabled>
+                                                                              </div>
+                                                                        @endif
+                                                                  </td>
+                                                            </tr>
 
-                                                        <tr>
-                                                              <td><strong>Cabeza y cuello</strong></td>
-                                                              <td align="left">
-                                                                    <textarea readonly name="cabeza_cuello" class="form-control">{{ $colposcopia->cabeza_cuello }}</textarea>
-                                                              </td>
-                                                        </tr>
+                                                            <tr>
+                                                                  <td><strong>- Otros (Especificar)</strong></td>
+                                                                  <td align="left">
+                                                                        {{ $colposcopia->hd_otros_especificar }}
+                                                                  </td>
+                                                            </tr>
 
-                                                        <tr>
-                                                              <td><strong>Tiroides</strong></td>
-                                                              <td align="left">
-                                                                    <textarea name="tiroides" class="form-control">{{ $colposcopia->tiroides }}</textarea>
-                                                              </td>
-                                                        </tr>
+                                                            <tr>
+                                                                  <td><strong>Hallazgos fuera de la zona de transformación</strong></td>
+                                                                  <td align="left">
+                                                                        {{ $colposcopia->hallazgos_fuera }}
+                                                                  </td>
+                                                            </tr>
 
-                                                        <tr>
-                                                              <td><strong>Mamas y axilas</strong></td>
-                                                              <td align="left">
-                                                                    <textarea readonly name="mamas_axilas" class="form-control">{{ $colposcopia->mamas_axilas }}</textarea>
-                                                              </td>
-                                                        </tr>
+                                                            <tr>
+                                                                  <td><strong>Sospecha colposcópica de carcinoma invasor</strong></td>
+                                                                  <td align="left">
+                                                                        {{ $colposcopia->carcinoma_invasor }}
+                                                                  </td>
+                                                            </tr>
 
-                                                        <tr>
-                                                              <td><strong>Cardiopulmonar</strong></td>
-                                                              <td align="left">
-                                                                    <textarea readonly name="cardiopulmonar" class="form-control">{{ $colposcopia->cardiopulmonar }}</textarea>
-                                                              </td>
-                                                        </tr>
+                                                            <tr>
+                                                                  <td><strong>Otros Hallazgos</strong></td>
+                                                                  <td align="left">
+                                                                        {{ $colposcopia->otros_hallazgos }}
+                                                                  </td>
+                                                            </tr>
 
-                                                        <tr>
-                                                              <td><strong>Abdomen</strong></td>
-                                                              <td align="left">
-                                                                    <textarea readonly name="abdomen" class="form-control">{{ $colposcopia->abdomen }}</textarea>
-                                                              </td>
-                                                        </tr>
+                                                            <tr>
+                                                                  <td colspan="2"><strong><u>Diagnósticos colposcópicos normales</u></strong></td>
+                                                            </tr>
 
-                                                        <tr>
-                                                              <td colspan="2" align="center"><strong><u>Ginecologico</u></strong></td>
-                                                        </tr>
+                                                            <tr>
+                                                                  <td><strong>- Colposcopia insatisfactoria (Especifique)</strong></td>
+                                                                  <td align="left">
+                                                                        @if ($colposcopia->dcn_insatisfactoria == 1)
+                                                                              <div class="primary-checkbox">
+                                                                                    <input type="checkbox" name="hd_eap" checked disabled>
+                                                                              </div>
+                                                                        @else
+                                                                              <div class="primary-checkbox">
+                                                                                    <input type="checkbox" name="hd_eap" disabled>
+                                                                              </div>
+                                                                        @endif
+                                                                  </td>
+                                                            </tr>
+                                                            <tr>
+                                                                  <td><strong>Especificar:</strong></td>
+                                                                  <td align="left">
+                                                                        {{ $colposcopia->dcn_insatisfactoria_especifique }}
+                                                                  </td>
+                                                            </tr>
 
-                                                        <tr>
-                                                              <td><strong>Genitales externos</strong></td>
-                                                              <td align="left">
-                                                                    <textarea readonly name="genitales_externos" class="form-control">{{ $colposcopia->genitales_externos }}</textarea>
-                                                              </td>
-                                                        </tr>
+                                                            <tr>
+                                                                  <td><strong>- Hallazgos colposcópicos normales</strong></td>
+                                                                  <td align="left">
+                                                                        @if ($colposcopia->hallazgos_nomales == 1)
+                                                                              <div class="primary-checkbox">
+                                                                                    <input type="checkbox" name="hd_eap" checked disabled>
+                                                                              </div>
+                                                                        @else
+                                                                              <div class="primary-checkbox">
+                                                                                    <input type="checkbox" name="hd_eap" disabled>
+                                                                              </div>
+                                                                        @endif
+                                                                  </td>
+                                                            </tr>
 
-                                                        <tr>
-                                                              <td><strong>Especuloscopia</strong></td>
-                                                              <td align="left">
-                                                                    <textarea readonly name="especuloscopia" class="form-control">{{ $colposcopia->especuloscopia }}</textarea>
-                                                              </td>
-                                                        </tr>
+                                                            <tr>
+                                                                  <td><strong>- Infamación o infección (especifique): </strong></td>
+                                                                  <td align="left">
+                                                                        @if ($colposcopia->inflamacion_infeccion == 1)
+                                                                              <div class="primary-checkbox">
+                                                                                    <input type="checkbox" name="hd_eap" checked disabled>
+                                                                              </div>
+                                                                        @else
+                                                                              <div class="primary-checkbox">
+                                                                                    <input type="checkbox" name="hd_eap" disabled>
+                                                                              </div>
+                                                                        @endif
+                                                                  </td>
+                                                            </tr>
+                                                            <tr>
+                                                                  <td><strong>Especificar:</strong></td>
+                                                                  <td align="left">
+                                                                        {{ $colposcopia->inflamacion_infeccion_especifique }}
+                                                                  </td>
+                                                            </tr>
 
-                                                        <tr>
-                                                              <td><strong>Tacto bimanual</strong></td>
-                                                              <td align="left">
-                                                                    <textarea readonly name="tacto_bimanual" class="form-control">{{ $colposcopia->tacto_bimanual }}</textarea>
-                                                              </td>
-                                                        </tr>
-
-                                                        <tr>
-                                                              <td><strong>Miembros inferiores</strong></td>
-                                                              <td align="left">
-                                                                    <textarea readonly name="miembros_inferiores" class="form-control">{{ $colposcopia->miembros_inferiores }}</textarea>
-                                                              </td>
-                                                        </tr>
-                                                        
-                                                  </tbody>
-                                            </table>
-                                      </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
-                                <div class="form-group">
-                                      <label for="datos"><strong><u>Concluciones</u></strong></label>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
-                                <div class="form-group">
-                                      <div class="table-responsive">
-                                            <table class="table table-sm table-striped table-bordered table-condensed table-hover">
-                                                  <tbody>
-
-                                                        <tr>
-                                                              <td>
-                                                                    <strong>Impresion Clinica</strong>
-                                                                    <textarea readonly name="impresion_clinica" class="form-control">{{ $colposcopia->impresion_clinica }}</textarea>
-                                                              </td>
-                                                        </tr>
-
-                                                        <tr>
-                                                              <td>
-                                                                    <strong>Plan Diagnostico</strong>
-                                                                    <textarea readonly name="plan_diagnostico" class="form-control">{{ $colposcopia->plan_diagnostico }}</textarea>
-                                                              </td>
-                                                        </tr>
-
-                                                        <tr>
-                                                              <td>
-                                                                    <strong>Plan Tratamiento</strong>
-                                                                    <textarea readonly name="plan_tratamiento" class="form-control">{{ $colposcopia->plan_tratamiento }}</textarea>
-                                                              </td>
-                                                        </tr>
-
-                                                        <tr>
-                                                              <td>
-                                                                    <strong>Recomendaciones Generales</strong>
-                                                                    <textarea readonly name="recomendaciones_generales" class="form-control">{{ $colposcopia->recomendaciones_generales }}</textarea>
-                                                              </td>
-                                                        </tr>
-
-                                                        <tr>
-                                                              <td>
-                                                                    <strong>Recomendaciones Especificas</strong>
-                                                                    <textarea readonly name="recomendaciones_especificas" class="form-control">{{ $colposcopia->recomendaciones_especificas }}</textarea>
-                                                              </td>
-                                                        </tr>
-
-                                                  </tbody>
-                                            </table>
-                                      </div>
-                                </div>
+                                                            
+                                                            
+                                                      </tbody>
+                                                </table>
+                                          </div>
+                                    </div>
                             </div>
                             <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                               <div class="form-group">

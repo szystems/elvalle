@@ -2599,5 +2599,73 @@ class ReportesController extends Controller
         
     }
 
+    public function vistacolposcopia(ReportesFormRequest $rrequest)
+    {  
+            if ($rrequest)
+            {
+                
+                $nombreusu = Auth::user()->name;
+                $empresa = Auth::user()->empresa;
+                $moneda = Auth::user()->moneda;
+                if (Auth::user()->logo == null)
+                {
+                    $logo = null;
+                    $imagen = null;
+                }
+                else
+                {
+                     $logo = Auth::user()->logo;
+                     $imagen = public_path('imagenes/logos/'.$logo);
+                     
+                }
+                $path = public_path('imagenes/colposcopias/');
+                $verpdf=trim($rrequest->get('pdf'));
+                $idcolposcopia=trim($rrequest->get('rid'));
+                $idpaciente=trim($rrequest->get('ridpaciente'));
+
+                $zona_horaria = Auth::user()->zona_horaria;
+                $hoy = Carbon::now($zona_horaria);
+                $hoy = $hoy->format('d-m-Y');
+
+                $nompdf = Carbon::now($zona_horaria);
+                $nompdf = $nompdf->format('Y-m-d H:i:s');
+
+                $colposcopia=DB::table('colposcopia as c')
+                ->join('paciente as p','c.idpaciente','=','p.idpaciente')
+                ->join('users as d','c.iddoctor','=','d.id')
+                ->join('users as u','c.idusuario','=','u.id')
+                ->select('c.idcolposcopia','c.fecha','c.iddoctor','d.name as Doctor','d.especialidad','c.idpaciente','p.nombre as Paciente','c.idusuario','u.name as Usuario','u.tipo_usuario','c.union_escamoso_cilindrica','colposcopia_insatisfactoria','hd_eap','hd_eam','hd_leucoplasia','hd_punteando','hd_mosaico','hd_vasos','hd_area','hd_otros','hd_otros_especificar','hallazgos_fuera','carcinoma_invasor','otros_hallazgos','dcn_insatisfactoria','dcn_insatisfactoria_especifique','hallazgos_nomales','inflamacion_infeccion','inflamacion_infeccion_especifique')
+                ->where('c.idcolposcopia','=',$idcolposcopia) 
+                ->first();
+
+                $paciente=DB::table('paciente')
+                ->where('idpaciente','=',$idpaciente)
+                ->first();
+
+                $colposcopiaimgs=DB::table('colposcopia_img')
+                ->where('idcolposcopia','=',$idcolposcopia) 
+                ->get();
+
+                
+                if ( $verpdf == "Descargar" )
+                {
+                    $view = \View::make('pdf.colposcopias.vistacolposcopia', compact('colposcopia','paciente','colposcopiaimgs','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
+                    $pdf = \App::make('dompdf.wrapper');
+                    $pdf->loadHTML($view);
+                    //$pdf->setPaper('A4', 'landscape');
+                    return $pdf->download ('VistaColposcopia'.'-'.$paciente->nombre.'-'.$colposcopia->fecha.'-'.$nompdf.'.pdf');
+                }
+                if ( $verpdf == "Navegador" )
+                {
+                    $view = \View::make('pdf.colposcopias.vistacolposcopia', compact('colposcopia','paciente','colposcopiaimgs','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
+                    $pdf = \App::make('dompdf.wrapper');
+                    $pdf->loadHTML($view);
+                    //$pdf->setPaper('A4', 'landscape');
+                    return $pdf->stream ('VistaColposcopia'.'-'.$paciente->nombre.'-'.$colposcopia->fecha.'-'.$nompdf.'.pdf');
+                }
+            }
+        
+    }
+
     
 }

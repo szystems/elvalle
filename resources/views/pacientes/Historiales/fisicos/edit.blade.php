@@ -70,7 +70,7 @@
                         <div class="card">
 
                               <header class="card-header">
-                                    <h2 class="h3 card-header-title"><strong>Crear examen fisico: </strong></h2>
+                                    <h2 class="h3 card-header-title"><strong>Editar examen fisico: </strong></h2>
                               </header>
 
                               <div class="card-body">

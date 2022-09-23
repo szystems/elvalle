@@ -28,6 +28,7 @@ class Colposcopia extends Model
         'hd_area',
         'hd_otros',
         'hd_otros_especificar',
+        'hallazgos_fuera',
         'carcinoma_invasor',
         'otros_hallazgos',
         'dcn_insatisfactoria',
