@@ -61,7 +61,7 @@ Route::get('pacientes/historiales/recetas/editar', 'RecetaController@editarmedic
 Route::get('pacientes/historiales/recetas/agregar', 'RecetaController@agregar');
 Route::get('pacientes/historiales/recetas/eliminar', 'RecetaController@eliminarreceta');
 Route::get('pacientes/historiales/fisicos/eliminar', 'FisicoController@eliminarfisico');
-Route::get('pacientes/historiales/ultrasonidos/eliminar', 'UltrasonidoObstetricoImgController@eliminarfisico');
+Route::get('pacientes/historiales/ultrasonidos/eliminar', 'UltrasonidoObstetricoImgController@eliminarultrasonido');
 Route::get('pacientes/historiales/colposcopias/eliminar', 'ColposcopiaController@eliminarcolposcopia');
 Route::get('pacientes/historiales/embarazos/eliminar', 'EmbarazoController@eliminarembarazo');
 Route::get('pacientes/historiales/embarazos/controles/eliminar', 'ControlController@eliminarcontrol');
@@ -129,7 +129,7 @@ Route::resource('reportes/ingresos','ReporteIngresosController');
     Route::post('pdf/recetas','ReportesController@vistareceta');
     Route::post('pdf/fisicos','ReportesController@vistafisico');
     Route::post('pdf/colposcopias','ReportesController@vistacolposcopia');
-    Route::post('pdf/ustrasonidos','ReportesController@vistaustrasonido');
+    Route::post('pdf/ultrasonidos','ReportesController@vistaultrasonido');
     Route::post('pdf/embarazos','ReportesController@vistaembarazo');
     Route::post('pdf/climaymenos','ReportesController@vistaclimaymeno');
     Route::post('pdf/incontinencias','ReportesController@vistaincontinencia');
