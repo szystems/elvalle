@@ -127,7 +127,7 @@
                                                                         <tbody>
 
                                                                               <tr>
-                                                                                    <td><strong>¿Vio toda la Unión escamoso-cilíndrica (UEC)?</strong><span>(En caso negativo, sopese la posibilidad de legrado endocervical)</span></td>
+                                                                                    <td><strong>¿Vio toda la Unión escamoso-cilíndrica (UEC)?</strong></td>
                                                                                     <td align="left">
                                                                                           <select name="union_escamoso_cilindrica" class="form-control">
                                                                                                 @if (old('union_escamoso_cilindrica'))
@@ -139,6 +139,13 @@
                                                                                                       <option value="SI">SI</option>
                                                                                                 @endif
                                                                                           </select>
+                                                                                    </td>
+                                                                              </tr>
+
+                                                                              <tr>
+                                                                                    <td><strong>En caso negativo, sopese la posibilidad de legrado endocervical:</strong></td>
+                                                                                    <td align="left">
+                                                                                          <textarea name="legrado_endocervical" class="form-control" >{{ old('legrado_endocervical') }}</textarea>
                                                                                     </td>
                                                                               </tr>
 

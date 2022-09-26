@@ -80,6 +80,13 @@
 		  </tr>
 
 		  <tr>
+				<td><strong>En caso negativo, sopese la posibilidad de legrado endocervical:</strong></td>
+				<td align="left">
+					{{ $colposcopia->legrado_endocervical }}
+				</td>
+	  	  </tr>
+
+		  <tr>
 				<td><strong>Colposcopia insatisfactoria:</strong></td>
 				<td align="left">
 					  {{ $colposcopia->colposcopia_insatisfactoria }}

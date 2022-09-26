@@ -168,9 +168,16 @@
                                                       <tbody>
 
                                                             <tr>
-                                                                  <td><strong>¿Vio toda la Unión escamoso-cilíndrica (UEC)?</strong><span>(En caso negativo, sopese la posibilidad de legrado endocervical)</span></td>
+                                                                  <td><strong>¿Vio toda la Unión escamoso-cilíndrica (UEC)?</strong></td>
                                                                   <td align="left">
                                                                         {{ $colposcopia->union_escamoso_cilindrica }}
+                                                                  </td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                  <td><strong>En caso negativo, sopese la posibilidad de legrado endocervical:</strong></td>
+                                                                  <td align="left">
+                                                                        {{ $colposcopia->legrado_endocervical }}
                                                                   </td>
                                                             </tr>
 

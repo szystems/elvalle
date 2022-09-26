@@ -29,6 +29,7 @@ class ColposcopiaFormRequest extends FormRequest
             'idusuario'=>'required',
             'fecha'=>'required|date_format:d-m-Y|date',
             'union_escamoso_cilindrica'=>'max:5',
+            'legrado_endocervical'=>'max:200',
             'colposcopia_insatisfactoria'=>'max:100',
             
             'hd_otros_especificar'=>'max:300',

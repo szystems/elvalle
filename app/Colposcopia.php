@@ -18,6 +18,7 @@ class Colposcopia extends Model
         'idusuario',
         'fecha',
         'union_escamoso_cilindrica',
+        'legrado_endocervical',
         'colposcopia_insatisfactoria',
         'hd_eap',
         'hd_eam',
