@@ -29,41 +29,80 @@
                   </div> <!-- fin .flash-message -->
 
                   <div class="card-body">
+                        
+
                         <ul class="nav nav-tabs">
+                              @php
+                                  $totalRecetas=DB::table('receta')
+                                  ->where('idpaciente','=',$paciente->idpaciente) 
+                                  ->count();
+          
+                                  $totalFisicos=DB::table('fisico')
+                                  ->where('idpaciente','=',$paciente->idpaciente) 
+                                  ->count();
+          
+                                  $totalEmbarazos=DB::table('embarazo')
+                                  ->where('idpaciente','=',$paciente->idpaciente) 
+                                  ->count();
+          
+                                  $totalRadiofrecuencias=DB::table('radiofrecuencia')
+                                  ->where('idpaciente','=',$paciente->idpaciente) 
+                                  ->count();
+          
+                                  $totalSillas=DB::table('sillae_ciclo')
+                                  ->where('idpaciente','=',$paciente->idpaciente) 
+                                  ->count();
+          
+                                  $totalClimaymenos=DB::table('climaymeno')
+                                  ->where('idpaciente','=',$paciente->idpaciente) 
+                                  ->count();
+          
+                                  $totalIncontinencias=DB::table('incontinenciau')
+                                  ->where('idpaciente','=',$paciente->idpaciente) 
+                                  ->count();
+          
+                                  $totalColposcopias=DB::table('colposcopia')
+                                  ->where('idpaciente','=',$paciente->idpaciente) 
+                                  ->count();
+          
+                                  $totalUltrasonidos=DB::table('ultrasonido_obstetrico')
+                                  ->where('idpaciente','=',$paciente->idpaciente) 
+                                  ->count();
+                              @endphp
                               <li class="nav-item">
-                                    <a class="nav-link" href="{{ URL::action('HistorialController@show', $paciente->idpaciente) }}">Perfil</a>
+                                  <a class="nav-link"  href="{{URL::action('HistorialController@show',$paciente->idpaciente)}}">Perfil</a>
                               </li>
                               <li class="nav-item">
-                                    <a class="nav-link" href="{{URL::action('RecetaController@index','searchidpaciente='.$paciente->idpaciente)}}">Recetas</a>
+                                  <a class="nav-link" href="{{URL::action('HistoriaController@index','searchidpaciente='.$paciente->idpaciente)}}">Historia</a>
                               </li>
                               <li class="nav-item">
-                                    <a class="nav-link" href="{{URL::action('HistoriaController@index','searchidpaciente='.$paciente->idpaciente)}}">Historia</a>
+                                  <a class="nav-link" href="{{URL::action('RecetaController@index','searchidpaciente='.$paciente->idpaciente)}}">Recetas <span class="badge badge-info">{{ $totalRecetas }}</span></a>
                               </li>
                               <li class="nav-item">
-                                    <a class="nav-link" href="{{URL::action('FisicoController@index','searchidpaciente='.$paciente->idpaciente)}}">Fisico</a>
+                                  <a class="nav-link" href="{{URL::action('FisicoController@index','searchidpaciente='.$paciente->idpaciente)}}">Fisico <span class="badge badge-info">{{ $totalFisicos }}</span></a>
                               </li>
                               <li class="nav-item">
-                                    <a class="nav-link" href="{{URL::action('EmbarazoController@index','searchidpaciente='.$paciente->idpaciente)}}">Embarazos</a>
+                                  <a class="nav-link" href="{{URL::action('EmbarazoController@index','searchidpaciente='.$paciente->idpaciente)}}">Embarazos <span class="badge badge-info">{{ $totalEmbarazos }}</span></a>
                               </li>
                               <li class="nav-item">
-                                    <a class="nav-link" href="{{URL::action('RadiofrecuenciaController@index','searchidpaciente='.$paciente->idpaciente)}}">Radiofrecuencias</a>
+                                  <a class="nav-link" href="{{URL::action('RadiofrecuenciaController@index','searchidpaciente='.$paciente->idpaciente)}}">Radiofrecuencias <span class="badge badge-info">{{ $totalRadiofrecuencias }}</span></a>
                               </li>
                               <li class="nav-item">
-                                    <a class="nav-link" href="{{URL::action('SillaElectromagneticaController@index','searchidpaciente='.$paciente->idpaciente)}}">Silla Electromagnetica</a>
+                                  <a class="nav-link" href="{{URL::action('SillaElectromagneticaController@index','searchidpaciente='.$paciente->idpaciente)}}">Silla Electromagnetica <span class="badge badge-info">{{ $totalSillas }}</span></a>
                               </li>
                               <li class="nav-item">
-                                    <a class="nav-link" href="{{URL::action('ClimaymenoController@index','searchidpaciente='.$paciente->idpaciente)}}">Climaterio / Menopausea</a>
+                                  <a class="nav-link" href="{{URL::action('ClimaymenoController@index','searchidpaciente='.$paciente->idpaciente)}}">Climaterio / Menopausea <span class="badge badge-info">{{ $totalClimaymenos }}</span></a>
                               </li>
                               <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="{{URL::action('IncontinenciauController@index','searchidpaciente='.$paciente->idpaciente)}}"><b><u>Incontinencia Urinaria</u></b></a>
+                                  <a class="nav-link active" aria-current="page" href="{{URL::action('IncontinenciauController@index','searchidpaciente='.$paciente->idpaciente)}}"><b><u>Incontinencia Urinaria</u></b> <span class="badge badge-info">{{ $totalIncontinencias }}</span></a>
                               </li>
                               <li class="nav-item">
-                                    <a class="nav-link" href="{{URL::action('ColposcopiaController@index','searchidpaciente='.$paciente->idpaciente)}}">Colposcopia</a>
+                                  <a class="nav-link" href="{{URL::action('ColposcopiaController@index','searchidpaciente='.$paciente->idpaciente)}}">Colposcopia <span class="badge badge-info">{{ $totalColposcopias }}</span></a>
                               </li>
                               <li class="nav-item">
-                                    <a class="nav-link" href="{{URL::action('UltrasonidoObstetricoController@index','searchidpaciente='.$paciente->idpaciente)}}">Ultrasonido Obstetrico</a>
+                                  <a class="nav-link" href="{{URL::action('UltrasonidoObstetricoController@index','searchidpaciente='.$paciente->idpaciente)}}">Ultrasonido Obstetrico <span class="badge badge-info">{{ $totalUltrasonidos }}</span></a>
                               </li>
-                        </ul>
+                          </ul>
 
 
                         <div class="card">

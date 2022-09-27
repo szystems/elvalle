@@ -32,7 +32,7 @@ class UltrasonidoObstetricoController extends Controller
         ->join('paciente as p','uo.idpaciente','=','p.idpaciente')
         ->join('users as d','uo.iddoctor','=','d.id')
         ->join('users as u','uo.idusuario','=','u.id')
-        ->select('uo.idultrasonido_obstetrico_obstetrico','uo.fecha','uo.iddoctor','d.name as Doctor','d.especialidad','uo.idpaciente','p.nombre as Paciente','uo.idusuario','u.name as Usuario','u.tipo_usuario')
+        ->select('uo.idultrasonido_obstetrico','uo.fecha','uo.iddoctor','d.name as Doctor','d.especialidad','uo.idpaciente','p.nombre as Paciente','uo.idusuario','u.name as Usuario','u.tipo_usuario')
         ->where('uo.idpaciente','=',$idpaciente) 
         ->orderby('uo.fecha','desc')
         ->paginate(20);
@@ -52,7 +52,11 @@ class UltrasonidoObstetricoController extends Controller
         ->where('idpaciente','=',$idpaciente)
         ->first();
 
-    	return view("pacientes.historiales.ultrasonidos.create",["doctor"=>$doctor,"paciente"=>$paciente]);
+        $historia = DB::table('historia')
+        ->where('idpaciente','=',$idpaciente)
+        ->first();
+
+    	return view("pacientes.historiales.ultrasonidos.create",["doctor"=>$doctor,"paciente"=>$paciente,"historia"=>$historia]);
     }
 
     public function store (UltrasonidoObstetricoFormRequest $request)
@@ -123,7 +127,7 @@ class UltrasonidoObstetricoController extends Controller
         ->join('paciente as p','uo.idpaciente','=','p.idpaciente')
         ->join('users as d','uo.iddoctor','=','d.id')
         ->join('users as u','uo.idusuario','=','u.id')
-        ->select('uo.idultrasonido_obstetrico_obstetrico','uo.fecha','uo.iddoctor','d.name as Doctor','d.especialidad','uo.idpaciente','p.nombre as Paciente','uo.idusuario','u.name as Usuario','u.tipo_usuario')
+        ->select('uo.idultrasonido_obstetrico','uo.fecha','uo.iddoctor','d.name as Doctor','d.especialidad','uo.idpaciente','p.nombre as Paciente','uo.idusuario','u.name as Usuario','u.tipo_usuario')
         ->where('uo.idpaciente','=',$idpaciente) 
         ->orderby('uo.fecha','desc')
         ->paginate(20);
@@ -137,7 +141,7 @@ class UltrasonidoObstetricoController extends Controller
         ->join('paciente as p','uo.idpaciente','=','p.idpaciente')
         ->join('users as d','uo.iddoctor','=','d.id')
         ->join('users as u','uo.idusuario','=','u.id')
-        ->select('uo.idultrasonido_obstetrico','uo.fecha','uo.iddoctor','d.name as Doctor','d.especialidad','uo.idpaciente','p.nombre as Paciente','uo.idusuario','u.name as Usuario','u.tipo_usuario','uo.spp','uo.fcardaca_fetal','pubicacion','liquido_amniotico','utero_anexos','cervix','diametro_biparietal_medida','diametro_biparietal_semanas','circunferencia_cefalica_medida','circunferencia_cefalica_semanas','circunferencia_abdominal_medida','circunferencia_abdominal_semanas','longitud_femoral_medida','longitud_femoral_semanas','fetometria','peso_estimado','percentilo','comentarios','interpretacion','recomendaciones','observaciones')
+        ->select('uo.idultrasonido_obstetrico','uo.fecha','uo.iddoctor','d.name as Doctor','d.especialidad','uo.idpaciente','p.nombre as Paciente','uo.idusuario','u.name as Usuario','u.tipo_usuario','uo.spp','uo.fcardiaca_fetal','pubicacion','liquido_amniotico','utero_anexos','cervix','diametro_biparietal_medida','diametro_biparietal_semanas','circunferencia_cefalica_medida','circunferencia_cefalica_semanas','circunferencia_abdominal_medida','circunferencia_abdominal_semanas','longitud_femoral_medida','longitud_femoral_semanas','fetometria','peso_estimado','percentilo','comentarios','interpretacion','recomendaciones','observaciones')
         ->where('uo.idultrasonido_obstetrico','=',$id) 
         ->first();
 
@@ -149,7 +153,11 @@ class UltrasonidoObstetricoController extends Controller
         ->where('idultrasonido_obstetrico','=',$id) 
         ->get();
 
-        return view("pacientes.historiales.ultrasonidos.show",["ultrasonido"=>$ultrasonido,"paciente"=>$paciente,"ultrasonidoimgs"=>$ultrasonidoimgs]);
+        $historia = DB::table('historia')
+        ->where('idpaciente','=',$ultrasonido->idpaciente)
+        ->first();
+
+        return view("pacientes.historiales.ultrasonidos.show",["ultrasonido"=>$ultrasonido,"paciente"=>$paciente,"ultrasonidoimgs"=>$ultrasonidoimgs,"historia"=>$historia]);
     }
 
     public function edit($id)
@@ -158,16 +166,20 @@ class UltrasonidoObstetricoController extends Controller
         ->join('paciente as p','uo.idpaciente','=','p.idpaciente')
         ->join('users as d','uo.iddoctor','=','d.id')
         ->join('users as u','uo.idusuario','=','u.id')
-        ->select('uo.idultrasonido_obstetrico','uo.fecha','uo.iddoctor','d.name as Doctor','d.especialidad','uo.idpaciente','p.nombre as Paciente','uo.idusuario','u.name as Usuario','u.tipo_usuario','uo.spp','uo.fcardaca_fetal','pubicacion','liquido_amniotico','utero_anexos','cervix','diametro_biparietal_medida','diametro_biparietal_semanas','circunferencia_cefalica_medida','circunferencia_cefalica_semanas','circunferencia_abdominal_medida','circunferencia_abdominal_semanas','longitud_femoral_medida','longitud_femoral_semanas','fetometria','peso_estimado','percentilo','comentarios','interpretacion','recomendaciones','observaciones')
-        ->where('c.idultrasonido_obstetrico','=',$id) 
+        ->select('uo.idultrasonido_obstetrico','uo.fecha','uo.iddoctor','d.name as Doctor','d.especialidad','uo.idpaciente','p.nombre as Paciente','uo.idusuario','u.name as Usuario','u.tipo_usuario','uo.spp','uo.fcardiaca_fetal','pubicacion','liquido_amniotico','utero_anexos','cervix','diametro_biparietal_medida','diametro_biparietal_semanas','circunferencia_cefalica_medida','circunferencia_cefalica_semanas','circunferencia_abdominal_medida','circunferencia_abdominal_semanas','longitud_femoral_medida','longitud_femoral_semanas','fetometria','peso_estimado','percentilo','comentarios','interpretacion','recomendaciones','observaciones')
+        ->where('uo.idultrasonido_obstetrico','=',$id) 
         ->first();
 
         $paciente=DB::table('paciente')
         ->where('idpaciente','=',$ultrasonido->idpaciente)
         ->first();
+
+        $historia = DB::table('historia')
+        ->where('idpaciente','=',$ultrasonido->idpaciente)
+        ->first();
         
        
-        return view("pacientes.historiales.ultrasonidos.edit",["ultrasonido"=>$ultrasonido,"paciente"=>$paciente]);
+        return view("pacientes.historiales.ultrasonidos.edit",["ultrasonido"=>$ultrasonido,"paciente"=>$paciente,"historia"=>$historia]);
     }
 
 
@@ -230,8 +242,8 @@ class UltrasonidoObstetricoController extends Controller
         ->join('paciente as p','uo.idpaciente','=','p.idpaciente')
         ->join('users as d','uo.iddoctor','=','d.id')
         ->join('users as u','uo.idusuario','=','u.id')
-        ->select('uo.idultrasonido_obstetrico','uo.fecha','uo.iddoctor','d.name as Doctor','d.especialidad','uo.idpaciente','p.nombre as Paciente','uo.idusuario','u.name as Usuario','u.tipo_usuario','uo.spp','uo.fcardaca_fetal','pubicacion','liquido_amniotico','utero_anexos','cervix','diametro_biparietal_medida','diametro_biparietal_semanas','circunferencia_cefalica_medida','circunferencia_cefalica_semanas','circunferencia_abdominal_medida','circunferencia_abdominal_semanas','longitud_femoral_medida','longitud_femoral_semanas','fetometria','peso_estimado','percentilo','comentarios','interpretacion','recomendaciones','observaciones')
-        ->where('c.idultrasonido_obstetrico','=',$id) 
+        ->select('uo.idultrasonido_obstetrico','uo.fecha','uo.iddoctor','d.name as Doctor','d.especialidad','uo.idpaciente','p.nombre as Paciente','uo.idusuario','u.name as Usuario','u.tipo_usuario','uo.spp','uo.fcardiaca_fetal','pubicacion','liquido_amniotico','utero_anexos','cervix','diametro_biparietal_medida','diametro_biparietal_semanas','circunferencia_cefalica_medida','circunferencia_cefalica_semanas','circunferencia_abdominal_medida','circunferencia_abdominal_semanas','longitud_femoral_medida','longitud_femoral_semanas','fetometria','peso_estimado','percentilo','comentarios','interpretacion','recomendaciones','observaciones')
+        ->where('uo.idultrasonido_obstetrico','=',$id) 
         ->first();
 
         $paciente=DB::table('paciente')
@@ -242,7 +254,11 @@ class UltrasonidoObstetricoController extends Controller
         ->where('idultrasonido_obstetrico','=',$id) 
         ->get();
 
-        return view("pacientes.historiales.ultrasonidos.show",["ultrasonido"=>$ultrasonido,"paciente"=>$paciente,"ultrasonidoimgs"=>$ultrasonidoimgs]);
+        $historia = DB::table('historia')
+        ->where('idpaciente','=',$ultrasonido->idpaciente)
+        ->first();
+
+        return view("pacientes.historiales.ultrasonidos.show",["ultrasonido"=>$ultrasonido,"paciente"=>$paciente,"ultrasonidoimgs"=>$ultrasonidoimgs,"historia"=>$historia]);
     }
 
     public function eliminarultrasonido(Request $request)
@@ -260,7 +276,7 @@ class UltrasonidoObstetricoController extends Controller
         ->join('paciente as p','uo.idpaciente','=','p.idpaciente')
         ->join('users as d','uo.iddoctor','=','d.id')
         ->join('users as u','uo.idusuario','=','u.id')
-        ->select('uo.idultrasonido_obstetrico_obstetrico','uo.fecha','uo.iddoctor','d.name as Doctor','d.especialidad','uo.idpaciente','p.nombre as Paciente','uo.idusuario','u.name as Usuario','u.tipo_usuario')
+        ->select('uo.idultrasonido_obstetrico','uo.fecha','uo.iddoctor','d.name as Doctor','d.especialidad','uo.idpaciente','p.nombre as Paciente','uo.idusuario','u.name as Usuario','u.tipo_usuario')
         ->where('uo.idpaciente','=',$idpaciente) 
         ->orderby('uo.fecha','desc')
         ->paginate(20);

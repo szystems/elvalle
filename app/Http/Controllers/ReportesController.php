@@ -2667,5 +2667,73 @@ class ReportesController extends Controller
         
     }
 
+    public function vistaultrasonido(ReportesFormRequest $rrequest)
+    {  
+            if ($rrequest)
+            {
+                
+                $nombreusu = Auth::user()->name;
+                $empresa = Auth::user()->empresa;
+                $moneda = Auth::user()->moneda;
+                if (Auth::user()->logo == null)
+                {
+                    $logo = null;
+                    $imagen = null;
+                }
+                else
+                {
+                     $logo = Auth::user()->logo;
+                     $imagen = public_path('imagenes/logos/'.$logo);
+                     
+                }
+                $path = public_path('imagenes/ultrasonidos/');
+                $verpdf=trim($rrequest->get('pdf'));
+                $idultrasonido=trim($rrequest->get('rid'));
+                $idpaciente=trim($rrequest->get('ridpaciente'));
+
+                $zona_horaria = Auth::user()->zona_horaria;
+                $hoy = Carbon::now($zona_horaria);
+                $hoy = $hoy->format('d-m-Y');
+
+                $nompdf = Carbon::now($zona_horaria);
+                $nompdf = $nompdf->format('Y-m-d H:i:s');
+
+                $ultrasonido=DB::table('ultrasonido_obstetrico as uo')
+                ->join('paciente as p','uo.idpaciente','=','p.idpaciente')
+                ->join('users as d','uo.iddoctor','=','d.id')
+                ->join('users as u','uo.idusuario','=','u.id')
+                ->select('uo.idultrasonido_obstetrico','uo.fecha','uo.iddoctor','d.name as Doctor','d.especialidad','uo.idpaciente','p.nombre as Paciente','uo.idusuario','u.name as Usuario','u.tipo_usuario','uo.spp','uo.fcardiaca_fetal','pubicacion','liquido_amniotico','utero_anexos','cervix','diametro_biparietal_medida','diametro_biparietal_semanas','circunferencia_cefalica_medida','circunferencia_cefalica_semanas','circunferencia_abdominal_medida','circunferencia_abdominal_semanas','longitud_femoral_medida','longitud_femoral_semanas','fetometria','peso_estimado','percentilo','comentarios','interpretacion','recomendaciones','observaciones')
+                ->where('uo.idultrasonido_obstetrico','=',$idultrasonido) 
+                ->first();
+
+                $paciente=DB::table('paciente')
+                ->where('idpaciente','=',$idpaciente)
+                ->first();
+
+                $ultrasonidoimgs=DB::table('ultrasonido_obstetrico_img')
+                ->where('idultrasonido_obstetrico','=',$idultrasonido) 
+                ->get();
+
+                
+                if ( $verpdf == "Descargar" )
+                {
+                    $view = \View::make('pdf.ultrasonidos.vistaultrasonido', compact('ultrasonido','paciente','ultrasonidoimgs','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
+                    $pdf = \App::make('dompdf.wrapper');
+                    $pdf->loadHTML($view);
+                    //$pdf->setPaper('A4', 'landscape');
+                    return $pdf->download ('VistaUltrasonidoObstetrico'.'-'.$paciente->nombre.'-'.$ultrasonido->fecha.'-'.$nompdf.'.pdf');
+                }
+                if ( $verpdf == "Navegador" )
+                {
+                    $view = \View::make('pdf.ultrasonidos.vistaultrasonido', compact('ultrasonido','paciente','ultrasonidoimgs','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
+                    $pdf = \App::make('dompdf.wrapper');
+                    $pdf->loadHTML($view);
+                    //$pdf->setPaper('A4', 'landscape');
+                    return $pdf->stream ('VistaUltrasonidoObstetrico'.'-'.$paciente->nombre.'-'.$ultrasonido->fecha.'-'.$nompdf.'.pdf');
+                }
+            }
+        
+    }
+
     
 }

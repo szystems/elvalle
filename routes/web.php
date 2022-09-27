@@ -61,7 +61,7 @@ Route::get('pacientes/historiales/recetas/editar', 'RecetaController@editarmedic
 Route::get('pacientes/historiales/recetas/agregar', 'RecetaController@agregar');
 Route::get('pacientes/historiales/recetas/eliminar', 'RecetaController@eliminarreceta');
 Route::get('pacientes/historiales/fisicos/eliminar', 'FisicoController@eliminarfisico');
-Route::get('pacientes/historiales/ultrasonidos/eliminar', 'UltrasonidoObstetricoImgController@eliminarultrasonido');
+Route::get('pacientes/historiales/ultrasonidos/eliminar', 'UltrasonidoObstetricoController@eliminarultrasonido');
 Route::get('pacientes/historiales/colposcopias/eliminar', 'ColposcopiaController@eliminarcolposcopia');
 Route::get('pacientes/historiales/embarazos/eliminar', 'EmbarazoController@eliminarembarazo');
 Route::get('pacientes/historiales/embarazos/controles/eliminar', 'ControlController@eliminarcontrol');
@@ -79,14 +79,14 @@ Route::get('pacientes/historiales/incontinencias/eliminar', 'IncontinenciauContr
 
 Route::get('pacientes/historiales/fisicos/imagenes/eliminar', 'FisicoImgController@eliminarimagen');
 Route::resource('pacientes/historiales/fisicos/imagenes','FisicoImgController');
-Route::get('pacientes/historiales/ultrasonidos/imagenes/eliminar', 'UltrasonidoObstetricoImgController@eliminarimagen');
-Route::resource('pacientes/historiales/ultrasonidos/imagenes','UltrasonidoObstetricoImgController');
 Route::get('pacientes/historiales/embarazos/imagenes/eliminar', 'EmbarazoImgController@eliminarimagen');
 Route::resource('pacientes/historiales/embarazos/imagenes','EmbarazoImgController');
 Route::get('pacientes/historiales/climaymenos/imagenes/eliminar', 'ClimaymenoImgController@eliminarimagen');
 Route::resource('pacientes/historiales/climaymenos/imagenes','ClimaymenoImgController');
 Route::get('pacientes/historiales/colposcopias/imagenes/eliminar', 'ColposcopiaImgController@eliminarimagen');
 Route::resource('pacientes/historiales/colposcopias/imagenes','ColposcopiaImgController');
+Route::get('pacientes/historiales/ultrasonidos/imagenes/eliminar', 'UltrasonidoObstetricoImgController@eliminarimagen');
+Route::resource('pacientes/historiales/ultrasonidos/imagenes','UltrasonidoObstetricoImgController');
 
 //historiales
 Route::resource('pacientes/historiales/historias','HistoriaController');
