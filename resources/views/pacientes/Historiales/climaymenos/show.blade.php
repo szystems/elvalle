@@ -107,7 +107,7 @@
         
                     <header class="card-header">
                         <h2 class="h3 card-header-title"><strong>Estudio de climaterio y menopausea: </strong></h2>
-                        @if(Auth::user()->tipo_usuario != "Administrador")
+                        @if(Auth::user()->tipo_usuario == "Doctor")
                             <a href="" data-target="#modal-eliminar-{{$climaymeno->idclimaymeno}}" data-toggle="modal">
                                 <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Eliminar Estudio">
                                     <button class="btn btn-sm btn-danger" style="pointer-events: none;" type="button">
@@ -194,7 +194,7 @@
                             <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                 <div class="form-group">
                                     <label for="doctor"><h2><strong><u>Controles</u></strong></h2></label>
-                                    @if(Auth::user()->tipo_usuario != "Administrador")
+                                    @if(Auth::user()->tipo_usuario == "Doctor")
                                         <a href="controles/create?idclimaymeno={{$climaymeno->idclimaymeno}}">
                                             <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Agregar Control ">
                                                 <button class="btn btn-sm btn-success" style="pointer-events: none;" type="button">
@@ -215,7 +215,7 @@
                                                 @foreach ($controles as $control)
                                                     <td align="left">
                                                         <u><h2> #{{ $control->numero_control }}</h2></u> 
-                                                        @if(Auth::user()->tipo_usuario != "Administrador")
+                                                        @if(Auth::user()->tipo_usuario == "Doctor")
                                                             <a href="{{URL::action('ClimaymenoControlController@edit',$control->idclimaymeno_control)}}">
                                                                 <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar Control">
                                                                     <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button"><i class="far fa-edit"></i> </button>
@@ -595,7 +595,7 @@
                             <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                 <div class="form-group">
                                       <label for="datos"><strong><u>Imagenes de climaterio y menopausea({{ $climaymenoimgs->count() }})</u></strong></label>
-                                      @if(Auth::user()->tipo_usuario != "Administrador")
+                                      @if(Auth::user()->tipo_usuario == "Doctor")
                                         <a href="{{URL::action('ClimaymenoImgController@index','searchidclimaymeno='.$climaymeno->idclimaymeno)}}">
                                             <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar Imagenes">
                                                 <button class="btn btn-sm btn-warning" style="pointer-events: none;" type="button">

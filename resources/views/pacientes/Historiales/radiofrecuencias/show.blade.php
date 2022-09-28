@@ -107,7 +107,7 @@
         
                     <header class="card-header">
                         <h2 class="h3 card-header-title"><strong>Radiofrecuencia: </strong></h2>
-                        @if(Auth::user()->tipo_usuario != "Administrador")
+                        @if(Auth::user()->tipo_usuario == "Doctor")
                             <a href="" data-target="#modal-eliminar-{{$radiofrecuencia->idradiofrecuencia}}" data-toggle="modal">
                                 <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Eliminar Radiofrecuencia">
                                     <button class="btn btn-sm btn-danger" style="pointer-events: none;" type="button">
@@ -161,7 +161,7 @@
                             </div>
                             <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                 <div class="form-group">
-                                    @if(Auth::user()->tipo_usuario != "Administrador")
+                                    @if(Auth::user()->tipo_usuario == "Doctor")
                                         <a href="{{URL::action('RadiofrecuenciaController@edit',$radiofrecuencia->idradiofrecuencia)}}">
                                             <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar radiofrecuencia">
                                                 <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button"><i class="far fa-edit"></i> Editar</button>
@@ -282,7 +282,7 @@
                             <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                 <div class="form-group">
                                     <label for="doctor"><h2><strong><u>Sesiones Radiofrecuencia</u></strong></h2></label>
-                                    @if(Auth::user()->tipo_usuario != "Administrador")
+                                    @if(Auth::user()->tipo_usuario == "Doctor")
                                         <a href="sesiones/create?idradiofrecuencia={{$radiofrecuencia->idradiofrecuencia}}">
                                             <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Agregar sesion ">
                                                 <button class="btn btn-sm btn-success" style="pointer-events: none;" type="button">
@@ -303,7 +303,7 @@
                                                 @foreach ($sesiones as $sesion)
                                                     <td align="left">
                                                         <u><h2> #{{ $sesion->numero_sesion }}</h2></u> 
-                                                        @if(Auth::user()->tipo_usuario != "Administrador")
+                                                        @if(Auth::user()->tipo_usuario == "Doctor")
                                                             <a href="{{URL::action('RadiofrecuenciaSesionController@edit',$sesion->idradiofrecuencia_sesion)}}">
                                                                 <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar sesion">
                                                                     <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button"><i class="far fa-edit"></i> </button>
@@ -510,7 +510,7 @@
                             <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                 <div class="form-group">
                                     <label for="doctor"><h2><strong><u>Sesiones Fotomodulacion</u></strong></h2></label>
-                                    @if(Auth::user()->tipo_usuario != "Administrador")
+                                    @if(Auth::user()->tipo_usuario == "Doctor")
                                         <a href="fotomodulaciones/create?idradiofrecuencia={{$radiofrecuencia->idradiofrecuencia}}">
                                             <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Agregar sesion ">
                                                 <button class="btn btn-sm btn-success" style="pointer-events: none;" type="button">
@@ -531,7 +531,7 @@
                                                 @foreach ($sesionesFotomodulacion as $sesionFotomodulacion)
                                                     <td align="left">
                                                         <u><h2> #{{ $sesionFotomodulacion->numero_sesion }}</h2></u> 
-                                                        @if(Auth::user()->tipo_usuario != "Administrador")
+                                                        @if(Auth::user()->tipo_usuario == "Doctor")
                                                             <a href="{{URL::action('RadiofrecuenciaFotomodulacionController@edit',$sesionFotomodulacion->idradiofrecuencia_fotomodulacion)}}">
                                                                 <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar sesion">
                                                                     <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button"><i class="far fa-edit"></i> </button>

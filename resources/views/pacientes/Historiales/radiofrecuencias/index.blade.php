@@ -108,7 +108,7 @@
                     <header class="card-header">
                         <h2 class="h3 card-header-title"><strong>Nueva Radiofrecuencia: </strong></h2>
 
-                        @if(Auth::user()->tipo_usuario != "Administrador")
+                        @if(Auth::user()->tipo_usuario == "Doctor")
                         
                         {!!Form::open(array('url'=>'pacientes/historiales/radiofrecuencias','method'=>'POST','autocomplete'=>'off'))!!}
                         {{Form::token()}}
@@ -157,7 +157,7 @@
                                                     </button>
                                                 </span>
                                             </a>
-                                            @if(Auth::user()->tipo_usuario != "Administrador")
+                                            @if(Auth::user()->tipo_usuario == "Doctor")
                                                 <a href="" data-target="#modal-eliminar-{{$radiofrecuencia->idradiofrecuencia}}" data-toggle="modal">
                                                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Eliminar Radiofrecuencia">
                                                         <button class="btn btn-sm btn-danger" style="pointer-events: none;" type="button">

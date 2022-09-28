@@ -142,7 +142,7 @@
 
                     {{ Form::close() }}
                     <div class="card-body">
-                        @if (Auth::user()->tipo_usuario != 'Administrador')
+                        @if (Auth::user()->tipo_usuario == "Doctor")
                             <a href="" data-target="#modal-eliminar-{{ $ultrasonido->idultrasonido_obstetrico }}"
                                 data-toggle="modal">
                                 <span class="d-inline-block" tabindex="0" data-toggle="tooltip"
@@ -583,7 +583,7 @@
                         <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                             <div class="form-group">
                                 <label for="datos"><strong><u>Imagenes de ultrasonido obstetrico({{ $ultrasonidoimgs->count() }})</u></strong></label>
-                                @if (Auth::user()->tipo_usuario != 'Administrador')
+                                @if (Auth::user()->tipo_usuario == "Doctor")
                                     <a href="{{ URL::action('UltrasonidoObstetricoImgController@index', 'searchidultrasonido=' . $ultrasonido->idultrasonido_obstetrico) }}">
                                         <span class="d-inline-block" tabindex="0" data-toggle="tooltip"
                                             title="Editar Imagenes">

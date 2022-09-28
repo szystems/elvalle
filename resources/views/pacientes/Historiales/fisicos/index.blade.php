@@ -107,7 +107,7 @@
         
                     <header class="card-header">
                         <h2 class="h3 card-header-title"><strong>Listado de Examenes Fisicos: </strong></h2>
-                        @if(Auth::user()->tipo_usuario != "Administrador")
+                        @if(Auth::user()->tipo_usuario == "Doctor")
                         <a href="fisicos/create?idpaciente={{$paciente->idpaciente}}">
                             <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Nuevo examen fisico ">
                                 <button class="btn btn-sm btn-success" style="pointer-events: none;" type="button">
@@ -139,7 +139,7 @@
                                                     </button>
                                                 </span>
                                             </a>
-                                            @if(Auth::user()->tipo_usuario != "Administrador")
+                                            @if(Auth::user()->tipo_usuario == "Doctor")
                                                 <a href="{{URL::action('FisicoController@edit',$fisico->idfisico)}}">
                                                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar examen fisico">
                                                         <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button">

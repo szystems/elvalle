@@ -106,7 +106,7 @@
                 <div class="card">
         
                     <header class="card-header">
-                        @if(Auth::user()->tipo_usuario != "Administrador")
+                        @if(Auth::user()->tipo_usuario == "Doctor")
                         <h2 class="h3 card-header-title"><strong>Nuevo Embarazo: </strong></h2>
                         
                         {!!Form::open(array('url'=>'pacientes/historiales/embarazos','method'=>'POST','autocomplete'=>'off'))!!}
@@ -167,7 +167,7 @@
                                                     </button>
                                                 </span>
                                             </a>
-                                            @if(Auth::user()->tipo_usuario != "Administrador")
+                                            @if(Auth::user()->tipo_usuario == "Doctor")
                                                 <a href="" data-target="#modal-eliminar-{{$embarazo->idembarazo}}" data-toggle="modal">
                                                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Eliminar Embarazo">
                                                         <button class="btn btn-sm btn-danger" style="pointer-events: none;" type="button">

@@ -142,7 +142,7 @@
                             
                         {{Form::close()}}
                     <div class="card-body">	
-                        @if(Auth::user()->tipo_usuario != "Administrador")	
+                        @if(Auth::user()->tipo_usuario == "Doctor")	
                             <a href="" data-target="#modal-eliminar-{{$colposcopia->idcolposcopia}}" data-toggle="modal">
                                 <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Eliminar examen colposcopia">
                                     <button class="btn btn-sm btn-danger" style="pointer-events: none;" type="button">
@@ -448,7 +448,7 @@
                             <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                               <div class="form-group">
                                     <label for="datos"><strong><u>Imagenes de examen colposcopia({{ $colposcopiaimgs->count() }})</u></strong></label>
-                                    @if(Auth::user()->tipo_usuario != "Administrador")
+                                    @if(Auth::user()->tipo_usuario == "Doctor")
                                     <a href="{{URL::action('ColposcopiaImgController@index','searchidcolposcopia='.$colposcopia->idcolposcopia)}}">
                                           <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar Imagenes">
                                               <button class="btn btn-sm btn-warning" style="pointer-events: none;" type="button">
