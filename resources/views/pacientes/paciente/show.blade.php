@@ -47,7 +47,14 @@
                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar Paciente">
                         <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button"><i class="far fa-edit"></i> Editar</button>
                     </span>
-                </a>		
+                </a>	
+                <a href="{{URL::action('HistorialController@show',$paciente->idpaciente)}}">
+                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Ver Historial">
+                            <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button">
+                                <i class="far fa-address-card"></i> Historial
+                            </button>
+                    </span>
+                </a>	
                 <a href="" data-target="#modaleliminarshow-delete-{{$paciente->idpaciente}}" data-toggle="modal">
                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Eliminar Doctor">
                         <button class="btn btn-sm btn-danger" style="pointer-events: none;" type="button"><i class="far fa-minus-square"></i> Eliminar</button>

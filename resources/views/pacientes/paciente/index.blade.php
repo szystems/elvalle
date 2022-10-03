@@ -105,6 +105,13 @@
                                           </button>
                                     </span>
                               	</a>
+								<a href="{{URL::action('HistorialController@show',$pac->idpaciente)}}">
+									<span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Ver Historial">
+											<button class="btn btn-sm btn-info" style="pointer-events: none;" type="button">
+												<i class="far fa-address-card"></i>
+											</button>
+									</span>
+								</a>
 								<a href="" data-target="#modal-delete-{{$pac->idpaciente}}" data-toggle="modal">
 									<span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Eliminar Paciente">
 										<button class="btn btn-sm btn-danger" style="pointer-events: none;" type="button">
