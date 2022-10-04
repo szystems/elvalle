@@ -50,8 +50,8 @@
 				$fecha = date("d-m-Y", strtotime($ultrasonido->fecha));
 			?>
 			<strong>Fecha:</strong><font color="Blue"> <strong>{{ $fecha}} </strong></font>
-			<br><strong>Doctor:</strong><font color="Blue"> <strong>{{ $ultrasonido->Paciente}}<strong></font>
-			<br><strong>Paciente:</strong><font color="Blue"> <strong>{{ $ultrasonido->Doctor}} ({{ $ultrasonido->especialidad }})<strong></font>
+			<br><strong>Doctor:</strong><font color="Blue"> <strong>{{ $ultrasonido->Doctor}} ({{ $ultrasonido->especialidad }})<strong></font>
+			<br><strong>Paciente:</strong><font color="Blue"> <strong>{{ $ultrasonido->Paciente}}<strong></font>
 			
 		</h6>
 		<div style="text-align:center;">
@@ -72,6 +72,56 @@
 				<td><p align="left"><font color="black">{{$fecha_nacimiento}} (Edad: {{$edad}})</font></p></td>
 			</tr>
 		</table>
+		</div>
+
+		<div style="text-align:center;">
+			<table>
+				<tr>
+					<th colspan="2" ><b><u><p align="center"> Antecedentes:</p></u></b></th>
+				</tr>
+				<tr>
+                                                                  
+					<td><strong>Gestas</strong></td>
+					<td align="center">{{ $historia->gestas }}</td>
+				</tr>
+				<tr>
+					<td><strong>Hijos Vivos</strong></td>
+					<td align="center">{{ $historia->hijos_vivos }}</td>
+				</tr>
+				<tr>
+					<td><strong>Hijos Muertos</strong></td>
+					<td align="center">{{ $historia->hijos_muertos }}</td>
+				</tr>
+				<tr>
+					<td><strong>Abortos</strong></td>
+					<td align="center">{{ $historia->abortos }}</td>
+				</tr>
+				<tr>
+				  <?php
+					  $fur = date("d-m-Y", strtotime($historia->fur));
+				  ?>
+				  <td><strong>FUR</strong></td>
+				  <td align="center">
+					  @if ($fur != '01-01-1970')
+						  {{ $fur }}
+					  @endif
+					  
+				  </td>
+				</tr>
+				<tr>
+					<?php
+						$fechaParto = date("d-m-Y", strtotime($historia->fur));
+						$fechaParto = date("d-m-Y", strtotime($fechaParto.'+ 280 days'));
+					?>
+					<td><strong>FPP</strong></td>
+					<td align="center">
+						@if ($fur != '01-01-1970')
+						{{ $fechaParto }}
+						@endif
+					</td>
+				</tr>
+
+			</table>
 		</div>
 
 		<h4><strong><u>Reporte de Ultrasonido Obstetrico</u></strong></h4>
@@ -219,18 +269,105 @@
 					<td colspan="2"><strong>Interpretación:</strong></td>
 				</tr>
 				<tr>
-					<td colspan="2">
-						<p>1. Embarazo único intrauterino.</p>
-						<p>2. Tamiz de alteraciones del crecimiento de bajo riesgo al momento
-							del estudio.</p>
-						<p>3. Tamiz de alteraciones de la frecuencia cardiaca fetal de bajo
-							riesgo al momento del estudio.</p>
-						<p>4. Tamiz de placenta de bajo riesgo al momento del estudio.</p>
-						<p>5. Tamiz de liquido amniótico de bajo riesgo al momento del estudio.
-						</p>
-						<p>6. Tamiz de parto prematuro de bajo riesgo al momento del estudio.
-						</p>
-
+					<td >
+						  1. Embarazo único intrauterino.
+					</td>
+					<td>
+						  @if ($ultrasonido->embarazo_unico == 1)
+								<div class="primary-checkbox">
+									  <input type="checkbox" name="embarazo_unico" checked disabled>
+								</div>
+						  @else
+								<div class="primary-checkbox">
+									  <input type="checkbox" name="embarazo_unico" disabled>
+								</div>
+						  @endif
+						  {{ $ultrasonido->embarazo_unico_comentar }}
+					</td>
+				</tr>
+				<tr>
+					<td >
+						  2. Tamiz de alteraciones del crecimiento de bajo riesgo al momento del estudio.
+					</td>
+					<td>
+						  @if ($ultrasonido->alteraciones_crecimiento == 1)
+								<div class="primary-checkbox">
+									  <input type="checkbox" name="alteraciones_crecimiento" checked disabled>
+								</div>
+						  @else
+								<div class="primary-checkbox">
+									  <input type="checkbox" name="alteraciones_crecimiento" disabled>
+								</div>
+						  @endif
+						  {{ $ultrasonido->alteraciones_crecimiento_comentar }}
+					</td>
+				</tr>
+				<tr>
+					<td >
+						  3. Tamiz de alteraciones de la frecuencia cardiaca fetal de bajo riesgo al momento del estudio.
+					</td>
+					<td>
+						  @if ($ultrasonido->alteraciones_frecuencia == 1)
+								<div class="primary-checkbox">
+									  <input type="checkbox" name="alteraciones_frecuencia" checked disabled>
+								</div>
+						  @else
+								<div class="primary-checkbox">
+									  <input type="checkbox" name="alteraciones_frecuencia" disabled>
+								</div>
+						  @endif
+						  {{ $ultrasonido->alteraciones_frecuencia_comentar }}
+					</td>
+				</tr>
+				<tr>
+					<td >
+						  4. Tamiz de placenta de bajo riesgo al momento del estudio.
+					</td>
+					<td>
+						  @if ($ultrasonido->placenta == 1)
+								<div class="primary-checkbox">
+									  <input type="checkbox" name="placenta" checked disabled>
+								</div>
+						  @else
+								<div class="primary-checkbox">
+									  <input type="checkbox" name="placenta" disabled>
+								</div>
+						  @endif
+						  {{ $ultrasonido->placenta_comentar }}
+					</td>
+				</tr>
+				<tr>
+					<td >
+						  5. Tamiz de liquido amniótico de bajo riesgo al momento del estudio.
+					</td>
+					<td>
+						  @if ($ultrasonido->liquido == 1)
+								<div class="primary-checkbox">
+									  <input type="checkbox" name="liquido" disabled checked>
+								</div>
+						  @else
+								<div class="primary-checkbox">
+									  <input type="checkbox" name="liquido" disabled>
+								</div>
+						  @endif
+						  {{ $ultrasonido->liquido_comentar }}
+					</td>
+				</tr>
+				<tr>
+					<td >
+						  6. Tamiz de parto prematuro de bajo riesgo al momento del estudio.
+					</td>
+					<td>
+						  @if ($ultrasonido->prematuro == 1)
+								<div class="primary-checkbox">
+									  <input type="checkbox" name="prematuro" checked disabled>
+								</div>
+						  @else
+								<div class="primary-checkbox">
+									  <input type="checkbox" name="prematuro" disabled>
+								</div>
+						  @endif
+						  {{ $ultrasonido->prematuro_comentar }}
 					</td>
 				</tr>
 				<tr>
@@ -241,6 +378,7 @@
 						{{ $ultrasonido->recomendaciones }}
 					</td>
 				</tr>
+				@if($ultrasonido->observaciones == 1)
 				<tr>
 					<td colspan="2"><strong>Observaciones:</strong></td>
 				</tr>
@@ -256,8 +394,18 @@
 
 					</td>
 				</tr>
+				@endif
 			  
 			</table>
+		</div>
+
+		<div>
+			<br><br><br>
+			<h5 align="center">_____________________________</h5>
+			<h5 align="center">Dr. {{ $ultrasonido->Doctor }}</h5>
+			<h5 align="center">{{ $ultrasonido->especialidad }}</h5>
+			<h5 align="center">No.Colegiado: {{ $ultrasonido->no_colegiado }}</h5>
+			
 		</div>
 
 		<div style="text-align:center;">

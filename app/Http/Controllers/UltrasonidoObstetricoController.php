@@ -68,6 +68,24 @@ class UltrasonidoObstetricoController extends Controller
             $iddoctor=$request->get('iddoctor');
             $idpaciente=$request->get('idpaciente');
             $idusuario=$request->get('idusuario');
+
+            $embarazo_unico=$request->get('embarazo_unico');
+            $alteraciones_crecimiento=$request->get('alteraciones_crecimiento');
+            $alteraciones_frecuencia=$request->get('alteraciones_frecuencia');
+            $placenta=$request->get('placenta');
+            $liquido=$request->get('liquido');
+            $prematuro=$request->get('prematuro');
+            $observaciones=$request->get('observaciones');
+
+            //verificando valores de checks
+            if($embarazo_unico == null){$embarazo_unico = 0;}
+            if($alteraciones_crecimiento == null){$alteraciones_crecimiento = 0;}
+            if($alteraciones_frecuencia == null){$alteraciones_frecuencia = 0;}
+            if($placenta == null){$placenta = 0;}
+            if($liquido == null){$liquido = 0;}
+            if($prematuro == null){$prematuro = 0;}
+            if($observaciones == null){$observaciones = 0;}
+
             
 
     		DB::beginTransaction();
@@ -98,7 +116,20 @@ class UltrasonidoObstetricoController extends Controller
             $ultrasonido->comentarios=$request->get('comentarios');
             $ultrasonido->interpretacion=$request->get('interpretacion');
             $ultrasonido->recomendaciones=$request->get('recomendaciones');
-            $ultrasonido->observaciones=$request->get('observaciones');
+            $ultrasonido->observaciones=$observaciones;
+            $ultrasonido->embarazo_unico=$embarazo_unico;
+            $ultrasonido->embarazo_unico_comentar=$request->get('embarazo_unico_comentar');
+            $ultrasonido->alteraciones_crecimiento=$alteraciones_crecimiento;
+            $ultrasonido->alteraciones_crecimiento_comentar=$request->get('alteraciones_crecimiento_comentar');
+            $ultrasonido->alteraciones_frecuencia=$alteraciones_frecuencia;
+            $ultrasonido->alteraciones_frecuencia_comentar=$request->get('alteraciones_frecuencia_comentar');
+            $ultrasonido->placenta=$placenta;
+            $ultrasonido->placenta_comentar=$request->get('placenta_comentar');
+            $ultrasonido->liquido=$liquido;
+            $ultrasonido->liquido_comentar=$request->get('liquido_comentar');
+            $ultrasonido->prematuro=$prematuro;
+            $ultrasonido->prematuro_comentar=$request->get('prematuro_comentar');
+            
     		$ultrasonido->save();
 
             $cli=DB::table('paciente')->where('idpaciente','=',$ultrasonido->idpaciente)->first();
@@ -141,7 +172,7 @@ class UltrasonidoObstetricoController extends Controller
         ->join('paciente as p','uo.idpaciente','=','p.idpaciente')
         ->join('users as d','uo.iddoctor','=','d.id')
         ->join('users as u','uo.idusuario','=','u.id')
-        ->select('uo.idultrasonido_obstetrico','uo.fecha','uo.iddoctor','d.name as Doctor','d.especialidad','uo.idpaciente','p.nombre as Paciente','uo.idusuario','u.name as Usuario','u.tipo_usuario','uo.spp','uo.fcardiaca_fetal','pubicacion','liquido_amniotico','utero_anexos','cervix','diametro_biparietal_medida','diametro_biparietal_semanas','circunferencia_cefalica_medida','circunferencia_cefalica_semanas','circunferencia_abdominal_medida','circunferencia_abdominal_semanas','longitud_femoral_medida','longitud_femoral_semanas','fetometria','peso_estimado','percentilo','comentarios','interpretacion','recomendaciones','observaciones')
+        ->select('uo.idultrasonido_obstetrico','uo.fecha','uo.iddoctor','d.name as Doctor','d.especialidad','uo.idpaciente','p.nombre as Paciente','uo.idusuario','u.name as Usuario','u.tipo_usuario','uo.spp','uo.fcardiaca_fetal','pubicacion','liquido_amniotico','utero_anexos','cervix','diametro_biparietal_medida','diametro_biparietal_semanas','circunferencia_cefalica_medida','circunferencia_cefalica_semanas','circunferencia_abdominal_medida','circunferencia_abdominal_semanas','longitud_femoral_medida','longitud_femoral_semanas','fetometria','peso_estimado','percentilo','comentarios','interpretacion','recomendaciones','observaciones','embarazo_unico','embarazo_unico_comentar','alteraciones_crecimiento','alteraciones_crecimiento_comentar','alteraciones_frecuencia','alteraciones_frecuencia_comentar','placenta','placenta_comentar','liquido','liquido_comentar','prematuro','prematuro_comentar')
         ->where('uo.idultrasonido_obstetrico','=',$id) 
         ->first();
 
@@ -166,7 +197,7 @@ class UltrasonidoObstetricoController extends Controller
         ->join('paciente as p','uo.idpaciente','=','p.idpaciente')
         ->join('users as d','uo.iddoctor','=','d.id')
         ->join('users as u','uo.idusuario','=','u.id')
-        ->select('uo.idultrasonido_obstetrico','uo.fecha','uo.iddoctor','d.name as Doctor','d.especialidad','uo.idpaciente','p.nombre as Paciente','uo.idusuario','u.name as Usuario','u.tipo_usuario','uo.spp','uo.fcardiaca_fetal','pubicacion','liquido_amniotico','utero_anexos','cervix','diametro_biparietal_medida','diametro_biparietal_semanas','circunferencia_cefalica_medida','circunferencia_cefalica_semanas','circunferencia_abdominal_medida','circunferencia_abdominal_semanas','longitud_femoral_medida','longitud_femoral_semanas','fetometria','peso_estimado','percentilo','comentarios','interpretacion','recomendaciones','observaciones')
+        ->select('uo.idultrasonido_obstetrico','uo.fecha','uo.iddoctor','d.name as Doctor','d.especialidad','uo.idpaciente','p.nombre as Paciente','uo.idusuario','u.name as Usuario','u.tipo_usuario','uo.spp','uo.fcardiaca_fetal','pubicacion','liquido_amniotico','utero_anexos','cervix','diametro_biparietal_medida','diametro_biparietal_semanas','circunferencia_cefalica_medida','circunferencia_cefalica_semanas','circunferencia_abdominal_medida','circunferencia_abdominal_semanas','longitud_femoral_medida','longitud_femoral_semanas','fetometria','peso_estimado','percentilo','comentarios','interpretacion','recomendaciones','observaciones','embarazo_unico','embarazo_unico_comentar','alteraciones_crecimiento','alteraciones_crecimiento_comentar','alteraciones_frecuencia','alteraciones_frecuencia_comentar','placenta','placenta_comentar','liquido','liquido_comentar','prematuro','prematuro_comentar')
         ->where('uo.idultrasonido_obstetrico','=',$id) 
         ->first();
 
@@ -190,6 +221,23 @@ class UltrasonidoObstetricoController extends Controller
         $iddoctor=$request->get('iddoctor');
         $idpaciente=$request->get('idpaciente');
         $idusuario=$request->get('idusuario');
+
+        $embarazo_unico=$request->get('embarazo_unico');
+        $alteraciones_crecimiento=$request->get('alteraciones_crecimiento');
+        $alteraciones_frecuencia=$request->get('alteraciones_frecuencia');
+        $placenta=$request->get('placenta');
+        $liquido=$request->get('liquido');
+        $prematuro=$request->get('prematuro');
+        $observaciones=$request->get('observaciones');
+
+        //verificando valores de checks
+        if($embarazo_unico == null){$embarazo_unico = 0;}
+        if($alteraciones_crecimiento == null){$alteraciones_crecimiento = 0;}
+        if($alteraciones_frecuencia == null){$alteraciones_frecuencia = 0;}
+        if($placenta == null){$placenta = 0;}
+        if($liquido == null){$liquido = 0;}
+        if($prematuro == null){$prematuro = 0;}
+        if($observaciones == null){$observaciones = 0;}
 
         
         $ultrasonido=UltrasonidoObstetrico::findOrFail($id);
@@ -218,7 +266,19 @@ class UltrasonidoObstetricoController extends Controller
         $ultrasonido->comentarios=$request->get('comentarios');
         $ultrasonido->interpretacion=$request->get('interpretacion');
         $ultrasonido->recomendaciones=$request->get('recomendaciones');
-        $ultrasonido->observaciones=$request->get('observaciones');
+        $ultrasonido->observaciones=$observaciones;
+        $ultrasonido->embarazo_unico=$embarazo_unico;
+        $ultrasonido->embarazo_unico_comentar=$request->get('embarazo_unico_comentar');
+        $ultrasonido->alteraciones_crecimiento=$alteraciones_crecimiento;
+        $ultrasonido->alteraciones_crecimiento_comentar=$request->get('alteraciones_crecimiento_comentar');
+        $ultrasonido->alteraciones_frecuencia=$alteraciones_frecuencia;
+        $ultrasonido->alteraciones_frecuencia_comentar=$request->get('alteraciones_frecuencia_comentar');
+        $ultrasonido->placenta=$placenta;
+        $ultrasonido->placenta_comentar=$request->get('placenta_comentar');
+        $ultrasonido->liquido=$liquido;
+        $ultrasonido->liquido_comentar=$request->get('liquido_comentar');
+        $ultrasonido->prematuro=$prematuro;
+        $ultrasonido->prematuro_comentar=$request->get('prematuro_comentar');
         $ultrasonido->update();
 
         $request->session()->flash('alert-success', 'Se edito correctamente un ultrasonido obstetrico.');
@@ -242,7 +302,7 @@ class UltrasonidoObstetricoController extends Controller
         ->join('paciente as p','uo.idpaciente','=','p.idpaciente')
         ->join('users as d','uo.iddoctor','=','d.id')
         ->join('users as u','uo.idusuario','=','u.id')
-        ->select('uo.idultrasonido_obstetrico','uo.fecha','uo.iddoctor','d.name as Doctor','d.especialidad','uo.idpaciente','p.nombre as Paciente','uo.idusuario','u.name as Usuario','u.tipo_usuario','uo.spp','uo.fcardiaca_fetal','pubicacion','liquido_amniotico','utero_anexos','cervix','diametro_biparietal_medida','diametro_biparietal_semanas','circunferencia_cefalica_medida','circunferencia_cefalica_semanas','circunferencia_abdominal_medida','circunferencia_abdominal_semanas','longitud_femoral_medida','longitud_femoral_semanas','fetometria','peso_estimado','percentilo','comentarios','interpretacion','recomendaciones','observaciones')
+        ->select('uo.idultrasonido_obstetrico','uo.fecha','uo.iddoctor','d.name as Doctor','d.especialidad','uo.idpaciente','p.nombre as Paciente','uo.idusuario','u.name as Usuario','u.tipo_usuario','uo.spp','uo.fcardiaca_fetal','pubicacion','liquido_amniotico','utero_anexos','cervix','diametro_biparietal_medida','diametro_biparietal_semanas','circunferencia_cefalica_medida','circunferencia_cefalica_semanas','circunferencia_abdominal_medida','circunferencia_abdominal_semanas','longitud_femoral_medida','longitud_femoral_semanas','fetometria','peso_estimado','percentilo','comentarios','interpretacion','recomendaciones','observaciones','embarazo_unico','embarazo_unico_comentar','alteraciones_crecimiento','alteraciones_crecimiento_comentar','alteraciones_frecuencia','alteraciones_frecuencia_comentar','placenta','placenta_comentar','liquido','liquido_comentar','prematuro','prematuro_comentar')
         ->where('uo.idultrasonido_obstetrico','=',$id) 
         ->first();
 

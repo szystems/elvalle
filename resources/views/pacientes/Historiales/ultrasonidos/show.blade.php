@@ -185,12 +185,12 @@
                                                 <button class="btn btn-link btn-block text-left" type="button"
                                                     data-toggle="collapse" data-target="#collapseOne"
                                                     aria-expanded="false" aria-controls="collapseOne">
-                                                    <b><u>Antecedentes Obstetricos</u></b>
+                                                    <b><u>Antecedentes</u></b>
                                                 </button>
                                             </h2>
                                         </div>
 
-                                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+                                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
                                             data-parent="#accordionExample">
                                             <div class="card-body">
 
@@ -204,10 +204,6 @@
                                                                   <td align="center">{{ $historia->gestas }}</td>
                                                               </tr>
                                                               <tr>
-                                                                  <td><strong>Vias de resolucion</strong></td>
-                                                                  <td align="center">{{ $historia->vias_resolucion }}</td>
-                                                              </tr>
-                                                              <tr>
                                                                   <td><strong>Hijos Vivos</strong></td>
                                                                   <td align="center">{{ $historia->hijos_vivos }}</td>
                                                               </tr>
@@ -216,133 +212,33 @@
                                                                   <td align="center">{{ $historia->hijos_muertos }}</td>
                                                               </tr>
                                                               <tr>
-                                                                  <td><strong>Complicaciones Neonatales</strong></td>
-                                                                  <td align="center">{{ $historia->complicaciones_neonatales }}</td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><strong>Complicaciones Obstetricos</strong></td>
-                                                                  <td align="center">{{ $historia->complicaciones_obstetricos }}</td>
-                                                              </tr>
-                                                              <tr>
                                                                   <td><strong>Abortos</strong></td>
                                                                   <td align="center">{{ $historia->abortos }}</td>
                                                               </tr>
                                                               <tr>
-                                                                  <td><strong>causa</strong></td>
-                                                                  <td align="center">{{ $historia->causa }}</td>
-                                                              </tr>
-                                                              
-                                                          </tbody>
-                                                      </table>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-header" id="headingTwo">
-                                            <h2 class="mb-0">
-                                                <button class="btn btn-link btn-block text-left collapsed" type="button"
-                                                    data-toggle="collapse" data-target="#collapseTwo"
-                                                    aria-expanded="false" aria-controls="collapseTwo">
-                                                    <b><u>Antecedentes Ginecologicos</u></b>
-                                                </button>
-                                            </h2>
-                                        </div>
-                                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
-                                            data-parent="#accordionExample">
-                                            <div class="card-body">
-                                                
-                                                <div class="table-responsive">
-                                                      <table class="table table-sm table-striped table-bordered table-condensed table-hover">
-                                                          
-                                                          <tbody>
-                                                              <tr>
-                                                                  <?php
-                                                                      $fur = date("d-m-Y", strtotime($historia->fur));
-                                                                  ?>
-                                                                  <td><strong>FUR</strong></td>
-                                                                  <td align="center">
-                                                                      @if ($fur != '01-01-1970')
-                                                                          {{ $fur }}
-                                                                      @endif
-                                                                      
-                                                                  </td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <?php
-                                                                      $fechaParto = date("d-m-Y", strtotime($historia->fur));
-                                                                      $fechaParto = date("d-m-Y", strtotime($fechaParto.'+ 280 days'));
-                                                                  ?>
-                                                                  <td><strong>Fecha de parto</strong></td>
-                                                                  <td align="center">
-                                                                      @if ($fur != '01-01-1970')
-                                                                      {{ $fechaParto }}
-                                                                      @endif
-                                                                  </td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><strong>Ciclos</strong></td>
-                                                                  <td align="center">Cada: {{ $historia->ciclos_cada }}, por: {{ $historia->ciclos_por }} Dismenorrea: {{ $historia->dismenorrea }}</td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><strong>Cantidad Hemorragia</strong></td>
-                                                                  <td align="center">{{ $historia->cantidad_hemorragia }}</td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><strong>Frecuencia</strong></td>
-                                                                  <td align="center">{{ $historia->frecuencia }}</td>
-                                                              </tr>
-                                                          </tbody>
-                                                      </table>
-                                                </div>
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-header" id="headingThree">
-                                            <h2 class="mb-0">
-                                                <button class="btn btn-link btn-block text-left collapsed" type="button"
-                                                    data-toggle="collapse" data-target="#collapseThree"
-                                                    aria-expanded="false" aria-controls="collapseThree">
-                                                    <b><u>Vida Sexual</u></b>
-                                                </button>
-                                            </h2>
-                                        </div>
-                                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
-                                            data-parent="#accordionExample">
-                                            <div class="card-body">
-                                                
-                                                <div class="table-responsive">
-                                                      <table class="table table-sm table-striped table-bordered table-condensed table-hover">
-                                                          
-                                                          <tbody>
-                                                              
-                                                              <tr>
-                                                                  <td><strong>Activa</strong></td>
-                                                                  <td align="center">{{ $historia->activa }}</td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><strong>Edad de inicio de vida sexual</strong></td>
-                                                                  <td align="center">{{ $historia->edad }}</td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><strong>Parejas</strong></td>
-                                                                  <td align="center">{{ $historia->parejas }}</td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><strong>Motodo Anticonceptivo</strong></td>
-                                                                  <td align="center">{{ $historia->metodo_anticonceptivo }}</td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><strong>Metodo</strong></td>
-                                                                  <td align="center">{{ $historia->metodo_si }}</td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><strong>Tiempo</strong></td>
-                                                                  <td align="center">Año(s): {{ $historia->tiempo_ano }}, Meses: {{ $historia->tiempo_mes }}</td>
-                                                              </tr>
+                                                                <?php
+                                                                    $fur = date("d-m-Y", strtotime($historia->fur));
+                                                                ?>
+                                                                <td><strong>FUR</strong></td>
+                                                                <td align="center">
+                                                                    @if ($fur != '01-01-1970')
+                                                                        {{ $fur }}
+                                                                    @endif
+                                                                    
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <?php
+                                                                    $fechaParto = date("d-m-Y", strtotime($historia->fur));
+                                                                    $fechaParto = date("d-m-Y", strtotime($fechaParto.'+ 280 days'));
+                                                                ?>
+                                                                <td><strong>FPP</strong></td>
+                                                                <td align="center">
+                                                                    @if ($fur != '01-01-1970')
+                                                                    {{ $fechaParto }}
+                                                                    @endif
+                                                                </td>
+                                                            </tr>
                                                               
                                                           </tbody>
                                                       </table>
@@ -354,7 +250,7 @@
                                 </div>
 
                             </div>
-                        </div>
+                      </div>
                         <?php
                         $fecha = date('d-m-Y', strtotime($ultrasonido->fecha));
                         ?>
@@ -537,18 +433,105 @@
                                                 <td colspan="2"><strong>Interpretación:</strong></td>
                                             </tr>
                                             <tr>
-                                                <td colspan="2">
-                                                    <p>1. Embarazo único intrauterino.</p>
-                                                    <p>2. Tamiz de alteraciones del crecimiento de bajo riesgo al momento
-                                                        del estudio.</p>
-                                                    <p>3. Tamiz de alteraciones de la frecuencia cardiaca fetal de bajo
-                                                        riesgo al momento del estudio.</p>
-                                                    <p>4. Tamiz de placenta de bajo riesgo al momento del estudio.</p>
-                                                    <p>5. Tamiz de liquido amniótico de bajo riesgo al momento del estudio.
-                                                    </p>
-                                                    <p>6. Tamiz de parto prematuro de bajo riesgo al momento del estudio.
-                                                    </p>
-
+                                                <td >
+                                                      1. Embarazo único intrauterino.
+                                                </td>
+                                                <td>
+                                                      @if ($ultrasonido->embarazo_unico == 1)
+                                                            <div class="primary-checkbox">
+                                                                  <input type="checkbox" name="embarazo_unico" checked disabled>
+                                                            </div>
+                                                      @else
+                                                            <div class="primary-checkbox">
+                                                                  <input type="checkbox" name="embarazo_unico" disabled>
+                                                            </div>
+                                                      @endif
+                                                      {{ $ultrasonido->embarazo_unico_comentar }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td >
+                                                      2. Tamiz de alteraciones del crecimiento de bajo riesgo al momento del estudio.
+                                                </td>
+                                                <td>
+                                                      @if ($ultrasonido->alteraciones_crecimiento == 1)
+                                                            <div class="primary-checkbox">
+                                                                  <input type="checkbox" name="alteraciones_crecimiento" checked disabled>
+                                                            </div>
+                                                      @else
+                                                            <div class="primary-checkbox">
+                                                                  <input type="checkbox" name="alteraciones_crecimiento" disabled>
+                                                            </div>
+                                                      @endif
+                                                      {{ $ultrasonido->alteraciones_crecimiento_comentar }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td >
+                                                      3. Tamiz de alteraciones de la frecuencia cardiaca fetal de bajo riesgo al momento del estudio.
+                                                </td>
+                                                <td>
+                                                      @if ($ultrasonido->alteraciones_frecuencia == 1)
+                                                            <div class="primary-checkbox">
+                                                                  <input type="checkbox" name="alteraciones_frecuencia" checked disabled>
+                                                            </div>
+                                                      @else
+                                                            <div class="primary-checkbox">
+                                                                  <input type="checkbox" name="alteraciones_frecuencia" disabled>
+                                                            </div>
+                                                      @endif
+                                                      {{ $ultrasonido->alteraciones_frecuencia_comentar }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td >
+                                                      4. Tamiz de placenta de bajo riesgo al momento del estudio.
+                                                </td>
+                                                <td>
+                                                      @if ($ultrasonido->placenta == 1)
+                                                            <div class="primary-checkbox">
+                                                                  <input type="checkbox" name="placenta" checked disabled>
+                                                            </div>
+                                                      @else
+                                                            <div class="primary-checkbox">
+                                                                  <input type="checkbox" name="placenta" disabled>
+                                                            </div>
+                                                      @endif
+                                                      {{ $ultrasonido->placenta_comentar }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td >
+                                                      5. Tamiz de liquido amniótico de bajo riesgo al momento del estudio.
+                                                </td>
+                                                <td>
+                                                      @if ($ultrasonido->liquido == 1)
+                                                            <div class="primary-checkbox">
+                                                                  <input type="checkbox" name="liquido" disabled checked>
+                                                            </div>
+                                                      @else
+                                                            <div class="primary-checkbox">
+                                                                  <input type="checkbox" name="liquido" disabled>
+                                                            </div>
+                                                      @endif
+                                                      {{ $ultrasonido->liquido_comentar }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td >
+                                                      6. Tamiz de parto prematuro de bajo riesgo al momento del estudio.
+                                                </td>
+                                                <td>
+                                                      @if ($ultrasonido->prematuro == 1)
+                                                            <div class="primary-checkbox">
+                                                                  <input type="checkbox" name="prematuro" checked disabled>
+                                                            </div>
+                                                      @else
+                                                            <div class="primary-checkbox">
+                                                                  <input type="checkbox" name="prematuro" disabled>
+                                                            </div>
+                                                      @endif
+                                                      {{ $ultrasonido->prematuro_comentar }}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -560,8 +543,20 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td colspan="2"><strong>Observaciones:</strong></td>
+                                                <td ><strong>Observaciones:</strong></td>
+                                                <td>
+                                                      @if ($ultrasonido->observaciones == 1)
+                                                            <div class="primary-checkbox">
+                                                                  <input type="checkbox" name="observaciones" value="1" checked disabled>
+                                                            </div>
+                                                      @else
+                                                            <div class="primary-checkbox">
+                                                                  <input type="checkbox" name="observaciones" disabled>
+                                                            </div>
+                                                      @endif
+                                                </td>
                                             </tr>
+                                            @if ($ultrasonido->observaciones == 1)
                                             <tr>
                                                 <td colspan="2">
                                                     <p>La realización de este ultrasonido esta basado en las guías practicas
@@ -574,6 +569,7 @@
 
                                                 </td>
                                             </tr>
+                                            @endif
 
                                         </tbody>
                                     </table>
