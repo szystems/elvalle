@@ -378,7 +378,7 @@
                                                             </tr>
 
                                                             <tr>
-                                                                  <td colspan="2"><strong><u>Diagnósticos colposcópicos normales</u></strong></td>
+                                                                  <td colspan="2"><strong><u>Diagnósticos colposcópicos</u></strong></td>
                                                             </tr>
 
                                                             <tr>
@@ -418,7 +418,7 @@
                                                             </tr>
 
                                                             <tr>
-                                                                  <td><strong>- Infamación o infección (especifique): </strong></td>
+                                                                  <td><strong>- Hallazgos colposcópicos anormales (especifique): </strong></td>
                                                                   <td align="left">
                                                                         @if ($colposcopia->inflamacion_infeccion == 1)
                                                                               <div class="primary-checkbox">
@@ -435,6 +435,46 @@
                                                                   <td><strong>Especificar:</strong></td>
                                                                   <td align="left">
                                                                         {{ $colposcopia->inflamacion_infeccion_especifique }}
+                                                                  </td>
+                                                            </tr>
+                                                            <tr>
+                                                                  <td><strong>- ¿Se realiza biopsia? </strong></td>
+                                                                  <td align="left">
+                                                                        @if ($colposcopia->biopsia == 1)
+                                                                              <div class="primary-checkbox">
+                                                                                    <input type="checkbox" name="biopsia" checked disabled>
+                                                                              </div>
+                                                                        @else
+                                                                              <div class="primary-checkbox">
+                                                                                    <input type="checkbox" name="biopsia" disabled>
+                                                                              </div>
+                                                                        @endif
+                                                                  </td>
+                                                            </tr>
+                                                            <tr>
+                                                                  <td><strong>Indicar número y localización:</strong></td>
+                                                                  <td>
+                                                                       {{ $colposcopia->numero_localizacion }}
+                                                                  </td>
+                                                            </tr>
+                                                            <tr>
+                                                                  <td><strong>- ¿Se realiza legrado endocervical? </strong></td>
+                                                                  <td align="left">
+                                                                        @if ($colposcopia->legrado == 1)
+                                                                              <div class="primary-checkbox">
+                                                                                    <input type="checkbox" name="legrado" checked disabled>
+                                                                              </div>
+                                                                        @else
+                                                                              <div class="primary-checkbox">
+                                                                                    <input type="checkbox" name="legrado" disabled>
+                                                                              </div>
+                                                                        @endif
+                                                                  </td>
+                                                            </tr>
+                                                            <tr>
+                                                                  <td><strong>Otros hallazgos:</strong></td>
+                                                                  <td align="left">
+                                                                        {{ $colposcopia->otros_hallazgos_colposcopicos }}
                                                                   </td>
                                                             </tr>
 

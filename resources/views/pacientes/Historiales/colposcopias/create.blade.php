@@ -363,7 +363,7 @@
                                                                               </tr>
 
                                                                               <tr>
-                                                                                    <td colspan="2"><strong><u>Diagnósticos colposcópicos normales</u></strong></td>
+                                                                                    <td colspan="2"><strong><u>Diagnósticos colposcópicos</u></strong></td>
                                                                               </tr>
 
                                                                               <tr>
@@ -403,7 +403,7 @@
                                                                               </tr>
 
                                                                               <tr>
-                                                                                    <td><strong>- Infamación o infección (especifique): </strong></td>
+                                                                                    <td><strong>- Hallazgos colposcópicos anormales (especifique): </strong></td>
                                                                                     <td align="left">
                                                                                           @if (old('inflamacion_infeccion'))
                                                                                                 <div class="primary-checkbox">
@@ -422,8 +422,46 @@
                                                                                           <textarea name="inflamacion_infeccion_especifique" class="form-control" >{{ old('inflamacion_infeccion_especifique') }}</textarea>
                                                                                     </td>
                                                                               </tr>
-
-                                                                              
+                                                                              <tr>
+                                                                                    <td><strong>- ¿Se realiza biopsia? </strong></td>
+                                                                                    <td align="left">
+                                                                                          @if (old('biopsia'))
+                                                                                                <div class="primary-checkbox">
+                                                                                                      <input type="checkbox" name="biopsia" value="1" checked>
+                                                                                                </div>
+                                                                                          @else
+                                                                                                <div class="primary-checkbox">
+                                                                                                      <input type="checkbox" name="biopsia" value="1">
+                                                                                                </div>
+                                                                                          @endif
+                                                                                    </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                    <td><strong>Indicar número y localización:</strong></td>
+                                                                                    <td>
+                                                                                          <input type="text" name="numero_localizacion" class="form-control" value="{{ old('numero_localizacion') }}">
+                                                                                    </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                    <td><strong>- ¿Se realiza legrado endocervical? </strong></td>
+                                                                                    <td align="left">
+                                                                                          @if (old('legrado'))
+                                                                                                <div class="primary-checkbox">
+                                                                                                      <input type="checkbox" name="legrado" value="1" checked>
+                                                                                                </div>
+                                                                                          @else
+                                                                                                <div class="primary-checkbox">
+                                                                                                      <input type="checkbox" name="legrado" value="1">
+                                                                                                </div>
+                                                                                          @endif
+                                                                                    </td>
+                                                                              </tr>
+                                                                              <tr>
+                                                                                    <td><strong>Otros hallazgos:</strong></td>
+                                                                                    <td align="left">
+                                                                                          <textarea name="otros_hallazgos_colposcopicos" class="form-control" >{{ old('otros_hallazgos_colposcopicos') }}</textarea>
+                                                                                    </td>
+                                                                              </tr>
                                                                               
                                                                         </tbody>
                                                                   </table>

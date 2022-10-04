@@ -78,6 +78,8 @@ class ColposcopiaController extends Controller
             $dcn_insatisfactoria=$request->get('dcn_insatisfactoria');
             $hallazgos_nomales=$request->get('hallazgos_nomales');
             $inflamacion_infeccion=$request->get('inflamacion_infeccion');
+            $biopsia=$request->get('biopsia');
+            $legrado=$request->get('legrado');
 
             //verificando valores de checks
             if($hd_eap == null){$hd_eap = 0;}
@@ -91,6 +93,8 @@ class ColposcopiaController extends Controller
             if($dcn_insatisfactoria == null){$dcn_insatisfactoria = 0;}
             if($hallazgos_nomales == null){$hallazgos_nomales = 0;}
             if($inflamacion_infeccion== null){$inflamacion_infeccion = 0;}
+            if($biopsia == null){$biopsia = 0;}
+            if($legrado == null){$legrado = 0;}
             
 
     		DB::beginTransaction();
@@ -121,6 +125,10 @@ class ColposcopiaController extends Controller
             $colposcopia->hallazgos_nomales=$hallazgos_nomales;
             $colposcopia->inflamacion_infeccion=$inflamacion_infeccion;
             $colposcopia->inflamacion_infeccion_especifique=$request->get('inflamacion_infeccion_especifique');
+            $colposcopia->biopsia=$biopsia;
+            $colposcopia->numero_localizacion=$request->get('numero_localizacion');
+            $colposcopia->legrado=$legrado;
+            $colposcopia->otros_hallazgos_colposcopicos=$request->get('otros_hallazgos_colposcopicos');
     		$colposcopia->save();
 
             $cli=DB::table('paciente')->where('idpaciente','=',$colposcopia->idpaciente)->first();
@@ -163,7 +171,7 @@ class ColposcopiaController extends Controller
         ->join('paciente as p','c.idpaciente','=','p.idpaciente')
         ->join('users as d','c.iddoctor','=','d.id')
         ->join('users as u','c.idusuario','=','u.id')
-        ->select('c.idcolposcopia','c.fecha','c.iddoctor','d.name as Doctor','d.especialidad','c.idpaciente','p.nombre as Paciente','c.idusuario','u.name as Usuario','u.tipo_usuario','c.union_escamoso_cilindrica','c.legrado_endocervical','colposcopia_insatisfactoria','hd_eap','hd_eam','hd_leucoplasia','hd_punteando','hd_mosaico','hd_vasos','hd_area','hd_otros','hd_otros_especificar','hallazgos_fuera','carcinoma_invasor','otros_hallazgos','dcn_insatisfactoria','dcn_insatisfactoria_especifique','hallazgos_nomales','inflamacion_infeccion','inflamacion_infeccion_especifique')
+        ->select('c.idcolposcopia','c.fecha','c.iddoctor','d.name as Doctor','d.especialidad','c.idpaciente','p.nombre as Paciente','c.idusuario','u.name as Usuario','u.tipo_usuario','c.union_escamoso_cilindrica','c.legrado_endocervical','colposcopia_insatisfactoria','hd_eap','hd_eam','hd_leucoplasia','hd_punteando','hd_mosaico','hd_vasos','hd_area','hd_otros','hd_otros_especificar','hallazgos_fuera','carcinoma_invasor','otros_hallazgos','dcn_insatisfactoria','dcn_insatisfactoria_especifique','hallazgos_nomales','inflamacion_infeccion','inflamacion_infeccion_especifique','biopsia','numero_localizacion','legrado','otros_hallazgos_colposcopicos')
         ->where('c.idcolposcopia','=',$id) 
         ->first();
 
@@ -184,7 +192,7 @@ class ColposcopiaController extends Controller
         ->join('paciente as p','c.idpaciente','=','p.idpaciente')
         ->join('users as d','c.iddoctor','=','d.id')
         ->join('users as u','c.idusuario','=','u.id')
-        ->select('c.idcolposcopia','c.fecha','c.iddoctor','d.name as Doctor','d.especialidad','c.idpaciente','p.nombre as Paciente','c.idusuario','u.name as Usuario','u.tipo_usuario','c.union_escamoso_cilindrica','c.legrado_endocervical','colposcopia_insatisfactoria','hd_eap','hd_eam','hd_leucoplasia','hd_punteando','hd_mosaico','hd_vasos','hd_area','hd_otros','hd_otros_especificar','hallazgos_fuera','carcinoma_invasor','otros_hallazgos','dcn_insatisfactoria','dcn_insatisfactoria_especifique','hallazgos_nomales','inflamacion_infeccion','inflamacion_infeccion_especifique')
+        ->select('c.idcolposcopia','c.fecha','c.iddoctor','d.name as Doctor','d.especialidad','c.idpaciente','p.nombre as Paciente','c.idusuario','u.name as Usuario','u.tipo_usuario','c.union_escamoso_cilindrica','c.legrado_endocervical','colposcopia_insatisfactoria','hd_eap','hd_eam','hd_leucoplasia','hd_punteando','hd_mosaico','hd_vasos','hd_area','hd_otros','hd_otros_especificar','hallazgos_fuera','carcinoma_invasor','otros_hallazgos','dcn_insatisfactoria','dcn_insatisfactoria_especifique','hallazgos_nomales','inflamacion_infeccion','inflamacion_infeccion_especifique','biopsia','numero_localizacion','legrado','otros_hallazgos_colposcopicos')
         ->where('c.idcolposcopia','=',$id) 
         ->first();
 
@@ -218,6 +226,8 @@ class ColposcopiaController extends Controller
         $dcn_insatisfactoria=$request->get('dcn_insatisfactoria');
         $hallazgos_nomales=$request->get('hallazgos_nomales');
         $inflamacion_infeccion=$request->get('inflamacion_infeccion');
+        $biopsia=$request->get('biopsia');
+        $legrado=$request->get('legrado');
 
         //verificando valores de checks
         if($hd_eap == null){$hd_eap = 0;}
@@ -231,6 +241,8 @@ class ColposcopiaController extends Controller
         if($dcn_insatisfactoria == null){$dcn_insatisfactoria = 0;}
         if($hallazgos_nomales == null){$hallazgos_nomales = 0;}
         if($inflamacion_infeccion== null){$inflamacion_infeccion = 0;}
+        if($biopsia == null){$biopsia = 0;}
+        if($legrado == null){$legrado = 0;}
 
         
         $colposcopia=Colposcopia::findOrFail($id);
@@ -259,6 +271,10 @@ class ColposcopiaController extends Controller
         $colposcopia->hallazgos_nomales=$hallazgos_nomales;
         $colposcopia->inflamacion_infeccion=$inflamacion_infeccion;
         $colposcopia->inflamacion_infeccion_especifique=$request->get('inflamacion_infeccion_especifique');
+        $colposcopia->biopsia=$biopsia;
+        $colposcopia->numero_localizacion=$request->get('numero_localizacion');
+        $colposcopia->legrado=$legrado;
+        $colposcopia->otros_hallazgos_colposcopicos=$request->get('otros_hallazgos_colposcopicos');
         $colposcopia->update();
 
         $request->session()->flash('alert-success', 'Se edito correctamente una colposcopia.');
@@ -282,7 +298,7 @@ class ColposcopiaController extends Controller
         ->join('paciente as p','c.idpaciente','=','p.idpaciente')
         ->join('users as d','c.iddoctor','=','d.id')
         ->join('users as u','c.idusuario','=','u.id')
-        ->select('c.idcolposcopia','c.fecha','c.iddoctor','d.name as Doctor','d.especialidad','c.idpaciente','p.nombre as Paciente','c.idusuario','u.name as Usuario','u.tipo_usuario','c.union_escamoso_cilindrica','c.legrado_endocervical','colposcopia_insatisfactoria','hd_eap','hd_eam','hd_leucoplasia','hd_punteando','hd_mosaico','hd_vasos','hd_area','hd_otros','hd_otros_especificar','hallazgos_fuera','carcinoma_invasor','otros_hallazgos','dcn_insatisfactoria','dcn_insatisfactoria_especifique','hallazgos_nomales','inflamacion_infeccion','inflamacion_infeccion_especifique')
+        ->select('c.idcolposcopia','c.fecha','c.iddoctor','d.name as Doctor','d.especialidad','c.idpaciente','p.nombre as Paciente','c.idusuario','u.name as Usuario','u.tipo_usuario','c.union_escamoso_cilindrica','c.legrado_endocervical','colposcopia_insatisfactoria','hd_eap','hd_eam','hd_leucoplasia','hd_punteando','hd_mosaico','hd_vasos','hd_area','hd_otros','hd_otros_especificar','hallazgos_fuera','carcinoma_invasor','otros_hallazgos','dcn_insatisfactoria','dcn_insatisfactoria_especifique','hallazgos_nomales','inflamacion_infeccion','inflamacion_infeccion_especifique','biopsia','numero_localizacion','legrado','otros_hallazgos_colposcopicos')
         ->where('c.idcolposcopia','=',$id) 
         ->first();
 
