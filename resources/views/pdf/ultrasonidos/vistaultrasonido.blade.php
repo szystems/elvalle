@@ -407,6 +407,8 @@
 			<h5 align="center">No.Colegiado: {{ $ultrasonido->no_colegiado }}</h5>
 			
 		</div>
+		<br>
+		<br>
 
 		<div style="text-align:center;">
 			<table>
