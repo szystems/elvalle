@@ -1,6 +1,6 @@
 <html html>
 	<head>
-  		<title>Vista de Radiofrecuencia</title>
+  		<title>Vista de Ginecoestética</title>
 		<style>
 		  	h1, h2, h3, h4, h5, h6 {
 				  font-family: arial, sans-serif;
@@ -43,7 +43,7 @@
 		@endif
 		
 		<h4 align="center">
-			<strong><u>Radiofrecuencia</u></strong>
+			<strong><u>Ginecoestética</u></strong>
 		</h4>
 		<h6>
 			<?php

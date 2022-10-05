@@ -5,7 +5,7 @@
       <div>
             <div class="card mb-4">
                   <header class="card-header">
-                        <h2 class="h3 card-header-title"><strong>Radiofrecuencia Paciente: {{ $paciente->nombre }}</strong></h2>
+                        <h2 class="h3 card-header-title"><strong>Ginecoestética Paciente: {{ $paciente->nombre }}</strong></h2>
                   </header>
 
                   @if (count($errors) > 0)
@@ -83,7 +83,7 @@
                                   <a class="nav-link" href="{{URL::action('EmbarazoController@index','searchidpaciente='.$paciente->idpaciente)}}">Embarazos <span class="badge badge-info">{{ $totalEmbarazos }}</span></a>
                               </li>
                               <li class="nav-item">
-                                  <a class="nav-link active" href="{{URL::action('RadiofrecuenciaController@index','searchidpaciente='.$paciente->idpaciente)}}"><b><u>Radiofrecuencias</u></b> <span class="badge badge-info">{{ $totalRadiofrecuencias }}</span></a>
+                                  <a class="nav-link active" href="{{URL::action('RadiofrecuenciaController@index','searchidpaciente='.$paciente->idpaciente)}}"><b><u>Ginecoestética</u></b> <span class="badge badge-info">{{ $totalRadiofrecuencias }}</span></a>
                               </li>
                               <li class="nav-item">
                                   <a class="nav-link" href="{{URL::action('SillaElectromagneticaController@index','searchidpaciente='.$paciente->idpaciente)}}">Silla Electromagnetica <span class="badge badge-info">{{ $totalSillas }}</span></a>

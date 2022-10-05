@@ -83,7 +83,7 @@
                         <a class="nav-link" href="{{URL::action('EmbarazoController@index','searchidpaciente='.$paciente->idpaciente)}}">Embarazos <span class="badge badge-info">{{ $totalEmbarazos }}</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="{{URL::action('RadiofrecuenciaController@index','searchidpaciente='.$paciente->idpaciente)}}"><b><u>Radiofrecuencias</u></b> <span class="badge badge-info">{{ $totalRadiofrecuencias }}</span></a>
+                        <a class="nav-link active" href="{{URL::action('RadiofrecuenciaController@index','searchidpaciente='.$paciente->idpaciente)}}"><b><u>Ginecoestética</u></b> <span class="badge badge-info">{{ $totalRadiofrecuencias }}</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{URL::action('SillaElectromagneticaController@index','searchidpaciente='.$paciente->idpaciente)}}">Silla Electromagnetica <span class="badge badge-info">{{ $totalSillas }}</span></a>
@@ -106,7 +106,7 @@
                 <div class="card">
         
                     <header class="card-header">
-                        <h2 class="h3 card-header-title"><strong>Nueva Radiofrecuencia: </strong></h2>
+                        <h2 class="h3 card-header-title"><strong>Nueva Ginecoestética: </strong></h2>
 
                         @if(Auth::user()->tipo_usuario == "Doctor")
                         
@@ -118,7 +118,7 @@
                                     <div class="form-group mb-2">
                                         <span class="input-group-btn"><br>
                                             <button type="submit" class="btn btn-success">
-                                                <i class="far fa-plus-square"></i> Crear Radiofrecuencia
+                                                <i class="far fa-plus-square"></i> Crear Ginecoestética
                                             </button>
                                         </span>
                                     </div>
@@ -137,7 +137,7 @@
                     </header>
         
                     <div class="card-body">
-                        <h2 class="h3 card-header-title"><strong>Listado de Radiofrecuencias: </strong></h2>
+                        <h2 class="h3 card-header-title"><strong>Listado de Ginecoestética: </strong></h2>
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered table-condensed table-hover">
                                 <thead>
@@ -151,7 +151,7 @@
                                         <td>
             
                                             <a href="{{URL::action('RadiofrecuenciaController@show',$radiofrecuencia->idradiofrecuencia)}}">
-                                                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Ver Radiofrecuencia">
+                                                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Ver Ginecoestética">
                                                     <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button">
                                                         <i class="far fa-eye"></i>
                                                     </button>
@@ -159,7 +159,7 @@
                                             </a>
                                             @if(Auth::user()->tipo_usuario == "Doctor")
                                                 <a href="" data-target="#modal-eliminar-{{$radiofrecuencia->idradiofrecuencia}}" data-toggle="modal">
-                                                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Eliminar Radiofrecuencia">
+                                                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Eliminar Ginecoestética">
                                                         <button class="btn btn-sm btn-danger" style="pointer-events: none;" type="button">
                                                                 <i class="far fa-minus-square"></i>
                                                         </button>

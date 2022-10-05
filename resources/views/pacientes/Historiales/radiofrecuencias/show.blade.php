@@ -83,7 +83,7 @@
                         <a class="nav-link" href="{{URL::action('EmbarazoController@index','searchidpaciente='.$paciente->idpaciente)}}">Embarazos <span class="badge badge-info">{{ $totalEmbarazos }}</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="{{URL::action('RadiofrecuenciaController@index','searchidpaciente='.$paciente->idpaciente)}}"><b><u>Radiofrecuencias</u></b> <span class="badge badge-info">{{ $totalRadiofrecuencias }}</span></a>
+                        <a class="nav-link active" href="{{URL::action('RadiofrecuenciaController@index','searchidpaciente='.$paciente->idpaciente)}}"><b><u>Ginecoestética</u></b> <span class="badge badge-info">{{ $totalRadiofrecuencias }}</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{URL::action('SillaElectromagneticaController@index','searchidpaciente='.$paciente->idpaciente)}}">Silla Electromagnetica <span class="badge badge-info">{{ $totalSillas }}</span></a>
@@ -106,10 +106,10 @@
                 <div class="card">
         
                     <header class="card-header">
-                        <h2 class="h3 card-header-title"><strong>Radiofrecuencia: </strong></h2>
+                        <h2 class="h3 card-header-title"><strong>Ginecoestética: </strong></h2>
                         @if(Auth::user()->tipo_usuario == "Doctor")
                             <a href="" data-target="#modal-eliminar-{{$radiofrecuencia->idradiofrecuencia}}" data-toggle="modal">
-                                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Eliminar Radiofrecuencia">
+                                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Eliminar Ginecoestética">
                                     <button class="btn btn-sm btn-danger" style="pointer-events: none;" type="button">
                                             <i class="far fa-minus-square"></i> Eliminar
                                     </button>
