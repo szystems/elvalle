@@ -51,7 +51,6 @@
 			?>
 			<strong>Fecha:</strong><font color="Blue"> <strong>{{ $fecha}} </strong></font>
 			<br><strong>Doctor:</strong><font color="Blue"> <strong>{{ $ultrasonido->Doctor}} ({{ $ultrasonido->especialidad }})<strong></font>
-			<br><strong>Paciente:</strong><font color="Blue"> <strong>{{ $ultrasonido->Paciente}}<strong></font>
 			
 		</h6>
 		<div style="text-align:center;">

@@ -53,7 +53,6 @@
                 $fechaParto = date("d-m-Y", strtotime($fechaParto.'+ 280 days'));
 			?>
 			<strong>Fecha:</strong><font color="Blue"> <strong>{{ $hoy}} </strong></font>
-			<br><strong>Paciente:</strong><font color="Blue"> <strong>{{ $embarazo->Paciente}} <strong></font>
 			<br><strong>Doctor:</strong><font color="Blue"> <strong>{{ $embarazo->Doctor}} ({{ $embarazo->especialidad }})<strong></font>
 			
 		</h6>

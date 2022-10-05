@@ -50,7 +50,6 @@
 				$fecha = date("d-m-Y", strtotime($incontinencia->fecha));
 			?>
 			<strong>Fecha:</strong><font color="Blue"> <strong>{{ $hoy}} </strong></font>
-			<br><strong>Paciente:</strong><font color="Blue"> <strong>{{ $incontinencia->Paciente}} <strong></font>
 			<br><strong>Sexo:</strong><font color="Blue"> <strong>{{ $incontinencia->sexo}} <strong></font>
 			<br><strong>Doctor:</strong><font color="Blue"> <strong>{{ $incontinencia->Doctor}} ({{ $incontinencia->especialidad }})<strong></font>
 			

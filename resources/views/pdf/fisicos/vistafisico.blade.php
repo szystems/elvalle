@@ -50,9 +50,8 @@
 				$fecha = date("d-m-Y", strtotime($fisico->fecha));
 			?>
 			<strong>Fecha:</strong><font color="Blue"> <strong>{{ $fecha}} </strong></font>
-			<br><strong>Doctor:</strong><font color="Blue"> <strong>{{ $fisico->Paciente}}<strong></font>
-			<br><strong>Paciente:</strong><font color="Blue"> <strong>{{ $fisico->Doctor}} ({{ $fisico->especialidad }})<strong></font>
-			
+			<br><strong>Doctor:</strong><font color="Blue"> <strong>{{ $fisico->Doctor}} ({{ $fisico->especialidad }})<strong></font>
+				
 		</h6>
 		<div style="text-align:center;">
 		<table>

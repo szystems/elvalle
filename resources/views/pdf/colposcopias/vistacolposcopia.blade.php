@@ -60,8 +60,6 @@
         <strong>Fecha:</strong>
         <font color="Blue"> <strong>{{ $fecha }} </strong></font>
         <br><strong>Doctor:</strong>
-        <font color="Blue"> <strong>{{ $colposcopia->Paciente }}<strong></font>
-        <br><strong>Paciente:</strong>
         <font color="Blue"> <strong>{{ $colposcopia->Doctor }} ({{ $colposcopia->especialidad }})<strong></font>
 
     </h6>
