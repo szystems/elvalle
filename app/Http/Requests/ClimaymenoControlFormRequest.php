@@ -52,7 +52,7 @@ class ClimaymenoControlFormRequest extends FormRequest
 
             'peso'=>'required',
             'talla'=>'required',
-            'presion_arterial'=>'required|integer',
+            'presion_arterial'=>'max:10',
             'temperatura'=>'required|integer',
             'frecuencia_cardiaca'=>'required|integer',
             'cara'=>'max:50',

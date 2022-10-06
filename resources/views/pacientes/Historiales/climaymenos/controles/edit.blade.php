@@ -633,7 +633,7 @@
                                                                                     <td><strong>Presion Arterial</strong></td>
                                                                                     <td align="left">
                                                                                           <div class="input-group">
-                                                                                                <input type="text" name="presion_arterial" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="{{ $control->presion_arterial }}" placeholder="0" onkeypress="return validarentero(event,this.value)" required>
+                                                                                                <input type="text" name="presion_arterial" class="form-control text-right" aria-label="Amount (to the nearest dollar)" value="{{ $control->presion_arterial }}" placeholder="0"  required>
                                                                                                 <div class="input-group-prepend">
                                                                                                       <span class="input-group-text">mm/</span>
                                                                                                 </div>
