@@ -110,7 +110,7 @@
                               </header>
 
                               <div class="card-body">
-                                    {!! Form::open(['url' => 'pacientes/historiales/radiofrecuencias/sesiones', 'method' => 'POST', 'autocomplete' => 'off']) !!}
+                                    {!! Form::open(['url' => 'pacientes/historiales/radiofrecuencias/sesionesradiofrecuencia', 'method' => 'POST', 'autocomplete' => 'off']) !!}
                                     {{ Form::token() }}
                                     
                                           <div class="row">

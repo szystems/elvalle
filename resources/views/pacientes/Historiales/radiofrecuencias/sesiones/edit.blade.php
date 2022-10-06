@@ -156,7 +156,7 @@
                                               </table>
                                           </div>
                                     </div>-->
-                                    {!!Form::model($sesion,['method'=>'PATCH','route'=>['sesiones.update',$sesion->idradiofrecuencia_sesion]])!!}
+                                    {!!Form::model($sesion,['method'=>'PATCH','route'=>['sesionesradiofrecuencia.update',$sesion->idradiofrecuencia_sesion]])!!}
                                     {{Form::token()}}
                                           <div class="row">
                                                 <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">

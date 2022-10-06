@@ -68,6 +68,7 @@ Route::get('pacientes/historiales/embarazos/controles/eliminar', 'ControlControl
 Route::get('pacientes/historiales/radiofrecuencias/eliminar', 'RadiofrecuenciaController@eliminarradiofrecuencia');
 Route::get('pacientes/historiales/radiofrecuencias/sesiones/eliminar', 'RadiofrecuenciaSesionController@eliminarsesion');
 Route::get('pacientes/historiales/radiofrecuencias/fotomodulaciones/eliminar', 'RadiofrecuenciaFotomodulacionController@eliminarsesion');
+Route::get('pacientes/historiales/radiofrecuencias/lasers/eliminar', 'RadiofrecuenciaLaserController@eliminarsesion');
 Route::get('pacientes/historiales/sillas/eliminar', 'SillaElectromagneticaController@eliminarsillaciclo');
 Route::get('pacientes/historiales/sillas/sesiones/eliminar', 'SillaElectromagneticaSesionController@eliminarsesion');
 Route::get('pacientes/historiales/climaymenos/eliminar', 'ClimaymenoController@eliminarclimaymeno');
@@ -97,8 +98,9 @@ Route::resource('pacientes/historiales/ultrasonidos','UltrasonidoObstetricoContr
 Route::resource('pacientes/historiales/embarazos','EmbarazoController');
 Route::resource('pacientes/historiales/embarazos/controles','ControlController');
 Route::resource('pacientes/historiales/radiofrecuencias','RadiofrecuenciaController');
-Route::resource('pacientes/historiales/radiofrecuencias/sesiones','RadiofrecuenciaSesionController');
+Route::resource('pacientes/historiales/radiofrecuencias/sesionesradiofrecuencia','RadiofrecuenciaSesionController');
 Route::resource('pacientes/historiales/radiofrecuencias/fotomodulaciones','RadiofrecuenciaFotomodulacionController');
+Route::resource('pacientes/historiales/radiofrecuencias/lasers','RadiofrecuenciaLaserController');
 Route::resource('pacientes/historiales/sillas','SillaElectromagneticaController');
 Route::resource('pacientes/historiales/sillas/sesiones','SillaElectromagneticaSesionController');
 Route::resource('pacientes/historiales/climaymenos','ClimaymenoController');

@@ -2353,6 +2353,10 @@ class ReportesController extends Controller
                 ->where('idradiofrecuencia','=',$radiofrecuencia->idradiofrecuencia)
                 ->get();
 
+                $sesionesLaser=DB::table('radiofrecuencia_laser')
+                ->where('idradiofrecuencia','=',$radiofrecuencia->idradiofrecuencia)
+                ->get();
+
                 $historia = DB::table('historia')
                 ->where('idpaciente','=',$radiofrecuencia->idpaciente)
                 ->first();
@@ -2360,7 +2364,7 @@ class ReportesController extends Controller
                 
                 if ( $verpdf == "Descargar" )
                 {
-                    $view = \View::make('pdf.radiofrecuencias.vistaradiofrecuencia', compact('radiofrecuencia','historia','sesiones','sesionesFotomodulacion','paciente','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
+                    $view = \View::make('pdf.radiofrecuencias.vistaradiofrecuencia', compact('radiofrecuencia','historia','sesiones','sesionesFotomodulacion','sesionesLaser','paciente','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
                     $pdf = \App::make('dompdf.wrapper');
                     $pdf->loadHTML($view);
                     $pdf->setPaper('A4', 'landscape');
@@ -2368,7 +2372,7 @@ class ReportesController extends Controller
                 }
                 if ( $verpdf == "Navegador" )
                 {
-                    $view = \View::make('pdf.radiofrecuencias.vistaradiofrecuencia', compact('radiofrecuencia','historia','sesiones','sesionesFotomodulacion','paciente','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
+                    $view = \View::make('pdf.radiofrecuencias.vistaradiofrecuencia', compact('radiofrecuencia','historia','sesiones','sesionesFotomodulacion','sesionesLaser','paciente','hoy','nombreusu','empresa','imagen','moneda','path'))->render();
                     $pdf = \App::make('dompdf.wrapper');
                     $pdf->loadHTML($view);
                     $pdf->setPaper('A4', 'landscape');

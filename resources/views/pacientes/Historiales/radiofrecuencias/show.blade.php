@@ -283,7 +283,7 @@
                                 <div class="form-group">
                                     <label for="doctor"><h2><strong><u>Sesiones Radiofrecuencia</u></strong></h2></label>
                                     @if(Auth::user()->tipo_usuario == "Doctor")
-                                        <a href="sesiones/create?idradiofrecuencia={{$radiofrecuencia->idradiofrecuencia}}">
+                                        <a href="sesionesradiofrecuencia/create?idradiofrecuencia={{$radiofrecuencia->idradiofrecuencia}}">
                                             <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Agregar sesion ">
                                                 <button class="btn btn-sm btn-success" style="pointer-events: none;" type="button">
                                                     <i class="far fa-plus-square"></i> Agregar sesion
@@ -679,6 +679,89 @@
                                 </div>
                             </div>
                             <!--Fin sesiones fotomodulacion-->
+
+                            <!--Sesiones laser-->
+                            <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                                <div class="form-group">
+                                    <label for="doctor"><h2><strong><u>Sesiones Laser</u></strong></h2></label>
+                                    @if(Auth::user()->tipo_usuario == "Doctor")
+                                        <a href="lasers/create?idradiofrecuencia={{$radiofrecuencia->idradiofrecuencia}}">
+                                            <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Agregar sesion ">
+                                                <button class="btn btn-sm btn-success" style="pointer-events: none;" type="button">
+                                                    <i class="far fa-plus-square"></i> Agregar sesion
+                                                </button>
+                                            </span>
+                                        </a>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                                <div class="table-responsive">
+                                    <table class="table table-sm table-striped table-bordered table-condensed table-hover">
+                                        
+                                        <tbody>
+                                            <tr>
+                                                <td><strong><h2>sesion</h2></strong></td>
+                                                @foreach ($sesionesLaser as $laser)
+                                                    <td align="left">
+                                                        <u><h2> #{{ $laser->numero_sesion }}</h2></u> 
+                                                        @if(Auth::user()->tipo_usuario == "Doctor")
+                                                            <a href="{{URL::action('RadiofrecuenciaLaserController@edit',$laser->idradiofrecuencia_laser)}}">
+                                                                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar sesion">
+                                                                    <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button"><i class="far fa-edit"></i> </button>
+                                                                </span>
+                                                            </a>
+                                                            <a href="" data-target="#modal-eliminar-laser-{{$laser->idradiofrecuencia_laser}}" data-toggle="modal">
+                                                                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Eliminar sesion">
+                                                                    <button class="btn btn-sm btn-danger" style="pointer-events: none;" type="button"><i class="far fa-minus-square"></i></button>
+                                                                </span>
+                                                            </a>
+                                                            @include('pacientes.historiales.radiofrecuencias.lasers.modaleliminar')
+                                                        @endif
+                                                    </td>
+                                                @endforeach
+                                                
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Fecha</strong></td>
+                                                @foreach ($sesionesLaser as $laser)
+                                                    @php
+                                                        $fechaSesion = date("d-m-Y", strtotime($laser->fecha));
+                                                    @endphp
+                                                    <td align="left">{{ $fechaSesion }}</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Tipo</strong></td>
+                                                @foreach ($sesionesLaser as $laser)
+                                                    <td align="left">{{ $laser->tipo }}</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Área</strong></td>
+                                                @foreach ($sesionesLaser as $laser)
+                                                    <td align="left">{{ $laser->area }}</td>
+                                                @endforeach
+                                            </tr>
+                                            
+                                            <tr>
+                                                <td><strong>Zonas a Tratar</strong></td>
+                                                @foreach ($sesionesLaser as $laser)
+                                                    <td align="left">{{ $laser->zonas_a_tratar }}</td>
+                                                @endforeach
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Parametros</strong></td>
+                                                @foreach ($sesionesLaser as $laser)
+                                                    <td align="left">{{ $laser->parametros }}</td>
+                                                @endforeach
+                                            </tr>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!--Fin sesiones laser-->
                             
                             
                         </div>

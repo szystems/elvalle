@@ -122,11 +122,15 @@ class RadiofrecuenciaController extends Controller
         ->where('idradiofrecuencia','=',$radiofrecuencia->idradiofrecuencia)
         ->get();
 
+        $sesionesLaser=DB::table('radiofrecuencia_laser')
+        ->where('idradiofrecuencia','=',$radiofrecuencia->idradiofrecuencia)
+        ->get();
+
         $historia = DB::table('historia')
         ->where('idpaciente','=',$radiofrecuencia->idpaciente)
         ->first();
 
-        return view("pacientes.historiales.radiofrecuencias.show",["radiofrecuencia"=>$radiofrecuencia,"paciente"=>$paciente,"sesiones"=>$sesiones,"sesionesFotomodulacion"=>$sesionesFotomodulacion,"historia"=>$historia]);
+        return view("pacientes.historiales.radiofrecuencias.show",["radiofrecuencia"=>$radiofrecuencia,"paciente"=>$paciente,"sesiones"=>$sesiones,"sesionesFotomodulacion"=>$sesionesFotomodulacion,"sesionesLaser"=>$sesionesLaser,"historia"=>$historia]);
     }
 
     public function edit($id)
@@ -204,6 +208,10 @@ class RadiofrecuenciaController extends Controller
         ->where('idradiofrecuencia','=',$radiofrecuencia->idradiofrecuencia)
         ->get();
 
+        $sesionesLaser=DB::table('radiofrecuencia_laser')
+        ->where('idradiofrecuencia','=',$radiofrecuencia->idradiofrecuencia)
+        ->get();
+
         $sesiones=DB::table('radiofrecuencia_sesion')
         ->where('idradiofrecuencia','=',$radiofrecuencia->idradiofrecuencia)
         ->get();
@@ -212,7 +220,7 @@ class RadiofrecuenciaController extends Controller
         ->where('idpaciente','=',$radiofrecuencia->idpaciente)
         ->first();
 
-        return view("pacientes.historiales.radiofrecuencias.show",["radiofrecuencia"=>$radiofrecuencia,"paciente"=>$paciente,"sesiones"=>$sesiones,"sesionesFotomodulacion"=>$sesionesFotomodulacion,"historia"=>$historia]);
+        return view("pacientes.historiales.radiofrecuencias.show",["radiofrecuencia"=>$radiofrecuencia,"paciente"=>$paciente,"sesiones"=>$sesiones,"sesionesFotomodulacion"=>$sesionesFotomodulacion,"sesionesLaser"=>$sesionesLaser,"historia"=>$historia]);
     }
 
     public function eliminarradiofrecuencia(Request $request)

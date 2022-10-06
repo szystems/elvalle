@@ -490,6 +490,55 @@
 				</tr>
 			</table>
 		</div>
+		@php
+			$numsesionesLaser = $sesionesLaser->count() + 1;
+		@endphp
+		<div style="text-align:center;">
+			<table>
+				<tr>		
+					<th colspan="{{ $numsesionesLaser }}"><h4 align="center">Sesiones de Laser:</h4></th>
+				</tr>
+				<tr>
+					<td><p align="center"><strong><h3> Sesion</h3></strong></p></td>
+					@foreach ($sesionesLaser as $laser)
+						<td><p align="center"><font color="black"><u><h2> #{{ $laser->numero_sesion }}</h2></u> </font></p></td>
+					@endforeach
+				</tr>
+				<tr>
+					<td><p align="center"><strong>Fecha</strong></p></td>
+					@foreach ($sesionesLaser as $laser)
+                        @php
+                            $fechasesionLaser = date("d-m-Y", strtotime($laser->fecha));
+                        @endphp
+						<td><p align="center"><font color="black">{{$fechasesionLaser}}</font></p></td>
+					@endforeach
+				</tr>
+				<tr>
+					<td><strong>Tipo</strong></td>
+					@foreach ($sesionesLaser as $laser)
+						<td align="left">{{ $laser->tipo }}</td>
+					@endforeach
+				</tr>
+				<tr>
+					<td><strong>Área</strong></td>
+					@foreach ($sesionesLaser as $laser)
+						<td align="left">{{ $laser->area }}</td>
+					@endforeach
+				</tr>
+				<tr>
+					<td><strong>Zonas a Tratar</strong></td>
+					@foreach ($sesionesLaser as $laser)
+						<td align="left">{{ $laser->zonas_a_tratar }}</td>
+					@endforeach
+				</tr>
+				<tr>
+					<td><strong>Parametros</strong></td>
+					@foreach ($sesionesLaser as $laser)
+						<td align="left">{{ $laser->parametros }}</td>
+					@endforeach
+				</tr>
+			</table>
+		</div>
 		<br>
 		<h6>Reporte generado en: <a href="https://szystems.com/" target="_blank">SZ-Ventas Version 1.0</a> &copy; 2022 <a class="link-muted" href="https://szystems.com/" target="_blank">Szystems</a>. Todos los derechos reservados.</h6>
 	</body>

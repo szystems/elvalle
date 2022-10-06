@@ -142,13 +142,17 @@ class RadiofrecuenciaFotomodulacionController extends Controller
         ->where('idradiofrecuencia','=',$radiofrecuencia->idradiofrecuencia)
         ->get();
 
+        $sesionesLaser=DB::table('radiofrecuencia_laser')
+        ->where('idradiofrecuencia','=',$radiofrecuencia->idradiofrecuencia)
+        ->get();
+
         $historia = DB::table('historia')
         ->where('idpaciente','=',$idpaciente)
         ->first();
 
         $request->session()->flash('alert-success', "Se creo una sesion de fotomodulacion del paciente: ".$cli->nombre.", Fecha: ".$fechaSesion);
 
-        return view("pacientes.historiales.radiofrecuencias.show",["radiofrecuencia"=>$radiofrecuencia,"paciente"=>$paciente,"sesiones"=>$sesiones,"sesionesFotomodulacion"=>$sesionesFotomodulacion, "historia"=>$historia]);
+        return view("pacientes.historiales.radiofrecuencias.show",["radiofrecuencia"=>$radiofrecuencia,"paciente"=>$paciente,"sesiones"=>$sesiones,"sesionesFotomodulacion"=>$sesionesFotomodulacion,"sesionesLaser"=>$sesionesLaser, "historia"=>$historia]);
     }
 
     public function edit($id)
@@ -244,13 +248,17 @@ class RadiofrecuenciaFotomodulacionController extends Controller
         ->where('idradiofrecuencia','=',$radiofrecuencia->idradiofrecuencia)
         ->get();
 
+        $sesionesLaser=DB::table('radiofrecuencia_laser')
+        ->where('idradiofrecuencia','=',$radiofrecuencia->idradiofrecuencia)
+        ->get();
+
         $historia = DB::table('historia')
         ->where('idpaciente','=',$radiofrecuencia->idpaciente)
         ->first();
 
         $request->session()->flash('alert-success', "Se edito una sesion de fotomodulacion del paciente: ".$cli->nombre.", Fecha: ".$fechaSesion);
 
-        return view("pacientes.historiales.radiofrecuencias.show",["radiofrecuencia"=>$radiofrecuencia,"paciente"=>$paciente,"sesiones"=>$sesiones,"sesionesFotomodulacion"=>$sesionesFotomodulacion, "historia"=>$historia]);
+        return view("pacientes.historiales.radiofrecuencias.show",["radiofrecuencia"=>$radiofrecuencia,"paciente"=>$paciente,"sesiones"=>$sesiones,"sesionesFotomodulacion"=>$sesionesFotomodulacion,"sesionesLaser"=>$sesionesLaser, "historia"=>$historia]);
     }
 
     public function eliminarsesion(Request $request)
@@ -284,11 +292,15 @@ class RadiofrecuenciaFotomodulacionController extends Controller
         $sesionesFotomodulacion=DB::table('radiofrecuencia_fotomodulacion')
             ->where('idradiofrecuencia','=',$radiofrecuencia->idradiofrecuencia)
             ->get();
+
+            $sesionesLaser=DB::table('radiofrecuencia_laser')
+        ->where('idradiofrecuencia','=',$radiofrecuencia->idradiofrecuencia)
+        ->get();
     
         $historia = DB::table('historia')
             ->where('idpaciente','=',$radiofrecuencia->idpaciente)
             ->first();
 
-        return view("pacientes.historiales.radiofrecuencias.show",["radiofrecuencia"=>$radiofrecuencia,"paciente"=>$paciente,"sesiones"=>$sesiones,"sesionesFotomodulacion"=>$sesionesFotomodulacion, "historia"=>$historia]);
+        return view("pacientes.historiales.radiofrecuencias.show",["radiofrecuencia"=>$radiofrecuencia,"paciente"=>$paciente,"sesiones"=>$sesiones,"sesionesFotomodulacion"=>$sesionesFotomodulacion,"sesionesLaser"=>$sesionesLaser, "historia"=>$historia]);
     }
 }
