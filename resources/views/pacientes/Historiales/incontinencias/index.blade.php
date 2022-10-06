@@ -108,7 +108,7 @@
                     <header class="card-header">
                         <h2 class="h3 card-header-title"><strong>Nuevo Estudio: </strong></h2>
 
-                        @if(Auth::user()->tipo_usuario == "Doctor")
+                        @if(Auth::user()->tipo_usuario != "Administrador")
                         
                         {!!Form::open(array('url'=>'pacientes/historiales/incontinencias','method'=>'POST','autocomplete'=>'off'))!!}
                         {{Form::token()}}
@@ -145,7 +145,7 @@
                                 <thead>
                                     <th><h5><i class="fa fa-sliders-h"></i></th>
                                     <th><h5><STRONG>Fecha</STRONG></th>
-                                    <th><h5><STRONG>Doctor</STRONG></th>
+                                    <th><h5><STRONG>Doctor/Asistente</STRONG></th>
                                     
                                 </thead>
                                 @foreach ($incontinencias as $incontinencia)
@@ -159,7 +159,7 @@
                                                     </button>
                                                 </span>
                                             </a>
-                                            @if(Auth::user()->tipo_usuario == "Doctor")
+                                            @if(Auth::user()->tipo_usuario != "Administrador")
                                                 <a href="" data-target="#modal-eliminar-{{$incontinencia->idincontinenciau}}" data-toggle="modal">
                                                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Eliminar estudio">
                                                         <button class="btn btn-sm btn-danger" style="pointer-events: none;" type="button">

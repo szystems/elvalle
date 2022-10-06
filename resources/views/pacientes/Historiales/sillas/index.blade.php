@@ -108,7 +108,7 @@
                     <header class="card-header">
                         <h2 class="h3 card-header-title"><strong>Silla Electromagnetica: </strong></h2>
 
-                        @if(Auth::user()->tipo_usuario == "Doctor")
+                        @if(Auth::user()->tipo_usuario != "Administrador")
                         
                         {!!Form::open(array('url'=>'pacientes/historiales/sillas','method'=>'POST','autocomplete'=>'off'))!!}
                         {{Form::token()}}
@@ -154,7 +154,7 @@
                                     <th><h5><i class="fa fa-sliders-h"></i></th>
                                     <th><h5><STRONG>Fecha</STRONG></th>
                                     <th><h5><STRONG>Ciclo</STRONG></th>
-                                    <th><h5><STRONG>Doctor</STRONG></th>
+                                    <th><h5><STRONG>Doctor/Asistente</STRONG></th>
                                     
                                 </thead>
                                 @foreach ($sillaCiclos as $sillaCiclo)
@@ -168,7 +168,7 @@
                                                     </button>
                                                 </span>
                                             </a>
-                                            @if(Auth::user()->tipo_usuario == "Doctor")
+                                            @if(Auth::user()->tipo_usuario != "Administrador")
                                                 <a href="" data-target="#modal-eliminar-{{$sillaCiclo->idsillae_ciclo}}" data-toggle="modal">
                                                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Eliminar ciclo">
                                                         <button class="btn btn-sm btn-danger" style="pointer-events: none;" type="button">
