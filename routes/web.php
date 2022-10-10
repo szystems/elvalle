@@ -49,6 +49,9 @@ Route::resource('seguridad/configuracion','ConfiguracionController');
 /* Rutas Dias */
 Route::resource('seguridad/dias','DiasController');
 
+/* Rutas Ayuda */
+Route::resource('ayuda','AyudaController');
+
 
 /*Rutas Pacientes */
     /*Pacientes */

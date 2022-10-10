@@ -233,7 +233,7 @@
 					
 					<div class="card">
 						<div class="card-header">
-							<a href="">
+							<a href="{{url('ayuda')}}">
 								<i class="far fa-question-circle u-sidebar-nav-menu__item-icon" style="font-size:30px;color:lightblue;text-shadow:2px 2px 4px #000000;"></i>
 								<span class="u-sidebar-nav-menu__item-title"><font color="orange"><b>Ayuda </b></font></span>
 							</a>

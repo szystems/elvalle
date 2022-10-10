@@ -405,7 +405,7 @@
 
 							<!-- Ayuda -->
 							<li class="u-sidebar-nav-menu__item">
-								<a class="u-sidebar-nav-menu__link" href="">
+								<a class="u-sidebar-nav-menu__link" href="{{url('ayuda')}}">
 									<i class="far fa-question-circle u-sidebar-nav-menu__item-icon"></i>
 									<span class="u-sidebar-nav-menu__item-title"><b>Ayuda</b></span>
 								</a>
