@@ -112,17 +112,12 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ url('/') }}">Inicio</a>
                                 </li>
-                                <!--<li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
-                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Categorías
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-                                        <a class="dropdown-item" href=""> Busqueda Avanzada</a>
-                                        <a class="dropdown-item" href=""> Busqueda Avanzada</a>
-                                        <a class="dropdown-item" href=""> Busqueda Avanzada</a> 
-                                    </div>
-                                </li>-->
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('/vistas/vquienessomos') }}">¿Quiénes somos? </a>
+								</li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('/vistas/vespecialistas') }}">Especialistas </a>
+								</li>
 								<li class="nav-item">
                                     <a class="nav-link" href="{{ url('/vistas/vcontacto') }}">Contacto</a>
 								</li>
@@ -229,7 +224,8 @@
                         <h4>Recursos</h4>
                         <ul class="list-unstyled">
                             <li><a href="{{ url('/') }}">Inicio</a></li>
-                            <!--<li><a href="{{ url('/vistas/varticulo') }}">Busqueda Avanzada</a></li>-->
+                            <li><a href="{{ url('/vistas/vquienessomos') }}">¿Quiénes somos?</a></li>
+                            <li><a href="{{ url('/vistas/vespecialistas') }}">Especialistas</a></li>
                             <li><a href="{{ url('/vistas/vcontacto') }}">Contacto</a></li>
                             
                             
