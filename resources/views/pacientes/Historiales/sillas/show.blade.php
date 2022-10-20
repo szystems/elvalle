@@ -216,6 +216,7 @@
                                     @endif
                                 </div>
                             </div>
+                            @if ($sesiones->count() > 0)
                             <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                     
 
@@ -261,6 +262,12 @@
                                 </div>
 
                             </div>
+                            @else
+                                <div class="alert alert-warning">
+                                    No se han ingresado sesiones
+                                </div>
+                            @endif
+                            
                             <!--Fin sesiones ciclo silla electromagnetica-->
                         </div>
                     </div>

@@ -293,6 +293,7 @@
                                     @endif
                                 </div>
                             </div>
+                            @if ($sesiones->count() > 0)
                             <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                 <div class="table-responsive">
                                     <table class="table table-sm table-striped table-bordered table-condensed table-hover">
@@ -503,6 +504,12 @@
                                     </table>
                                 </div>
                             </div>
+                            @else
+                                <div class="alert alert-warning">
+                                    No se han ingresado sesiones
+                                </div>
+                            @endif
+                            
                             <!--Fin sesiones radiofrecuecia-->
                             
 
@@ -521,6 +528,7 @@
                                     @endif
                                 </div>
                             </div>
+                            @if ($sesionesFotomodulacion->count() > 0)
                             <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                 <div class="table-responsive">
                                     <table class="table table-sm table-striped table-bordered table-condensed table-hover">
@@ -678,6 +686,12 @@
                                     </table>
                                 </div>
                             </div>
+                            @else
+                                <div class="alert alert-warning">
+                                    No se han ingresado sesiones
+                                </div>
+                            @endif
+                            
                             <!--Fin sesiones fotomodulacion-->
 
                             <!--Sesiones laser-->
@@ -695,6 +709,7 @@
                                     @endif
                                 </div>
                             </div>
+                            @if ($sesionesLaser->count() > 0)
                             <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                 <div class="table-responsive">
                                     <table class="table table-sm table-striped table-bordered table-condensed table-hover">
@@ -761,6 +776,12 @@
                                     </table>
                                 </div>
                             </div>
+                            @else
+                                <div class="alert alert-warning">
+                                    No se han ingresado sesiones
+                                </div>
+                            @endif
+                            
                             <!--Fin sesiones laser-->
                             
                             

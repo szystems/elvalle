@@ -162,6 +162,7 @@
 				<tr>		
 					<th colspan="{{ $numsesiones }}"><h4 align="center">Sesiones de Radiofrecuencia:</h4></th>
 				</tr>
+				@if ($sesiones->count() > 0)
 				<tr>
 					<td><p align="center"><strong><h3> Sesion</h3></strong></p></td>
 					@foreach ($sesiones as $sesion)
@@ -347,6 +348,12 @@
 						<td align="left">{{ $sesion->ginecologico_zonas_tratadas }}</td>
 					@endforeach
 				</tr>
+				@else
+					<tr>
+						<td><p align="center"><strong><h2> No se han ingresado sesiones</h2></strong></p></td>
+					</tr>
+				@endif
+				
 
 			</table>
 		</div>
@@ -358,6 +365,7 @@
 				<tr>		
 					<th colspan="{{ $numsesionesFotomodulacion }}"><h4 align="center">Sesiones de Fotomodulacion:</h4></th>
 				</tr>
+				@if ($sesionesFotomodulacion->count() > 0)
 				<tr>
 					<td><p align="center"><strong><h3> Sesion</h3></strong></p></td>
 					@foreach ($sesionesFotomodulacion as $sesionFotomodulacion)
@@ -488,6 +496,12 @@
 						<td align="left">{{ $sesionFotomodulacion->rubylight_tiempo }} Minutos</td>
 					@endforeach
 				</tr>
+				@else
+					<tr>
+						<td><p align="center"><strong><h2> No se han ingresado sesiones</h2></strong></p></td>
+					</tr>
+				@endif
+				
 			</table>
 		</div>
 		@php
@@ -498,6 +512,7 @@
 				<tr>		
 					<th colspan="{{ $numsesionesLaser }}"><h4 align="center">Sesiones de Laser:</h4></th>
 				</tr>
+				@if ($sesionesLaser->count() > 0)
 				<tr>
 					<td><p align="center"><strong><h3> Sesion</h3></strong></p></td>
 					@foreach ($sesionesLaser as $laser)
@@ -537,6 +552,12 @@
 						<td align="left">{{ $laser->parametros }}</td>
 					@endforeach
 				</tr>
+				@else
+					<tr>
+						<td><p align="center"><strong><h2> No se han ingresado sesiones</h2></strong></p></td>
+					</tr>
+				@endif
+				
 			</table>
 		</div>
 		<br>

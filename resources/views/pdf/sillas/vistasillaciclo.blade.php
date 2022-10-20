@@ -98,6 +98,7 @@
 		<h4 align="center">
 			<strong><u>Sesiones de Ciclo de Silla Electromagnetica</u></strong>
 		</h4>
+		@if ($sesiones->count() > 0)
 		<div style="text-align:center;">
 			<table>
 				<tr>
@@ -121,6 +122,10 @@
 				@endforeach
 			</table>
 		</div>
+		@else
+			<p>No se han ingresado sesiones.</p>
+		@endif
+		
 		<br>
 		<h6>Reporte generado en: <a href="https://szystems.com/" target="_blank">SZ-Ventas Version 1.0</a> &copy; 2022 <a class="link-muted" href="https://szystems.com/" target="_blank">Szystems</a>. Todos los derechos reservados.</h6>
 	</body>

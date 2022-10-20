@@ -65,7 +65,7 @@
 			</table>
 		</div>
 		<br>
-		
+		@if ($cuestionarios->count() > 0)
 		<div style="text-align:center;">
 			<table>
 				
@@ -223,6 +223,10 @@
 				</tr>
 			</table>
 		</div>
+		@else
+			<p>No se han ingresado cuestionarios</p>
+		@endif
+		
 		<br>
 		<h6>Reporte generado en: <a href="https://szystems.com/" target="_blank">Szystems Version 1.0</a> &copy; 2022 <a class="link-muted" href="https://szystems.com/" target="_blank">Szystems</a>. Todos los derechos reservados.</h6>
 	</body>

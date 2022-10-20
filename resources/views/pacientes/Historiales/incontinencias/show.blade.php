@@ -205,6 +205,7 @@
                             @php
                                 $numcuestionarios = (($cuestionarios->count() + 1) *2);
                             @endphp
+                            @if ($cuestionarios->count() > 0)
                             <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                 <div class="table-responsive">
                                     <table class="table table-sm table-striped table-bordered table-condensed table-hover">
@@ -389,6 +390,12 @@
                                     </table>
                                 </div>
                             </div>
+                            @else
+                                <div class="alert alert-warning">
+                                    No se han ingresado cuestionarios
+                                </div>
+                            @endif
+                            
 
                         </div>
                     </div>

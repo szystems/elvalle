@@ -121,11 +121,13 @@
 				
 			</table>
 		</div>
+		
 		<div style="text-align:center;">
 			<table>
 				<tr>		
 					<th colspan="{{ $numControles }}"><h4 align="center">Controles:</h4></th>
 				</tr>
+				@if ($controles->count() > 0)
 				<tr>
 					<td><p align="center"><strong><h3> Control</h3></strong></p></td>
 					@foreach ($controles as $control)
@@ -323,9 +325,17 @@
 						<td><p align="left"><font color="black">{{ $control->nota }} </font></p></td>
 					@endforeach
 				</tr>
+				@else
+				<tr>
+					<td><p align="center"><strong><h2> No se han ingresado controles</h2></strong></p></td>
+					
+				</tr>
+				@endif
 
 			</table>
 		</div>
+		
+		
 
 		<div style="text-align:center;">
 			<table>

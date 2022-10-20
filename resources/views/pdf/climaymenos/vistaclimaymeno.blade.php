@@ -65,6 +65,7 @@
 		@php
 			$numControles = $controles->count() + 1;
 		@endphp
+		@if ($controles->count() > 0)
 		<div style="text-align:center;">
 			<table>
 				
@@ -424,6 +425,10 @@
 				</tr>
 			</table>
 		</div>
+		@else
+			<p>No se han ingresado controles</p>
+		@endif
+		
 		<div style="text-align:center;">
 			<table>
 				<tr>		

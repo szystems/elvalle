@@ -205,6 +205,7 @@
                                     @endif
                                 </div>
                             </div>
+                            @if ($controles->count() > 0)
                             <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                 <div class="table-responsive">
                                     <table class="table table-sm table-striped table-bordered table-condensed table-hover">
@@ -591,6 +592,12 @@
                                     </table>
                                 </div>
                             </div>
+                            @else
+                                <div class="alert alert-warning">
+                                    No se han ingresado controles
+                                </div>
+                            @endif
+                            
 
                             <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                 <div class="form-group">
