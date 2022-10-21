@@ -193,6 +193,7 @@ Route::resource('reportes/ingresos','ReporteIngresosController');
 Route::resource('vistas/vinicio','InicioController');
 Route::resource('vistas/vquienessomos','QuienesSomosController');
 Route::resource('vistas/vespecialistas','EspecialistasController');
+Route::resource('vistas/vservicios','ServiciosController');
     /* Rutas Usuario */
 Route::resource('vistas/vusuario','VistaUsuarioController');
 Route::resource('vistas/configuracion','ConfiguracionController');

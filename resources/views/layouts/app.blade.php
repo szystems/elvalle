@@ -118,6 +118,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ url('/vistas/vespecialistas') }}">Especialistas </a>
 								</li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('/vistas/vservicios') }}">Servicios </a>
+								</li>
 								<li class="nav-item">
                                     <a class="nav-link" href="{{ url('/vistas/vcontacto') }}">Contacto</a>
 								</li>
@@ -226,6 +229,7 @@
                             <li><a href="{{ url('/') }}">Inicio</a></li>
                             <li><a href="{{ url('/vistas/vquienessomos') }}">¿Quiénes somos?</a></li>
                             <li><a href="{{ url('/vistas/vespecialistas') }}">Especialistas</a></li>
+                            <li><a href="{{ url('/vistas/vservicios') }}">Servicios</a></li>
                             <li><a href="{{ url('/vistas/vcontacto') }}">Contacto</a></li>
                             
                             
