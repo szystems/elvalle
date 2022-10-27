@@ -18,6 +18,113 @@
     </section>
     <!-- breadcrumb start-->
 
+    <!-- product_list part start-->
+    <section class="product_list best_seller section_padding">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="section_tittle text-center">
+                        <a href="{{ url('/vistas/vespecialistas') }}">
+                            <h2>Servicios</h2>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center justify-content-between">
+                <div class="col-lg-12">
+                    <div class="best_product_slider owl-carousel">
+                        <div class="single_product_item">
+                            <a href="">
+                                <img src="{{asset('imagenes/servicios/anticonceptivos2.jpg')}}" alt="">
+                            </a>
+                        </div>
+                        <div class="single_product_item">
+                            <a href="">
+                                <img src="{{asset('imagenes/servicios/cancer.jpg')}}" alt="">
+                            </a>
+                        </div>
+                        <div class="single_product_item">
+                            <a href="">
+                                <img src="{{asset('imagenes/servicios/cita.jpg')}}" alt="">
+                            </a>
+                        </div>
+                        <div class="single_product_item">
+                            <a href="">
+                                <img src="{{asset('imagenes/servicios/cutis.jpg')}}" alt="">
+                            </a>
+                        </div>
+                        <div class="single_product_item">
+                            <a href="">
+                                <img src="{{asset('imagenes/servicios/cutis2.jpg')}}" alt="">
+                            </a>
+                        </div>
+                        <div class="single_product_item">
+                            <a href="">
+                                <img src="{{asset('imagenes/servicios/embarazo1.jpg')}}" alt="">
+                            </a>
+                        </div>
+                        <div class="single_product_item">
+                            <a href="">
+                                <img src="{{asset('imagenes/servicios/incontinencia1.jpg')}}" alt="">
+                            </a>
+                        </div>
+                        <div class="single_product_item">
+                            <a href="">
+                                <img src="{{asset('imagenes/servicios/parto1.jpg')}}" alt="">
+                            </a>
+                        </div>
+                        <div class="single_product_item">
+                            <a href="">
+                                <img src="{{asset('imagenes/servicios/radio1.jpg')}}" alt="">
+                            </a>
+                        </div>
+                        <div class="single_product_item">
+                            <a href="">
+                                <img src="{{asset('imagenes/servicios/radio2.jpg')}}" alt="">
+                            </a>
+                        </div>
+                        <div class="single_product_item">
+                            <a href="">
+                                <img src="{{asset('imagenes/servicios/radio3.jpg')}}" alt="">
+                            </a>
+                        </div>
+                        <div class="single_product_item">
+                            <a href="">
+                                <img src="{{asset('imagenes/servicios/silla2.jpg')}}" alt="">
+                            </a>
+                        </div>
+                        <div class="single_product_item">
+                            <a href="">
+                                <img src="{{asset('imagenes/servicios/silla3.jpg')}}" alt="">
+                            </a>
+                        </div>
+                        <div class="single_product_item">
+                            <a href="">
+                                <img src="{{asset('imagenes/servicios/ultra1.jpg')}}" alt="">
+                            </a>
+                        </div>
+                        <div class="single_product_item">
+                            <a href="">
+                                <img src="{{asset('imagenes/servicios/ultra2.jpg')}}" alt="">
+                            </a>
+                        </div>
+                        <div class="single_product_item">
+                            <a href="">
+                                <img src="{{asset('imagenes/servicios/vaginosis.jpg')}}" alt="">
+                            </a>
+                        </div>
+                        <div class="single_product_item">
+                            <a href="">
+                                <img src="{{asset('imagenes/servicios/vph.jpg')}}" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- product_list part end-->
+
     <!-- Start Sample Area -->
     <section class="sample-text-area">
         <div class="container box_1170">

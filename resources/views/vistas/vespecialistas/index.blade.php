@@ -36,6 +36,48 @@
     </section>
     <!-- End Sample Area --> --}}
 
+    <!-- product_list part start-->
+    <section class="product_list best_seller section_padding">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="section_tittle text-center">
+                        <a href="{{ url('/vistas/vespecialistas') }}">
+                            <h2>Especialistas</h2>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center justify-content-between">
+                <div class="col-lg-12">
+                    <div class="best_product_slider owl-carousel">
+                        <div class="single_product_item">
+                            <a href="">
+                                <img src="{{asset('imagenes/doctoras/doctoras4.jpg')}}" alt="">
+                            </a>
+                        </div>
+                        <div class="single_product_item">
+                            <a href="">
+                                <img src="{{asset('imagenes/doctoras/doctoras2.jpg')}}" alt="">
+                            </a>
+                        </div>
+                        <div class="single_product_item">
+                            <a href="">
+                                <img src="{{asset('imagenes/doctoras/doctoras3.jpg')}}" alt="">
+                            </a>
+                        </div>
+                        <div class="single_product_item">
+                            <a href="">
+                                <img src="{{asset('imagenes/doctoras/doctoras1.jpg')}}" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- product_list part end-->
+
     <!-- Start Align Area -->
     <div class="whole-wrap">
         <div class="container box_1170">
@@ -44,7 +86,7 @@
 				<h3 class="mb-30">Dra. Mildred Esmeralda Vàsquez Garcìa de Hipp</h3>
 				<div class="row">
 					<div class="col-md-3">
-						<img src="{{asset('imagenes/doctoras/draMildredEsmeraldaVasquezGarciadeHipp.jpg')}}" alt="" class="img-fluid">
+						<img src="{{asset('imagenes/doctoras/doctoras2.jpg')}}" alt="" class="img-fluid">
 					</div>
 					<div class="col-md-9 mt-sm-20">
 						<p>
