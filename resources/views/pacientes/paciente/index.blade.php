@@ -8,7 +8,7 @@
 	<header class="card-header d-md-flex align-items-center">
 		<h4><strong>Pacientes </strong>
 
-			@if(Auth::user()->tipo_usuario != "Administrador")
+			
 			<a href="paciente/create">
                 <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Nuevo Paciente ">
                     <button class="btn btn-sm btn-success" style="pointer-events: none;" type="button">
@@ -16,7 +16,6 @@
                     </button>
                 </span>
 			</a>
-			@endif
 
 		</h4>
 
@@ -97,7 +96,7 @@
 									</span>
 								</a>
 
-								@if(Auth::user()->tipo_usuario != "Administrador")
+								
 								<a href="{{URL::action('PacienteController@edit',$pac->idpaciente)}}">
                                     <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar Paciente">
                                           <button class="btn btn-sm btn-info" style="pointer-events: none;" type="button">
@@ -119,7 +118,6 @@
 										</button>
 									</span>
 								</a>
-								@endif
 
 							</td>
 							<td align="left">

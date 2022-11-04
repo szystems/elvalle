@@ -56,7 +56,13 @@
                                     </span>
                               </a>
                             <select name="idpaciente" id="idpaciente" class="form-control selectpicker"  data-live-search="true">
-                                  <option value="">Buscar Paciente #Documento/Nombre</option>
+                                
+                                  @if ( !isset($_GET["idpaciente"]) )
+                                  <option value="">Buscar Paciente #DPI/Nombre</option> 
+                                  @else
+                                  <option value="{{$_GET["idpaciente"]}}">{{$_GET["dpiPaciente"]}} - {{$_GET["nombrePaciente"]}}</option>
+                                  @endif
+                                  <option value="">Buscar Paciente #DPI/Nombre</option>
                                   @foreach($pacientes as $paciente)
                                   <option value="{{$paciente->idpaciente}}">{{$paciente->dpi}} - {{$paciente->nombre}}</option>
                                   @endforeach
@@ -73,9 +79,14 @@
                                     </span>
                               </a>-->
                             <select name="iddoctor" id="iddioctor" class="form-control selectpicker"  data-live-search="true">
+                                  @if ( !isset($_GET["idpaciente"]) )
                                   <option value="">Buscar Doctor Nombre/Especialidad</option>
+                                  @else
+                                  <option value="{{$_GET["iddoctor"]}}">{{$_GET["nombreDoctor"]}} ({{$_GET["especialidadDoctor"]}})</option>
+                                  @endif
+                                  
                                   @foreach($doctores as $doctor)
-                                  <option value="{{$doctor->id}}">{{$doctor->name}} - {{$doctor->especialidad}}</option>
+                                  <option value="{{$doctor->id}}">{{$doctor->name}} ({{$doctor->especialidad}})</option>
                                   @endforeach
 
                             </select>

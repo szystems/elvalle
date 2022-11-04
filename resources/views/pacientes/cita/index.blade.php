@@ -187,7 +187,22 @@
 		               @foreach ($citas as $cita)
 						<tr>
 							<td>
+								<?php
+									$citaDoctor = DB::table('users')
+									->where('id', '=', $cita->iddoctor)
+									->first();
 
+									$citaPaciente = DB::table('paciente')
+									->where('idpaciente', '=', $cita->idpaciente)
+									->first();
+
+									$citaUsuario = DB::table('users')
+									->where('id', '=', $cita->idusuario)
+									->first();
+
+									$fecha_inicio = date("d-m-Y H:i A", strtotime($cita->fecha_inicio));
+									$fecha_fin = date("H:i A", strtotime($cita->fecha_fin));
+								?>
 								<a href="{{URL::action('CitaController@show',$cita->idcita)}}">
 									<span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Ver Cita">
 										<button class="btn btn-sm btn-info" style="pointer-events: none;" type="button">
@@ -210,24 +225,16 @@
 										</button>
 									</span>
 								</a>
+								<a href="{{url('ventas\orden\create')}}?idpaciente={{$citaPaciente->idpaciente}}&nombrePaciente={{ $citaPaciente->nombre }}&dpiPaciente={{ $citaPaciente->dpi }}&iddoctor={{ $citaDoctor->id }}&nombreDoctor={{ $citaDoctor->name }}&especialidadDoctor={{ $citaDoctor->especialidad }}">
+									<span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Nuevo examen fisico ">
+										<button class="btn btn-sm btn-warning" style="pointer-events: none;" type="button">
+											<i class="fas fa-tasks"></i> Crear Orden
+										</button>
+									</span>
+								</a>
 								@endif
 							</td>
-							<?php
-								$citaDoctor = DB::table('users')
-								->where('id', '=', $cita->iddoctor)
-								->first();
-
-								$citaPaciente = DB::table('paciente')
-								->where('idpaciente', '=', $cita->idpaciente)
-								->first();
-
-								$citaUsuario = DB::table('users')
-								->where('id', '=', $cita->idusuario)
-								->first();
-
-								$fecha_inicio = date("d-m-Y H:i A", strtotime($cita->fecha_inicio));
-								$fecha_fin = date("H:i A", strtotime($cita->fecha_fin));
-							?>
+							
 							<td align="center">
 								<h5>
 									@if ($citaDoctor->foto != null)
