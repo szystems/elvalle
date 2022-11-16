@@ -9,9 +9,6 @@
             </header>
             <div class="card-body">
                 <div class="row">
-					<?php
-					
-					?>
                     <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
                         <div class="form-group mb-2">
 							<label for="desde"></label><font color="orange">*</font>Desde:</label>

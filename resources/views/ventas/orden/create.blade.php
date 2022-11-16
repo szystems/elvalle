@@ -120,6 +120,7 @@
                                 $articulos = DB::table('rubro_articulo as ra')
                                 ->join('articulo as a','ra.idarticulo','=','a.idarticulo')
 								->where('idrubro', '=', $rubro->idrubro)
+                                ->orderBy("a.nombre")
 								->get();
 
                                 

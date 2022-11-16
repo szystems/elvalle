@@ -1434,6 +1434,9 @@ class ReportesController extends Controller
                 ->first();
 
                 $rubros=DB::table('rubro')
+                ->where('estado','=','Habilitado')
+                ->where('estado_rubro','=','Habilitado')
+                ->orderByRaw("CAST(nombre as UNSIGNED) ASC")
                 ->get();
 
                 if ( $verpdf == "Descargar" )

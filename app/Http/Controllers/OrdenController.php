@@ -142,6 +142,7 @@ class OrdenController extends Controller
     	$rubros=DB::table('rubro')
     	->where('estado_rubro','=','Habilitado')
         ->where('estado','=','Habilitado')
+        ->orderByRaw("CAST(nombre as UNSIGNED) ASC")
     	->get();
     	return view("ventas.orden.create",["pacientes"=>$pacientes,"doctores"=>$doctores,"rubros"=>$rubros]);
     }
@@ -250,6 +251,9 @@ class OrdenController extends Controller
         ->first();
 
         $rubros=DB::table('rubro')
+        ->where('estado','=','Habilitado')
+        ->where('estado_rubro','=','Habilitado')
+        ->orderByRaw("CAST(nombre as UNSIGNED) ASC")
     	->get();
 
         return view("ventas.orden.show",["orden"=>$orden,"rubros"=>$rubros]);
@@ -268,6 +272,7 @@ class OrdenController extends Controller
     	$rubros=DB::table('rubro')
     	->where('estado_rubro','=','Habilitado')
         ->where('estado','=','Habilitado')
+        ->orderByRaw("CAST(nombre as UNSIGNED) ASC")
     	->get();
 
     	$orden=DB::table('orden as o')

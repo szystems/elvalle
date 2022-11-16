@@ -58,56 +58,64 @@
 			<br><strong>Cliente:</strong><font color="Blue"> <strong>{{$orden->Paciente}}<strong></font>
 				<strong>Doctor:</strong><font color="Blue"> <strong>{{$orden->Doctor}} ({{ $orden->especialidad }})<strong></font>
 				<strong>Usuario:</strong><font color="Blue"> <strong>{{$orden->Usuario}} ({{$orden->tipo_usuario}})<strong></font>
-			<br><strong>Codigo EEPS:</strong><font color="Blue"> <strong>{{$orden->codigoeeps}}<strong></font>
-			<br><strong>Codigo Papanicolau:</strong><font color="Blue"> <strong>{{$orden->codigopapanicolau}}<strong></font>
-			<br><strong>Observaciones:</strong><font color="Blue"> <strong>{{$orden->observaciones}}<strong></font>
-			<br><strong>Total:</strong><font color="Blue"> <strong>{{ Auth::user()->moneda }}{{number_format($orden->total,2, '.', ',')}}<strong></font>
+			@if ($orden->codigoeeps != null)
+				<br><strong>Codigo EEPS:</strong><font color="Blue"> <strong>{{$orden->codigoeeps}}<strong></font>
+			@endif
+			@if ($orden->codigopapanicolau != null)
+				<br><strong>Codigo Papanicolau:</strong><font color="Blue"> <strong>{{$orden->codigopapanicolau}}<strong></font>
+			@endif
+			@if ($orden->observaciones != null)
+				<br><strong>Observaciones:</strong><font color="Blue"> <strong>{{$orden->observaciones}}<strong></font>
+			@endif
+			
 		</h6>
 		<h4 align="left">
 			<strong><u>Detalle de Rubros</u></strong>
 		</h4>
 
 		@foreach ($rubros as $rubro)
-			<h5 align="left">
-				<strong><u>{{ $rubro->nombre }}</u></strong>
-			</h5>
-			<p>{{ $rubro->nota }}</p>
+			
 			<?php
                 $articulos = DB::table('rubro_articulo as ra')
                 ->join('articulo as a','ra.idarticulo','=','a.idarticulo')
                 ->where('idrubro', '=', $rubro->idrubro)
                 ->get();
 			?>
+			@foreach ($articulos as $articulo)
+				<?php
+				$ExisteArticuloOrden=DB::table('detalle_orden')
+					->where('idorden','=',$orden->idorden)
+					->where('idarticulo','=',$articulo->idarticulo)
+					->get();
+				?>
+				@if($ExisteArticuloOrden->count() >= 1)
+					<?php
+						$detalleExistente=DB::table('detalle_orden')
+						->where('idorden','=',$orden->idorden)
+						->where('idarticulo','=',$articulo->idarticulo)
+						->first();
+					?>
+					<p></p>
+					<div style="text-align:center;">
 
-			<div style="text-align:center;">
-
-				<table>
-					<tr>
-						<th><h3 align="center">Rubro</h3></th>
-						<th><h3 align="center">Precio</h3></th>
-					</tr>
-					@foreach ($articulos as $articulo)
-						<tr>
-							<?php
-                                $ExisteArticuloOrden=DB::table('detalle_orden')
-                                ->where('idorden','=',$orden->idorden)
-                                ->where('idarticulo','=',$articulo->idarticulo)
-                                ->get();
-                            ?>
-                            @if($ExisteArticuloOrden->count() >= 1)
-                                <?php
-                                	$detalleExistente=DB::table('detalle_orden')
-                                    ->where('idorden','=',$orden->idorden)
-                                    ->where('idarticulo','=',$articulo->idarticulo)
-                                    ->first();
-                                ?>
-								<td><h3 align="center">{{ $articulo->nombre}}</p></h3></td>
-								<td><h3 align="center">{{ Auth::user()->moneda }}{{number_format($detalleExistente->precio_venta,2, '.', ',')}}</h3></td>
+						<table>
+							<tr>
+								<th><h3 align="center">{{ $rubro->nombre }} </h3></th>
+								<th><h3 align="center">Precio</h3></th>
+							</tr>
+							@if ($rubro->nota != null)
+								<tr>
+									<td colspan="2">{{ $rubro->nota }}</td>
+								</tr>
 							@endif
-						</tr>
-					@endforeach
-				</table>
-			</div>
+							<tr>	
+								<td><h3 align="center">{{ $articulo->nombre}}</p></h3></td>
+								<td><h3 align="center">{{ Auth::user()->moneda }}{{number_format($detalleExistente->precio_venta,2, '.', ',')}}</h3></td>	
+							</tr>
+						</table>
+					</div>
+				@endif
+			@endforeach
 		@endforeach
 		<div style="text-align:center;">
 

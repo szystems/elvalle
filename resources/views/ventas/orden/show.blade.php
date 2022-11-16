@@ -144,8 +144,8 @@
                             @foreach($rubros as $rubro)
                             <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                                 <div class="form-group">
-                                    <label><b><u>{{$rubro->nombre}}</u></b> </label>
-                                    <p>{{$rubro->nota}}</p>
+                                    <!--<label><b><u>{{$rubro->nombre}}</u></b> </label>
+                                    <p>{{$rubro->nota}}</p>-->
                                     <?php
                                         $articulos = DB::table('rubro_articulo as ra')
                                         ->join('articulo as a','ra.idarticulo','=','a.idarticulo')
@@ -154,44 +154,53 @@
 
                                         
                                     ?>
-                                    <div class="table-responsive">
-                                        <table class="table table-striped table-bordered table-condensed table-hover">
-                                            <thead>
-                                                
-                                                <th class="col-5"><h5><strong>Rubro</strong></h5></th>
-                                                <th class="col-3"><h5><strong>Precio ({{ Auth::user()->moneda }})</strong></h5></th>
-                                                
-                                            </thead>
-                                            @foreach ($articulos as $articulo)
-                                                <tr>
-                                                    <?php
-                                                        $ExisteArticuloOrden=DB::table('detalle_orden')
-                                                        ->where('idorden','=',$orden->idorden)
-                                                        ->where('idarticulo','=',$articulo->idarticulo)
-                                                        ->get();
-                                                    ?>
-                                                    @if($ExisteArticuloOrden->count() >= 1)
-                                                        <?php
-                                                            $detalleExistente=DB::table('detalle_orden')
-                                                            ->where('idorden','=',$orden->idorden)
-                                                            ->where('idarticulo','=',$articulo->idarticulo)
-                                                            ->first();
-                                                        ?>
-                                                        <td align="center"><h5>{{ $articulo->nombre}}</h5></td>
-                                                        <td>
-                                                            <div class="input-group">
-                                                                <div class="input-group-prepend">
-                                                                    <span class="input-group-text">{{ Auth::user()->moneda }}</span>
-                                                                </div>
-                                                                <input readonly type="text"  class="form-control" aria-label="Amount (to the nearest dollar)" value="{{$detalleExistente->precio_venta}}" onkeypress="return validardecimal(event,this.value)">
-                                                            </div>
-                                                        </td>
-                                                    @endif
-                                                </tr>
-                                            @endforeach
-                                        </table>
-                                    </div>
-                                    
+                                    @foreach ($articulos as $articulo)
+                                        <?php
+                                            $ExisteArticuloOrden=DB::table('detalle_orden')
+                                            ->where('idorden','=',$orden->idorden)
+                                            ->where('idarticulo','=',$articulo->idarticulo)
+                                            ->get();
+                                        ?>
+                                        @if($ExisteArticuloOrden->count() >= 1)
+                                            <?php
+                                                $detalleExistente=DB::table('detalle_orden')
+                                                ->where('idorden','=',$orden->idorden)
+                                                ->where('idarticulo','=',$articulo->idarticulo)
+                                                ->first();
+                                            ?>
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-bordered table-condensed table-hover">
+                                                    <thead>
+                                                        
+                                                        <th class="col-5"><h5><strong>{{ $rubro->nombre }}</strong></h5></th>
+                                                        <th class="col-3"><h5><strong>Precio ({{ Auth::user()->moneda }})</strong></h5></th>
+                                                        
+                                                    </thead>
+                                                        @if ($rubro->nota != null)
+                                                            <tr>
+                                                                <td colspan="2">{{ $rubro->nota }}</td>
+                                                            </tr>
+                                                        @endif  
+                                                    
+                                                        <tr>
+                                                            
+                                                            
+                                                                <td align="center"><h5>{{ $articulo->nombre}}</h5></td>
+                                                                <td>
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-prepend">
+                                                                            <span class="input-group-text">{{ Auth::user()->moneda }}</span>
+                                                                        </div>
+                                                                        <input readonly type="text"  class="form-control" aria-label="Amount (to the nearest dollar)" value="{{$detalleExistente->precio_venta}}" onkeypress="return validardecimal(event,this.value)">
+                                                                    </div>
+                                                                </td>
+                                                            
+                                                        </tr>
+                                                    
+                                                </table>
+                                            </div>
+                                        @endif
+                                    @endforeach
                                 </div>
                             </div>
                             @endforeach

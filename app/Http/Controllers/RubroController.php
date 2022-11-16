@@ -31,7 +31,7 @@ class RubroController extends Controller
             $rubros=DB::table('rubro')
             ->where('nombre','LIKE','%'.$query.'%')
             ->where ('estado','=','Habilitado')
-            ->orderBy('nombre','asc')
+            ->orderByRaw("CAST(nombre as UNSIGNED) ASC")
             ->paginate(20);
             return view('ventas.rubro.index',["rubros"=>$rubros,"searchText"=>$query]);
         }
@@ -77,10 +77,12 @@ class RubroController extends Controller
         $rubroArticulos=DB::table('rubro_articulo as ra')
             ->join('articulo as a','ra.idarticulo','=','a.idarticulo')
             ->where('ra.idrubro','=',$id)
+            ->orderByRaw("CAST(a.nombre as UNSIGNED) ASC")
 			->get();
 
         $articulos=DB::table('articulo')
             ->where('estado','=',"Activo")
+            ->orderBy("nombre")
 			->get();
 
         return view("ventas.rubro.show",["rubro"=>Rubro::findOrFail($id),"rubroArticulos"=>$rubroArticulos,"articulos"=>$articulos]);
