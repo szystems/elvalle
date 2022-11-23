@@ -65,7 +65,8 @@
                 $annos = $hoy->diff($cumpleanos);
                 $edad = $annos->y;
 
-                $fecha_inicio = date("d-m-Y H:i A", strtotime($cita->fecha_inicio));
+				$fecha_cita = date("d-m-Y", strtotime($cita->fecha_inicio));
+                $fecha_inicio = date("H:i A", strtotime($cita->fecha_inicio));
 				$fecha_fin = date("H:i A", strtotime($cita->fecha_fin));
             ?>
 			<tr>
@@ -74,7 +75,7 @@
 			</tr>
 			<tr>
 				<td><h4 align="right"><strong>Fecha y Hora:</strong></h4></td>
-				<td><h4 align="left"><font color="Blue"><font color="limegreen"> {{$fecha_inicio}}</font> - <font color="Red">{{$fecha_fin}}</font></font></h4></td>
+				<td><h4><font color="blue">{{ $fecha_cita }}</font> <b>(<font color="limegreen">{{ $fecha_inicio}}</font> - <font color="red">{{$fecha_fin}}</font>)</b></h4></td>
 			</tr>
 			<tr>
 				<td><h4 align="right"><strong>Apuntes:</strong></h4></td>
@@ -88,6 +89,6 @@
 		</table>
 		</div>
 		<br>
-		<h6>Reporte generado en: <a href="https://szystems.com/" target="_blank">SZ-Ventas Version 1.0</a> &copy; 2022 <a class="link-muted" href="https://szystems.com/" target="_blank">Szystems</a>. Todos los derechos reservados.</h6>
+		<h6>Reporte generado en: <a href="https://szystems.com/" target="_blank">SZ-Clinicas Version 1.0</a> &copy; 2022 <a class="link-muted" href="https://szystems.com/" target="_blank">Szystems</a>. Todos los derechos reservados.</h6>
 	</body>
 </html>

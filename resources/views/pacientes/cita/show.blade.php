@@ -75,7 +75,8 @@
                         $annos = $hoy->diff($cumpleanos);
                         $edad = $annos->y;
 
-                        $fecha_inicio = date("d-m-Y H:i A", strtotime($cita->fecha_inicio));
+                        $fecha_cita = date("d-m-Y", strtotime($cita->fecha_inicio));
+                        $fecha_inicio = date("H:i A", strtotime($cita->fecha_inicio));
 				        $fecha_fin = date("H:i A", strtotime($cita->fecha_fin));
                     ?>
                     <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
@@ -94,7 +95,7 @@
                     <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                         <div class="form-group">
                             <label for="paciente"><strong>Fecha y Hora</strong></label>
-                            <p><font color="limegreen"> {{$fecha_inicio}}</font> - <font color="Red">{{$fecha_fin}}</font></p>
+                            <p><h5><font color="blue">{{ $fecha_cita }}</font> <b>(<font color="limegreen">{{ $fecha_inicio}}</font> - <font color="red">{{$fecha_fin}}</font>)</b></h5></p>
                         </div>
                     </div>
                     

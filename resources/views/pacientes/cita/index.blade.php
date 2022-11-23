@@ -85,7 +85,9 @@
 						<select name="minuto" id="minuto" class="form-control selectpicker"  data-live-search="true" required>
 							<option value="">Seleccione el minuto</option>
 							<option value="00">00</option>
+							<option value="15">15</option>
 							<option value="30">30</option>
+							<option value="45">45</option>
 						</select>
 					</div>
 				</div><div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
@@ -93,8 +95,11 @@
 						<label for="hora"><font color="orange">*</font>Duracion</label>
 						<select name="duracion" id="duracion" class="form-control selectpicker"  data-live-search="true" required>
 							<option value="">Seleccione la duracion</option>
-							<option value="59">1 hora</option>
-							<option value="29">30 minutos</option>
+							<option value="119">120 min</option>
+							<option value="89">90 Minutos</option>
+							<option value="59">60 Minutos</option>
+							<option value="44">45 minutos</option>
+							<option value="29">30 Minutos</option>
 						</select>
 					</div>
 				</div>
@@ -134,17 +139,31 @@
 				
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				<?php
-                    $doctorBuscar=DB::table('users')->where('id','=',$iddoctorBuscar)->first();
-					$fechaImprimir=$fechaBuscar;
-					$fechaBuscar = date("d-m-Y", strtotime($fechaBuscar));
-                ?>
+					$doctorBuscar=DB::table('users')->where('id','=',$iddoctorBuscar)->first();
+					$desdeReporte=$desde;
+					$hastaReporte=date("d-m-Y", strtotime($hasta.'- 1 days'));
+
+					$desde = date("d-m-Y", strtotime($desde));
+					$hasta = date("d-m-Y", strtotime($hasta));
+					if($desde == '01-01-1970' or $hasta == '01-01-1970')
+					{
+						$desde = date('d-m-Y');
+						$hasta = date('d-m-Y');
+					}else
+					{
+						$desde = date("d-m-Y", strtotime($desde));
+						$hasta = date("d-m-Y", strtotime($hasta.'- 1 days'));
+					}
+								
+				?>
 				@include('pacientes/cita.search')
 				<p> <b><u>Filtros:</u></b> </p>
-				<p>Fecha: <font color="Blue">{{$fechaBuscar}}</font>,  Doctor: <font color="Blue">@if($iddoctorBuscar == "") Todos @else {{$doctorBuscar->name}} ({{$doctorBuscar->especialidad}}) @endif</font></p>
+				<p>Desde: <font color="Blue">{{$desde}}</font>, Hasta: <font color="Blue">{{$hasta}}</font>,  Doctor: <font color="Blue">@if($iddoctorBuscar == "") Todos @else {{$doctorBuscar->name}} ({{$doctorBuscar->especialidad}}) @endif</font></p>
 				{{Form::open(array('action' => 'ReportesController@reportecitas','method' => 'POST','role' => 'form', 'target' => '_blank'))}}
 
                 {{Form::token()}}
-					<input type="hidden" id="rfecha" class="form-control datepicker" name="rfecha" value="{{$fechaImprimir}}">
+					<input type="hidden" name="searchDesde" value="{{ $desdeReporte }}">
+					<input type="hidden" name="searchHasta" value="{{ $hastaReporte }}">
 					<input type="hidden" id="rdoctor" class="form-control datepicker" name="rdoctor" @if($iddoctorBuscar != null) value="{{ $iddoctorBuscar }}" @else value="" @endif>
 					
 					<div class="card mb-4">
@@ -199,8 +218,8 @@
 									$citaUsuario = DB::table('users')
 									->where('id', '=', $cita->idusuario)
 									->first();
-
-									$fecha_inicio = date("d-m-Y H:i A", strtotime($cita->fecha_inicio));
+									$fecha_cita = date("d/m/Y", strtotime($cita->fecha_inicio));
+									$fecha_inicio = date("H:i A", strtotime($cita->fecha_inicio));
 									$fecha_fin = date("H:i A", strtotime($cita->fecha_fin));
 								?>
 								<a href="{{URL::action('CitaController@show',$cita->idcita)}}">
@@ -259,7 +278,7 @@
 								</h5>
 							</td>
 							
-							<td align="center"><h5><font color="limegreen">{{ $fecha_inicio}}</font> - <font color="red">{{$fecha_fin}}</font></h5></td>
+							<td align="center"><h5><font color="blue">{{ $fecha_cita }}</font> <b>(<font color="limegreen">{{ $fecha_inicio}}</font> - <font color="red">{{$fecha_fin}}</font>)</b></h5></td>
 							<td align="center"><h5>{{ $citaUsuario->name}}<br>({{$citaUsuario->tipo_usuario}})</h5></td>
 							@if($cita->estado_cita == "Confirmada")
 								<td align="center"><h5> <font color="Blue">{{ $cita->estado_cita}}</font> </h5></td>
@@ -312,9 +331,12 @@
 		todayBtn: "linked",
 	};
 	$( '#fecha' ).datepicker( optSimple );
-	$( '#fechaBuscar' ).datepicker( optSimple );
+	$( '#datepickerdesde' ).datepicker( optSimple );
+
+	$( '#datepickerhasta' ).datepicker( optSimple );
 
 	$( '#fecha').datepicker( 'setDate', today );
-	$( '#fechaBuscar').datepicker( 'setDate', $fechaBuscar );
+	$( '#datepickerdesde').datepicker( 'setDate', today );
+	$( '#datepickerhasta').datepicker( 'setDate', today );
 </script>
 @endsection

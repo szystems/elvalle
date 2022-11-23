@@ -46,14 +46,10 @@
 		</h4>
 		<h6><strong>Empresa:</strong><font color="Blue"> <strong>'{{ $empresa}}' </strong></font><br><strong>Reporte creado por:</strong><font color="Blue"> <strong>'{{ $nombreusu}}' <strong></font>
 		<?php
-			$fecha = date("d-m-Y", strtotime($fecha));
-			if($fecha == '01-01-1970')
-			{
-				$fecha = null;
-			}
-					
+			$desde = date("d-m-Y", strtotime($desde));
+			$hasta = date("d-m-Y", strtotime($hasta.'- 1 days'));
 		?>
-		<br><strong>Filtros:</strong><font color="Blue"> <strong>Fecha:</strong> '{{ $fecha}}', <strong>Doctor:</strong> @if(isset($docfiltro)) '{{$docfiltro->name}}' @else Todos @endif</font></h6>
+		<br><strong>Filtros:</strong><font color="Blue"> <strong>Desde:</strong> '{{ $desde}}', <strong>Hasta:</strong> '{{ $hasta}}', <strong>Doctor:</strong> @if(isset($docfiltro)) '{{$docfiltro->name}}' @else Todos @endif</font></h6>
 		
 		
 		
@@ -83,12 +79,13 @@
 					->where('id', '=', $cita->idusuario)
 					->first();
 
-					$fecha_inicio = date("d-m-Y H:i A", strtotime($cita->fecha_inicio));
+					$fecha_cita = date("d/m/Y", strtotime($cita->fecha_inicio));
+					$fecha_inicio = date("H:i A", strtotime($cita->fecha_inicio));
 					$fecha_fin = date("H:i A", strtotime($cita->fecha_fin));
 				?>			
 				<td class="celda"><h4 align="center">{{ $citaDoctor->name}}</h4></td>
 				<td><h4 align="center">{{ $citaPaciente->nombre}} @if($cita->apuntes != null) <i class="fas fa-comment"> @endif </i></h4></td>
-				<td><h4 align="center"><font color="limegreen">{{ $fecha_inicio}}</font> - <font color="red">{{$fecha_fin}}</font></h4></td>
+				<td><h4 align="center"><font color="blue">{{ $fecha_cita }}</font> <b><br>(<font color="limegreen">{{ $fecha_inicio}}</font> - <font color="red">{{$fecha_fin}}</font>)</b></h4></td>
 				<td><h4 align="center">{{ $citaUsuario->name}}<br>({{$citaUsuario->tipo_usuario}})</h4></td>
 				@if($cita->estado_cita == "Confirmada")
 					<td class="celda"><h4 align="center"><font color="Blue">{{ $cita->estado_cita}}</font></h4></td>

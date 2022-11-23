@@ -9,6 +9,8 @@ use sisVentasWeb\User;
 use sisVentasWeb\Cita;
 use sisVentasWeb\Bitacora;
 use Carbon\Carbon;
+use \Datetime;
+use DateInterval;
 use Illuminate\Support\Facades\Redirect;
 use sisVentasWeb\Http\Requests\CitaFormRequest;
 use sisVentasWeb\Http\Requests\BitacoraFormRequest;
@@ -28,20 +30,43 @@ class CitaController extends Controller
 		if ($request)
 		{
             $iddoctorBuscar = $request->get('iddoctorBuscar');
-            $fechaBuscar = trim($request->get('fechaBuscar'));
+            $desde = trim($request->get('desde'));
+            $hasta = trim($request->get('hasta'));
 
-            $fechaBuscar = date("Y-m-d", strtotime($fechaBuscar));
-            $mananaBuscar = date("Y-m-d", strtotime($fechaBuscar.'+ 1 days'));
-
-            if($fechaBuscar != '1970-01-01')
+            $desde = date("Y-m-d", strtotime($desde));
+            if($desde == '1970-01-01')
             {
+                $zona_horaria = Auth::user()->zona_horaria;
+                $hoy = Carbon::now($zona_horaria);
+                $desde = $hoy->format('d-m-Y');
+                $desde = date("Y-m-d", strtotime($desde));
+            }
+            $hasta = date("Y-m-d", strtotime($hasta.'+ 1 days'));
+
+            
+
+            \error_log('desde: '.$desde.', hasta: '.$hasta." Doctor: ".$iddoctorBuscar);
+
+
+            if($desde != '1970-01-01' or $hasta != '1970-01-01')
+            {
+                if($iddoctorBuscar != null)
+                {
+                    $citas=DB::table('cita')
+                    ->where('iddoctor','=', $iddoctorBuscar)
+                    ->where('fecha_inicio','>=', $desde)
+                    ->where('fecha_inicio','<', $hasta)
+                    ->orderBy('fecha_inicio','asc')
+                    ->paginate(20);
+                }else
+                {
+                    $citas=DB::table('cita')
+                    ->where('fecha_inicio','>=', $desde)
+                    ->where('fecha_inicio','<', $hasta)
+                    ->orderBy('fecha_inicio','asc')
+                    ->paginate(20);
+                }
                 
-                $citas=DB::table('cita')
-                ->where('iddoctor','LIKE', '%'.$iddoctorBuscar.'%')
-                ->where('fecha_inicio','>=', $fechaBuscar)
-                ->where('fecha_inicio','<', $mananaBuscar)
-                ->orderBy('fecha_inicio','asc')
-                ->paginate(20);
 
                 $doctores=DB::table('users')
                 ->where('tipo_usuario', '=', 'Doctor')
@@ -54,20 +79,16 @@ class CitaController extends Controller
                 ->orderBy('nombre','asc')
                 ->get();
 
-                return view('pacientes.cita.index',["citas"=>$citas,"doctores"=>$doctores,"pacientes"=>$pacientes,"iddoctorBuscar"=>$iddoctorBuscar,"fechaBuscar"=>$fechaBuscar]);
+                return view('pacientes.cita.index',["citas"=>$citas,"doctores"=>$doctores,"pacientes"=>$pacientes,"iddoctorBuscar"=>$iddoctorBuscar,"desde"=>$desde,"hasta"=>$hasta]);
             }
             else
             {
                 $zona_horaria = Auth::user()->zona_horaria;
-                $fecha= Carbon::now($zona_horaria);
-                $fecha=trim($fecha);
-                $fecha = date("Y-m-d", strtotime($fecha));
-
-                $manana = date("Y-m-d", strtotime($fecha.'+ 1 days'));
+                
 
                 $citas=DB::table('cita')
-                ->where('fecha_inicio','>=',$fecha)
-                ->where('fecha_inicio','<',$manana)
+                ->where('fecha_inicio','>=',$desde)
+                ->where('fecha_inicio','<',$hasta)
                 ->orderBy('fecha_inicio','asc')
                 ->paginate(20);
 
@@ -81,7 +102,7 @@ class CitaController extends Controller
                 ->where('estado','=','Habilitado')
                 ->orderBy('nombre','asc')
                 ->get();
-                return view('pacientes.cita.index',["citas"=>$citas,"doctores"=>$doctores,"pacientes"=>$pacientes,"iddoctorBuscar"=>$iddoctorBuscar,"fechaBuscar"=>$fecha]);
+                return view('pacientes.cita.index',["citas"=>$citas,"doctores"=>$doctores,"pacientes"=>$pacientes,"iddoctorBuscar"=>$iddoctorBuscar,"desde"=>$desde,"hasta"=>$hasta]);
             }
 		}
 	}
@@ -108,20 +129,27 @@ class CitaController extends Controller
         $fecha_inicio = date("Y-m-d", strtotime($fecha_inicio));
         $fecha_inicio = date($fecha_inicio." ".$hora.":".$minuto_entrada.":00");
 
-        if($duracion == 59 and $minuto_entrada == 30)
-        {
-            $duracion = 29;
-            $minuto_salida = $duracion;
-            $hora = $hora + 1;
-        }
-        else
-        {
-            $minuto_salida = $minuto_entrada + $duracion;
-        }
+
+        // if($duracion == 59 and $minuto_entrada == 30)
+        // {
+        //     $duracion = 29;
+        //     $minuto_salida = $duracion;
+        //     $hora = $hora + 1;
+        // }
+        // else
+        // {
+        //     $minuto_salida = $minuto_entrada + $duracion;
+        // }
         
 
-        $fecha_fin = date("Y-m-d", strtotime($fecha_fin));
-        $fecha_fin = date($fecha_fin." ".$hora.":".$minuto_salida.":00");
+        // $fecha_fin = date("Y-m-d", strtotime($fecha_fin));
+        // $fecha_fin = date($fecha_fin." ".$hora.":".$minuto_salida.":00");
+        
+        
+
+        $fecha_fin = new DateTime($fecha_inicio);
+        $fecha_fin->add(new DateInterval('PT' . $duracion . 'M'));
+        error_log('Fecha fin: '.$fecha_fin->format("Y-m-d H:i A"));
 
         //comprobamos que la fecha no este bloqueada para este doctor
         $fechaComprobacion = date("Y-m-d", strtotime($fecha_inicio));
@@ -155,6 +183,8 @@ class CitaController extends Controller
                 $cita->estado="Habilitado";
                 $cita->save();
 
+                $ff = $fecha_fin->format('d-m-Y H:i:s'); // for example
+
                 $zonahoraria = Auth::user()->zona_horaria;
                 $moneda = Auth::user()->moneda;
                 $fechahora= Carbon::now($zonahoraria);
@@ -163,7 +193,7 @@ class CitaController extends Controller
                 $bitacora->idempresa=Auth::user()->idempresa;
                 $bitacora->fecha=$fechahora;
                 $bitacora->tipo="Citas";
-                $bitacora->descripcion="Se creo una cita, Paciente: ".$paciente->nombre.", Doctor: ".$doctor->name.", Fecha y hora: ".$cita->fecha_inicio.", Finaliza: ".$cita->fecha_fin.", Estado: ".$cita->estado_cita;
+                $bitacora->descripcion="Se creo una cita, Paciente: ".$paciente->nombre.", Doctor: ".$doctor->name.", Fecha y hora: ".$cita->fecha_inicio.", Finaliza: ".$ff.", Estado: ".$cita->estado_cita;
                 $bitacora->save();
 
                 //$request->session()->flash('alert-success', 'La cita se creo correctamente: '.$paciente->nombre.", Doctor: ".$doctor->name.", Fecha y hora: ".$cita->fecha_inicio.", Finaliza: ".$cita->fecha_fin.", Estado: ".$cita->estado_cita);
@@ -195,6 +225,7 @@ class CitaController extends Controller
         $cita=DB::table('cita')->where('idcita','=',$id)->first();
         $doctor=DB::table('users')->where('id','=',$cita->iddoctor)->first();
         $paciente=DB::table('paciente')->where('idpaciente','=',$cita->idpaciente)->first();
+        
     	return view("pacientes.cita.edit",["cita"=>$cita,"doctor"=>$doctor,"paciente"=>$paciente]);
     }
 
@@ -217,19 +248,22 @@ class CitaController extends Controller
         $fecha_inicio = date("Y-m-d", strtotime($fecha_inicio));
         $fecha_inicio = date($fecha_inicio." ".$hora.":".$minuto_entrada.":00");
         
-        if($duracion == 59 and $minuto_entrada == 30)
-        {
-            $duracion = 29;
-            $minuto_salida = $duracion;
-            $hora = $hora + 1;
-        }
-        else
-        {
-            $minuto_salida = $minuto_entrada + $duracion;
-        }
+        // if($duracion == 59 and $minuto_entrada == 30)
+        // {
+        //     $duracion = 29;
+        //     $minuto_salida = $duracion;
+        //     $hora = $hora + 1;
+        // }
+        // else
+        // {
+        //     $minuto_salida = $minuto_entrada + $duracion;
+        // }
 
-        $fecha_fin = date("Y-m-d", strtotime($fecha_fin));
-        $fecha_fin = date($fecha_fin." ".$hora.":".$minuto_salida.":00");
+        // $fecha_fin = date("Y-m-d", strtotime($fecha_fin));
+        // $fecha_fin = date($fecha_fin." ".$hora.":".$minuto_salida.":00");
+
+        $fecha_fin = new DateTime($fecha_inicio);
+        $fecha_fin->add(new DateInterval('PT' . $duracion . 'M'));
 
         //comprobamos que la fecha no este bloqueada para este doctor
         $fechaComprobacion = date("Y-m-d", strtotime($fecha_inicio));
@@ -300,6 +334,8 @@ class CitaController extends Controller
                     $cita->idusuario=Auth::user()->id;
                     $cita->save();
 
+                    $ff = $fecha_fin->format('d-m-Y H:i:s'); // for example
+
                     $zonahoraria = Auth::user()->zona_horaria;
                     $moneda = Auth::user()->moneda;
                     $fechahora= Carbon::now($zonahoraria);
@@ -308,7 +344,7 @@ class CitaController extends Controller
                     $bitacora->idempresa=Auth::user()->idempresa;
                     $bitacora->fecha=$fechahora;
                     $bitacora->tipo="Citas";
-                    $bitacora->descripcion="Se edito una cita, Paciente: ".$paciente->nombre.", Doctor: ".$doctor->name.", Fecha y hora: ".$cita->fecha_inicio.", Finaliza: ".$cita->fecha_fin.", Estado: ".$cita->estado_cita.", Apuntes: ".$cita->apuntes;
+                    $bitacora->descripcion="Se edito una cita, Paciente: ".$paciente->nombre.", Doctor: ".$doctor->name.", Fecha y hora: ".$cita->fecha_inicio.", Finaliza: ".$ff.", Estado: ".$cita->estado_cita.", Apuntes: ".$cita->apuntes;
                     $bitacora->save();
 
                     $request->session()->flash('alert-success', 'La Fecha y Hora con el doctor: '.$doctor->name.' esta disponible y se edito correctamente. dbturno:'.$dbturno);
@@ -362,6 +398,8 @@ class CitaController extends Controller
                 $cita->idusuario=Auth::user()->id;
                 $cita->save();
 
+                $ff = $fecha_fin->format('d-m-Y H:i:s'); // for example
+
                 $zonahoraria = Auth::user()->zona_horaria;
                 $moneda = Auth::user()->moneda;
                 $fechahora= Carbon::now($zonahoraria);
@@ -370,7 +408,7 @@ class CitaController extends Controller
                 $bitacora->idempresa=Auth::user()->idempresa;
                 $bitacora->fecha=$fechahora;
                 $bitacora->tipo="Citas";
-                $bitacora->descripcion="Se edito una cita, Paciente: ".$paciente->nombre.", Doctor: ".$doctor->name.", Fecha y hora: ".$cita->fecha_inicio.", Finaliza: ".$cita->fecha_fin.", Estado: ".$cita->estado_cita.", Apuntes: ";
+                $bitacora->descripcion="Se edito una cita, Paciente: ".$paciente->nombre.", Doctor: ".$doctor->name.", Fecha y hora: ".$cita->fecha_inicio.", Finaliza: ".$ff.", Estado: ".$cita->estado_cita.", Apuntes: ";
                 $bitacora->save();
     
                 $request->session()->flash('alert-success', 'La Fecha y Hora con el doctor: '.$doctor->name.' esta disponible y se edito correctamente. Turno:'.$dbturno);

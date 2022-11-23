@@ -66,6 +66,12 @@
                         ->where('estado','=','Habilitado')
                         ->orderBy('nombre','asc')
                         ->get();
+
+                        //diferencia en minutos
+                        $fi = strtotime($cita->fecha_inicio);
+                        $ff = strtotime($cita->fecha_fin);
+                        $interval  = abs($ff - $fi);
+                        $minutos   = round($interval / 60);
 			?>
                   <div class="form-group">
                         <label for="fecha_inicio"> <b>Fecha y Hora</b> </label>
@@ -95,82 +101,103 @@
                       </div>
                   </div>-->
                   <h3><strong><u>Modificar Datos: </u></strong></h3>
-                  <div class="form-group">
-				<label for="iddoctor"><font color="orange">*</font>Doctor</label>
-				<select name="iddoctor" id="iddoctor" class="form-control selectpicker"  data-live-search="true" required>
-					<option selected value="{{$doctor->id}}">{{$doctor->name}} ({{$doctor->especialidad}})</option>
-					@foreach($doctores as $doc)
-					      <option value="{{$doc->id}}">{{$doc->name}} / {{$doc->especialidad}}</option>
-					@endforeach
-				</select>
-			</div>
-                  <div class="form-group">
-				<label for="idpaciente"><font color="orange">*</font>Paciente</label>
-				<a href="{{url('pacientes\paciente\create')}}">
-					<span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Crear nuevo Paciente">
-						<button class="btn btn-sm btn-success" style="pointer-events: none;" type="button">
-							<i class="far fa-plus-square"></i>
-						</button>
-					</span>
-				</a>
-				<select name="idpaciente" id="idpaciente" class="form-control selectpicker"  data-live-search="true" required>
-                              <option selected value="{{$paciente->idpaciente}}">{{$paciente->nombre}} / {{$paciente->dpi}} / {{$paciente->nit}} / {{$paciente->telefono}}</option>
-					@foreach($pacientes as $pac)
-						<option value="{{$pac->idpaciente}}">{{$pac->nombre}} / {{$pac->dpi}} / {{$pac->nit}} / {{$pac->telefono}}</option>
-					@endforeach
+                  <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                        <div class="form-group">
+                              <label for="iddoctor"><font color="orange">*</font>Doctor</label>
+                              <select name="iddoctor" id="iddoctor" class="form-control selectpicker"  data-live-search="true" required>
+                                    <option selected value="{{$doctor->id}}">{{$doctor->name}} ({{$doctor->especialidad}})</option>
+                                    @foreach($doctores as $doc)
+                                          <option value="{{$doc->id}}">{{$doc->name}} / {{$doc->especialidad}}</option>
+                                    @endforeach
+                              </select>
+                        </div>
+                  </div>
+                  <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                        <div class="form-group">
+                              <label for="idpaciente"><font color="orange">*</font>Paciente</label>
+                              <a href="{{url('pacientes\paciente\create')}}">
+                                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Crear nuevo Paciente">
+                                          <button class="btn btn-sm btn-success" style="pointer-events: none;" type="button">
+                                                <i class="far fa-plus-square"></i>
+                                          </button>
+                                    </span>
+                              </a>
+                              <select name="idpaciente" id="idpaciente" class="form-control selectpicker"  data-live-search="true" required>
+                                    <option selected value="{{$paciente->idpaciente}}">{{$paciente->nombre}} / {{$paciente->dpi}} / {{$paciente->nit}} / {{$paciente->telefono}}</option>
+                                    @foreach($pacientes as $pac)
+                                          <option value="{{$pac->idpaciente}}">{{$pac->nombre}} / {{$pac->dpi}} / {{$pac->nit}} / {{$pac->telefono}}</option>
+                                    @endforeach
 
-				</select>
+                              </select>
+                        </div>
 			</div>
-			<div class="form-group">
-				<label for="fecha"></label><font color="orange">*</font>Fecha:</label>
-				<span class="form-icon-wrapper">
-					<span class="form-icon form-icon--right">
-						<i class="fas fa-calendar-alt form-icon__item"></i>
-					</span>
-					<input type="text" id="fecha" class="form-control datepicker" name="fecha" value="{{$fechaCita}}">
-				</span>
-			</div>
-			<div class="form-group">
-				<label for="hora"><font color="orange">*</font>Hora</label>
-				<select name="hora" id="hora" class="form-control selectpicker"  data-live-search="true" required>
-					<option value="{{$hora}}">{{$hora}}</option>
-					@for ($i = 0; $i < 24; $i++)
-						<option value="{{$i}}">{{$i}}</option>
-					@endfor
-				</select>		
-			</div>
-			<div class="form-group">
-				<label for="hora"><font color="orange">*</font>Minutos</label>
-				<select name="minuto" id="minuto" class="form-control selectpicker"  data-live-search="true" required>
-					<option value="{{$minuto}}">{{$minuto}}</option>
-					<option value="00">00</option>
-					<option value="30">30</option>
-				</select>
-			</div>
-                  <div class="form-group">
-				<label for="duracion"><font color="orange">*</font>Duracion</label>
-				<select name="duracion" id="duracion" class="form-control selectpicker"  data-live-search="true" required>
-					<option value="{{$duracion->format('%i')}}">
-                                    @if($duracion->format('%i') == "59")
-                                          1 Hora
-                                    @endif
-                                    @if($duracion->format('%i') == "29")
-                                          30 minutos
-                                    @endif
-                              </option>
-					<option value="59">1 Hora</option>
-					<option value="29">30 Minutos</option>
-				</select>
-			</div>
-                  <div class="form-group{{ $errors->has('estado_cita') ? ' has-error' : '' }}">
-                        <label for="estado_cita"><font color="orange">*</font>Estado_cita</label>
-                        <select id="estado_cita" type="text" class="form-control" name="estado_cita">
-                              <option selected="selected" value="{{$cita->estado_cita}}">{{$cita->estado_cita}}</option>
-                              <option value="Confirmada">Confirmada</option>
-                              <option value="Espera">Espera</option>
-                              <option value="Activa">Activa</option>
-                              <option value="Finalizada">Finalizada</option>
-                        </select>
+                  <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                        <div class="form-group">
+                              <label for="fecha"></label><font color="orange">*</font>Fecha:</label>
+                              <span class="form-icon-wrapper">
+                                    <span class="form-icon form-icon--right">
+                                          <i class="fas fa-calendar-alt form-icon__item"></i>
+                                    </span>
+                                    <input type="text" id="fecha" class="form-control datepicker" name="fecha" value="{{$fechaCita}}">
+                              </span>
+                        </div>
+                  </div>
+                  <div class="col-lg-4 col-sm-12 col-md-6 col-xs-12">
+                        <div class="form-group">
+                              <label for="hora"><font color="orange">*</font>Hora</label>
+                              <select name="hora" id="hora" class="form-control selectpicker"  data-live-search="true" required>
+                                    <option value="{{$hora}}">{{$hora}}</option>
+                                    @for ($i = 0; $i < 24; $i++)
+                                          <option value="{{$i}}">{{$i}}</option>
+                                    @endfor
+                              </select>		
+                        </div>
+                  </div>
+                  <div class="col-lg-4 col-sm-12 col-md-6 col-xs-12">
+                        <div class="form-group">
+                              <label for="hora"><font color="orange">*</font>Minutos</label>
+                              <select name="minuto" id="minuto" class="form-control selectpicker"  data-live-search="true" required>
+                                    <option value="{{$minuto}}">{{$minuto}}</option>
+                                    <option value="00">00</option>
+                                    <option value="15">15</option>
+                                    <option value="30">30</option>
+                                    <option value="45">45</option>
+                              </select>
+                              
+                        </div>
+                  </div>
+                  <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                        <div class="form-group">
+                              <label for="duracion"><font color="orange">*</font>Duracion</label>
+                              <select name="duracion" id="duracion" class="form-control selectpicker"  data-live-search="true" required>
+                                    {{-- <option value="{{$duracion->format('%i')}}">
+                                          @if($duracion->format('%i') == "59")
+                                                1 Hora
+                                          @endif
+                                          @if($duracion->format('%i') == "29")
+                                                30 minutos
+                                          @endif
+                                    </option> --}}
+                                    <option value="{{ $minutos }}" selected>{{ $minutos+1 }} Minutos</option>
+                                    <option value="119">120 min</option>
+                                    <option value="89">90 Minutos</option>
+                                    <option value="59">60 Minutos</option>
+                                    <option value="44">45 minutos</option>
+                                    <option value="29">30 Minutos</option>
+                              </select>
+                        </div>
+                  </div>
+                  <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                        <div class="form-group{{ $errors->has('estado_cita') ? ' has-error' : '' }}">
+                              <label for="estado_cita"><font color="orange">*</font>Estado_cita</label>
+                              <select id="estado_cita" type="text" class="form-control" name="estado_cita">
+                                    <option selected="selected" value="{{$cita->estado_cita}}">{{$cita->estado_cita}}</option>
+                                    <option value="Confirmada">Confirmada</option>
+                                    <option value="Espera">Espera</option>
+                                    <option value="Activa">Activa</option>
+                                    <option value="Finalizada">Finalizada</option>
+                              </select>
+                        </div>
                   </div>
                   <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                       <div class="form-group">

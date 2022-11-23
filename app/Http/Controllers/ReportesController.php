@@ -1898,8 +1898,9 @@ class ReportesController extends Controller
 
                 
                 $verpdf=trim($rrequest->get('pdf'));
-                $fecha=trim($rrequest->get('rfecha'));
-                $mananaBuscar = date("Y-m-d", strtotime($fecha.'+ 1 days'));
+                $desde=trim($rrequest->get('searchDesde'));
+                $hasta=trim($rrequest->get('searchHasta'));
+                $hasta = date("Y-m-d", strtotime($hasta.'+ 1 days'));
                 $doctor=trim($rrequest->get('rdoctor'));
 
                 $usuarios=DB::table('users')
@@ -1918,33 +1919,33 @@ class ReportesController extends Controller
                 $nompdf = Carbon::now($zona_horaria);
                 $nompdf = $nompdf->format('Y-m-d H:i:s');
                 
-                if($fecha != '1970-01-01')
+                if($desde != '1970-01-01')
                 {
                     $citas=DB::table('cita')
                     ->where('iddoctor','LIKE', '%'.$doctor.'%')
-                    ->where('fecha_inicio','>=', $fecha)
-                    ->where('fecha_inicio','<', $mananaBuscar)
+                    ->where('fecha_inicio','>=', $desde)
+                    ->where('fecha_inicio','<', $hasta)
                     ->orderBy('fecha_inicio','asc')
                     ->paginate(20);
                 }
                 else
                 {
                     $citas=DB::table('cita')
-                    ->where('fecha_inicio','>=',$fecha)
-                    ->where('fecha_inicio','<',$manana)
+                    ->where('fecha_inicio','>=',$desde)
+                    ->where('fecha_inicio','<',$hasta)
                     ->orderBy('fecha_inicio','asc')
                     ->paginate(20);
                 }  
                 if ( $verpdf == "Descargar" )
                 {
-                    $view = \View::make('pdf.citas.reportecitas', compact('citas','fecha','doctor','hoy','nombreusu','empresa','imagen','docfiltro'))->render();
+                    $view = \View::make('pdf.citas.reportecitas', compact('citas','desde','hasta','doctor','hoy','nombreusu','empresa','imagen','docfiltro'))->render();
                     $pdf = \App::make('dompdf.wrapper');
                     $pdf->loadHTML($view);
                     return $pdf->download ('ReporteCitas'.$nompdf.'.pdf');
                 }
                 if ( $verpdf == "Navegador" )
                 {
-                    $view = \View::make('pdf.citas.reportecitas', compact('citas','fecha','doctor','hoy','nombreusu','empresa','imagen','docfiltro'))->render();
+                    $view = \View::make('pdf.citas.reportecitas', compact('citas','desde','hasta','doctor','hoy','nombreusu','empresa','imagen','docfiltro'))->render();
                     $pdf = \App::make('dompdf.wrapper');
                     $pdf->loadHTML($view);
                     return $pdf->stream ('ReporteCitas'.$nompdf.'.pdf');
