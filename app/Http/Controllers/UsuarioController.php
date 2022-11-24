@@ -50,6 +50,12 @@ class UsuarioController extends Controller
     {
         $idempresa = Auth::user()->idempresa;
 
+        $activo = $request->get('activo');
+        if($activo == null)
+        {
+            $activo = "NO";
+        }
+
         $usuario=new User;
     	$usuario->name=$request->get('name');
     	$usuario->email=$request->get('email');
@@ -68,6 +74,7 @@ class UsuarioController extends Controller
         $usuario->max_descuento=$request->get('max_descuento');
         $usuario->logo=Auth::user()->logo;
         $usuario->principal='NO';
+        $usuario->activo=$activo;
         if (input::hasfile('foto')){
             $permitted_chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
             $generar_codigo_imagen = substr(str_shuffle($permitted_chars), 0, 5);
@@ -114,6 +121,12 @@ class UsuarioController extends Controller
             return view("seguridad.usuario.edit",["usuario"=>User::findOrFail($id)]);
         }else
         {
+            $activo = $request->get('activo');
+            if($activo == null)
+            {
+                $activo = "NO";
+            }
+
             $usuario=User::findOrFail($id);
             $usuario->name=$request->get('name');
             $usuario->email=$request->get('email');
@@ -125,6 +138,7 @@ class UsuarioController extends Controller
             $usuario->telefono_emergencia=$request->get('telefono_emergencia');
             $usuario->tipo_usuario=$request->get('tipo_usuario');
             $usuario->max_descuento=$request->get('max_descuento');
+            $usuario->activo=$activo;
             if (input::hasfile('foto')){
                 $permitted_chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
                 $generar_codigo_imagen = substr(str_shuffle($permitted_chars), 0, 5);

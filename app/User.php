@@ -34,6 +34,7 @@ class User extends Authenticatable
         'moneda',
         'max_descuento',
         'principal',
+        'activo'
         
         
     ];

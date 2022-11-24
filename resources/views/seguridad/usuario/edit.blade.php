@@ -147,6 +147,22 @@
                               </span>
                         @endif
                   </div>  
+                  <div class="form-group{{ $errors->has('activo') ? ' has-error' : '' }}">
+                        
+                        <label class="d-flex align-items-center justify-content-between">
+                              Activo:
+                              <div class="form-toggle">
+                                    @if ($usuario->activo == "SI")
+                                          <input name="activo" type="checkbox" value="SI" checked>
+                                    @else
+                                          <input name="activo" type="checkbox" value="SI">
+                                    @endif
+                                    <div class="form-toggle__item">
+                                          <i class="fa" data-check-icon="&#xf00c" data-uncheck-icon="&#xf00d"></i>
+                                    </div>
+                              </div>
+                        </label>
+                  </div>
 
             </div>
 

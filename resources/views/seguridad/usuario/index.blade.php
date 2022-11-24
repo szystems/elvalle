@@ -80,6 +80,7 @@
 							<th><h5><STRONG>Email</STRONG></th>
 							<th><h5><STRONG>Tipo</STRONG></th>
 							<th><h5><STRONG>Principal</STRONG></th>
+							<th><h5><STRONG>Activo</STRONG></th>
 							
 						</thead>
 		               @foreach ($usuarios as $usu)
@@ -126,6 +127,7 @@
 							<td align="left"><h5>{{ $usu->email}}</h5></td>
 							<td align="left"><h5>{{ $usu->tipo_usuario}}</h5></td>
 							<td align="center"><h5>{{ $usu->principal}}</h5></td>
+							<td align="center"><h5>{{ $usu->activo}}</h5></td>
 							
 						</tr>
 						@include('seguridad.usuario.modal')

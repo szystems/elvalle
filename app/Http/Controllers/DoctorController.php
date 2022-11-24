@@ -59,6 +59,12 @@ class DoctorController extends Controller
     {
         $idempresa = Auth::user()->idempresa;
 
+        $activo = $request->get('activo');
+        if($request->get('activo') == null)
+        {
+            $activo = "NO";
+        }
+
         $doctor=new User;
     	$doctor->name=$request->get('name');
     	$doctor->email=$request->get('email');
@@ -79,6 +85,7 @@ class DoctorController extends Controller
         $doctor->max_descuento=$request->get('max_descuento');
         $doctor->logo=Auth::user()->logo;
         $doctor->principal='NO';
+        $doctor->activo=$activo;
         if (input::hasfile('foto')){
             $permitted_chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
             $generar_codigo_imagen = substr(str_shuffle($permitted_chars), 0, 5);
@@ -122,9 +129,15 @@ class DoctorController extends Controller
         if($emailrepetido > 0)
         {
             $request->session()->flash('alert-danger', 'El email '.$request->get('email').' ya esta siendo usado por otro usuario, por favor intente con otro email.');
-            return view("seguridad.doctor.edit",["usuario"=>User::findOrFail($id)]);
+            return view("seguridad.doctor.edit",["doctor"=>User::findOrFail($id)]);
         }else
         {
+            $activo = $request->get('activo');
+            if($activo == null)
+            {
+                $activo = "NO";
+            }
+
             $doctor=User::findOrFail($id);
             $doctor->name=$request->get('name');
             $doctor->email=$request->get('email');
@@ -137,6 +150,7 @@ class DoctorController extends Controller
             $doctor->contacto_emergencia=$request->get('contacto_emergencia');
             $doctor->telefono_emergencia=$request->get('telefono_emergencia');
             $doctor->max_descuento=$request->get('max_descuento');
+            $doctor->activo=$activo;
             if (input::hasfile('foto')){
                 $permitted_chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
                 $generar_codigo_imagen = substr(str_shuffle($permitted_chars), 0, 5);
