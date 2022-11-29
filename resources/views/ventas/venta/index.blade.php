@@ -66,12 +66,12 @@
 							<input type="hidden" name="searchDesde" value="{{ $desdeReporte }}">
 							<input type="hidden" name="searchHasta" value="{{ $hastaReporte }}">
 							@if(isset($clientefiltro))
-								<input type="hidden" name="searchCliente" value="{{ $clientefiltro->idpaciente }}">
+								<input type="hidden" name="searchCliente" value="{{ $clientefiltro->dpi }}">
 							@else
 								<input type="hidden" name="searchCliente" value="">
 							@endif
 							@if(isset($usufiltro))
-								<input type="hidden" name="searchUsuario" value="{{ $usufiltro->id }}">
+								<input type="hidden" name="searchUsuario" value="{{ $usufiltro->email }}">
 							@else
 								<input type="hidden" name="searchUsuario" value="">
 							@endif

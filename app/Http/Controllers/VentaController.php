@@ -65,11 +65,11 @@ class VentaController extends Controller
             ->get();
 
             $usufiltro=DB::table('users')
-            ->where('id','=',$usuario)
+            ->where('email','=',$usuario)
             ->first();
                     
             $clientefiltro=DB::table('paciente')
-            ->where('idpaciente','=',$cliente)
+            ->where('dpi','=',$cliente)
             ->first();
 
             
@@ -87,8 +87,8 @@ class VentaController extends Controller
                     ->join('users as u','v.idusuario','=','u.id')
                     ->select('v.idventa','p.nombre','u.name','u.tipo_usuario','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.fecha','v.impuesto','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estado','v.estadosaldo','v.estadoventa','v.tipopago','v.idorden')
                     ->whereBetween('fecha', [$desde, $hasta])
-                    ->where('p.idpaciente','LIKE','%'.$cliente.'%')
-                    ->where('u.id','LIKE','%'.$usuario.'%')
+                    ->where('p.dpi','LIKE','%'.$cliente.'%')
+                    ->where('u.email','LIKE','%'.$usuario.'%')
                     ->where('v.idempresa','=',$idempresa)
                     ->where('v.estado','=','A')
                     ->where('v.estadosaldo','=',$estadosaldo)
@@ -106,8 +106,8 @@ class VentaController extends Controller
                     ->join('users as u','v.idusuario','=','u.id')
                     ->select('v.idventa','p.nombre','u.name','u.tipo_usuario','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.fecha','v.impuesto','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estado','v.estadosaldo','v.estadoventa','v.tipopago','v.idorden')
                     ->whereBetween('fecha', [$desde, $hasta])
-                    ->where('p.idpaciente','LIKE','%'.$cliente.'%')
-                    ->where('u.id','LIKE','%'.$usuario.'%')
+                    ->where('p.dpi','LIKE','%'.$cliente.'%')
+                    ->where('u.email','LIKE','%'.$usuario.'%')
                     ->where('v.idempresa','=',$idempresa)
                     ->where('v.estado','=','A')
                     ->where('v.estadoventa','LIKE','%'.$estadoventa.'%')

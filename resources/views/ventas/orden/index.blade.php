@@ -64,17 +64,17 @@
                                 <input type="hidden" name="searchDesde" value="{{ $desdeReporte }}">
                                 <input type="hidden" name="searchHasta" value="{{ $hastaReporte }}">
                                 @if(isset($pacientefiltro))
-                                    <input type="hidden" name="searchPaciente" value="{{ $pacientefiltro->idpaciente }}">
+                                    <input type="hidden" name="searchPaciente" value="{{ $pacientefiltro->dpi }}">
                                 @else
                                 <input type="hidden" name="searchPaciente" value="">
                                 @endif
                                 @if(isset($docfiltro))
-                                    <input type="hidden" name="searchDoctor" value="{{ $docfiltro->id }}">
+                                    <input type="hidden" name="searchDoctor" value="{{ $docfiltro->email }}">
                                 @else
                                     <input type="hidden" name="searchDoctor" value="">
                                 @endif
                                 @if(isset($usufiltro))
-                                    <input type="hidden" name="searchUsuario" value="{{ $usufiltro->id }}">
+                                    <input type="hidden" name="searchUsuario" value="{{ $usufiltro->email }}">
                                 @else
                                     <input type="hidden" name="searchUsuario" value="">
                                 @endif

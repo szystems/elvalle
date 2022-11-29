@@ -59,6 +59,7 @@
                         $doctores=DB::table('users')
                         ->where('tipo_usuario','=','Doctor')
                         ->where('email','!=','Eliminado')
+                        ->where('activo','=','SI')  
                         ->orderBy('especialidad','name','asc')
                         ->get();
 

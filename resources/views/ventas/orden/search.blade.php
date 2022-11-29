@@ -35,17 +35,17 @@
 
 					<div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
                         <div class="form-group mb-2">
-							<label for="paciente"></label>Paciente:</label>
+							<label for="paciente"></label>Paciente / DPI:</label>
 							<select name="paciente" class="form-control" value="{{ old('paciente') }}">
 								<option value="">Todos</option>
 								@if(isset($pacientefiltro))
-									<option selected value="{{ $pacientefiltro->idpaciente }}">{{ $pacientefiltro->nombre }}</option>
+									<option selected value="{{ $pacientefiltro->dpi }}">{{ $pacientefiltro->nombre }} / {{ $pacientefiltro->dpi }}</option>
 								@else
 									<option selected value="">Todos</option>
 								@endif
 
 								@foreach ($pacientes as $paciente)
-                                <option value="{{$paciente->idpaciente}}">{{$paciente->nombre}}</option>
+                                <option value="{{$paciente->dpi}}">{{$paciente->nombre}} / {{ $paciente->dpi }}</option>
                               	@endforeach
 							</select>
 						</div>
@@ -57,13 +57,13 @@
 							<select name="doctor" class="form-control" value="{{ old('doctor') }}">
 								<option value="">Todos</option>
 								@if(isset($docfiltro))
-									<option selected value="{{ $docfiltro->id }}">{{ $docfiltro->name }} ({{ $docfiltro->especialidad }})</option>
+									<option selected value="{{ $docfiltro->email }}">{{ $docfiltro->name }} ({{ $docfiltro->especialidad }})</option>
 								@else
 									<option selected value="">Todos</option>
 								@endif
 
 								@foreach ($doctores as $doctor)
-                                <option value="{{$doctor->id}}">{{$doctor->name}} ({{ $doctor->especialidad }})</option>
+                                <option value="{{$doctor->email}}">{{$doctor->name}} ({{ $doctor->especialidad }})</option>
                               	@endforeach
 							</select>
 						</div>
@@ -75,13 +75,13 @@
 							<select name="usuario" class="form-control" value="{{ old('usuario') }}">
 								<option value="">Todos</option>
 								@if(isset($usufiltro))
-									<option selected value="{{ $usufiltro->id }}">{{ $usufiltro->name }} ({{ $usufiltro->tipo_usuario }})</option>
+									<option selected value="{{ $usufiltro->email }}">{{ $usufiltro->name }} ({{ $usufiltro->tipo_usuario }})</option>
 								@else
 									<option selected value="">Todos</option>
 								@endif
 
 								@foreach ($usuarios as $usu)
-                                <option value="{{$usu->id}}">{{$usu->name}} ({{ $usu->tipo_usuario }})</option>
+                                <option value="{{$usu->email}}">{{$usu->name}} ({{ $usu->tipo_usuario }})</option>
                               	@endforeach
 							</select>
 						</div>

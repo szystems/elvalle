@@ -42,11 +42,11 @@
 							<select name="cliente" class="form-control">
 								<option value="">Todos</option>
 								@if (isset($clientefiltro))
-								  	<option selected value="{{$clientefiltro->idpaciente}}">{{$clientefiltro->nombre}}</option>
+								  	<option selected value="{{$clientefiltro->dpi}}">{{$clientefiltro->nombre}}</option>
 								@endif
 
 								@foreach ($personas as $per)
-                                <option value="{{$per->idpaciente}}">{{$per->nombre}}</option>
+                                <option value="{{$per->dpi}}">{{$per->nombre}}</option>
                               	@endforeach
 							</select>
 						</div>
@@ -58,11 +58,11 @@
 							<select name="usuario" class="form-control">
 								<option value="">Todos</option>
 								@if (isset($usufiltro))
-								  	<option selected value="{{$usufiltro->id}}">{{$usufiltro->name}} ({{ $usufiltro->tipo_usuario }})</option>
+								  	<option selected value="{{$usufiltro->email}}">{{$usufiltro->name}} ({{ $usufiltro->tipo_usuario }})</option>
 								@endif
 
 								@foreach ($usuarios as $usu)
-                                <option value="{{$usu->id}}">{{$usu->name}} ({{ $usu->tipo_usuario }})</option>
+                                <option value="{{$usu->email}}">{{$usu->name}} ({{ $usu->tipo_usuario }})</option>
                               	@endforeach
 							</select>
 						</div>

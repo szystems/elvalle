@@ -50,6 +50,10 @@ class OrdenController extends Controller
             $estadoorden=trim($request->get('estadoorden'));
             $estado=trim($request->get('estado'));
             
+            error_log('Doctor: '.$doctor);
+            error_log('Doctor: '.$paciente);
+            error_log('Doctor: '.$usuario);
+
             $pacientes=DB::table('paciente')
             ->where('estado','=','Habilitado')
             ->get();
@@ -57,6 +61,7 @@ class OrdenController extends Controller
             $doctores=DB::table('users')
             ->where('tipo_usuario','=','Doctor')
             ->where('email','!=','Eliminado')
+            ->where('activo','=','SI')  
             ->get();
 
             $usuarios=DB::table('users')
@@ -65,17 +70,17 @@ class OrdenController extends Controller
             ->get();
 
             $usufiltro=DB::table('users')
-            ->where('id','=',$usuario)
+            ->where('email','=',$usuario)
             ->where('idempresa','=',$idempresa)
             ->first();
                     
             $pacientefiltro=DB::table('paciente')
-            ->where('idpaciente','=',$paciente)
+            ->where('dpi','=',$paciente)
             ->first();
 
             $docfiltro=DB::table('users')
             ->where('tipo_usuario','=','Doctor')
-            ->where('id','=',$doctor)
+            ->where('email','=',$doctor)
             ->first();
 
             $zona_horaria = Auth::user()->zona_horaria;
@@ -85,20 +90,18 @@ class OrdenController extends Controller
                 
             if($desde != '1970-01-01' or $hasta != '1970-01-01')
             {
-                
                 $ordenes=DB::table('orden as o')
                 ->join('paciente as p','o.idpaciente','=','p.idpaciente')
                 ->join('users as d','o.iddoctor','=','d.id')
                 ->join('users as u','o.idusuario','=','u.id')
                 ->select('o.idorden','o.idventa','o.fecha','o.estado_orden','o.estado','o.total','p.idpaciente','p.nombre as Paciente','p.sexo','p.telefono','p.fecha_nacimiento','p.dpi','p.nit','d.id as iddoctor','d.name as Doctor','d.especialidad','u.id as idusuario','u.name as Usuario','u.tipo_usuario')
                 ->whereBetween('fecha', [$desde, $hasta])
-                ->where('p.idpaciente','LIKE','%'.$paciente.'%')
-                ->where('d.id','LIKE','%'.$doctor.'%')
-                ->where('u.id','LIKE','%'.$usuario.'%')
+                ->where('p.dpi','LIKE','%'.$paciente.'%')
+                ->where('d.email','LIKE','%'.$doctor.'%')
+                ->where('u.email','LIKE','%'.$usuario.'%')
                 ->where('o.estado_orden','LIKE','%'.$estadoorden.'%')
                 ->where('o.estado','LIKE','%'.$estado.'%')
                 ->orderBy('o.idorden','desc')
-                
                 ->paginate(20);
             }
             else
@@ -138,6 +141,7 @@ class OrdenController extends Controller
         $doctores=DB::table('users')
         ->where('tipo_usuario','=','Doctor')
         ->where('email','!=','Habilitado')
+        ->where('activo','=','SI')  
         ->get();
     	$rubros=DB::table('rubro')
     	->where('estado_rubro','=','Habilitado')
@@ -268,6 +272,7 @@ class OrdenController extends Controller
         $doctores=DB::table('users')
         ->where('tipo_usuario','=','Doctor')
         ->where('email','!=','Habilitado')
+        ->where('activo','=','SI')  
         ->get();
     	$rubros=DB::table('rubro')
     	->where('estado_rubro','=','Habilitado')
