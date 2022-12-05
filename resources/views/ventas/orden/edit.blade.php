@@ -126,7 +126,7 @@
                                     
                                 ?>
                                 <div class="table-responsive">
-                                    <table class="table table-striped table-bordered table-condensed table-hover">
+                                    <table class="table table-striped table-sm table-bordered table-condensed table-hover">
                                         <thead>
                                             
                                             <th class="col-5"><h5><strong>Rubro</strong></h5></th>
