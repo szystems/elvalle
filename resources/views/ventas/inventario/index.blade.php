@@ -140,16 +140,16 @@
 							<td align="left"><small>{{$det->Codigo}} <br> <strong> {{ $det->Articulo}}</strong></small></td>
 							<td align="left"><small>{{$det->descripcion_inventario}}</small></td>
 							<?php 
-								$fv = date("d-m-Y", strtotime($det->fecha_vencimiento));
-								$hoy = date("d-m-Y", strtotime($hoy));
-								$mas30 = date("d-m-Y", strtotime($hoy.'+ 1 month'));
+								$fv = date("Y-m-d", strtotime($det->fecha_vencimiento));
+								$hoy = date("Y-m-d", strtotime($hoy));
+								$mas30 = date("Y-m-d", strtotime($hoy.'+ 60 days'));
 							?>
 							@if($fv > $mas30)
-								<td align="center"><small>{{$fecha_vencimiento}} <br><font color="limegreen">Vigente</font></small></td>
+								<td align="center"><small>{{$fecha_vencimiento}} <span class="badge badge-success">Vigente</span></td>
 							@elseif($fv >= $hoy and $fv <= $mas30)
-								<td align="center"><small>{{$fecha_vencimiento}} <br><font color="orange">Vigente</font></small></td>
+								<td align="center"><small>{{$fecha_vencimiento}} <span class="badge badge-warning">Vigente</span></td>
 							@elseif($fv < $hoy )
-								<td align="center"><small>{{$fecha_vencimiento}} <br><font color="red">Vencido</font></small></td>
+								<td align="center"><small>{{$fecha_vencimiento}} <span class="badge badge-danger">Vencido</span></td>
 							@endif
 							<td align="center"><small>{{$det->Presentacion}}</small></td>
 							<td align="center"><font color="blue"><strong>{{$det->total_unidades_inventario}}</strong></font></td>

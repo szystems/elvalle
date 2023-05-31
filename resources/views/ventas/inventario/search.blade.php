@@ -148,8 +148,8 @@
 									<option selected value="">Todos</option>
 								@endif
 
-								<option value="+30 dias">+30 dias</option>
-								<option value="-30 dias">-30 dias</option>
+								<option value="+60 dias">+60 dias</option>
+								<option value="-60 dias">-60 dias</option>
 								<option value="Vigentes">Vigentes</option>
 								<option value="Vencidos">Vencidos</option>
 

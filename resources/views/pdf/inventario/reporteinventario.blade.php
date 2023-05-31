@@ -96,9 +96,9 @@
 				<td><h4 align="center">{{$det->Codigo}} <br> <strong> {{ $det->Articulo}}</strong></h4></td>
 				<td><h4 align="center">{{$det->descripcion_inventario}}</h4></td>
 				<?php 
-					$fv = date("d-m-Y", strtotime($det->fecha_vencimiento));
-					$hoy = date("d-m-Y", strtotime($hoy));
-					$mas30 = date("d-m-Y", strtotime($hoy.'+ 1 month'));
+					$fv = date("Y-m-d", strtotime($det->fecha_vencimiento));
+					$hoy = date("Y-m-d", strtotime($hoy));
+					$mas30 = date("Y-m-d", strtotime($hoy.'+ 2 month'));
 				?>
 				@if($fv > $mas30)
 					<td><h4 align="center">{{$fecha_vencimiento}} <br><font color="limegreen">Vigente</font></h4></td>

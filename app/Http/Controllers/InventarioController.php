@@ -69,15 +69,15 @@ class InventarioController extends Controller
                 $today = Carbon::now($zona_horaria);
                 $today = $today->format('Y-m-d');
                 $signo = ">=";
-                if($vigenciaf == "+30 dias")
+                if($vigenciaf == "+60 dias")
                 {
-                    $vigencia = date("Y-m-d", strtotime($today.'+ 30 days'));
+                    $vigencia = date("Y-m-d", strtotime($today.'+ 60 days'));
                     $signo = ">";
                 }
-                elseif($vigenciaf == "-30 dias")
+                elseif($vigenciaf == "-60 dias")
                 {
                     $vigenciaDesde = $today;
-                    $vigenciaHasta = date("Y-m-d", strtotime($today.'+ 29 days'));
+                    $vigenciaHasta = date("Y-m-d", strtotime($today.'+ 59 days'));
                 }
                 elseif($vigenciaf == "Vigentes")
                 {
@@ -111,7 +111,7 @@ class InventarioController extends Controller
                 
                 if($desdef != '1970-01-01' or $hastaf != '1970-01-01')
                 {
-                    if($vigenciaf == "-30 dias")
+                    if($vigenciaf == "-60 dias")
                     {
                         $detalles=DB::table('detalle_ingreso as di')
                         ->join('ingreso as i','di.idingreso','=','i.idingreso')

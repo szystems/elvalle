@@ -281,15 +281,15 @@ class ReportesController extends Controller
                 $today = Carbon::now($zona_horaria);
                 $today = $today->format('Y-m-d');
                 $signo = ">=";
-                if($vigenciaf == "+30 dias")
+                if($vigenciaf == "+60 dias")
                 {
-                    $vigencia = date("Y-m-d", strtotime($today.'+ 30 days'));
+                    $vigencia = date("Y-m-d", strtotime($today.'+ 60 days'));
                     $signo = ">";
                 }
-                elseif($vigenciaf == "-30 dias")
+                elseif($vigenciaf == "-60 dias")
                 {
                     $vigenciaDesde = $today;
-                    $vigenciaHasta = date("Y-m-d", strtotime($today.'+ 29 days'));
+                    $vigenciaHasta = date("Y-m-d", strtotime($today.'+ 59 days'));
                 }
                 elseif($vigenciaf == "Vigentes")
                 {
@@ -312,7 +312,7 @@ class ReportesController extends Controller
                 $nompdf = $nompdf->format('Y-m-d H:i:s');
                 
                 
-                    if($vigenciaf == "-30 dias")
+                    if($vigenciaf === "-60 dias")
                     {
                         $detalles=DB::table('detalle_ingreso as di')
                         ->join('ingreso as i','di.idingreso','=','i.idingreso')
