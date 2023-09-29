@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-09-2022 a las 23:47:32
--- Versión del servidor: 10.4.22-MariaDB
--- Versión de PHP: 7.4.27
+-- Tiempo de generación: 29-09-2023 a las 20:33:24
+-- Versión del servidor: 10.4.27-MariaDB
+-- Versión de PHP: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,16 +29,16 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `articulo` (
   `idarticulo` int(11) NOT NULL,
-  `codigo` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `codigo` varchar(50) DEFAULT NULL,
   `idempresa` int(11) NOT NULL,
   `idcategoria` int(11) NOT NULL,
-  `nombre` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
+  `nombre` varchar(45) NOT NULL,
   `minimo` int(11) NOT NULL,
-  `bodega` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `ubicacion` varchar(45) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `descripcion` varchar(200) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `imagen` varchar(500) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `estado` varchar(20) COLLATE utf8_spanish2_ci NOT NULL
+  `bodega` varchar(100) DEFAULT NULL,
+  `ubicacion` varchar(45) DEFAULT NULL,
+  `descripcion` varchar(200) DEFAULT NULL,
+  `imagen` varchar(500) DEFAULT NULL,
+  `estado` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
@@ -110,7 +110,7 @@ CREATE TABLE `bitacora` (
   `fecha` datetime NOT NULL,
   `tipo` varchar(20) NOT NULL,
   `descripcion` varchar(1000) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Volcado de datos para la tabla `bitacora`
@@ -596,7 +596,164 @@ INSERT INTO `bitacora` (`idbitacora`, `idempresa`, `idusuario`, `fecha`, `tipo`,
 (476, 2, 4, '2022-09-27 12:20:24', 'Paciente', 'Se agrego una imagen de un ultrasonido obstetrico para el paciente:Catalina de Alcazar, Fecha: 27-09-2022'),
 (477, 2, 4, '2022-09-27 12:25:25', 'Paciente', 'Se creo un ultrasonido obstetrico para el paciente:Maria Tereza, Fecha: 27-09-2022'),
 (478, 2, 4, '2022-09-27 12:25:36', 'Paciente', 'Se agrego una imagen de un ultrasonido obstetrico para el paciente:Maria Tereza, Fecha: 27-09-2022'),
-(479, 2, 4, '2022-09-27 12:25:42', 'Paciente', 'Se agrego una imagen de un ultrasonido obstetrico para el paciente:Maria Tereza, Fecha: 27-09-2022');
+(479, 2, 4, '2022-09-27 12:25:42', 'Paciente', 'Se agrego una imagen de un ultrasonido obstetrico para el paciente:Maria Tereza, Fecha: 27-09-2022'),
+(480, 2, 4, '2022-09-27 16:16:59', 'Paciente', 'Se creo un nuevo estudio de climaterio y menopausea para el paciente:Catalina de Alcazar, Fecha: 27-09-2022'),
+(481, 2, 4, '2022-09-27 16:17:03', 'Paciente', 'Se creo un nuevo estudio de climaterio y menopausea para el paciente:Catalina de Alcazar, Fecha: 27-09-2022'),
+(482, 2, 4, '2022-09-27 16:22:12', 'Paciente', 'Se agrego una imagen de una colposcopia para el paciente:Catalina de Alcazar, Fecha: 27-09-2022'),
+(483, 2, 4, '2022-09-27 16:23:26', 'Paciente', 'Se agrego una imagen de una colposcopia para el paciente:Catalina de Alcazar, Fecha: 27-09-2022'),
+(484, 2, 4, '2022-09-27 16:28:30', 'Paciente', 'Se creo un nuevo embarazo para el paciente:Catalina de Alcazar, Fecha: 27-09-2022'),
+(485, 2, 4, '2022-09-27 16:30:51', 'Paciente', 'Se creo un examen fisico para el paciente:Catalina de Alcazar, Fecha: 27-09-2022'),
+(486, 2, 4, '2022-09-27 16:31:00', 'Paciente', 'Se agrego una imagen de un examen fisico para el paciente:Catalina de Alcazar, Fecha: 27-09-2022'),
+(487, 2, 4, '2022-09-27 16:37:16', 'Paciente', 'Se creo un examen fisico para el paciente:Catalina de Alcazar, Fecha: 27-09-2022'),
+(488, 2, 4, '2022-09-27 16:38:32', 'Pacientes', 'Se edito la historia de: Catalina de Alcazar, Fecha: 30-05-2022'),
+(489, 2, 4, '2022-09-27 16:51:59', 'Pacientes', 'Se edito la cabecera de radiofrecuencia del paciente: Catalina de Alcazar, Fecha: 09-08-2022'),
+(490, 2, 4, '2022-10-04 10:19:27', 'Paciente', 'Se creo una colposcopia para el paciente:Catalina de Alcazar, Fecha: 04-10-2022'),
+(491, 2, 4, '2022-10-04 10:19:53', 'Paciente', 'Se edito una colposcopia del paciente:Catalina de Alcazar, Fecha: 04-10-2022'),
+(492, 2, 4, '2022-10-04 15:51:29', 'Paciente', 'Se creo un ultrasonido obstetrico para el paciente:Catalina de Alcazar, Fecha: 04-10-2022'),
+(493, 2, 4, '2022-10-04 15:59:21', 'Paciente', 'Se edito un ultrasonido obstetrico del paciente:Catalina de Alcazar, Fecha: 04-10-2022'),
+(494, 2, 4, '2022-10-04 16:09:11', 'Paciente', 'Se edito un ultrasonido obstetrico del paciente:Catalina de Alcazar, Fecha: 04-10-2022'),
+(495, 2, 4, '2022-10-04 16:09:26', 'Paciente', 'Se edito un ultrasonido obstetrico del paciente:Catalina de Alcazar, Fecha: 04-10-2022'),
+(496, 2, 4, '2022-10-04 16:09:42', 'Paciente', 'Se edito un ultrasonido obstetrico del paciente:Catalina de Alcazar, Fecha: 04-10-2022'),
+(497, 2, 4, '2022-10-04 16:20:34', 'Paciente', 'Se creo un ultrasonido obstetrico para el paciente:Catalina de Alcazar, Fecha: 04-10-2022'),
+(498, 2, 4, '2022-10-04 16:22:47', 'Paciente', 'Se creo un ultrasonido obstetrico para el paciente:Catalina de Alcazar, Fecha: 04-10-2022'),
+(499, 2, 4, '2022-10-04 16:23:53', 'Paciente', 'Se edito un ultrasonido obstetrico del paciente:Catalina de Alcazar, Fecha: 04-10-2022'),
+(500, 2, 4, '2022-10-04 16:24:07', 'Paciente', 'Se edito un ultrasonido obstetrico del paciente:Catalina de Alcazar, Fecha: 04-10-2022'),
+(501, 2, 4, '2022-10-04 16:25:21', 'Paciente', 'Se creo un ultrasonido obstetrico para el paciente:Catalina de Alcazar, Fecha: 04-10-2022'),
+(502, 2, 4, '2022-10-04 16:25:35', 'Paciente', 'Se edito un ultrasonido obstetrico del paciente:Catalina de Alcazar, Fecha: 04-10-2022'),
+(503, 2, 4, '2022-10-04 16:26:22', 'Paciente', 'Se edito un ultrasonido obstetrico del paciente:Catalina de Alcazar, Fecha: 04-10-2022'),
+(504, 2, 4, '2022-10-04 16:27:24', 'Paciente', 'Se edito un ultrasonido obstetrico del paciente:Catalina de Alcazar, Fecha: 04-10-2022'),
+(505, 2, 4, '2022-10-04 16:39:41', 'Paciente', 'Se edito un ultrasonido obstetrico del paciente:Catalina de Alcazar, Fecha: 04-10-2022'),
+(506, 2, 4, '2022-10-05 11:21:38', 'Paciente', 'Se creo un nueva sesion de laser para el paciente:Catalina de Alcazar, Fecha: 05-10-2022'),
+(507, 2, 4, '2022-10-05 11:26:08', 'Paciente', 'Se creo un nueva sesion de laser para el paciente:Catalina de Alcazar, Fecha: 05-10-2022'),
+(508, 2, 4, '2022-10-05 11:26:43', 'Paciente', 'Se creo un nueva sesion de laser para el paciente:Catalina de Alcazar, Fecha: 05-10-2022'),
+(509, 2, 4, '2022-10-05 11:29:33', 'Paciente', 'Se creo un nueva sesion de laser para el paciente:Catalina de Alcazar, Fecha: 05-10-2022'),
+(510, 2, 4, '2022-10-05 11:30:42', 'Paciente', 'Se creo un nueva sesion de laser para el paciente:Catalina de Alcazar, Fecha: 05-10-2022'),
+(511, 2, 4, '2022-10-05 11:30:52', 'Paciente', 'Se creo un nueva sesion de laser para el paciente:Catalina de Alcazar, Fecha: 05-10-2022'),
+(512, 2, 4, '2022-10-05 11:31:32', 'Paciente', 'Se edito una sesion de laser para el paciente:Catalina de Alcazar, Fecha: 06-10-2022'),
+(513, 2, 4, '2022-10-05 11:32:02', 'Paciente', 'Se edito una sesion de laser para el paciente:Catalina de Alcazar, Fecha: 13-10-2022'),
+(514, 2, 4, '2022-10-05 11:32:39', 'Paciente', 'Se creo un nueva sesion de laser para el paciente:Catalina de Alcazar, Fecha: 05-10-2022'),
+(515, 2, 4, '2022-10-05 11:35:34', 'Paciente', 'Se creo una nueva sesion de fotomodulacion para el paciente:Catalina de Alcazar, Fecha: 05-10-2022'),
+(516, 2, 4, '2022-10-05 11:37:41', 'Paciente', 'Se creo una nueva sesion de fotomodulacion para el paciente:Catalina de Alcazar, Fecha: 05-10-2022'),
+(517, 2, 4, '2022-10-05 11:40:16', 'Paciente', 'Se creo una nueva sesion de fotomodulacion para el paciente:Catalina de Alcazar, Fecha: 06-10-2022'),
+(518, 2, 4, '2022-10-05 11:43:48', 'Paciente', 'Se creo una nueva sesion de fotomodulacion para el paciente:Catalina de Alcazar, Fecha: 09-08-2022'),
+(519, 2, 4, '2022-10-05 11:47:11', 'Paciente', 'Se creo un nueva sesion de radiofrecuencia para el paciente:Catalina de Alcazar, Fecha: 05-10-2022'),
+(520, 2, 4, '2022-10-05 12:12:02', 'Paciente', 'Se creo un nueva sesion de radiofrecuencia para el paciente:Catalina de Alcazar, Fecha: 05-10-2022'),
+(521, 2, 4, '2022-10-05 12:13:09', 'Paciente', 'Se creo una nuevo ciclo para silla electromagnetica para el paciente:Catalina de Alcazar, Fecha: 05-10-2022'),
+(522, 2, 4, '2022-10-05 12:13:22', 'Paciente', 'Se creo un nueva sesion de silla electromagnetica para el paciente:Catalina de Alcazar, Fecha: 05-10-2022'),
+(523, 2, 4, '2022-10-05 12:13:29', 'Paciente', 'Se edito una sesion de silla electromagnetica para el paciente:Catalina de Alcazar, Fecha: 05-10-2022'),
+(524, 2, 4, '2022-10-05 12:15:36', 'Paciente', 'Se creo un nueva sesion de radiofrecuencia para el paciente:Catalina de Alcazar, Fecha: 05-10-2022'),
+(525, 2, 4, '2022-10-05 12:15:58', 'Paciente', 'Se edito una sesion de radiofrecuencia para el paciente:Catalina de Alcazar, Fecha: 05-10-2022'),
+(526, 2, 4, '2022-10-05 12:16:11', 'Paciente', 'Se edito una sesion de radiofrecuencia para el paciente:Catalina de Alcazar, Fecha: 20-10-2022'),
+(527, 2, 4, '2022-10-06 10:39:43', 'Paciente', 'Se creo una nueva radiofrecuencia para el paciente:Catalina de Alcazar, Fecha: 06-10-2022'),
+(528, 2, 4, '2022-10-06 10:40:09', 'Pacientes', 'Se edito la cabecera de radiofrecuencia del paciente: Catalina de Alcazar, Fecha: 09-08-2022'),
+(529, 2, 4, '2022-10-06 10:40:15', 'Paciente', 'Se creo un nueva sesion de radiofrecuencia para el paciente:Catalina de Alcazar, Fecha: 06-10-2022'),
+(530, 2, 4, '2022-10-06 10:40:29', 'Paciente', 'Se edito una sesion de radiofrecuencia para el paciente:Catalina de Alcazar, Fecha: 06-10-2022'),
+(531, 2, 4, '2022-10-06 10:40:59', 'Paciente', 'Se creo un nueva sesion de radiofrecuencia para el paciente:Catalina de Alcazar, Fecha: 06-10-2022'),
+(532, 2, 4, '2022-10-06 10:41:10', 'Paciente', 'Se creo un nueva nueva sesion de fotomodulacion para el paciente:Catalina de Alcazar, Fecha: 06-10-2022'),
+(533, 2, 4, '2022-10-06 10:41:19', 'Paciente', 'Se creo un nueva sesion de laser para el paciente:Catalina de Alcazar, Fecha: 06-10-2022'),
+(534, 2, 4, '2022-10-06 10:41:41', 'Paciente', 'Se edito una sesion de radiofrecuencia para el paciente:Catalina de Alcazar, Fecha: 09-08-2022'),
+(535, 2, 4, '2022-10-06 10:41:49', 'Paciente', 'Se edito una sesion de radiofrecuencia para el paciente:Catalina de Alcazar, Fecha: 09-08-2022'),
+(536, 2, 4, '2022-10-06 10:50:02', 'Paciente', 'Se creo un nueva sesion de laser para el paciente:Catalina de Alcazar, Fecha: 06-10-2022'),
+(537, 2, 4, '2022-10-06 10:50:51', 'Paciente', 'Se creo un nueva sesion de silla electromagnetica para el paciente:Catalina de Alcazar, Fecha: 06-10-2022'),
+(538, 2, 4, '2022-10-06 11:09:50', 'Paciente', 'Se creo un nuevo estudio de climaterio y menopausea para el paciente:Catalina de Alcazar, Fecha: 06-10-2022'),
+(539, 2, 4, '2022-10-06 11:15:24', 'Paciente', 'Se edito un examen fisico del paciente:Catalina de Alcazar, Fecha: 27-09-2022'),
+(540, 2, 4, '2022-10-06 11:25:03', 'Paciente', 'Se creo un nuevo control climaterio y menopausea del paciente:Catalina de Alcazar, Fecha: 06-10-2022'),
+(541, 2, 4, '2022-10-06 11:26:06', 'Paciente', 'Se edito un control de climaterio y menopausea para el paciente:Catalina de Alcazar, Fecha: 06-10-2022'),
+(542, 2, 4, '2022-10-06 11:27:57', 'Paciente', 'Se creo un examen fisico para el paciente:Catalina de Alcazar, Fecha: 06-10-2022'),
+(543, 2, 18, '2022-10-06 11:42:16', 'Paciente', 'Se edito una sesion de silla electromagnetica para el paciente:Catalina de Alcazar, Fecha: 09-08-2022'),
+(544, 2, 18, '2022-10-06 11:42:34', 'Paciente', 'Se creo un nueva sesion de silla electromagnetica para el paciente:Catalina de Alcazar, Fecha: 06-10-2022'),
+(545, 2, 18, '2022-10-06 11:42:43', 'Paciente', 'Se creo un nueva sesion de silla electromagnetica para el paciente:Catalina de Alcazar, Fecha: 06-10-2022'),
+(546, 2, 18, '2022-10-06 11:43:38', 'Paciente', 'Se creo un nuevo estudio de incontinencia urinaria para el paciente:Catalina de Alcazar, Fecha: 06-10-2022'),
+(547, 2, 18, '2022-10-06 11:44:40', 'Paciente', 'Se creo un nuevo cuestionario de incontinencia urinaria del paciente:Catalina de Alcazar, Fecha: 06-10-2022'),
+(548, 2, 18, '2022-10-06 11:44:47', 'Paciente', 'Se edito un cuestionario de incontinencia urinaria para el paciente:Catalina de Alcazar, Fecha: 06-10-2022'),
+(549, 2, 4, '2022-10-20 10:43:17', 'Paciente', 'Se creo un nuevo control de embarazo para el paciente:Catalina de Alcazar, Fecha: 20-10-2022'),
+(550, 2, 4, '2022-10-20 10:54:43', 'Paciente', 'Se creo un nuevo control de embarazo para el paciente:Catalina de Alcazar, Fecha: 20-10-2022'),
+(551, 2, 4, '2022-10-20 11:06:21', 'Paciente', 'Se creo un nueva sesion de laser para el paciente:Catalina de Alcazar, Fecha: 20-10-2022'),
+(552, 2, 4, '2022-10-20 11:10:28', 'Paciente', 'Se creo una nuevo ciclo para silla electromagnetica para el paciente:Catalina de Alcazar, Fecha: 20-10-2022'),
+(553, 2, 2, '2022-11-04 10:56:34', 'Citas', 'Se creo una cita, Paciente: Catalina de Alcazar, Doctor: Otto Szarata, Fecha y hora: 2022-11-04 11:00:00, Finaliza: 2022-11-04 11:59:00, Estado: Confirmada'),
+(554, 2, 2, '2022-11-04 10:56:40', 'Citas', 'Se edito una cita, Paciente: Catalina de Alcazar, Doctor: Otto Szarata, Fecha y hora: 2022-11-04 11:00:00, Finaliza: 2022-11-04 11:59:00, Estado: Confirmada, Apuntes: '),
+(555, 2, 2, '2022-11-04 11:41:28', 'Paciente', 'Se edito un paciente, Nombre: Catalina de Alcazar, Sexo: Femenino, Teléfono: , Email: jalbuerra1@gmail.com, Dirección: , Fecha Nacimiento: 2022-05-20, Nit: 34935037, Estado: Habilitado, DPI: 123142353423401'),
+(556, 2, 2, '2022-11-04 11:45:38', 'Ventas', 'Se creo una orden nueva, Paciente: Catalina de Alcazar, Doctor: Otto Szarata, Total:Q.950'),
+(557, 2, 2, '2022-11-05 11:46:57', 'Citas', 'Se creo una cita, Paciente: Catalina de Alcazar, Doctor: Marcela Chacon, Fecha y hora: 2022-11-05 10:00:00, Finaliza: 2022-11-05 10:29:00, Estado: Confirmada'),
+(558, 2, 2, '2022-11-05 11:47:00', 'Citas', 'Se edito una cita, Paciente: Catalina de Alcazar, Doctor: Marcela Chacon, Fecha y hora: 2022-11-05 10:00:00, Finaliza: 2022-11-05 10:29:00, Estado: Confirmada, Apuntes: '),
+(559, 2, 2, '2022-11-05 11:53:44', 'Compras', 'Se creo un ingreso nuevo, Proveedor: Bodega Farmacéutica, Comprobante: Factura -, Fecha: 2022-11-05, Total Compra: Q.400'),
+(560, 2, 2, '2022-11-14 16:09:58', 'Ventas', 'Se edito un rubro, Nombre: 5. PELLETS, Nota: '),
+(561, 2, 2, '2022-11-14 16:10:08', 'Ventas', 'Se edito un rubro, Nombre: 1. ULSTRASONIDO, Nota: '),
+(562, 2, 2, '2022-11-14 16:10:20', 'Ventas', 'Se edito un rubro, Nombre: 2. PROCEDIMIENTOS GINECOLOGICOS, Nota: '),
+(563, 2, 2, '2022-11-14 16:10:30', 'Ventas', 'Se edito un rubro, Nombre: 3. RADIOFRECUENCIA CORPORAL, Nota: '),
+(564, 2, 2, '2022-11-14 16:10:38', 'Ventas', 'Se edito un rubro, Nombre: 4. RADIOFRECUENCIA VAGINAL, Nota: '),
+(565, 2, 2, '2022-11-14 16:10:54', 'Ventas', 'Se edito un rubro, Nombre: 6. RADIOFRECUENCIA FRACCIONADA, Nota: '),
+(566, 2, 2, '2022-11-14 16:17:06', 'Ventas', 'Se edito una orden, Paciente: Catalina de Alcazar, Doctor: Otto Szarata, Total:Q.1350'),
+(567, 2, 2, '2022-11-14 16:45:56', 'Ventas', 'Se creo una orden nueva, Paciente: Maria Tereza, Doctor: Jessica Maldonado, Total:Q.6950'),
+(568, 2, 2, '2022-11-14 16:51:22', 'Ventas', 'Se edito una orden, Paciente: Maria Tereza, Doctor: Jessica Maldonado, Total:Q.6950'),
+(569, 2, 2, '2022-11-14 16:53:19', 'Ventas', 'Se edito un rubro, Nombre: 7. RADIOFRECUENCIA FACIAL, Nota: '),
+(570, 2, 2, '2022-11-15 16:38:17', 'Ventas', 'Se edito un rubro, Nombre: 1. ULSTRASONIDO, Nota: Esta es una nota de ultrasonido solo para probar como sale'),
+(571, 2, 2, '2022-11-22 12:21:55', 'Citas', 'Se Cancelo una cita, Fecha y Hora: 22-11-2022 10:30 AM - 11:29 AM, Doctor: Otto Szarata, Paciente: Miriam de Samayoa, Usuario: Otto Szarata'),
+(572, 2, 2, '2022-11-22 12:23:42', 'Citas', 'Se Cancelo una cita, Fecha y Hora: 22-11-2022 10:00 AM - 11:29 AM, Doctor: Alejandra Gomez, Paciente: Catalina de Alcazar, Usuario: Otto Szarata'),
+(573, 2, 2, '2022-11-22 12:30:14', 'Citas', 'Se creo una cita, Paciente: Maria Tereza, Doctor: Jessica Maldonado, Fecha y hora: 2022-11-22 17:30:00, Finaliza: 22-11-2022 18:59:00, Estado: Confirmada'),
+(574, 2, 2, '2022-11-22 15:41:12', 'Citas', 'Se creo una cita, Paciente: Catalina de Alcazar, Doctor: Otto Szarata, Fecha y hora: 2022-11-22 10:15:00, Finaliza: 22-11-2022 11:44:00, Estado: Confirmada'),
+(575, 2, 2, '2022-11-22 15:41:19', 'Citas', 'Se edito una cita, Paciente: Catalina de Alcazar, Doctor: Otto Szarata, Fecha y hora: 2022-11-22 10:15:00, Finaliza: 2022-11-22 10:44:00, Estado: Confirmada, Apuntes: '),
+(576, 2, 2, '2022-11-22 15:52:59', 'Citas', 'Se creo una cita, Paciente: Catalina de Alcazar, Doctor: Otto Szarata, Fecha y hora: 2022-11-22 10:45:00, Finaliza: 22-11-2022 11:14:00, Estado: Confirmada'),
+(577, 2, 2, '2022-11-22 17:27:10', 'Citas', 'Se creo una cita, Paciente: Catalina de Alcazar, Doctor: Otto Szarata, Fecha y hora: 2022-11-23 3:15:00, Finaliza: 23-11-2022 04:44:00, Estado: Confirmada'),
+(578, 2, 2, '2022-11-22 17:31:18', 'Citas', 'Se edito una cita, Paciente: Catalina de Alcazar, Doctor: Otto Szarata, Fecha y hora: 2022-11-23 03:15:00, Finaliza: 23-11-2022 04:44:00, Estado: Confirmada, Apuntes: '),
+(579, 2, 2, '2022-11-22 17:34:30', 'Citas', 'Se edito una cita, Paciente: Catalina de Alcazar, Doctor: Otto Szarata, Fecha y hora: 2022-11-23 10:00:00, Finaliza: 23-11-2022 11:29:00, Estado: Confirmada, Apuntes: '),
+(580, 2, 2, '2022-11-22 17:35:28', 'Citas', 'Se creo una cita, Paciente: Catalina de Alcazar, Doctor: Otto Szarata, Fecha y hora: 2022-11-22 1:00:00, Finaliza: 22-11-2022 01:44:00, Estado: Confirmada'),
+(581, 2, 2, '2022-11-22 17:35:36', 'Citas', 'Se edito una cita, Paciente: Catalina de Alcazar, Doctor: Otto Szarata, Fecha y hora: 2022-11-22 01:00:00, Finaliza: 22-11-2022 01:44:00, Estado: Confirmada, Apuntes: '),
+(582, 2, 2, '2022-11-22 17:36:37', 'Citas', 'Se edito una cita, Paciente: Catalina de Alcazar, Doctor: Otto Szarata, Fecha y hora: 2022-11-22 01:00:00, Finaliza: 22-11-2022 02:29:00, Estado: Confirmada, Apuntes: '),
+(583, 2, 2, '2022-11-22 17:37:15', 'Citas', 'Se edito una cita, Paciente: Catalina de Alcazar, Doctor: Otto Szarata, Fecha y hora: 2022-11-22 01:30:00, Finaliza: 22-11-2022 02:29:00, Estado: Confirmada, Apuntes: '),
+(584, 2, 2, '2022-11-22 17:40:01', 'Citas', 'Se creo una cita, Paciente: Catalina de Alcazar, Doctor: Otto Szarata, Fecha y hora: 2022-11-22 1:00:00, Finaliza: 22-11-2022 01:29:00, Estado: Confirmada'),
+(585, 2, 2, '2022-11-22 17:40:05', 'Citas', 'Se edito una cita, Paciente: Catalina de Alcazar, Doctor: Otto Szarata, Fecha y hora: 2022-11-22 01:00:00, Finaliza: 22-11-2022 01:29:00, Estado: Confirmada, Apuntes: '),
+(586, 2, 2, '2022-11-22 17:44:17', 'Citas', 'Se edito una cita, Paciente: Catalina de Alcazar, Doctor: Otto Szarata, Fecha y hora: 2022-11-22 3:00:00, Finaliza: 22-11-2022 03:29:00, Estado: Confirmada, Apuntes: '),
+(587, 2, 2, '2022-11-23 09:51:23', 'Citas', 'Se creo una cita, Paciente: Catalina de Alcazar, Doctor: Otto Szarata, Fecha y hora: 2022-11-23 8:00:00, Finaliza: 23-11-2022 09:59:00, Estado: Confirmada'),
+(588, 2, 2, '2022-11-23 09:59:16', 'Citas', 'Se edito una cita, Paciente: Catalina de Alcazar, Doctor: Otto Szarata, Fecha y hora: 2022-11-23 08:30:00, Finaliza: 23-11-2022 10:29:00, Estado: Confirmada, Apuntes: '),
+(589, 2, 2, '2022-11-23 09:59:43', 'Citas', 'Se creo una cita, Paciente: Catalina de Alcazar, Doctor: Otto Szarata, Fecha y hora: 2022-11-23 10:30:00, Finaliza: 23-11-2022 11:29:00, Estado: Confirmada'),
+(590, 2, 2, '2022-11-23 09:59:57', 'Citas', 'Se edito una cita, Paciente: Catalina de Alcazar, Doctor: Otto Szarata, Fecha y hora: 2022-11-23 10:30:00, Finaliza: 23-11-2022 11:29:00, Estado: Confirmada, Apuntes: '),
+(591, 2, 2, '2022-11-23 10:00:11', 'Citas', 'Se Cancelo una cita, Fecha y Hora: 23-11-2022 10:30 AM - 11:29 AM, Doctor: Otto Szarata, Paciente: Catalina de Alcazar, Usuario: Otto Szarata'),
+(592, 2, 2, '2022-11-23 10:01:15', 'Citas', 'Se creo una cita, Paciente: Catalina de Alcazar, Doctor: Otto Szarata, Fecha y hora: 2022-11-23 10:30:00, Finaliza: 23-11-2022 11:59:00, Estado: Confirmada'),
+(593, 2, 2, '2022-11-23 10:01:24', 'Citas', 'Se edito una cita, Paciente: Catalina de Alcazar, Doctor: Otto Szarata, Fecha y hora: 2022-11-23 10:30:00, Finaliza: 23-11-2022 12:29:00, Estado: Confirmada, Apuntes: '),
+(594, 2, 2, '2022-11-23 10:28:28', 'Citas', 'Se creo una cita, Paciente: Catalina de Alcazar, Doctor: Jessica Maldonado, Fecha y hora: 2022-11-23 10:00:00, Finaliza: 23-11-2022 10:59:00, Estado: Confirmada'),
+(595, 2, 2, '2022-11-23 10:28:31', 'Citas', 'Se edito una cita, Paciente: Catalina de Alcazar, Doctor: Jessica Maldonado, Fecha y hora: 2022-11-23 10:00:00, Finaliza: 23-11-2022 10:59:00, Estado: Confirmada, Apuntes: '),
+(596, 2, 2, '2022-11-23 10:51:33', 'Citas', 'Se creo una cita, Paciente: Catalina de Alcazar, Doctor: Otto Szarata, Fecha y hora: 2022-11-21 10:15:00, Finaliza: 21-11-2022 10:59:00, Estado: Confirmada'),
+(597, 2, 2, '2022-11-23 10:51:36', 'Citas', 'Se edito una cita, Paciente: Catalina de Alcazar, Doctor: Otto Szarata, Fecha y hora: 2022-11-21 10:15:00, Finaliza: 21-11-2022 10:59:00, Estado: Confirmada, Apuntes: '),
+(598, 2, 2, '2022-11-23 10:52:40', 'Citas', 'Se creo una cita, Paciente: Catalina de Alcazar, Doctor: Jessica Maldonado, Fecha y hora: 2022-11-21 10:15:00, Finaliza: 21-11-2022 11:44:00, Estado: Confirmada'),
+(599, 2, 2, '2022-11-23 10:52:49', 'Citas', 'Se edito una cita, Paciente: Catalina de Alcazar, Doctor: Jessica Maldonado, Fecha y hora: 2022-11-21 10:15:00, Finaliza: 21-11-2022 11:44:00, Estado: Confirmada, Apuntes: '),
+(600, 2, 2, '2022-11-23 11:18:31', 'Citas', 'Se creo una cita, Paciente: Maria Tereza, Doctor: Alejandra Gomez, Fecha y hora: 2022-11-22 2:15:00, Finaliza: 22-11-2022 02:59:00, Estado: Confirmada'),
+(601, 2, 2, '2022-11-23 11:18:33', 'Citas', 'Se edito una cita, Paciente: Maria Tereza, Doctor: Alejandra Gomez, Fecha y hora: 2022-11-22 02:15:00, Finaliza: 22-11-2022 02:59:00, Estado: Confirmada, Apuntes: '),
+(602, 2, 2, '2022-11-23 11:44:35', 'Citas', 'Se creo una cita, Paciente: Maria Tereza, Doctor: Jessica Maldonado, Fecha y hora: 2020-06-17 5:30:00, Finaliza: 17-06-2020 06:14:00, Estado: Confirmada'),
+(603, 2, 2, '2022-11-23 11:44:38', 'Citas', 'Se edito una cita, Paciente: Maria Tereza, Doctor: Jessica Maldonado, Fecha y hora: 2020-06-17 05:30:00, Finaliza: 17-06-2020 06:14:00, Estado: Confirmada, Apuntes: '),
+(604, 2, 2, '2022-11-24 10:34:44', 'Seguridad', 'Se creo un usuario de Doctor, Nombre: prueba, Email: prueba@prueba.com, Dirección: , Teléfono: , tipo: Doctor, Especialidad: Ginecólogo y Obstetra, Fecha Nacimiento: 2022-11-24, Contacto Emergencia: , Telefono Emergencia: , Descuento maximo: 5'),
+(605, 2, 2, '2022-11-24 10:34:50', 'Seguridad', 'Se elimino un doctor, Nombre: prueba'),
+(606, 2, 2, '2022-11-24 10:40:03', 'Seguridad', 'Se edito un usuario doctor Nombre: Alejandra Gomez, Email: agomez@gmail.comgfd, Dirección: , Teléfono: 85423158, tipo: Doctor, Especialidad: Ginecólogo y Obstetra, Fecha Nacimiento: 2022-05-20, Contacto Emergencia: , Telefono Emergencia: , Descuento maximo: 15.00'),
+(607, 2, 2, '2022-11-24 11:20:45', 'Seguridad', 'Se creo un usuario , Nombre: prueba, Email: prueba@prueba.com, Dirección: , Teléfono: , Tipo: Administrador, Fecha Nacimiento: 2022-11-24, Contacto Emergencia: , Telefono Emergencia: , Descuento maximo: 5'),
+(608, 2, 2, '2022-11-24 11:22:50', 'Seguridad', 'Se edito un usuario: Nombre: prueba, Email: prueba@prueba.com, Dirección: , Teléfono: , Tipo: Administrador, Fecha Nacimiento: 2022-11-24, Contacto Emergencia: , Telefono Emergencia: , Descuento maximo: 5.00'),
+(609, 2, 2, '2022-11-24 11:22:57', 'Seguridad', 'Se edito un usuario: Nombre: prueba, Email: prueba@prueba.com, Dirección: , Teléfono: , Tipo: Administrador, Fecha Nacimiento: 2022-11-24, Contacto Emergencia: , Telefono Emergencia: , Descuento maximo: 5.00'),
+(610, 2, 2, '2022-11-24 11:27:17', 'Seguridad', 'Se creo un usuario , Nombre: p2, Email: p2@p2.com, Dirección: , Teléfono: , Tipo: Administrador, Fecha Nacimiento: 2022-11-24, Contacto Emergencia: , Telefono Emergencia: , Descuento maximo: 3'),
+(611, 2, 2, '2022-11-24 11:30:05', 'Seguridad', 'Se creo un usuario de Doctor, Nombre: doc, Email: doc@doc.com, Dirección: , Teléfono: , tipo: Doctor, Especialidad: Ginecólogo y Obstetra, Fecha Nacimiento: 2022-11-24, Contacto Emergencia: , Telefono Emergencia: , Descuento maximo: 43'),
+(612, 2, 2, '2022-11-24 11:31:02', 'Seguridad', 'Se edito un usuario doctor Nombre: doc, Email: doc@doc.com, Dirección: , Teléfono: , tipo: Doctor, Especialidad: Ginecólogo y Obstetra, Fecha Nacimiento: 2022-11-24, Contacto Emergencia: , Telefono Emergencia: , Descuento maximo: 43.00'),
+(613, 2, 2, '2022-11-24 11:31:09', 'Seguridad', 'Se edito un usuario doctor Nombre: doc, Email: doc@doc.com, Dirección: , Teléfono: , tipo: Doctor, Especialidad: Ginecólogo y Obstetra, Fecha Nacimiento: 2022-11-24, Contacto Emergencia: , Telefono Emergencia: , Descuento maximo: 43.00'),
+(614, 2, 2, '2022-11-24 11:31:29', 'Seguridad', 'Se edito un usuario: Nombre: Otto Szarata, Email: ottoszarata@szystems.com, Dirección: , Teléfono: , Tipo: Administrador, Fecha Nacimiento: 1970-01-01, Contacto Emergencia: , Telefono Emergencia: , Descuento maximo: 20.00'),
+(615, 2, 2, '2022-11-24 11:32:17', 'Seguridad', 'Se edito un usuario doctor Nombre: Otto Szarata, Email: szotto18@hotmail.com, Dirección: diagonal 2 32-22 zona 3, Teléfono: +50242153288, tipo: Doctor, Especialidad: Internista, Fecha Nacimiento: 1970-01-01, Contacto Emergencia: , Telefono Emergencia: , Descuento maximo: 0.00'),
+(616, 2, 2, '2022-11-24 11:32:24', 'Seguridad', 'Se edito un usuario doctor Nombre: Otto Szarata, Email: szotto18@hotmail.com, Dirección: diagonal 2 32-22 zona 3, Teléfono: +50242153288, tipo: Doctor, Especialidad: Internista, Fecha Nacimiento: 1970-01-01, Contacto Emergencia: , Telefono Emergencia: , Descuento maximo: 0.00'),
+(617, 2, 2, '2022-11-24 11:32:31', 'Seguridad', 'Se edito un usuario doctor Nombre: Otto Szarata, Email: szotto18@hotmail.com, Dirección: diagonal 2 32-22 zona 3, Teléfono: +50242153288, tipo: Doctor, Especialidad: Internista, Fecha Nacimiento: 1970-01-01, Contacto Emergencia: , Telefono Emergencia: , Descuento maximo: 0.00'),
+(618, 2, 2, '2022-11-24 11:33:43', 'Seguridad', 'Se edito un usuario doctor Nombre: Alejandra Gomez, Email: agomez@gmail.comgfd, Dirección: , Teléfono: 85423158, tipo: Doctor, Especialidad: Ginecólogo y Obstetra, Fecha Nacimiento: 2022-05-20, Contacto Emergencia: , Telefono Emergencia: , Descuento maximo: 15.00'),
+(619, 2, 2, '2022-11-24 11:33:51', 'Seguridad', 'Se edito un usuario doctor Nombre: Jessica Maldonado, Email: jmaldonado@gmail.com, Dirección: 64854254, Teléfono: , tipo: Doctor, Especialidad: Ginecólogo y Obstetra, Fecha Nacimiento: 1989-08-16, Contacto Emergencia: , Telefono Emergencia: , Descuento maximo: 10.00'),
+(620, 2, 2, '2022-11-24 11:33:58', 'Seguridad', 'Se edito un usuario doctor Nombre: Marcela Chacon, Email: mchacon@gmail.com, Dirección: , Teléfono: 32156487, tipo: Doctor, Especialidad: Ginecólogo y Obstetra, Fecha Nacimiento: 2022-05-20, Contacto Emergencia: , Telefono Emergencia: , Descuento maximo: 10.00'),
+(621, 2, 2, '2022-11-24 11:34:04', 'Seguridad', 'Se edito un usuario doctor Nombre: Mishelle Jacobs, Email: mjacobs@gmail.com, Dirección: , Teléfono: , tipo: Doctor, Especialidad: Ginecólogo y Obstetra, Fecha Nacimiento: 2022-05-20, Contacto Emergencia: , Telefono Emergencia: , Descuento maximo: 15.00'),
+(622, 2, 2, '2022-11-24 11:34:18', 'Seguridad', 'Se edito un usuario: Nombre: Ana Castillo, Email: szotto18@gmail.com, Dirección: , Teléfono: 35874125, Tipo: Asistente, Fecha Nacimiento: 2022-05-20, Contacto Emergencia: , Telefono Emergencia: , Descuento maximo: 5.00'),
+(623, 2, 2, '2022-11-24 11:45:06', 'Seguridad', 'Se edito un usuario doctor Nombre: Mishelle Jacobs, Email: mjacobs@gmail.com, Dirección: , Teléfono: , tipo: Doctor, Especialidad: Ginecólogo y Obstetra, Fecha Nacimiento: 2022-05-20, Contacto Emergencia: , Telefono Emergencia: , Descuento maximo: 15.00'),
+(624, 2, 4, '2022-11-24 11:50:22', 'Paciente', 'Se creo una nuevo ciclo para silla electromagnetica para el paciente:Catalina de Alcazar, Fecha: 24-11-2022'),
+(625, 2, 2, '2022-11-28 10:00:51', 'Seguridad', 'Se creo un usuario de Doctor, Nombre: prueba, Email: docpru@doc.com, Dirección: , Teléfono: , tipo: Doctor, Especialidad: Urólogo, Fecha Nacimiento: 2022-11-28, Contacto Emergencia: , Telefono Emergencia: , Descuento maximo: 10'),
+(626, 2, 2, '2022-11-28 10:01:54', 'Ventas', 'Se creo una orden nueva, Paciente: Maria Tereza, Doctor: prueba, Total:Q.2625'),
+(627, 2, 2, '2022-11-28 10:31:16', 'Citas', 'Se creo una cita, Paciente: Maria Tereza, Doctor: prueba, Fecha y hora: 2022-11-28 4:15:00, Finaliza: 28-11-2022 05:44:00, Estado: Confirmada'),
+(628, 2, 2, '2022-11-28 10:31:19', 'Citas', 'Se edito una cita, Paciente: Maria Tereza, Doctor: prueba, Fecha y hora: 2022-11-28 04:15:00, Finaliza: 28-11-2022 05:44:00, Estado: Confirmada, Apuntes: ');
+INSERT INTO `bitacora` (`idbitacora`, `idempresa`, `idusuario`, `fecha`, `tipo`, `descripcion`) VALUES
+(629, 2, 2, '2022-11-28 17:57:56', 'Ventas', 'Se creo una orden nueva, Paciente: paciente prueba, Doctor: Otto Szarata, Total:Q.1300'),
+(630, 2, 2, '2022-11-29 10:13:16', 'Ventas', 'Se creo una venta nueva, Cliente: paciente prueba, Comprobante: Factura -, Fecha: 2022-11-29, Total Venta: Q.100, Abonado: 100.00, Estado Saldo: Pagado, Estado Venta: Cerrada, Tipo Pago: Efectivo'),
+(631, 2, 2, '2022-12-05 12:07:02', 'Ventas', 'Se edito una orden, Paciente: Maria Tereza, Doctor: prueba, Total:Q.2625'),
+(632, 2, 2, '2023-05-30 19:41:07', 'Compras', 'Se creo un ingreso nuevo, Proveedor: Bodega Farmacéutica, Comprobante: Factura -, Fecha: 2023-05-30, Total Compra: Q.30'),
+(633, 2, 2, '2023-05-31 10:47:49', 'Compras', 'Se creo un ingreso nuevo, Proveedor: Bodega Farmacéutica, Comprobante: Factura -, Fecha: 2023-05-31, Total Compra: Q.590'),
+(634, 2, 2, '2023-05-31 11:15:38', 'Compras', 'Se creo un ingreso nuevo, Proveedor: Bodega Farmacéutica, Comprobante: Factura -, Fecha: 2023-05-31, Total Compra: Q.580'),
+(635, 2, 2, '2023-05-31 11:18:55', 'Compras', 'Se creo un ingreso nuevo, Proveedor: Amicelco, Comprobante: Factura -, Fecha: 2023-05-31, Total Compra: Q.250');
 
 -- --------------------------------------------------------
 
@@ -607,10 +764,10 @@ INSERT INTO `bitacora` (`idbitacora`, `idempresa`, `idusuario`, `fecha`, `tipo`,
 CREATE TABLE `categoria` (
   `idcategoria` int(11) NOT NULL,
   `idempresa` int(11) NOT NULL,
-  `nombre` varchar(45) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `descripcion` varchar(500) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `imagen` varchar(500) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `condicion` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL
+  `nombre` varchar(45) DEFAULT NULL,
+  `descripcion` varchar(500) DEFAULT NULL,
+  `imagen` varchar(500) DEFAULT NULL,
+  `condicion` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
@@ -634,10 +791,10 @@ CREATE TABLE `cita` (
   `idpaciente` int(11) NOT NULL,
   `fecha_inicio` datetime NOT NULL,
   `fecha_fin` datetime NOT NULL,
-  `estado_cita` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
-  `apuntes` varchar(1000) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `estado_cita` varchar(20) NOT NULL,
+  `apuntes` varchar(1000) DEFAULT NULL,
   `turno` int(11) DEFAULT NULL,
-  `estado` varchar(20) COLLATE utf8_spanish2_ci NOT NULL
+  `estado` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
@@ -645,7 +802,17 @@ CREATE TABLE `cita` (
 --
 
 INSERT INTO `cita` (`idcita`, `idusuario`, `iddoctor`, `idpaciente`, `fecha_inicio`, `fecha_fin`, `estado_cita`, `apuntes`, `turno`, `estado`) VALUES
-(24, 4, 14, 7, '2022-09-22 16:30:00', '2022-09-22 17:29:00', 'Confirmada', NULL, NULL, 'Habilitado');
+(37, 2, 4, 7, '2022-11-22 01:30:00', '2022-11-22 02:29:00', 'Confirmada', NULL, NULL, 'Habilitado'),
+(38, 2, 4, 7, '2022-11-22 03:00:00', '2022-11-22 03:29:00', 'Confirmada', NULL, NULL, 'Habilitado'),
+(39, 2, 4, 7, '2022-11-23 08:30:00', '2022-11-23 10:29:00', 'Confirmada', NULL, NULL, 'Habilitado'),
+(40, 2, 4, 7, '2022-11-23 10:30:00', '2022-11-23 11:29:00', 'Cancelada', NULL, NULL, 'Cancelada'),
+(41, 2, 4, 7, '2022-11-23 10:30:00', '2022-11-23 12:29:00', 'Confirmada', NULL, NULL, 'Habilitado'),
+(42, 2, 14, 7, '2022-11-23 10:00:00', '2022-11-23 10:59:00', 'Confirmada', NULL, NULL, 'Habilitado'),
+(43, 2, 4, 7, '2022-11-21 10:15:00', '2022-11-21 10:59:00', 'Confirmada', NULL, NULL, 'Habilitado'),
+(44, 2, 14, 7, '2022-11-21 10:15:00', '2022-11-21 11:44:00', 'Confirmada', NULL, NULL, 'Habilitado'),
+(45, 2, 15, 6, '2022-11-22 02:15:00', '2022-11-22 02:59:00', 'Confirmada', NULL, NULL, 'Habilitado'),
+(46, 2, 14, 6, '2020-06-17 05:30:00', '2020-06-17 06:14:00', 'Confirmada', NULL, NULL, 'Habilitado'),
+(47, 2, 41, 6, '2022-11-28 04:15:00', '2022-11-28 05:44:00', 'Confirmada', NULL, NULL, 'Habilitado');
 
 -- --------------------------------------------------------
 
@@ -666,7 +833,10 @@ CREATE TABLE `climaymeno` (
 --
 
 INSERT INTO `climaymeno` (`idclimaymeno`, `idpaciente`, `iddoctor`, `idusuario`, `fecha`) VALUES
-(6, 7, 4, 4, '2022-08-17');
+(6, 7, 4, 4, '2022-08-17'),
+(7, 7, 4, 4, '2022-09-27'),
+(8, 7, 4, 4, '2022-09-27'),
+(9, 7, 4, 4, '2022-10-06');
 
 -- --------------------------------------------------------
 
@@ -679,70 +849,70 @@ CREATE TABLE `climaymeno_control` (
   `idclimaymeno` int(11) NOT NULL,
   `numero_control` int(11) DEFAULT NULL,
   `fecha` date DEFAULT NULL,
-  `bochornos` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `bochornos_escala` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `depresion` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `depresion_escala` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `irritabilidad` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `irritabilidad_escala` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `perdida_libido` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `perdida_libido_escala` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `sequedad_vaginal` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `sequedad_vaginal_escala` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `insomnio` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `insomnio_escala` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `cefalea` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `cefalea_escala` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `fatiga` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `fatiga_escala` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `artralgias_mialgias` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `artralgias_mialgias_escala` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `trastornos_miccionales` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `trastornos_miccionales_escala` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `otros` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `otros_si` varchar(200) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `bochornos` varchar(5) DEFAULT NULL,
+  `bochornos_escala` varchar(5) DEFAULT NULL,
+  `depresion` varchar(5) DEFAULT NULL,
+  `depresion_escala` varchar(5) DEFAULT NULL,
+  `irritabilidad` varchar(5) DEFAULT NULL,
+  `irritabilidad_escala` varchar(5) DEFAULT NULL,
+  `perdida_libido` varchar(5) DEFAULT NULL,
+  `perdida_libido_escala` varchar(5) DEFAULT NULL,
+  `sequedad_vaginal` varchar(5) DEFAULT NULL,
+  `sequedad_vaginal_escala` varchar(5) DEFAULT NULL,
+  `insomnio` varchar(5) DEFAULT NULL,
+  `insomnio_escala` varchar(5) DEFAULT NULL,
+  `cefalea` varchar(5) DEFAULT NULL,
+  `cefalea_escala` varchar(5) DEFAULT NULL,
+  `fatiga` varchar(5) DEFAULT NULL,
+  `fatiga_escala` varchar(5) DEFAULT NULL,
+  `artralgias_mialgias` varchar(5) DEFAULT NULL,
+  `artralgias_mialgias_escala` varchar(5) DEFAULT NULL,
+  `trastornos_miccionales` varchar(5) DEFAULT NULL,
+  `trastornos_miccionales_escala` varchar(5) DEFAULT NULL,
+  `otros` varchar(5) DEFAULT NULL,
+  `otros_si` varchar(200) DEFAULT NULL,
   `peso` decimal(10,0) NOT NULL,
   `talla` decimal(10,0) NOT NULL,
-  `presion_arterial` int(11) NOT NULL,
+  `presion_arterial` varchar(10) DEFAULT NULL,
   `temperatura` int(11) NOT NULL,
   `frecuencia_cardiaca` int(11) NOT NULL,
-  `cara` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `mamas` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `torax` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `abdomen` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `vulva` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `utero_anexos` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `varices` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `flujo_vaginal_ph` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `hallazgos` varchar(500) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `cara` varchar(50) DEFAULT NULL,
+  `mamas` varchar(50) DEFAULT NULL,
+  `torax` varchar(50) DEFAULT NULL,
+  `abdomen` varchar(50) DEFAULT NULL,
+  `vulva` varchar(50) DEFAULT NULL,
+  `utero_anexos` varchar(50) DEFAULT NULL,
+  `varices` varchar(50) DEFAULT NULL,
+  `flujo_vaginal_ph` varchar(50) DEFAULT NULL,
+  `hallazgos` varchar(500) DEFAULT NULL,
   `fecha_laboratorios` date NOT NULL,
-  `hemograma` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `examen_orina` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `glicemia_curva_glicemica` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `insulina` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `panel_lipidos` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `transaminasas` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `citologia_cervicovaginal` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `mamografia` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `fsh` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `lh` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `pruebas_tiroideas` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `prolactina` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `densitometria_osea` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `ultrasonografia_pelvica` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `escala_homa` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `otros_laboratorio` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `acos` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `tratamiento_infecciones` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `trh_tipo_dosis` varchar(300) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `tratamiento_osteoporosis` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `calcio` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `vitamina_d` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `aspirina` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `tratamiento_hta` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `tratamiento_diabetes` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `jabones_intimos` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `nota_adicionales` varchar(1000) COLLATE utf8_spanish2_ci DEFAULT NULL
+  `hemograma` varchar(50) DEFAULT NULL,
+  `examen_orina` varchar(50) DEFAULT NULL,
+  `glicemia_curva_glicemica` varchar(50) DEFAULT NULL,
+  `insulina` varchar(50) DEFAULT NULL,
+  `panel_lipidos` varchar(50) DEFAULT NULL,
+  `transaminasas` varchar(50) DEFAULT NULL,
+  `citologia_cervicovaginal` varchar(50) DEFAULT NULL,
+  `mamografia` varchar(50) DEFAULT NULL,
+  `fsh` varchar(50) DEFAULT NULL,
+  `lh` varchar(50) DEFAULT NULL,
+  `pruebas_tiroideas` varchar(50) DEFAULT NULL,
+  `prolactina` varchar(50) DEFAULT NULL,
+  `densitometria_osea` varchar(50) DEFAULT NULL,
+  `ultrasonografia_pelvica` varchar(50) DEFAULT NULL,
+  `escala_homa` varchar(50) DEFAULT NULL,
+  `otros_laboratorio` varchar(100) DEFAULT NULL,
+  `acos` varchar(100) DEFAULT NULL,
+  `tratamiento_infecciones` varchar(100) DEFAULT NULL,
+  `trh_tipo_dosis` varchar(300) DEFAULT NULL,
+  `tratamiento_osteoporosis` varchar(100) DEFAULT NULL,
+  `calcio` varchar(100) DEFAULT NULL,
+  `vitamina_d` varchar(100) DEFAULT NULL,
+  `aspirina` varchar(100) DEFAULT NULL,
+  `tratamiento_hta` varchar(100) DEFAULT NULL,
+  `tratamiento_diabetes` varchar(100) DEFAULT NULL,
+  `jabones_intimos` varchar(100) DEFAULT NULL,
+  `nota_adicionales` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
@@ -750,8 +920,8 @@ CREATE TABLE `climaymeno_control` (
 --
 
 INSERT INTO `climaymeno_control` (`idclimaymeno_control`, `idclimaymeno`, `numero_control`, `fecha`, `bochornos`, `bochornos_escala`, `depresion`, `depresion_escala`, `irritabilidad`, `irritabilidad_escala`, `perdida_libido`, `perdida_libido_escala`, `sequedad_vaginal`, `sequedad_vaginal_escala`, `insomnio`, `insomnio_escala`, `cefalea`, `cefalea_escala`, `fatiga`, `fatiga_escala`, `artralgias_mialgias`, `artralgias_mialgias_escala`, `trastornos_miccionales`, `trastornos_miccionales_escala`, `otros`, `otros_si`, `peso`, `talla`, `presion_arterial`, `temperatura`, `frecuencia_cardiaca`, `cara`, `mamas`, `torax`, `abdomen`, `vulva`, `utero_anexos`, `varices`, `flujo_vaginal_ph`, `hallazgos`, `fecha_laboratorios`, `hemograma`, `examen_orina`, `glicemia_curva_glicemica`, `insulina`, `panel_lipidos`, `transaminasas`, `citologia_cervicovaginal`, `mamografia`, `fsh`, `lh`, `pruebas_tiroideas`, `prolactina`, `densitometria_osea`, `ultrasonografia_pelvica`, `escala_homa`, `otros_laboratorio`, `acos`, `tratamiento_infecciones`, `trh_tipo_dosis`, `tratamiento_osteoporosis`, `calcio`, `vitamina_d`, `aspirina`, `tratamiento_hta`, `tratamiento_diabetes`, `jabones_intimos`, `nota_adicionales`) VALUES
-(10, 6, 1, '2022-08-17', 'SI', NULL, 'NO', '+', 'SI', '++', 'NO', '+++', 'SI', NULL, 'NO', '+', 'SI', '++', 'NO', '+++', 'SI', NULL, 'NO', '+', 'SI', 'otros si sinromas', '1', '2', 3, 4, 5, '6', '7', '8', '9', '0', '1', '2', '3', '4', '2022-08-18', '5', '6', '7', '8', '9', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '1'),
-(11, 6, 2, '2022-08-17', 'NO', NULL, 'NO', NULL, 'NO', NULL, 'NO', NULL, 'NO', NULL, 'NO', NULL, 'NO', NULL, 'NO', NULL, 'NO', NULL, 'NO', NULL, 'NO', NULL, '1', '2', 3, 4, 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-17', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(10, 6, 1, '2022-08-17', 'SI', NULL, 'NO', '+', 'SI', '++', 'NO', '+++', 'SI', NULL, 'NO', '+', 'SI', '++', 'NO', '+++', 'SI', NULL, 'NO', '+', 'SI', 'otros si sinromas', '1', '2', '3', 4, 5, '6', '7', '8', '9', '0', '1', '2', '3', '4', '2022-08-18', '5', '6', '7', '8', '9', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '1'),
+(11, 6, 2, '2022-08-17', 'NO', NULL, 'NO', NULL, 'NO', NULL, 'NO', NULL, 'NO', NULL, 'NO', NULL, 'NO', NULL, 'NO', NULL, 'NO', NULL, 'NO', NULL, 'NO', NULL, '1', '2', '3', 4, 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-17', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -762,8 +932,8 @@ INSERT INTO `climaymeno_control` (`idclimaymeno_control`, `idclimaymeno`, `numer
 CREATE TABLE `climaymeno_img` (
   `idclimaymeno_img` int(11) NOT NULL,
   `idclimaymeno` int(11) NOT NULL,
-  `imagen` varchar(100) COLLATE utf8_spanish2_ci NOT NULL,
-  `descripcion` varchar(300) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `imagen` varchar(100) NOT NULL,
+  `descripcion` varchar(300) DEFAULT NULL,
   `fecha` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
@@ -788,9 +958,9 @@ CREATE TABLE `colposcopia` (
   `iddoctor` int(11) NOT NULL,
   `idusuario` int(11) NOT NULL,
   `fecha` date DEFAULT NULL,
-  `union_escamoso_cilindrica` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `legrado_endocervical` varchar(200) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `colposcopia_insatisfactoria` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `union_escamoso_cilindrica` varchar(5) DEFAULT NULL,
+  `legrado_endocervical` varchar(200) DEFAULT NULL,
+  `colposcopia_insatisfactoria` varchar(100) DEFAULT NULL,
   `hd_eap` tinyint(1) DEFAULT NULL,
   `hd_eam` tinyint(1) DEFAULT NULL,
   `hd_leucoplasia` tinyint(1) DEFAULT NULL,
@@ -799,24 +969,29 @@ CREATE TABLE `colposcopia` (
   `hd_vasos` tinyint(1) DEFAULT NULL,
   `hd_area` tinyint(1) DEFAULT NULL,
   `hd_otros` tinyint(1) DEFAULT NULL,
-  `hd_otros_especificar` varchar(300) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `hallazgos_fuera` varchar(500) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `carcinoma_invasor` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `otros_hallazgos` varchar(500) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `hd_otros_especificar` varchar(300) DEFAULT NULL,
+  `hallazgos_fuera` varchar(500) DEFAULT NULL,
+  `carcinoma_invasor` varchar(5) DEFAULT NULL,
+  `otros_hallazgos` varchar(500) DEFAULT NULL,
   `dcn_insatisfactoria` tinyint(1) DEFAULT NULL,
-  `dcn_insatisfactoria_especifique` varchar(300) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `hallazgos_nomales` varchar(300) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `dcn_insatisfactoria_especifique` varchar(300) DEFAULT NULL,
+  `hallazgos_nomales` varchar(300) DEFAULT NULL,
   `inflamacion_infeccion` tinyint(1) DEFAULT NULL,
-  `inflamacion_infeccion_especifique` varchar(300) COLLATE utf8_spanish2_ci DEFAULT NULL
+  `inflamacion_infeccion_especifique` varchar(300) DEFAULT NULL,
+  `biopsia` tinyint(1) DEFAULT NULL,
+  `numero_localizacion` varchar(100) DEFAULT NULL,
+  `legrado` tinyint(1) DEFAULT NULL,
+  `otros_hallazgos_colposcopicos` varchar(300) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `colposcopia`
 --
 
-INSERT INTO `colposcopia` (`idcolposcopia`, `idpaciente`, `iddoctor`, `idusuario`, `fecha`, `union_escamoso_cilindrica`, `legrado_endocervical`, `colposcopia_insatisfactoria`, `hd_eap`, `hd_eam`, `hd_leucoplasia`, `hd_punteando`, `hd_mosaico`, `hd_vasos`, `hd_area`, `hd_otros`, `hd_otros_especificar`, `hallazgos_fuera`, `carcinoma_invasor`, `otros_hallazgos`, `dcn_insatisfactoria`, `dcn_insatisfactoria_especifique`, `hallazgos_nomales`, `inflamacion_infeccion`, `inflamacion_infeccion_especifique`) VALUES
-(5, 7, 4, 4, '2022-09-23', 'SI', NULL, 'Por no haber visto toda la lesión', 1, 0, 1, 0, 1, 0, 1, 0, '1', '2', 'SI', '3', 1, '4', '1', 0, '5'),
-(6, 7, 4, 4, '2022-09-26', 'NO', '555555555555555', 'por no haber visto todo la UEC', 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, 'NO', NULL, 0, NULL, '0', 0, NULL);
+INSERT INTO `colposcopia` (`idcolposcopia`, `idpaciente`, `iddoctor`, `idusuario`, `fecha`, `union_escamoso_cilindrica`, `legrado_endocervical`, `colposcopia_insatisfactoria`, `hd_eap`, `hd_eam`, `hd_leucoplasia`, `hd_punteando`, `hd_mosaico`, `hd_vasos`, `hd_area`, `hd_otros`, `hd_otros_especificar`, `hallazgos_fuera`, `carcinoma_invasor`, `otros_hallazgos`, `dcn_insatisfactoria`, `dcn_insatisfactoria_especifique`, `hallazgos_nomales`, `inflamacion_infeccion`, `inflamacion_infeccion_especifique`, `biopsia`, `numero_localizacion`, `legrado`, `otros_hallazgos_colposcopicos`) VALUES
+(5, 7, 4, 4, '2022-09-23', 'SI', NULL, 'Por no haber visto toda la lesión', 1, 0, 1, 0, 1, 0, 1, 0, '1', '2', 'SI', '3', 1, '4', '1', 0, '5', NULL, NULL, NULL, NULL),
+(6, 7, 4, 4, '2022-09-26', 'NO', '555555555555555', 'por no haber visto todo la UEC', 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, 'NO', NULL, 0, NULL, '0', 0, NULL, NULL, NULL, NULL, NULL),
+(7, 7, 4, 4, '2022-10-04', 'SI', '1', 'Por no haber visto toda la lesión', 1, 0, 1, 0, 1, 0, 1, 0, '2', '3', 'SI', '4', 1, '5', '1', 1, '6', 0, '2', 0, '1');
 
 -- --------------------------------------------------------
 
@@ -827,8 +1002,8 @@ INSERT INTO `colposcopia` (`idcolposcopia`, `idpaciente`, `iddoctor`, `idusuario
 CREATE TABLE `colposcopia_img` (
   `idcolposcopia_img` int(11) NOT NULL,
   `idcolposcopia` int(11) NOT NULL,
-  `imagen` varchar(100) COLLATE utf8_spanish2_ci NOT NULL,
-  `descripcion` varchar(300) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `imagen` varchar(100) NOT NULL,
+  `descripcion` varchar(300) DEFAULT NULL,
   `fecha` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
@@ -838,7 +1013,9 @@ CREATE TABLE `colposcopia_img` (
 
 INSERT INTO `colposcopia_img` (`idcolposcopia_img`, `idcolposcopia`, `imagen`, `descripcion`, `fecha`) VALUES
 (3, 5, '2E53Kdesayunos2.jpg', NULL, '2022-09-23'),
-(4, 5, 'K08HIofsm.png', NULL, '2022-09-23');
+(4, 5, 'K08HIofsm.png', NULL, '2022-09-23'),
+(5, 6, '1WIS2desayunos.jpg', NULL, '2022-09-27'),
+(6, 6, 'Y4DJCdesayunos.jpg', NULL, '2022-09-27');
 
 -- --------------------------------------------------------
 
@@ -851,31 +1028,31 @@ CREATE TABLE `control` (
   `idembarazo` int(11) NOT NULL,
   `numero_control` int(11) DEFAULT NULL,
   `fecha` date DEFAULT NULL,
-  `semanas` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `sueno` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `apetito` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `estrenimiento` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `disuria` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `nauseas_vomitos` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `flujo_vaginal` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `dolor` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `otros` varchar(300) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `semanas` varchar(50) DEFAULT NULL,
+  `sueno` varchar(100) DEFAULT NULL,
+  `apetito` varchar(100) DEFAULT NULL,
+  `estrenimiento` varchar(100) DEFAULT NULL,
+  `disuria` varchar(100) DEFAULT NULL,
+  `nauseas_vomitos` varchar(100) DEFAULT NULL,
+  `flujo_vaginal` varchar(100) DEFAULT NULL,
+  `dolor` varchar(100) DEFAULT NULL,
+  `otros` varchar(300) DEFAULT NULL,
   `peso` decimal(10,0) DEFAULT NULL,
   `talla` decimal(10,0) DEFAULT NULL,
-  `presion_arterial` varchar(10) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `presion_arterial` varchar(10) DEFAULT NULL,
   `temperatura` int(11) DEFAULT NULL,
   `frecuencia_cardiaca_materna` int(11) DEFAULT NULL,
   `altura_uterina` decimal(10,0) DEFAULT NULL,
   `frecuencia_cardiaca_fetal` int(11) DEFAULT NULL,
-  `presentacion_fetal` varchar(15) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `movimientos_fetales` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `edema_mi` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `varices` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `presentacion_fetal` varchar(15) DEFAULT NULL,
+  `movimientos_fetales` varchar(5) DEFAULT NULL,
+  `edema_mi` varchar(5) DEFAULT NULL,
+  `varices` varchar(5) DEFAULT NULL,
   `flujo_vaginal_ph` int(11) DEFAULT NULL,
-  `medicamentos` varchar(500) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `especiales` varchar(200) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `medicamentos` varchar(500) DEFAULT NULL,
+  `especiales` varchar(200) DEFAULT NULL,
   `proxima_cita` date DEFAULT NULL,
-  `nota` varchar(500) COLLATE utf8_spanish2_ci DEFAULT NULL
+  `nota` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
@@ -887,7 +1064,8 @@ INSERT INTO `control` (`idcontrol`, `idembarazo`, `numero_control`, `fecha`, `se
 (19, 30, 2, '2022-05-30', '5 semanas con 5 días', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '2', '3/4', 5, 6, '7', 8, 'Cefalica', '+', 'NO', 'NO', 4, NULL, NULL, '2022-05-30', NULL),
 (20, 31, 1, '2022-06-08', '0 semanas con 0 días', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '2', '3/4', 5, 6, '7', 8, 'Cefalica', '+', 'NO', 'NO', 9, NULL, NULL, '2022-06-08', NULL),
 (22, 32, 1, '2022-07-22', '0 semanas con 0 días', 'fdfg', 'dfgdfg', 'dfgd', 'fgfdf', 'gdf', 'dfg', 'gdf', 'dfgdfgdfg', '160', '2', '89/35', 609, 34, '34', 34, 'Oblicua', '+++', 'SI', 'SI', 45, '3ertrterrt', 'ertert', '2022-07-22', 'ertert'),
-(23, 31, 2, '2022-09-01', '12 semanas con 1 días', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '2', '3/4', 5, 6, '7', 8, 'Cefalica', '+', 'NO', 'NO', 8, NULL, NULL, '2022-09-01', NULL);
+(23, 31, 2, '2022-09-01', '12 semanas con 1 días', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '2', '3/4', 5, 6, '7', 8, 'Cefalica', '+', 'NO', 'NO', 8, NULL, NULL, '2022-09-01', NULL),
+(26, 33, 1, '2022-10-20', '3 semanas con 2 días', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '2', '3/4', 5, 6, '7', 88, 'Cefalica', '+', 'NO', 'NO', 9, NULL, NULL, '2022-10-20', NULL);
 
 -- --------------------------------------------------------
 
@@ -899,7 +1077,7 @@ CREATE TABLE `detalle_ingreso` (
   `iddetalle_ingreso` int(11) NOT NULL,
   `idingreso` int(11) NOT NULL,
   `idarticulo` int(11) NOT NULL,
-  `codigo` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `codigo` varchar(50) DEFAULT NULL,
   `idpresentacion_compra` int(11) NOT NULL,
   `cantidad_compra` int(11) NOT NULL,
   `bonificacion` int(11) NOT NULL,
@@ -913,14 +1091,14 @@ CREATE TABLE `detalle_ingreso` (
   `cantidadxunidad` int(11) NOT NULL,
   `total_unidades_inventario` int(11) NOT NULL,
   `costo_unidad_inventario` decimal(11,2) NOT NULL,
-  `descripcion_inventario` varchar(200) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `descripcion_inventario` varchar(200) DEFAULT NULL,
   `precio_sugerido` decimal(11,2) NOT NULL,
   `porcentaje_utilidad` decimal(11,2) NOT NULL,
   `precio_venta` decimal(11,2) NOT NULL,
   `precio_oferta` decimal(11,2) NOT NULL,
-  `estado_oferta` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
+  `estado_oferta` varchar(20) NOT NULL,
   `stock` int(11) DEFAULT NULL,
-  `estado` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL
+  `estado` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
@@ -929,9 +1107,16 @@ CREATE TABLE `detalle_ingreso` (
 
 INSERT INTO `detalle_ingreso` (`iddetalle_ingreso`, `idingreso`, `idarticulo`, `codigo`, `idpresentacion_compra`, `cantidad_compra`, `bonificacion`, `cantidad_total_compra`, `costo_unidad_compra`, `sub_total_compra`, `descuento`, `total_compra`, `fecha_vencimiento`, `idpresentacion_inventario`, `cantidadxunidad`, `total_unidades_inventario`, `costo_unidad_inventario`, `descripcion_inventario`, `precio_sugerido`, `porcentaje_utilidad`, `precio_venta`, `precio_oferta`, `estado_oferta`, `stock`, `estado`) VALUES
 (28, 62, 81, NULL, 20, 20, 1, 21, '30.00', '600.00', '0.00', '600.00', '2022-05-23', 20, 1, 21, '28.57', 'CAJA DE 30 TABLETAS RECUBIERTAS', '45.00', '57.50', '45.00', '10.00', 'Inactivo', 12, 'Activo'),
-(29, 62, 73, NULL, 15, 100, 10, 110, '60.00', '6000.00', '0.00', '6000.00', '2022-05-23', 15, 1, 110, '54.55', 'Ovulos para inducir al parto unidad', '100.00', '83.33', '100.00', '10.00', 'Inactivo', 99, 'Activo'),
+(29, 62, 73, NULL, 15, 100, 10, 110, '60.00', '6000.00', '0.00', '6000.00', '2022-05-23', 15, 1, 110, '54.55', 'Ovulos para inducir al parto unidad', '100.00', '83.33', '100.00', '10.00', 'Inactivo', 98, 'Activo'),
 (30, 62, 72, NULL, 21, 1, 0, 1, '100.00', '100.00', '0.00', '100.00', '2022-05-23', 21, 1, 1, '100.00', 'Frasco de AK Cápsulas de 50MG. T3', '200.00', '100.00', '200.00', '10.00', 'Inactivo', 0, 'Activo'),
-(31, 63, 74, '555', 20, 100, 0, 100, '300.00', '30000.00', '0.00', '30000.00', '2022-05-23', 20, 1, 100, '300.00', 'testosterona caja de 10 unidades', '400.00', '33.33', '400.00', '10.00', 'Inactivo', 97, 'Activo');
+(31, 63, 74, '555', 20, 100, 0, 100, '300.00', '30000.00', '0.00', '30000.00', '2022-05-23', 20, 1, 100, '300.00', 'testosterona caja de 10 unidades', '400.00', '33.33', '400.00', '10.00', 'Inactivo', 97, 'Activo'),
+(32, 64, 40, NULL, 16, 5, 0, 5, '80.00', '400.00', '0.00', '400.00', '2022-11-05', 16, 1, 5, '80.00', NULL, '0.00', '0.00', '80.00', '0.00', 'Inactivo', 5, 'Activo'),
+(33, 65, 46, NULL, 17, 1, 0, 1, '40.00', '40.00', '10.00', '30.00', '2024-06-14', 17, 1, 1, '30.00', NULL, '0.00', '0.00', '30.00', '0.00', 'Inactivo', 1, 'Activo'),
+(34, 66, 66, NULL, 20, 10, 0, 10, '60.00', '600.00', '10.00', '590.00', '2023-06-16', 20, 1, 10, '59.00', NULL, '60.00', '1.69', '60.00', '10.00', 'Inactivo', 10, 'Activo'),
+(35, 67, 54, NULL, 19, 10, 0, 10, '80.00', '800.00', '70.00', '730.00', '2023-07-20', 19, 1, 10, '73.00', NULL, '0.00', '0.00', '73.00', '0.00', 'Inactivo', 10, 'Activo'),
+(36, 68, 40, NULL, 17, 5, 0, 5, '100.00', '500.00', '0.00', '500.00', '2023-07-28', 17, 1, 5, '100.00', NULL, '120.00', '20.00', '120.00', '5.00', 'Inactivo', 5, 'Activo'),
+(37, 68, 42, NULL, 17, 1, 0, 1, '80.00', '80.00', '0.00', '80.00', '2023-08-02', 17, 1, 1, '80.00', NULL, '100.00', '10.00', '88.00', '5.00', 'Inactivo', 1, 'Activo'),
+(38, 69, 42, NULL, 8, 5, 0, 5, '50.00', '250.00', '0.00', '250.00', '2023-09-21', 8, 1, 5, '50.00', NULL, '0.00', '-100.00', '0.00', '5.00', 'Inactivo', 5, 'Activo');
 
 -- --------------------------------------------------------
 
@@ -970,7 +1155,22 @@ INSERT INTO `detalle_orden` (`iddetalle_orden`, `idorden`, `idarticulo`, `cantid
 (27, 6, 63, 1, '950.00', '0.00'),
 (28, 6, 65, 1, '3200.00', '0.00'),
 (29, 6, 68, 1, '1000.00', '0.00'),
-(30, 6, 69, 1, '500.00', '0.00');
+(30, 6, 69, 1, '500.00', '0.00'),
+(31, 7, 48, 1, '450.00', '0.00'),
+(32, 7, 67, 1, '500.00', '0.00'),
+(33, 7, 40, 1, '400.00', '0.00'),
+(34, 8, 35, 1, '750.00', '0.00'),
+(35, 8, 39, 1, '300.00', '0.00'),
+(36, 8, 47, 1, '850.00', '0.00'),
+(37, 8, 57, 1, '250.00', '0.00'),
+(38, 8, 49, 1, '1100.00', '0.00'),
+(39, 8, 65, 1, '3200.00', '0.00'),
+(40, 8, 66, 1, '500.00', '0.00'),
+(41, 9, 37, 1, '75.00', '0.00'),
+(42, 9, 42, 1, '550.00', '0.00'),
+(43, 9, 53, 1, '2000.00', '0.00'),
+(44, 10, 39, 1, '300.00', '0.00'),
+(45, 10, 68, 1, '1000.00', '0.00');
 
 -- --------------------------------------------------------
 
@@ -989,7 +1189,7 @@ CREATE TABLE `detalle_venta` (
   `precio_compra` decimal(11,2) NOT NULL,
   `precio_oferta` decimal(11,2) NOT NULL,
   `descuento` decimal(11,2) NOT NULL,
-  `agregado` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL
+  `agregado` varchar(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
@@ -1022,7 +1222,8 @@ INSERT INTO `detalle_venta` (`iddetalle_venta`, `idventa`, `idarticulo`, `idpres
 (46, 13, 74, 20, 31, 2, '400.00', '300.00', '0.00', '0.00', 'SI'),
 (47, 14, 74, 20, 31, 1, '400.00', '300.00', '0.00', '0.00', 'SI'),
 (48, 15, 73, 15, 29, 10, '100.00', '54.55', '0.00', '0.00', 'SI'),
-(49, 16, 81, 20, 28, 5, '45.00', '28.57', '0.00', '0.00', 'SI');
+(49, 16, 81, 20, 28, 5, '45.00', '28.57', '0.00', '0.00', 'SI'),
+(50, 17, 73, 15, 29, 1, '100.00', '54.55', '0.00', '0.00', 'SI');
 
 -- --------------------------------------------------------
 
@@ -1034,7 +1235,7 @@ CREATE TABLE `dias` (
   `iddias` int(11) NOT NULL,
   `iddoctor` int(11) NOT NULL,
   `fecha` date NOT NULL,
-  `apuntes` varchar(500) COLLATE utf8_spanish2_ci DEFAULT NULL
+  `apuntes` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 -- --------------------------------------------------------
@@ -1050,9 +1251,9 @@ CREATE TABLE `embarazo` (
   `idusuario` int(11) NOT NULL,
   `fur` date DEFAULT NULL,
   `fecha` date DEFAULT NULL,
-  `trimestre1` varchar(1000) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `trimestre2` varchar(1000) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `trimestre3` varchar(1000) COLLATE utf8_spanish2_ci DEFAULT NULL
+  `trimestre1` varchar(1000) DEFAULT NULL,
+  `trimestre2` varchar(1000) DEFAULT NULL,
+  `trimestre3` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
@@ -1062,7 +1263,8 @@ CREATE TABLE `embarazo` (
 INSERT INTO `embarazo` (`idembarazo`, `idpaciente`, `iddoctor`, `idusuario`, `fur`, `fecha`, `trimestre1`, `trimestre2`, `trimestre3`) VALUES
 (30, 6, 4, 4, '2022-04-20', '2022-05-30', NULL, NULL, NULL),
 (31, 7, 4, 4, '2022-06-08', '2022-06-08', NULL, NULL, NULL),
-(32, 6, 4, 4, '2022-07-22', '2022-07-22', NULL, NULL, NULL);
+(32, 6, 4, 4, '2022-07-22', '2022-07-22', NULL, NULL, NULL),
+(33, 7, 4, 4, '2022-09-27', '2022-09-27', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1073,8 +1275,8 @@ INSERT INTO `embarazo` (`idembarazo`, `idpaciente`, `iddoctor`, `idusuario`, `fu
 CREATE TABLE `embarazo_img` (
   `idembarazo_img` int(11) NOT NULL,
   `idembarazo` int(11) NOT NULL,
-  `imagen` varchar(100) COLLATE utf8_spanish2_ci NOT NULL,
-  `descripcion` varchar(300) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `imagen` varchar(100) NOT NULL,
+  `descripcion` varchar(300) DEFAULT NULL,
   `fecha` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
@@ -1098,29 +1300,29 @@ CREATE TABLE `fisico` (
   `iddoctor` int(11) NOT NULL,
   `idusuario` int(11) NOT NULL,
   `fecha` date DEFAULT NULL,
-  `motivo_consulta` varchar(1000) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `motivo_consulta` varchar(1000) DEFAULT NULL,
   `peso` decimal(10,0) DEFAULT NULL,
   `talla` decimal(10,0) DEFAULT NULL,
   `perimetro_abdominal` decimal(10,0) DEFAULT NULL,
-  `presion_arterial` varchar(10) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `presion_arterial` varchar(10) DEFAULT NULL,
   `frecuencia_cardiaca` int(11) DEFAULT NULL,
   `frecuencia_respiratoria` int(11) DEFAULT NULL,
   `temperatura` int(11) DEFAULT NULL,
   `saturacion_oxigeno` int(11) DEFAULT NULL,
-  `impresion_clinica` varchar(500) COLLATE utf8_spanish2_ci NOT NULL,
-  `plan_diagnostico` varchar(500) COLLATE utf8_spanish2_ci NOT NULL,
-  `plan_tratamiento` varchar(500) COLLATE utf8_spanish2_ci NOT NULL,
-  `recomendaciones_generales` varchar(500) COLLATE utf8_spanish2_ci NOT NULL,
-  `recomendaciones_especificas` varchar(500) COLLATE utf8_spanish2_ci NOT NULL,
-  `cabeza_cuello` varchar(200) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `tiroides` varchar(200) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `mamas_axilas` varchar(200) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `cardiopulmonar` varchar(200) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `abdomen` varchar(500) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `genitales_externos` varchar(200) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `especuloscopia` varchar(200) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `tacto_bimanual` varchar(500) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `miembros_inferiores` varchar(200) COLLATE utf8_spanish2_ci DEFAULT NULL
+  `impresion_clinica` varchar(500) NOT NULL,
+  `plan_diagnostico` varchar(500) NOT NULL,
+  `plan_tratamiento` varchar(500) NOT NULL,
+  `recomendaciones_generales` varchar(500) NOT NULL,
+  `recomendaciones_especificas` varchar(500) NOT NULL,
+  `cabeza_cuello` varchar(200) DEFAULT NULL,
+  `tiroides` varchar(200) DEFAULT NULL,
+  `mamas_axilas` varchar(200) DEFAULT NULL,
+  `cardiopulmonar` varchar(200) DEFAULT NULL,
+  `abdomen` varchar(500) DEFAULT NULL,
+  `genitales_externos` varchar(200) DEFAULT NULL,
+  `especuloscopia` varchar(200) DEFAULT NULL,
+  `tacto_bimanual` varchar(500) DEFAULT NULL,
+  `miembros_inferiores` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
@@ -1129,7 +1331,9 @@ CREATE TABLE `fisico` (
 
 INSERT INTO `fisico` (`idfisico`, `idpaciente`, `iddoctor`, `idusuario`, `fecha`, `motivo_consulta`, `peso`, `talla`, `perimetro_abdominal`, `presion_arterial`, `frecuencia_cardiaca`, `frecuencia_respiratoria`, `temperatura`, `saturacion_oxigeno`, `impresion_clinica`, `plan_diagnostico`, `plan_tratamiento`, `recomendaciones_generales`, `recomendaciones_especificas`, `cabeza_cuello`, `tiroides`, `mamas_axilas`, `cardiopulmonar`, `abdomen`, `genitales_externos`, `especuloscopia`, `tacto_bimanual`, `miembros_inferiores`) VALUES
 (20, 6, 4, 4, '2022-05-30', 'sdaf asdf asdf', '150', '140', '68', '100/80', 78, 18, 36, 98, 'a dfa d', 'ads fasd', 'f adsf a d', 'ad asdf', 'ad fadf adf', 'asdf asdf', 'asd fadsf', 'asdf asdf', 'ad sfadsf', 'adf adf', 'ad fadf', 'adsf', 'aa dfadf', 'asdf asdf'),
-(21, 7, 4, 4, '2022-06-08', 'sdfsd fsd fsdf sdf sdf s', '1', '2', '3', '4', 5, 7, 8, 9, 'sdf sdf s', 'df sdf', 'sd fsd f', 's dfs fs', 'dfsdf sdf sdf s', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(22, 7, 4, 4, '2022-09-27', 'dfgdfg dgdg dfg dfg', '2', '3', '4', '5/6', 7, 8, 9, 0, 'd fgdf g', 'd fgd', 'g df', 'g dfg', 'dg d', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(23, 7, 4, 4, '2022-09-27', 'sdfsdf sfd', '1', '2', '3', '5/4', 6, 7, 8, 9, 's fs', 'sfd s', 'fdsdf', 'sf s', 'f sf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(24, 7, 4, 4, '2022-10-06', 'ASD asd ASD sad ASD', '120', '30', '3', '120/80', 4, 5, 6, 7, 'DSFFASD FASDF', 'ASD FADSF', 'ASDF AD', 'F ASDFASDF', 'ASDF ASDF ASDF', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1140,8 +1344,8 @@ INSERT INTO `fisico` (`idfisico`, `idpaciente`, `iddoctor`, `idusuario`, `fecha`
 CREATE TABLE `fisico_img` (
   `idfisico_img` int(11) NOT NULL,
   `idfisico` int(11) NOT NULL,
-  `imagen` varchar(100) COLLATE utf8_spanish2_ci NOT NULL,
-  `descripcion` varchar(300) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `imagen` varchar(100) NOT NULL,
+  `descripcion` varchar(300) DEFAULT NULL,
   `fecha` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
@@ -1152,7 +1356,8 @@ CREATE TABLE `fisico_img` (
 INSERT INTO `fisico_img` (`idfisico_img`, `idfisico`, `imagen`, `descripcion`, `fecha`) VALUES
 (4, 21, 'NBYUDFBportada.jpg', 'portada de facebook', '2022-08-30'),
 (5, 21, 'COIHWLogoSZ.png', 'este es el logo en solitario', '2022-08-30'),
-(6, 21, 'AG6MS741407.jpg', 'este es el logo en negro', '2022-08-30');
+(6, 21, 'AG6MS741407.jpg', 'este es el logo en negro', '2022-08-30'),
+(8, 22, 'T7E6Ddesayunos.jpg', NULL, '2022-09-27');
 
 -- --------------------------------------------------------
 
@@ -1164,75 +1369,75 @@ CREATE TABLE `historia` (
   `idhistoria` int(11) NOT NULL,
   `idpaciente` int(11) NOT NULL,
   `fecha` date NOT NULL,
-  `estado_civil` varchar(15) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `procedencia` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `escolaridad` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `tel_emergencia` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `profesion` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `motivo` varchar(300) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `historia` varchar(1000) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `ciclos_regulares` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `histerectomia` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `mastopatia` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `cardiopatias` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `cafelea_vascular` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `tabaquismo` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `tratamiento_quimioradiacion` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `ejercicio` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `affecciones_ginecologicas` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `cancer` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `varices_trombosis` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `enfermedades_hepaticas` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `alcoholismo` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `cafeista` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `trh` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `otros` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `otros_texto` varchar(200) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `cardiopatias_50anos` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `cardiopatias_50anos_quien` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `osteoporosis` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `osteoporosis_quien` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `cancer_mama` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `cancer_mama_quien` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `cancer_ovario` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `cancer_ovario_quien` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `diabetes` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `diabetes_quien` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `hiperlipidemias` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `hiperlipidemias_quien` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `cancer_endometrial` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `cancer_endometrial_quien` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `familiares_otros` varchar(300) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `estado_civil` varchar(15) DEFAULT NULL,
+  `procedencia` varchar(50) DEFAULT NULL,
+  `escolaridad` varchar(100) DEFAULT NULL,
+  `tel_emergencia` varchar(20) DEFAULT NULL,
+  `profesion` varchar(50) DEFAULT NULL,
+  `motivo` varchar(300) DEFAULT NULL,
+  `historia` varchar(1000) DEFAULT NULL,
+  `ciclos_regulares` varchar(5) DEFAULT NULL,
+  `histerectomia` varchar(5) DEFAULT NULL,
+  `mastopatia` varchar(5) DEFAULT NULL,
+  `cardiopatias` varchar(5) DEFAULT NULL,
+  `cafelea_vascular` varchar(5) DEFAULT NULL,
+  `tabaquismo` varchar(5) DEFAULT NULL,
+  `tratamiento_quimioradiacion` varchar(5) DEFAULT NULL,
+  `ejercicio` varchar(5) DEFAULT NULL,
+  `affecciones_ginecologicas` varchar(5) DEFAULT NULL,
+  `cancer` varchar(5) DEFAULT NULL,
+  `varices_trombosis` varchar(5) DEFAULT NULL,
+  `enfermedades_hepaticas` varchar(5) DEFAULT NULL,
+  `alcoholismo` varchar(5) DEFAULT NULL,
+  `cafeista` varchar(5) DEFAULT NULL,
+  `trh` varchar(5) DEFAULT NULL,
+  `otros` varchar(5) DEFAULT NULL,
+  `otros_texto` varchar(200) DEFAULT NULL,
+  `cardiopatias_50anos` varchar(5) DEFAULT NULL,
+  `cardiopatias_50anos_quien` varchar(50) DEFAULT NULL,
+  `osteoporosis` varchar(5) DEFAULT NULL,
+  `osteoporosis_quien` varchar(50) DEFAULT NULL,
+  `cancer_mama` varchar(5) DEFAULT NULL,
+  `cancer_mama_quien` varchar(50) DEFAULT NULL,
+  `cancer_ovario` varchar(5) DEFAULT NULL,
+  `cancer_ovario_quien` varchar(50) DEFAULT NULL,
+  `diabetes` varchar(5) DEFAULT NULL,
+  `diabetes_quien` varchar(50) DEFAULT NULL,
+  `hiperlipidemias` varchar(5) DEFAULT NULL,
+  `hiperlipidemias_quien` varchar(50) DEFAULT NULL,
+  `cancer_endometrial` varchar(5) DEFAULT NULL,
+  `cancer_endometrial_quien` varchar(50) DEFAULT NULL,
+  `familiares_otros` varchar(300) DEFAULT NULL,
   `gestas` int(11) DEFAULT NULL,
-  `vias_resolucion` varchar(500) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `vias_resolucion` varchar(500) DEFAULT NULL,
   `hijos_vivos` int(11) DEFAULT NULL,
   `hijos_muertos` int(11) DEFAULT NULL,
-  `complicaciones_neonatales` varchar(500) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `complicaciones_obstetricos` varchar(1000) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `complicaciones_neonatales` varchar(500) DEFAULT NULL,
+  `complicaciones_obstetricos` varchar(1000) DEFAULT NULL,
   `abortos` int(11) DEFAULT NULL,
-  `causa` varchar(500) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `causa` varchar(500) DEFAULT NULL,
   `fur` date DEFAULT NULL,
   `ciclos_cada` int(11) DEFAULT NULL,
   `ciclos_por` int(11) DEFAULT NULL,
-  `observaciones` varchar(500) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `cantidad_hemorragia` varchar(15) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `frecuencia` varchar(15) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `dismenorrea` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `activa` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `observaciones` varchar(500) DEFAULT NULL,
+  `cantidad_hemorragia` varchar(15) DEFAULT NULL,
+  `frecuencia` varchar(15) DEFAULT NULL,
+  `dismenorrea` varchar(5) DEFAULT NULL,
+  `activa` varchar(5) DEFAULT NULL,
   `edad` int(11) DEFAULT NULL,
   `parejas` int(11) DEFAULT NULL,
-  `metodo_anticonceptivo` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `metodo_si` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `metodo_anticonceptivo` varchar(5) DEFAULT NULL,
+  `metodo_si` varchar(50) DEFAULT NULL,
   `tiempo_ano` int(11) DEFAULT NULL,
   `tiempo_mes` int(11) DEFAULT NULL,
-  `efectos_secundarios` varchar(500) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `efectos_secundarios` varchar(500) DEFAULT NULL,
   `ultimo` date DEFAULT NULL,
-  `resultado` varchar(500) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `colonoscopia` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `colonoscopia_si` varchar(500) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `procedimientos` varchar(500) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `rendiciones` varchar(300) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `revision` varchar(1000) COLLATE utf8_spanish2_ci DEFAULT NULL
+  `resultado` varchar(500) DEFAULT NULL,
+  `colonoscopia` varchar(5) DEFAULT NULL,
+  `colonoscopia_si` varchar(500) DEFAULT NULL,
+  `procedimientos` varchar(500) DEFAULT NULL,
+  `rendiciones` varchar(300) DEFAULT NULL,
+  `revision` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
@@ -1264,7 +1469,8 @@ CREATE TABLE `incontinenciau` (
 
 INSERT INTO `incontinenciau` (`idincontinenciau`, `idpaciente`, `iddoctor`, `idusuario`, `fecha`) VALUES
 (10, 7, 4, 4, '2022-08-23'),
-(11, 7, 4, 4, '2022-08-24');
+(11, 7, 4, 4, '2022-08-24'),
+(13, 7, 18, 18, '2022-10-06');
 
 -- --------------------------------------------------------
 
@@ -1312,12 +1518,12 @@ CREATE TABLE `ingreso` (
   `idempresa` int(11) NOT NULL,
   `idproveedor` int(11) NOT NULL,
   `idusuario` int(11) NOT NULL,
-  `tipo_comprobante` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
-  `serie_comprobante` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `num_comprobante` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `tipo_comprobante` varchar(20) NOT NULL,
+  `serie_comprobante` varchar(20) DEFAULT NULL,
+  `num_comprobante` varchar(20) DEFAULT NULL,
   `fecha` date NOT NULL,
   `impuesto` decimal(11,2) NOT NULL,
-  `estado` varchar(20) COLLATE utf8_spanish2_ci NOT NULL
+  `estado` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
@@ -1326,7 +1532,13 @@ CREATE TABLE `ingreso` (
 
 INSERT INTO `ingreso` (`idingreso`, `idempresa`, `idproveedor`, `idusuario`, `tipo_comprobante`, `serie_comprobante`, `num_comprobante`, `fecha`, `impuesto`, `estado`) VALUES
 (62, 2, 72, 4, 'Factura', NULL, NULL, '2022-05-23', '0.00', 'Activo'),
-(63, 2, 74, 4, 'Factura', NULL, NULL, '2022-05-23', '0.00', 'Activo');
+(63, 2, 74, 4, 'Factura', NULL, NULL, '2022-05-23', '0.00', 'Activo'),
+(64, 2, 73, 2, 'Factura', NULL, NULL, '2022-11-05', '0.00', 'Activo'),
+(65, 2, 73, 2, 'Factura', NULL, NULL, '2023-05-30', '0.00', 'Activo'),
+(66, 2, 73, 2, 'Factura', NULL, NULL, '2023-05-31', '0.00', 'Activo'),
+(67, 2, 73, 2, 'Factura', NULL, NULL, '2023-05-31', '0.00', 'Activo'),
+(68, 2, 73, 2, 'Factura', NULL, NULL, '2023-05-31', '0.00', 'Activo'),
+(69, 2, 72, 2, 'Factura', NULL, NULL, '2023-05-31', '0.00', 'Activo');
 
 -- --------------------------------------------------------
 
@@ -1336,7 +1548,7 @@ INSERT INTO `ingreso` (`idingreso`, `idempresa`, `idproveedor`, `idusuario`, `ti
 
 CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -1352,11 +1564,11 @@ CREATE TABLE `orden` (
   `iddoctor` int(11) NOT NULL,
   `idusuario` int(11) NOT NULL,
   `fecha` date NOT NULL,
-  `codigoeeps` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `codigopapanicolau` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `observaciones` varchar(500) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `estado_orden` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
-  `estado` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
+  `codigoeeps` varchar(20) DEFAULT NULL,
+  `codigopapanicolau` varchar(20) DEFAULT NULL,
+  `observaciones` varchar(500) DEFAULT NULL,
+  `estado_orden` varchar(20) NOT NULL,
+  `estado` varchar(20) NOT NULL,
   `total` decimal(11,2) DEFAULT NULL,
   `idventa` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
@@ -1366,7 +1578,11 @@ CREATE TABLE `orden` (
 --
 
 INSERT INTO `orden` (`idorden`, `idpaciente`, `iddoctor`, `idusuario`, `fecha`, `codigoeeps`, `codigopapanicolau`, `observaciones`, `estado_orden`, `estado`, `total`, `idventa`) VALUES
-(6, 6, 4, 4, '2022-05-20', NULL, NULL, 'Esta es una observacion', 'Finalizada', 'Habilitada', '17750.00', 9);
+(6, 6, 4, 4, '2022-05-20', NULL, NULL, 'Esta es una observacion', 'Finalizada', 'Habilitada', '17750.00', 9),
+(7, 7, 4, 2, '2022-11-04', NULL, NULL, NULL, 'Pendiente', 'Habilitada', '1350.00', NULL),
+(8, 6, 14, 2, '2022-11-14', NULL, NULL, NULL, 'Pendiente', 'Habilitada', '6950.00', NULL),
+(9, 6, 41, 2, '2022-11-28', NULL, NULL, NULL, 'Pendiente', 'Habilitada', '2625.00', NULL),
+(10, 17, 4, 2, '2022-11-28', NULL, NULL, NULL, 'Pendiente', 'Habilitada', '1300.00', NULL);
 
 -- --------------------------------------------------------
 
@@ -1376,16 +1592,16 @@ INSERT INTO `orden` (`idorden`, `idpaciente`, `iddoctor`, `idusuario`, `fecha`, 
 
 CREATE TABLE `paciente` (
   `idpaciente` int(11) NOT NULL,
-  `nombre` varchar(100) COLLATE utf8_spanish2_ci NOT NULL,
-  `sexo` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
-  `correo` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `telefono` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `direccion` varchar(200) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `sexo` varchar(20) NOT NULL,
+  `correo` varchar(100) DEFAULT NULL,
+  `telefono` varchar(20) DEFAULT NULL,
+  `direccion` varchar(200) DEFAULT NULL,
   `fecha_nacimiento` date NOT NULL,
-  `dpi` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
-  `nit` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `foto` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `estado` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL
+  `dpi` varchar(20) NOT NULL,
+  `nit` varchar(20) DEFAULT NULL,
+  `foto` varchar(100) DEFAULT NULL,
+  `estado` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
@@ -1394,8 +1610,9 @@ CREATE TABLE `paciente` (
 
 INSERT INTO `paciente` (`idpaciente`, `nombre`, `sexo`, `correo`, `telefono`, `direccion`, `fecha_nacimiento`, `dpi`, `nit`, `foto`, `estado`) VALUES
 (6, 'Maria Tereza', 'Femenino', NULL, NULL, NULL, '1994-10-28', '45687895-8', NULL, 'OH7APistockphoto-470958260-612x612.jpg', 'Habilitado'),
-(7, 'Catalina de Alcazar', 'Femenino', 'jalbuerra1@gmail.com', NULL, NULL, '2022-05-20', '7898787-8', '34935037', '6DBKPistockphoto-856599656-612x612.jpg', 'Habilitado'),
-(8, 'Miriam de Samayoa', 'Femenino', 'msamayoa@gmail.com', NULL, NULL, '2007-09-15', '4897596-9', NULL, '1JA0Sistockphoto-473795730-612x612.jpg', 'Habilitado');
+(7, 'Catalina de Alcazar', 'Femenino', 'jalbuerra1@gmail.com', NULL, NULL, '2022-05-20', '123142353423401', '34935037', '6DBKPistockphoto-856599656-612x612.jpg', 'Habilitado'),
+(8, 'Miriam de Samayoa', 'Femenino', 'msamayoa@gmail.com', NULL, NULL, '2007-09-15', '4897596-9', NULL, '1JA0Sistockphoto-473795730-612x612.jpg', 'Habilitado'),
+(17, 'paciente prueba', 'Masculino', NULL, NULL, NULL, '2012-11-08', '12326374637827', NULL, NULL, 'Habilitado');
 
 -- --------------------------------------------------------
 
@@ -1404,8 +1621,8 @@ INSERT INTO `paciente` (`idpaciente`, `nombre`, `sexo`, `correo`, `telefono`, `d
 --
 
 CREATE TABLE `password_resets` (
-  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -1414,8 +1631,7 @@ CREATE TABLE `password_resets` (
 --
 
 INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
-('ottoszarata@szystems.com', '$2y$10$CJb.qRdm0K0YbG0vP6Pue.COaMXl7hgQOeuSoSDUxEhUtGY2UrtHe', '2020-05-14 04:26:57'),
-('szotto18@gmail.com', '$2y$10$p8OywbQuBQ7Aps62X50yKukT.EuGHf0Q6O2dFiw2IH7Io1.HQZdP2', '2022-09-03 00:03:22');
+('ottoszarata@szystems.com', '$2y$10$8lEvXxAC..MedzYzCxWI3uZHtM8tKkPOkAUuJDT12NdsLG2mgzgRG', '2022-11-10 06:14:18');
 
 -- --------------------------------------------------------
 
@@ -1426,16 +1642,16 @@ INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
 CREATE TABLE `persona` (
   `idpersona` int(11) NOT NULL,
   `idempresa` int(11) NOT NULL,
-  `tipo` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
-  `nombre` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
-  `tipo_documento` varchar(45) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `num_documento` varchar(45) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `direccion` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `telefono` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `email` varchar(45) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `banco` varchar(45) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `nombre_cuenta` varchar(45) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `numero_cuenta` varchar(45) COLLATE utf8_spanish2_ci DEFAULT NULL
+  `tipo` varchar(20) NOT NULL,
+  `nombre` varchar(45) NOT NULL,
+  `tipo_documento` varchar(45) DEFAULT NULL,
+  `num_documento` varchar(45) DEFAULT NULL,
+  `direccion` varchar(100) DEFAULT NULL,
+  `telefono` varchar(20) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `banco` varchar(45) DEFAULT NULL,
+  `nombre_cuenta` varchar(45) DEFAULT NULL,
+  `numero_cuenta` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
@@ -1456,9 +1672,9 @@ INSERT INTO `persona` (`idpersona`, `idempresa`, `tipo`, `nombre`, `tipo_documen
 
 CREATE TABLE `presentacion` (
   `idpresentacion` int(11) NOT NULL,
-  `nombre` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
-  `descripcion` varchar(500) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `estado` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL
+  `nombre` varchar(50) NOT NULL,
+  `descripcion` varchar(500) DEFAULT NULL,
+  `estado` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
@@ -1498,18 +1714,18 @@ CREATE TABLE `radiofrecuencia` (
   `iddoctor` int(11) NOT NULL,
   `idusuario` int(11) NOT NULL,
   `fecha` date DEFAULT NULL,
-  `fototipo_piel` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `implantes` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `implantes_tipo` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `marcapasos` varchar(5) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `periodo_gestacion` varchar(200) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `glaucoma` varchar(200) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `neoplasias_procesos_tumorales` varchar(200) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `portador_epilepsia` varchar(200) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `antecedentes_fotosensibilidad` varchar(200) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `tratamientos_acidos` varchar(200) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `medicamentos_fotosensibles` varchar(200) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `resumen` varchar(500) COLLATE utf8_spanish2_ci DEFAULT NULL
+  `fototipo_piel` varchar(5) DEFAULT NULL,
+  `implantes` varchar(5) DEFAULT NULL,
+  `implantes_tipo` varchar(50) DEFAULT NULL,
+  `marcapasos` varchar(5) DEFAULT NULL,
+  `periodo_gestacion` varchar(200) DEFAULT NULL,
+  `glaucoma` varchar(200) DEFAULT NULL,
+  `neoplasias_procesos_tumorales` varchar(200) DEFAULT NULL,
+  `portador_epilepsia` varchar(200) DEFAULT NULL,
+  `antecedentes_fotosensibilidad` varchar(200) DEFAULT NULL,
+  `tratamientos_acidos` varchar(200) DEFAULT NULL,
+  `medicamentos_fotosensibles` varchar(200) DEFAULT NULL,
+  `resumen` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
@@ -1534,20 +1750,20 @@ CREATE TABLE `radiofrecuencia_fotomodulacion` (
   `idradiofrecuencia` int(11) NOT NULL,
   `numero_sesion` int(11) NOT NULL,
   `fecha` date DEFAULT NULL,
-  `azul_area` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `azul_zona` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `azul_area` varchar(50) DEFAULT NULL,
+  `azul_zona` varchar(100) DEFAULT NULL,
   `azul_jm2` int(11) DEFAULT NULL,
   `azul_tiempo` int(11) DEFAULT NULL,
-  `infralight_area` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `infralight_zona` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `infralight_area` varchar(50) DEFAULT NULL,
+  `infralight_zona` varchar(100) DEFAULT NULL,
   `infralight_jm2` int(11) DEFAULT NULL,
   `infralight_tiempo` int(11) DEFAULT NULL,
-  `ambar_area` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `ambar_zona` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `ambar_area` varchar(50) DEFAULT NULL,
+  `ambar_zona` varchar(100) DEFAULT NULL,
   `ambar_jm2` int(11) DEFAULT NULL,
   `ambar_tiempo` int(11) DEFAULT NULL,
-  `rubylight_area` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `rubylight_zona` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `rubylight_area` varchar(50) DEFAULT NULL,
+  `rubylight_zona` varchar(100) DEFAULT NULL,
   `rubylight_jm2` int(11) DEFAULT NULL,
   `rubylight_tiempo` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
@@ -1558,8 +1774,31 @@ CREATE TABLE `radiofrecuencia_fotomodulacion` (
 
 INSERT INTO `radiofrecuencia_fotomodulacion` (`idradiofrecuencia_fotomodulacion`, `idradiofrecuencia`, `numero_sesion`, `fecha`, `azul_area`, `azul_zona`, `azul_jm2`, `azul_tiempo`, `infralight_area`, `infralight_zona`, `infralight_jm2`, `infralight_tiempo`, `ambar_area`, `ambar_zona`, `ambar_jm2`, `ambar_tiempo`, `rubylight_area`, `rubylight_zona`, `rubylight_jm2`, `rubylight_tiempo`) VALUES
 (1, 6, 1, '2022-06-30', 'azularea2', 'azulzona', 12, 22, 'inarea2', 'inzona2', 32, 42, 'amarea2', 'amzona2', 52, 62, 'rubarea2', 'rubzona2', 72, 82),
-(2, 6, 2, '2022-06-30', NULL, NULL, 0, 0, NULL, NULL, 0, 0, NULL, NULL, 0, 0, NULL, NULL, 0, 0),
-(4, 10, 1, '2022-08-09', NULL, NULL, 0, 0, NULL, NULL, 0, 0, NULL, NULL, 0, 0, NULL, NULL, 0, 0);
+(2, 6, 2, '2022-06-30', NULL, NULL, 0, 0, NULL, NULL, 0, 0, NULL, NULL, 0, 0, NULL, NULL, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `radiofrecuencia_laser`
+--
+
+CREATE TABLE `radiofrecuencia_laser` (
+  `idradiofrecuencia_laser` int(11) NOT NULL,
+  `idradiofrecuencia` int(11) NOT NULL,
+  `numero_sesion` int(11) DEFAULT NULL,
+  `fecha` date DEFAULT NULL,
+  `tipo` varchar(20) DEFAULT NULL,
+  `area` varchar(100) DEFAULT NULL,
+  `zonas_a_tratar` varchar(200) DEFAULT NULL,
+  `parametros` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `radiofrecuencia_laser`
+--
+
+INSERT INTO `radiofrecuencia_laser` (`idradiofrecuencia_laser`, `idradiofrecuencia`, `numero_sesion`, `fecha`, `tipo`, `area`, `zonas_a_tratar`, `parametros`) VALUES
+(10, 6, 1, '2022-10-20', 'Fraccionada', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1572,31 +1811,31 @@ CREATE TABLE `radiofrecuencia_sesion` (
   `idradiofrecuencia` int(11) NOT NULL,
   `numero_sesion` int(11) DEFAULT NULL,
   `fecha` date DEFAULT NULL,
-  `monopolar_areas` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `monopolar_indicacion` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `monopolar_areas` varchar(50) DEFAULT NULL,
+  `monopolar_indicacion` varchar(100) DEFAULT NULL,
   `monopolar_temperatura` int(11) DEFAULT NULL,
   `monopolar_tiempo` int(11) DEFAULT NULL,
-  `monopolar_zonas_tratadas` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `bipolar_areas` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `bipolar_indicacion` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `monopolar_zonas_tratadas` varchar(100) DEFAULT NULL,
+  `bipolar_areas` varchar(50) DEFAULT NULL,
+  `bipolar_indicacion` varchar(100) DEFAULT NULL,
   `bipolar_temperatura` int(11) DEFAULT NULL,
   `bipolar_tiempo` int(11) DEFAULT NULL,
-  `bipolar_zonas_tratadas` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `tetrapolar_areas` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `tetrapolar_indicacion` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `bipolar_zonas_tratadas` varchar(100) DEFAULT NULL,
+  `tetrapolar_areas` varchar(50) DEFAULT NULL,
+  `tetrapolar_indicacion` varchar(100) DEFAULT NULL,
   `tetrapolar_temperatura` int(11) DEFAULT NULL,
   `tetrapolar_tiempo` int(11) DEFAULT NULL,
-  `tetrapolar_zonas_tratadas` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `hexapolar_areas` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `hexapolar_indicacion` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `tetrapolar_zonas_tratadas` varchar(100) DEFAULT NULL,
+  `hexapolar_areas` varchar(50) DEFAULT NULL,
+  `hexapolar_indicacion` varchar(100) DEFAULT NULL,
   `hexapolar_temperatura` int(11) DEFAULT NULL,
   `hexapolar_tiempo` int(11) DEFAULT NULL,
-  `hexapolar_zonas_tratadas` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `ginecologico_areas` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `ginecologico_indicacion` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `hexapolar_zonas_tratadas` varchar(100) DEFAULT NULL,
+  `ginecologico_areas` varchar(50) DEFAULT NULL,
+  `ginecologico_indicacion` varchar(100) DEFAULT NULL,
   `ginecologico_temperatura` int(11) DEFAULT NULL,
   `ginecologico_tiempo` int(11) DEFAULT NULL,
-  `ginecologico_zonas_tratadas` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL
+  `ginecologico_zonas_tratadas` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
@@ -1608,8 +1847,7 @@ INSERT INTO `radiofrecuencia_sesion` (`idradiofrecuencia_sesion`, `idradiofrecue
 (14, 4, 2, '2022-06-29', NULL, NULL, 0, 0, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, 0, 0, NULL),
 (15, 4, 3, '2022-06-29', NULL, NULL, 0, 0, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, 0, 0, NULL),
 (16, 4, 4, '2022-06-29', NULL, NULL, 0, 0, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, 0, 0, NULL),
-(19, 6, 1, '2022-06-30', '1', '2', 25, 3, '4', '5', '6', 7, 8, '9', '10', '11', 12, 13, '14', '15', '16', 17, 18, '19', '20', '21', 22, 23, '24'),
-(22, 10, 1, '2022-08-09', 'Facial', 'Rejuvenecimiento', 37, 4, 'Malar y Frente', NULL, NULL, 0, 0, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, 0, 0, NULL);
+(19, 6, 1, '2022-06-30', '1', '2', 25, 3, '4', '5', '6', 7, 8, '9', '10', '11', 12, 13, '14', '15', '16', 17, 18, '19', '20', '21', 22, 23, '24');
 
 -- --------------------------------------------------------
 
@@ -1643,9 +1881,9 @@ CREATE TABLE `receta_medicamento` (
   `idreceta_medicamento` int(11) NOT NULL,
   `idreceta` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
-  `presentacion` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
-  `medicamento` varchar(100) COLLATE utf8_spanish2_ci NOT NULL,
-  `indicaciones` varchar(500) COLLATE utf8_spanish2_ci DEFAULT NULL
+  `presentacion` varchar(50) NOT NULL,
+  `medicamento` varchar(100) NOT NULL,
+  `indicaciones` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
@@ -1666,10 +1904,10 @@ INSERT INTO `receta_medicamento` (`idreceta_medicamento`, `idreceta`, `cantidad`
 
 CREATE TABLE `rubro` (
   `idrubro` int(11) NOT NULL,
-  `nombre` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
-  `nota` varchar(500) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `estado_rubro` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `estado` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL
+  `nombre` varchar(50) NOT NULL,
+  `nota` varchar(500) DEFAULT NULL,
+  `estado_rubro` varchar(20) DEFAULT NULL,
+  `estado` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
@@ -1677,14 +1915,14 @@ CREATE TABLE `rubro` (
 --
 
 INSERT INTO `rubro` (`idrubro`, `nombre`, `nota`, `estado_rubro`, `estado`) VALUES
-(4, 'PROCEDIMIENTOS GINECOLOGICOS', NULL, 'Habilitado', 'Habilitado'),
-(5, 'ULSTRASONIDO', NULL, 'Habilitado', 'Habilitado'),
-(6, 'RADIOFRECUENCIA VAGINAL', NULL, 'Habilitado', 'Habilitado'),
+(4, '2. PROCEDIMIENTOS GINECOLOGICOS', NULL, 'Habilitado', 'Habilitado'),
+(5, '1. ULSTRASONIDO', 'Esta es una nota de ultrasonido solo para probar como sale', 'Habilitado', 'Habilitado'),
+(6, '4. RADIOFRECUENCIA VAGINAL', NULL, 'Habilitado', 'Habilitado'),
 (7, 'FACIAL: CONTORNO DE OJOS Y MEJIAS', NULL, 'Deshabilitado', 'Eliminado'),
-(8, 'RADIOFRECUENCIA CORPORAL', NULL, 'Habilitado', 'Habilitado'),
-(9, 'RADIOFRECUENCIA FRACCIONADA', NULL, 'Habilitado', 'Habilitado'),
-(10, 'PELLETS', NULL, 'Habilitado', 'Habilitado'),
-(11, 'RADIOFRECUENCIA FACIAL: Contorno de ojos y mejias', NULL, 'Habilitado', 'Habilitado');
+(8, '3. RADIOFRECUENCIA CORPORAL', NULL, 'Habilitado', 'Habilitado'),
+(9, '6. RADIOFRECUENCIA FRACCIONADA', NULL, 'Habilitado', 'Habilitado'),
+(10, '5. PELLETS', NULL, 'Habilitado', 'Habilitado'),
+(11, '7. RADIOFRECUENCIA FACIAL', NULL, 'Habilitado', 'Habilitado');
 
 -- --------------------------------------------------------
 
@@ -1698,7 +1936,7 @@ CREATE TABLE `rubro_articulo` (
   `idarticulo` int(11) NOT NULL,
   `precio_costo` decimal(11,2) NOT NULL,
   `precio_venta` decimal(11,2) NOT NULL,
-  `estado` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL
+  `estado` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
@@ -1766,7 +2004,9 @@ CREATE TABLE `sillae_ciclo` (
 
 INSERT INTO `sillae_ciclo` (`idsillae_ciclo`, `idpaciente`, `iddoctor`, `idusuario`, `fecha`, `ciclo_numero`) VALUES
 (13, 6, 4, 4, '2022-07-15', 1),
-(15, 7, 4, 4, '2022-08-09', 1);
+(15, 7, 4, 4, '2022-08-09', 1),
+(17, 7, 4, 4, '2022-10-20', 1),
+(18, 7, 4, 4, '2022-11-24', 1);
 
 -- --------------------------------------------------------
 
@@ -1781,7 +2021,7 @@ CREATE TABLE `sillae_ciclo_sesion` (
   `fecha` date DEFAULT NULL,
   `tesla` decimal(11,2) NOT NULL,
   `minutos` int(11) NOT NULL,
-  `observaciones` varchar(300) COLLATE utf8_spanish2_ci DEFAULT NULL
+  `observaciones` varchar(300) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
@@ -1792,7 +2032,7 @@ INSERT INTO `sillae_ciclo_sesion` (`idsillae_ciclo_sesion`, `idsillae_ciclo`, `n
 (32, 13, 1, '2022-07-18', '33.33', 10, 'dfsdfg sdfgsdf gsdfg'),
 (37, 13, 2, '2022-07-18', '33.33', 70, 'sdf gsdf gsf gsfd'),
 (40, 15, 1, '2022-08-09', '33.33', 30, 'nada importante'),
-(41, 15, 2, '2022-08-09', '66.66', 30, 'algo importante');
+(44, 15, 2, '2022-10-06', '33.33', 67, 'dfgfd gdf gd');
 
 -- --------------------------------------------------------
 
@@ -1806,12 +2046,12 @@ CREATE TABLE `ultrasonido_obstetrico` (
   `iddoctor` int(11) NOT NULL,
   `idusuario` int(11) NOT NULL,
   `fecha` date NOT NULL,
-  `spp` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `fcardiaca_fetal` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `pubicacion` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `liquido_amniotico` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `utero_anexos` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `cervix` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `spp` varchar(100) DEFAULT NULL,
+  `fcardiaca_fetal` varchar(100) DEFAULT NULL,
+  `pubicacion` varchar(100) DEFAULT NULL,
+  `liquido_amniotico` varchar(100) DEFAULT NULL,
+  `utero_anexos` varchar(100) DEFAULT NULL,
+  `cervix` varchar(100) DEFAULT NULL,
   `diametro_biparietal_medida` decimal(11,2) DEFAULT NULL,
   `diametro_biparietal_semanas` int(11) DEFAULT NULL,
   `circunferencia_cefalica_medida` decimal(11,2) DEFAULT NULL,
@@ -1820,22 +2060,38 @@ CREATE TABLE `ultrasonido_obstetrico` (
   `circunferencia_abdominal_semanas` int(11) DEFAULT NULL,
   `longitud_femoral_medida` decimal(11,2) DEFAULT NULL,
   `longitud_femoral_semanas` int(11) DEFAULT NULL,
-  `fetometria` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `peso_estimado` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `percentilo` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `comentarios` varchar(1000) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `interpretacion` varchar(1000) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `recomendaciones` varchar(1000) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `observaciones` varchar(1000) COLLATE utf8_spanish2_ci DEFAULT NULL
+  `fetometria` varchar(100) DEFAULT NULL,
+  `peso_estimado` varchar(100) DEFAULT NULL,
+  `percentilo` varchar(100) DEFAULT NULL,
+  `comentarios` varchar(1000) DEFAULT NULL,
+  `interpretacion` varchar(1000) DEFAULT NULL,
+  `recomendaciones` varchar(1000) DEFAULT NULL,
+  `observaciones` tinyint(1) DEFAULT NULL,
+  `embarazo_unico` tinyint(1) DEFAULT NULL,
+  `embarazo_unico_comentar` varchar(300) DEFAULT NULL,
+  `alteraciones_crecimiento` tinyint(1) DEFAULT NULL,
+  `alteraciones_crecimiento_comentar` varchar(300) DEFAULT NULL,
+  `alteraciones_frecuencia` tinyint(1) DEFAULT NULL,
+  `alteraciones_frecuencia_comentar` varchar(300) DEFAULT NULL,
+  `placenta` tinyint(1) DEFAULT NULL,
+  `placenta_comentar` varchar(300) DEFAULT NULL,
+  `liquido` tinyint(1) DEFAULT NULL,
+  `liquido_comentar` varchar(300) DEFAULT NULL,
+  `prematuro` tinyint(1) DEFAULT NULL,
+  `prematuro_comentar` varchar(300) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `ultrasonido_obstetrico`
 --
 
-INSERT INTO `ultrasonido_obstetrico` (`idultrasonido_obstetrico`, `idpaciente`, `iddoctor`, `idusuario`, `fecha`, `spp`, `fcardiaca_fetal`, `pubicacion`, `liquido_amniotico`, `utero_anexos`, `cervix`, `diametro_biparietal_medida`, `diametro_biparietal_semanas`, `circunferencia_cefalica_medida`, `circunferencia_cefalica_semanas`, `circunferencia_abdominal_medida`, `circunferencia_abdominal_semanas`, `longitud_femoral_medida`, `longitud_femoral_semanas`, `fetometria`, `peso_estimado`, `percentilo`, `comentarios`, `interpretacion`, `recomendaciones`, `observaciones`) VALUES
-(8, 7, 4, 4, '2022-09-26', '1', '2', '3', '4', '5', '6', '7.00', 8, '9.00', 0, '1.00', 2, '3.00', 4, '5', '6', '7', '8', NULL, '9', NULL),
-(10, 6, 4, 4, '2022-09-27', '1', '2', '3', '4', '5', '6', '7.00', 8, '9.00', 0, '1.00', 2, '3.00', 4, '5', '6', '7', '8', NULL, '9', NULL);
+INSERT INTO `ultrasonido_obstetrico` (`idultrasonido_obstetrico`, `idpaciente`, `iddoctor`, `idusuario`, `fecha`, `spp`, `fcardiaca_fetal`, `pubicacion`, `liquido_amniotico`, `utero_anexos`, `cervix`, `diametro_biparietal_medida`, `diametro_biparietal_semanas`, `circunferencia_cefalica_medida`, `circunferencia_cefalica_semanas`, `circunferencia_abdominal_medida`, `circunferencia_abdominal_semanas`, `longitud_femoral_medida`, `longitud_femoral_semanas`, `fetometria`, `peso_estimado`, `percentilo`, `comentarios`, `interpretacion`, `recomendaciones`, `observaciones`, `embarazo_unico`, `embarazo_unico_comentar`, `alteraciones_crecimiento`, `alteraciones_crecimiento_comentar`, `alteraciones_frecuencia`, `alteraciones_frecuencia_comentar`, `placenta`, `placenta_comentar`, `liquido`, `liquido_comentar`, `prematuro`, `prematuro_comentar`) VALUES
+(8, 7, 4, 4, '2022-09-26', '1', '2', '3', '4', '5', '6', '7.00', 8, '9.00', 0, '1.00', 2, '3.00', 4, '5', '6', '7', '8', NULL, '9', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(10, 6, 4, 4, '2022-09-27', '1', '2', '3', '4', '5', '6', '7.00', 8, '9.00', 0, '1.00', 2, '3.00', 4, '5', '6', '7', '8', NULL, '9', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(11, 7, 4, 4, '2022-10-04', NULL, NULL, NULL, NULL, NULL, NULL, '1.00', 2, '3.00', 4, '5.00', 6, '7.00', 8, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, '6', 1, '5', 0, '4', 1, '3', 0, '2', 1, '1'),
+(12, 7, 4, 4, '2022-10-04', NULL, NULL, NULL, NULL, NULL, NULL, '1.00', 2, '3.00', 4, '5.00', 6, '7.00', 8, NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, '6', 1, '5', 1, '4', 1, '3', 1, '2', 1, '1'),
+(13, 7, 4, 4, '2022-10-04', NULL, NULL, NULL, NULL, NULL, NULL, '1.00', 2, '3.00', 4, '5.00', 6, '7.00', 8, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '6', 1, '5', 1, '4', 1, '3', 1, '2', 1, '1'),
+(14, 7, 4, 4, '2022-10-04', NULL, NULL, NULL, NULL, NULL, NULL, '0.00', 0, '0.00', 0, '0.00', 0, '0.00', 0, NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -1846,8 +2102,8 @@ INSERT INTO `ultrasonido_obstetrico` (`idultrasonido_obstetrico`, `idpaciente`, 
 CREATE TABLE `ultrasonido_obstetrico_img` (
   `idultrasonido_obstetrico_img` int(11) NOT NULL,
   `idultrasonido_obstetrico` int(11) NOT NULL,
-  `imagen` varchar(100) COLLATE utf8_spanish2_ci NOT NULL,
-  `descripcion` varchar(300) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `imagen` varchar(100) NOT NULL,
+  `descripcion` varchar(300) DEFAULT NULL,
   `fecha` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
@@ -1869,43 +2125,49 @@ INSERT INTO `ultrasonido_obstetrico_img` (`idultrasonido_obstetrico_img`, `idult
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `foto` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `foto` varchar(100) DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `empresa` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `empresa` varchar(45) NOT NULL,
   `idempresa` int(11) NOT NULL,
-  `telefono` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `direccion` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `telefono` varchar(20) DEFAULT NULL,
+  `direccion` varchar(100) DEFAULT NULL,
   `fecha_nacimiento` date DEFAULT NULL,
-  `contacto_emergencia` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `telefono_emergencia` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `logo` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tipo_usuario` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `especialidad` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `contacto_emergencia` varchar(100) DEFAULT NULL,
+  `telefono_emergencia` varchar(100) DEFAULT NULL,
+  `logo` varchar(100) DEFAULT NULL,
+  `tipo_usuario` varchar(45) NOT NULL,
+  `especialidad` varchar(50) DEFAULT NULL,
   `no_colegiado` int(10) DEFAULT NULL,
-  `zona_horaria` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `moneda` varchar(5) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `zona_horaria` varchar(45) NOT NULL,
+  `moneda` varchar(5) NOT NULL,
   `max_descuento` decimal(11,2) NOT NULL,
-  `principal` varchar(5) COLLATE utf8mb4_unicode_ci NOT NULL
+  `principal` varchar(5) NOT NULL,
+  `activo` varchar(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `foto`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `empresa`, `idempresa`, `telefono`, `direccion`, `fecha_nacimiento`, `contacto_emergencia`, `telefono_emergencia`, `logo`, `tipo_usuario`, `especialidad`, `no_colegiado`, `zona_horaria`, `moneda`, `max_descuento`, `principal`) VALUES
-(2, 'Otto Szarata', 'YDM5Z5XL2FIMG-20180704-WA0016.jpg', 'ottoszarata@szystems.com', NULL, '$2y$10$HeSJ7./wqC/Vh/wPWIeIwe3bLRL9JyQtYvAJndNJkvNbL6MhH7otm', 'wYr0rCPiFfP4gVwa8Ecp38DivJ9MOgF7o3db7yGiP7MwsBo0QJfZ0QyiIGom', '2019-12-11 23:33:22', '2021-10-20 23:28:39', 'Clinicas El Valle', 2, NULL, NULL, '1970-01-01', NULL, NULL, '1630601297logolargo.png', 'Administrador', NULL, NULL, 'America/Guatemala', 'Q.', '20.00', 'SI'),
-(4, 'Otto Szarata', 'VURN71I9JMIMG-20180704-WA0015.jpeg', 'szotto18@hotmail.com', NULL, '$2y$10$dQXpz//eAr1FvXv3nFP.iOX6YuuVRu3yECgGj6glrWIzqOB8bDKCG', 'C7VCle7zmCWg9R1hundbtjOP0nSBmoBvVsR9w7Riftbz4XCLRQUUqe40kGf9', '2021-09-09 23:33:53', '2022-06-01 23:13:18', 'Clinicas El Valle', 2, '+50242153288', 'diagonal 2 32-22 zona 3', '1970-01-01', NULL, NULL, '1630601297logolargo.png', 'Doctor', 'Internista', 987465, 'America/Guatemala', 'Q.', '0.00', 'NO'),
-(14, 'Jessica Maldonado', 'J2NC8depositphotos_157004224-stock-photo-happy-smiling-female-doctor-on.jpg', 'jmaldonado@gmail.com', NULL, '$2y$10$DdyT3cM266xwuQohOHqDqOTH52Hc1MNa2QIJoaNositUGJXRiz16K', NULL, '2022-05-20 23:45:16', '2022-06-01 23:12:35', 'Clinicas El Valle', 2, NULL, '64854254', '1989-08-16', NULL, NULL, '1630601297logolargo.png', 'Doctor', 'Ginecólogo y Obstetra', 98745, 'America/Guatemala', 'Q.', '10.00', 'NO'),
-(15, 'Alejandra Gomez', '2JEBHdepositphotos_157642492-stock-photo-young-female-doctor.jpg', 'agomez@gmail.com', NULL, '$2y$10$0zvg4Bv79YYnrq9BmCve7.EjIqjUXSUG3zTj0ocAcqnitwKTBZity', NULL, '2022-05-20 23:46:18', '2022-06-01 23:11:20', 'Clinicas El Valle', 2, '85423158', NULL, '2022-05-20', NULL, NULL, '1630601297logolargo.png', 'Doctor', 'Ginecólogo y Obstetra', 123456, 'America/Guatemala', 'Q.', '15.00', 'NO'),
-(16, 'Marcela Chacon', '36S4H25087596-portrait-of-a-happy-female-doctor.jpg', 'mchacon@gmail.com', NULL, '$2y$10$z7YZ3u/3CqnSE/EpKuZkR./.FVV8PWZZJj5gXhX67X9bsKObCgUSK', NULL, '2022-05-20 23:47:29', '2022-06-01 23:12:46', 'Clinicas El Valle', 2, '32156487', NULL, '2022-05-20', NULL, NULL, '1630601297logolargo.png', 'Doctor', 'Ginecólogo y Obstetra', 654786, 'America/Guatemala', 'Q.', '10.00', 'NO'),
-(17, 'Mishelle Jacobs', 'RZX53doctor-16980324.jpg', 'mjacobs@gmail.com', NULL, '$2y$10$ZTM3boAxnAgBWiYBfoyFWOWSSMvKkwzIzO8LAZHn30Qrduk34O1pa', NULL, '2022-05-20 23:48:26', '2022-06-01 23:13:00', 'Clinicas El Valle', 2, NULL, NULL, '2022-05-20', NULL, NULL, '1630601297logolargo.png', 'Doctor', 'Ginecólogo y Obstetra', 458562, 'America/Guatemala', 'Q.', '15.00', 'NO'),
-(18, 'Ana Castillo', 'AYCR9istockphoto-515630181-612x612.jpg', 'szotto18@gmail.com', NULL, '$2y$10$Pw/3ttoR6ezl6fXzrvz4xejczbRIQbAfStydXy7VvRZXsI0aPFHBC', NULL, '2022-05-20 23:52:40', '2022-05-20 23:52:40', 'Clinicas El Valle', 2, '35874125', NULL, '2022-05-20', NULL, NULL, '1630601297logolargo.png', 'Asistente', NULL, NULL, 'America/Guatemala', 'Q.', '5.00', 'NO');
+INSERT INTO `users` (`id`, `name`, `foto`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `empresa`, `idempresa`, `telefono`, `direccion`, `fecha_nacimiento`, `contacto_emergencia`, `telefono_emergencia`, `logo`, `tipo_usuario`, `especialidad`, `no_colegiado`, `zona_horaria`, `moneda`, `max_descuento`, `principal`, `activo`) VALUES
+(2, 'Otto Szarata', 'YDM5Z5XL2FIMG-20180704-WA0016.jpg', 'ottoszarata@szystems.com', NULL, '$2y$10$HeSJ7./wqC/Vh/wPWIeIwe3bLRL9JyQtYvAJndNJkvNbL6MhH7otm', 'ByjSBZIwtIUqVnEwDrllc303WeSkqnC1buCnBUdSWDxtsHDyVfCaQeAw5Qhv', '2019-12-11 23:33:22', '2022-11-24 23:31:29', 'Clinicas El Valle', 2, NULL, NULL, '1970-01-01', NULL, NULL, '1630601297logolargo.png', 'Administrador', NULL, NULL, 'America/Guatemala', 'Q.', '20.00', 'SI', 'SI'),
+(4, 'Otto Szarata', 'VURN71I9JMIMG-20180704-WA0015.jpeg', 'szotto18@hotmail.com', NULL, '$2y$10$dQXpz//eAr1FvXv3nFP.iOX6YuuVRu3yECgGj6glrWIzqOB8bDKCG', 'HOt9FfuLOnXRQhekyA3cTGlWRoOI0kK6pDxxFeuXBbna9egjwXElMNDKkSwL', '2021-09-09 23:33:53', '2022-11-24 23:32:31', 'Clinicas El Valle', 2, '+50242153288', 'diagonal 2 32-22 zona 3', '1970-01-01', NULL, NULL, '1630601297logolargo.png', 'Doctor', 'Internista', 987465, 'America/Guatemala', 'Q.', '0.00', 'NO', 'SI'),
+(14, 'Jessica Maldonado', 'J2NC8depositphotos_157004224-stock-photo-happy-smiling-female-doctor-on.jpg', 'jmaldonado@gmail.com', NULL, '$2y$10$DdyT3cM266xwuQohOHqDqOTH52Hc1MNa2QIJoaNositUGJXRiz16K', NULL, '2022-05-20 23:45:16', '2022-11-24 23:33:51', 'Clinicas El Valle', 2, NULL, '64854254', '1989-08-16', NULL, NULL, '1630601297logolargo.png', 'Doctor', 'Ginecólogo y Obstetra', 98745, 'America/Guatemala', 'Q.', '10.00', 'NO', 'SI'),
+(15, 'Alejandra Gomez', '2JEBHdepositphotos_157642492-stock-photo-young-female-doctor.jpg', 'agomez@gmail.comgfd', NULL, '$2y$10$0zvg4Bv79YYnrq9BmCve7.EjIqjUXSUG3zTj0ocAcqnitwKTBZity', NULL, '2022-05-20 23:46:18', '2022-11-24 23:33:43', 'Clinicas El Valle', 2, '85423158', NULL, '2022-05-20', NULL, NULL, '1630601297logolargo.png', 'Doctor', 'Ginecólogo y Obstetra', 123456, 'America/Guatemala', 'Q.', '15.00', 'NO', 'SI'),
+(16, 'Marcela Chacon', '36S4H25087596-portrait-of-a-happy-female-doctor.jpg', 'mchacon@gmail.com', NULL, '$2y$10$z7YZ3u/3CqnSE/EpKuZkR./.FVV8PWZZJj5gXhX67X9bsKObCgUSK', NULL, '2022-05-20 23:47:29', '2022-11-24 23:33:58', 'Clinicas El Valle', 2, '32156487', NULL, '2022-05-20', NULL, NULL, '1630601297logolargo.png', 'Doctor', 'Ginecólogo y Obstetra', 654786, 'America/Guatemala', 'Q.', '10.00', 'NO', 'SI'),
+(17, 'Mishelle Jacobs', 'RZX53doctor-16980324.jpg', 'mjacobs@gmail.com', NULL, '$2y$10$ZTM3boAxnAgBWiYBfoyFWOWSSMvKkwzIzO8LAZHn30Qrduk34O1pa', NULL, '2022-05-20 23:48:26', '2022-11-24 23:45:06', 'Clinicas El Valle', 2, NULL, NULL, '2022-05-20', NULL, NULL, '1630601297logolargo.png', 'Doctor', 'Ginecólogo y Obstetra', 458562, 'America/Guatemala', 'Q.', '15.00', 'NO', 'NO'),
+(18, 'Ana Castillo', 'AYCR9istockphoto-515630181-612x612.jpg', 'szotto18@gmail.com', NULL, '$2y$10$V3oIf8tlb9Pzmc/.tT3GnOEZAX4sFhzsQOcsQWeZUuzx/ao6pY/Z6', '9EoUr1VP1ABJ6Yh4SrQe8YjsRrhGUIUh142BpEBBLxdXHIMJlthWiwnZQCRY', '2022-05-20 23:52:40', '2022-11-24 23:34:18', 'Clinicas El Valle', 2, '35874125', NULL, '2022-05-20', NULL, NULL, '1630601297logolargo.png', 'Asistente', NULL, NULL, 'America/Guatemala', 'Q.', '5.00', 'NO', 'SI'),
+(19, 'prueba', NULL, 'Eliminado', NULL, '$2y$10$9cNn5uSVN8wBxF8ZCmfSQerJ0YhpxX6Ky7PAvfuSEVrnLpVPZ77TC', NULL, '2022-11-24 22:34:44', '2022-11-24 22:34:50', 'Clinicas El Valle', 2, NULL, NULL, '2022-11-24', NULL, NULL, '1630601297logolargo.png', 'Doctor', 'Ginecólogo y Obstetra', NULL, 'America/Guatemala', 'Q.', '5.00', 'NO', NULL),
+(20, 'prueba', NULL, 'prueba@prueba.com', NULL, '$2y$10$zJ07MkdheulRc1fg3SxlPejch/IY1MPrY.dYALXJEP/1HJ/T/.CLi', NULL, '2022-11-24 23:20:45', '2022-11-24 23:22:57', 'Clinicas El Valle', 2, NULL, NULL, '2022-11-24', NULL, NULL, '1630601297logolargo.png', 'Administrador', NULL, NULL, 'America/Guatemala', 'Q.', '5.00', 'NO', 'SI'),
+(21, 'p2', NULL, 'p2@p2.com', NULL, '$2y$10$HTFcguFle6ERLlybenjA7uBLDm3kqmNh8UY.krRW1bvRTH9UpoSGe', NULL, '2022-11-24 23:27:17', '2022-11-24 23:27:17', 'Clinicas El Valle', 2, NULL, NULL, '2022-11-24', NULL, NULL, '1630601297logolargo.png', 'Administrador', NULL, NULL, 'America/Guatemala', 'Q.', '3.00', 'NO', 'NO'),
+(22, 'doc', NULL, 'doc@doc.com', NULL, '$2y$10$fNxjkPRvO7LX.s4ddraWQeUwzEiTV32HfShXuZVwMqRO3Q9j4QFjm', NULL, '2022-11-24 23:30:05', '2022-11-24 23:31:09', 'Clinicas El Valle', 2, NULL, NULL, '2022-11-24', NULL, NULL, '1630601297logolargo.png', 'Doctor', 'Ginecólogo y Obstetra', NULL, 'America/Guatemala', 'Q.', '43.00', 'NO', 'NO'),
+(41, 'prueba', NULL, 'docpru@doc.com', NULL, '$2y$10$HuEfRLR3sOL9StXeSj2JduAr.y16Xizx02YpgvdianQoxVaNiFphW', NULL, '2022-11-28 22:00:51', '2022-11-28 22:00:51', 'Clinicas El Valle', 2, NULL, NULL, '2022-11-28', NULL, NULL, '1630601297logolargo.png', 'Doctor', 'Urólogo', NULL, 'America/Guatemala', 'Q.', '10.00', 'NO', 'SI');
 
 -- --------------------------------------------------------
 
@@ -1916,10 +2178,10 @@ INSERT INTO `users` (`id`, `name`, `foto`, `email`, `email_verified_at`, `passwo
 CREATE TABLE `vendedor` (
   `idvendedor` int(11) NOT NULL,
   `idproveedor` int(11) NOT NULL,
-  `nombre` varchar(100) COLLATE utf8_spanish2_ci NOT NULL,
-  `telefono` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `email` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `codigo` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL
+  `nombre` varchar(100) NOT NULL,
+  `telefono` varchar(20) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `codigo` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
@@ -1947,9 +2209,9 @@ CREATE TABLE `venta` (
   `idempresa` int(11) NOT NULL,
   `idcliente` int(11) NOT NULL,
   `idusuario` int(11) NOT NULL,
-  `tipo_comprobante` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
-  `serie_comprobante` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `num_comprobante` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `tipo_comprobante` varchar(20) NOT NULL,
+  `serie_comprobante` varchar(20) DEFAULT NULL,
+  `num_comprobante` varchar(20) DEFAULT NULL,
   `fecha` date NOT NULL,
   `impuesto` decimal(11,2) NOT NULL,
   `total_venta` decimal(11,2) NOT NULL,
@@ -1957,10 +2219,10 @@ CREATE TABLE `venta` (
   `total_comision` decimal(11,2) NOT NULL,
   `total_impuesto` decimal(11,2) NOT NULL,
   `abonado` decimal(11,2) NOT NULL,
-  `estado` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `estadosaldo` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
-  `estadoventa` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
-  `tipopago` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
+  `estado` varchar(20) DEFAULT NULL,
+  `estadosaldo` varchar(20) NOT NULL,
+  `estadoventa` varchar(20) NOT NULL,
+  `tipopago` varchar(20) NOT NULL,
   `idorden` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
@@ -1976,7 +2238,8 @@ INSERT INTO `venta` (`idventa`, `idempresa`, `idcliente`, `idusuario`, `tipo_com
 (13, 2, 7, 4, 'Factura', NULL, NULL, '2022-05-23', '0.00', '800.00', '600.00', '0.00', '0.00', '800.00', 'A', 'Pagado', 'Cerrada', 'Efectivo', NULL),
 (14, 2, 7, 4, 'Factura', NULL, NULL, '2022-05-23', '0.00', '400.00', '300.00', '0.00', '0.00', '400.00', 'A', 'Pagado', 'Cerrada', 'Efectivo', NULL),
 (15, 2, 7, 2, 'Factura', NULL, NULL, '2022-09-02', '0.00', '1000.00', '545.50', '0.00', '0.00', '500.00', 'A', 'Pendiente', 'Cerrada', 'Efectivo', NULL),
-(16, 2, 8, 2, 'Factura', NULL, NULL, '2022-09-02', '0.00', '225.00', '142.85', '0.00', '0.00', '200.00', 'A', 'Pendiente', 'Abierta', 'Efectivo', NULL);
+(16, 2, 8, 2, 'Factura', NULL, NULL, '2022-09-02', '0.00', '225.00', '142.85', '0.00', '0.00', '200.00', 'A', 'Pendiente', 'Abierta', 'Efectivo', NULL),
+(17, 2, 17, 2, 'Factura', NULL, NULL, '2022-11-29', '0.00', '100.00', '54.55', '0.00', '0.00', '100.00', 'A', 'Pagado', 'Cerrada', 'Efectivo', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -2174,6 +2437,12 @@ ALTER TABLE `radiofrecuencia_fotomodulacion`
   ADD PRIMARY KEY (`idradiofrecuencia_fotomodulacion`);
 
 --
+-- Indices de la tabla `radiofrecuencia_laser`
+--
+ALTER TABLE `radiofrecuencia_laser`
+  ADD PRIMARY KEY (`idradiofrecuencia_laser`);
+
+--
 -- Indices de la tabla `radiofrecuencia_sesion`
 --
 ALTER TABLE `radiofrecuencia_sesion`
@@ -2260,7 +2529,7 @@ ALTER TABLE `articulo`
 -- AUTO_INCREMENT de la tabla `bitacora`
 --
 ALTER TABLE `bitacora`
-  MODIFY `idbitacora` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=480;
+  MODIFY `idbitacora` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=636;
 
 --
 -- AUTO_INCREMENT de la tabla `categoria`
@@ -2272,19 +2541,19 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `cita`
 --
 ALTER TABLE `cita`
-  MODIFY `idcita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `idcita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT de la tabla `climaymeno`
 --
 ALTER TABLE `climaymeno`
-  MODIFY `idclimaymeno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idclimaymeno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `climaymeno_control`
 --
 ALTER TABLE `climaymeno_control`
-  MODIFY `idclimaymeno_control` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idclimaymeno_control` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `climaymeno_img`
@@ -2296,37 +2565,37 @@ ALTER TABLE `climaymeno_img`
 -- AUTO_INCREMENT de la tabla `colposcopia`
 --
 ALTER TABLE `colposcopia`
-  MODIFY `idcolposcopia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idcolposcopia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `colposcopia_img`
 --
 ALTER TABLE `colposcopia_img`
-  MODIFY `idcolposcopia_img` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idcolposcopia_img` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `control`
 --
 ALTER TABLE `control`
-  MODIFY `idcontrol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `idcontrol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_ingreso`
 --
 ALTER TABLE `detalle_ingreso`
-  MODIFY `iddetalle_ingreso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `iddetalle_ingreso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_orden`
 --
 ALTER TABLE `detalle_orden`
-  MODIFY `iddetalle_orden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `iddetalle_orden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
-  MODIFY `iddetalle_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `iddetalle_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT de la tabla `dias`
@@ -2338,7 +2607,7 @@ ALTER TABLE `dias`
 -- AUTO_INCREMENT de la tabla `embarazo`
 --
 ALTER TABLE `embarazo`
-  MODIFY `idembarazo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `idembarazo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de la tabla `embarazo_img`
@@ -2350,13 +2619,13 @@ ALTER TABLE `embarazo_img`
 -- AUTO_INCREMENT de la tabla `fisico`
 --
 ALTER TABLE `fisico`
-  MODIFY `idfisico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `idfisico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `fisico_img`
 --
 ALTER TABLE `fisico_img`
-  MODIFY `idfisico_img` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idfisico_img` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `historia`
@@ -2368,19 +2637,19 @@ ALTER TABLE `historia`
 -- AUTO_INCREMENT de la tabla `incontinenciau`
 --
 ALTER TABLE `incontinenciau`
-  MODIFY `idincontinenciau` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idincontinenciau` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `incontinenciau_cuestionario`
 --
 ALTER TABLE `incontinenciau_cuestionario`
-  MODIFY `idincontinenciau_cuestionario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `idincontinenciau_cuestionario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `ingreso`
 --
 ALTER TABLE `ingreso`
-  MODIFY `idingreso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `idingreso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT de la tabla `migrations`
@@ -2392,13 +2661,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT de la tabla `orden`
 --
 ALTER TABLE `orden`
-  MODIFY `idorden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idorden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `paciente`
 --
 ALTER TABLE `paciente`
-  MODIFY `idpaciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idpaciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `persona`
@@ -2416,19 +2685,25 @@ ALTER TABLE `presentacion`
 -- AUTO_INCREMENT de la tabla `radiofrecuencia`
 --
 ALTER TABLE `radiofrecuencia`
-  MODIFY `idradiofrecuencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idradiofrecuencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `radiofrecuencia_fotomodulacion`
 --
 ALTER TABLE `radiofrecuencia_fotomodulacion`
-  MODIFY `idradiofrecuencia_fotomodulacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idradiofrecuencia_fotomodulacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `radiofrecuencia_laser`
+--
+ALTER TABLE `radiofrecuencia_laser`
+  MODIFY `idradiofrecuencia_laser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `radiofrecuencia_sesion`
 --
 ALTER TABLE `radiofrecuencia_sesion`
-  MODIFY `idradiofrecuencia_sesion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `idradiofrecuencia_sesion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de la tabla `receta`
@@ -2458,19 +2733,19 @@ ALTER TABLE `rubro_articulo`
 -- AUTO_INCREMENT de la tabla `sillae_ciclo`
 --
 ALTER TABLE `sillae_ciclo`
-  MODIFY `idsillae_ciclo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `idsillae_ciclo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `sillae_ciclo_sesion`
 --
 ALTER TABLE `sillae_ciclo_sesion`
-  MODIFY `idsillae_ciclo_sesion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `idsillae_ciclo_sesion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT de la tabla `ultrasonido_obstetrico`
 --
 ALTER TABLE `ultrasonido_obstetrico`
-  MODIFY `idultrasonido_obstetrico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idultrasonido_obstetrico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `ultrasonido_obstetrico_img`
@@ -2482,7 +2757,7 @@ ALTER TABLE `ultrasonido_obstetrico_img`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT de la tabla `vendedor`
@@ -2494,7 +2769,7 @@ ALTER TABLE `vendedor`
 -- AUTO_INCREMENT de la tabla `venta`
 --
 ALTER TABLE `venta`
-  MODIFY `idventa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `idventa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
