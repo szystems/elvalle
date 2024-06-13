@@ -115,6 +115,7 @@
 								<option value="Tarjeta">Tarjeta</option>
 								<option value="Cheque">Cheque</option>
 								<option value="Credito">Credito</option>
+								<option value="Transferencia">Transferencia</option>
 							</select>
 						</div>
 					</div>

@@ -321,11 +321,12 @@
                             <div class="form-group">
                                 <label>Tipo Pago:</label>
                                 <select name="tipopago" class="form-control">
-                                <option value="{{$venta->tipopago}}" selected>{{$venta->tipopago}}</option>
-                                <option value="Efectivo">Efectivo</option>
-                                <option value="Tarjeta">Tarjeta</option>
+                                    <option value="{{$venta->tipopago}}" selected>{{$venta->tipopago}}</option>
+                                    <option value="Efectivo">Efectivo</option>
+                                    <option value="Tarjeta">Tarjeta</option>
                                     <option value="Cheque">Cheque</option>
                                     <option value="Credito">Credito</option>
+                                    <option value="Transferencia">Transferencia</option>
                                 </select>
                             </div>
                         </div>

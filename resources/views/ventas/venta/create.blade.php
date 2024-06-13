@@ -107,9 +107,9 @@
                         
                         <div class="form-group">
 
-                            <label>Articulo</label>
+                            <label>Articulo {{ $articulos->count() }}</label>
                             <select name="pidarticulo" class="form-control selectpicker" id="pidarticulo" data-live-search="true">
-                                <option value="" selected>Seleccione un articulo</option>
+                                <option value="" selected>Seleccione un articulo </option>
                                     @foreach($articulos as $articulo)
                                     <?php
                                         $precio_descuento= ($articulo->precio_venta-(($articulo->precio_oferta*$articulo->precio_venta)/(100)));
@@ -146,7 +146,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">{{ Auth::user()->moneda }}</span>
                                 </div>
-                                <input readonly type="" name="pprecio_venta" class="form-control" id="pprecio_venta" aria-label="Amount (to the nearest dollar)" value="0.00" onkeypress="return validardecimal(event,this.value)" >
+                                <input type="" name="pprecio_venta" class="form-control" id="pprecio_venta" aria-label="Amount (to the nearest dollar)" value="0.00" onkeypress="return validardecimal(event,this.value)" >
                             </div>
                         </div>
                     </div>
@@ -224,6 +224,7 @@
                           <option value="Tarjeta">Tarjeta</option>
 							<option value="Cheque">Cheque</option>
 							<option value="Credito">Credito</option>
+                            <option value="Transferencia">Transferencia</option>
                         </select>
                       </div>
                     </div>

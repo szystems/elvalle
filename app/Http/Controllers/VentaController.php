@@ -121,25 +121,29 @@ class VentaController extends Controller
             }
             else
             {
-                $FechaMin = DB::table('venta')
-				->where('estado','=','A')
-				->first();
-				if(isset($FechaMin))
-				{
-					$desde = $FechaMin->fecha;
-					$desde = date("d-m-Y", strtotime($desde));
-					$hasta = date('d-m-Y');
-				}else
-				{
+                // $FechaMin = DB::table('venta')
+				// ->where('estado','=','A')
+				// ->first();
+				// if(isset($FechaMin))
+				// {
+				// 	$desde = $FechaMin->fecha;
+				// 	// $desde = date("d-m-Y", strtotime($desde));
+                //     $desde = date('d-m-Y');
+				// 	$hasta = date('d-m-Y');
+				// }else
+				// {
 					$desde = date('d-m-Y');
 					$hasta = date('d-m-Y');
-				}
+                    $desdeinicio = date('Y-m-d');
+                    $hastainicio = date('Y-m-d');
+				// }
 
                 $ventas=DB::table('venta as v')
                     ->join('paciente as p','v.idcliente','=','p.idpaciente')
                     ->join('detalle_venta as dv','v.idventa','=','dv.idventa')
                     ->join('users as u','v.idusuario','=','u.id')
                     ->select('v.idventa','p.nombre','u.name','u.tipo_usuario','v.tipo_comprobante','v.serie_comprobante','v.num_comprobante','v.fecha','v.impuesto','v.total_venta','v.total_compra','v.total_comision','v.total_impuesto','v.abonado','v.estado','v.estadosaldo','v.estadoventa','v.tipopago','v.idorden')
+                    ->whereBetween('fecha', [$desdeinicio, $hastainicio])
                     ->where('v.idempresa','=',$idempresa)
                     ->where('v.estado','=','A')
                     ->where('v.estadoventa','LIKE','%'.$estadoventa.'%')
@@ -170,6 +174,7 @@ class VentaController extends Controller
             ->where('idempresa','=',$idempresa)
             ->groupBy('di.iddetalle_ingreso','di.idingreso','a.nombre','di.codigo','di.idarticulo','a.estado','di.idpresentacion_inventario','pr.nombre','di.stock','a.minimo','di.precio_venta','di.costo_unidad_inventario','di.precio_oferta','di.estado_oferta')
             ->get();
+        
     	return view("ventas.venta.create",["personas"=>$personas,"articulos"=>$articulos]);
     }
 

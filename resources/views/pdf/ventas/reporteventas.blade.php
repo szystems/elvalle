@@ -121,9 +121,13 @@
 		</h4>
 		<table>
 			<tr>
-				<th><h4 align="center">Total Costo</h4></th>
+				@if(Auth::user()->tipo_usuario == "Administrador")
+					<th><h4 align="center">Total Costo</h4></th>
+				@endif
 				<th><h4 align="center">Total Ventas</h4></th>
-				<th><h4 align="center">Diferencia</h4></th>
+				@if(Auth::user()->tipo_usuario == "Administrador")
+					<th><h4 align="center">Diferencia</h4></th>
+				@endif
 				<th><h4 align="center">Total Saldo</h4></th>
 				<!--<th><h4 align="center">Total Comisiones</h4></th>-->
 			</tr>
@@ -131,9 +135,13 @@
 				<?php
 					$diferencia = $ventatotal - $compratotal;
 				?>
-				<td><h1 align="right"><strong><font color="Orange">{{ Auth::user()->moneda }}{{number_format($compratotal,2, '.', ',')}}</font></strong></h1></td>
+				@if(Auth::user()->tipo_usuario == "Administrador")
+					<td><h1 align="right"><strong><font color="Orange">{{ Auth::user()->moneda }}{{number_format($compratotal,2, '.', ',')}}</font></strong></h1></td>
+				@endif
 				<td><h1 align="right"><strong><font color="Blue">{{ Auth::user()->moneda }}{{number_format($ventatotal,2, '.', ',')}}</font></strong></h1></td>
-				<td><h1 align="right"><strong><font color="Green">{{ Auth::user()->moneda }}{{number_format($diferencia,2, '.', ',')}}</font></strong></h1></td>
+				@if(Auth::user()->tipo_usuario == "Administrador")
+					<td><h1 align="right"><strong><font color="Green">{{ Auth::user()->moneda }}{{number_format($diferencia,2, '.', ',')}}</font></strong></h1></td>
+				@endif
 				<td><h1 align="right"><strong><font color="Red">{{ Auth::user()->moneda }}{{number_format($totalsaldo,2, '.', ',')}}</font></strong></h1></td>
 				<!--<td><h1 align="right"><strong><font color="Orange">{{ Auth::user()->moneda }}{{number_format($totalcomision,2, '.', ',')}}</font></strong></h1></td>-->
 							
