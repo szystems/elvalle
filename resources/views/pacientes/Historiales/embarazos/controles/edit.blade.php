@@ -114,47 +114,55 @@
                                           <div class="form-group">
                                               <label for=""><strong><u>Antecedentes Obstetricos</u></strong></label>
                                           </div>
-                                          <div class="table-responsive">
-                                              <table class="table table-sm table-striped table-bordered table-condensed table-hover">
-                                                  
-                                                  <tbody>
-                                                      <tr>
-                                                          
-                                                          <td><strong>Gestas</strong></td>
-                                                          <td align="center">{{ $historia->gestas }}</td>
-                                                      </tr>
-                                                      <tr>
-                                                          <td><strong>Vias de resolucion</strong></td>
-                                                          <td align="center">{{ $historia->vias_resolucion }}</td>
-                                                      </tr>
-                                                      <tr>
-                                                          <td><strong>Hijos Vivos</strong></td>
-                                                          <td align="center">{{ $historia->hijos_vivos }}</td>
-                                                      </tr>
-                                                      <tr>
-                                                          <td><strong>Hijos Muertos</strong></td>
-                                                          <td align="center">{{ $historia->hijos_muertos }}</td>
-                                                      </tr>
-                                                      <tr>
-                                                          <td><strong>Complicaciones Neonatales</strong></td>
-                                                          <td align="center">{{ $historia->complicaciones_neonatales }}</td>
-                                                      </tr>
-                                                      <tr>
-                                                          <td><strong>Complicaciones Obstetricos</strong></td>
-                                                          <td align="center">{{ $historia->complicaciones_obstetricos }}</td>
-                                                      </tr>
-                                                      <tr>
-                                                          <td><strong>Abortos</strong></td>
-                                                          <td align="center">{{ $historia->abortos }}</td>
-                                                      </tr>
-                                                      <tr>
-                                                          <td><strong>causa</strong></td>
-                                                          <td align="center">{{ $historia->causa }}</td>
-                                                      </tr>
+                                          @if ($historia)
+                                                <div class="table-responsive">
+                                                <table class="table table-sm table-striped table-bordered table-condensed table-hover">
                                                       
-                                                  </tbody>
-                                              </table>
-                                          </div>
+                                                      <tbody>
+                                                            <tr>
+                                                            
+                                                            <td><strong>Gestas</strong></td>
+                                                            <td align="center">{{ $historia->gestas }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                            <td><strong>Vias de resolucion</strong></td>
+                                                            <td align="center">{{ $historia->vias_resolucion }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                            <td><strong>Hijos Vivos</strong></td>
+                                                            <td align="center">{{ $historia->hijos_vivos }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                            <td><strong>Hijos Muertos</strong></td>
+                                                            <td align="center">{{ $historia->hijos_muertos }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                            <td><strong>Complicaciones Neonatales</strong></td>
+                                                            <td align="center">{{ $historia->complicaciones_neonatales }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                            <td><strong>Complicaciones Obstetricos</strong></td>
+                                                            <td align="center">{{ $historia->complicaciones_obstetricos }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                            <td><strong>Abortos</strong></td>
+                                                            <td align="center">{{ $historia->abortos }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                            <td><strong>causa</strong></td>
+                                                            <td align="center">{{ $historia->causa }}</td>
+                                                            </tr>
+                                                            
+                                                      </tbody>
+                                                </table>
+                                                </div>
+                                          @else
+                                                <div class="alert alert-warning">
+                                                <ul>
+                                                      <li>Aun no se han ingresado datos en la historia de este paciente.</li>
+                                                </ul>
+                                                </div>
+                                          @endif
                                     </div>
                                     {!!Form::model($control,['method'=>'PATCH','route'=>['controles.update',$control->idcontrol]])!!}
                                     {{Form::token()}}

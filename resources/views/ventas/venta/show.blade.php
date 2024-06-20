@@ -221,6 +221,7 @@
                                                         <option value="Cheque">Cheque</option>
                                                         <option value="Credito">Credito</option>
                                                         <option value="Transferencia">Transferencia</option>
+                                                        <option value="Mixto">Mixto</option>
                                                     </select>
                                                 </strong>
                                             </h4>

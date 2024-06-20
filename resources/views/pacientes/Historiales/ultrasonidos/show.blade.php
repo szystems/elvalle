@@ -193,57 +193,63 @@
                                         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
                                             data-parent="#accordionExample">
                                             <div class="card-body">
-
-                                                <div class="table-responsive">
-                                                      <table class="table table-sm table-striped table-bordered table-condensed table-hover">
-                                                          
-                                                          <tbody>
-                                                              <tr>
-                                                                  
-                                                                  <td><strong>Gestas</strong></td>
-                                                                  <td align="center">{{ $historia->gestas }}</td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><strong>Hijos Vivos</strong></td>
-                                                                  <td align="center">{{ $historia->hijos_vivos }}</td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><strong>Hijos Muertos</strong></td>
-                                                                  <td align="center">{{ $historia->hijos_muertos }}</td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td><strong>Abortos</strong></td>
-                                                                  <td align="center">{{ $historia->abortos }}</td>
-                                                              </tr>
-                                                              <tr>
-                                                                <?php
-                                                                    $fur = date("d-m-Y", strtotime($historia->fur));
-                                                                ?>
-                                                                <td><strong>FUR</strong></td>
-                                                                <td align="center">
-                                                                    @if ($fur != '01-01-1970')
-                                                                        {{ $fur }}
-                                                                    @endif
+                                                @if ($historia)
+                                                    <div class="table-responsive">
+                                                        <table class="table table-sm table-striped table-bordered table-condensed table-hover">
+                                                            
+                                                            <tbody>
+                                                                <tr>
                                                                     
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <?php
-                                                                    $fechaParto = date("d-m-Y", strtotime($historia->fur));
-                                                                    $fechaParto = date("d-m-Y", strtotime($fechaParto.'+ 280 days'));
-                                                                ?>
-                                                                <td><strong>FPP</strong></td>
-                                                                <td align="center">
-                                                                    @if ($fur != '01-01-1970')
-                                                                    {{ $fechaParto }}
-                                                                    @endif
-                                                                </td>
-                                                            </tr>
-                                                              
-                                                          </tbody>
-                                                      </table>
-                                                </div>
-
+                                                                    <td><strong>Gestas</strong></td>
+                                                                    <td align="center">{{ $historia->gestas }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><strong>Hijos Vivos</strong></td>
+                                                                    <td align="center">{{ $historia->hijos_vivos }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><strong>Hijos Muertos</strong></td>
+                                                                    <td align="center">{{ $historia->hijos_muertos }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><strong>Abortos</strong></td>
+                                                                    <td align="center">{{ $historia->abortos }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <?php
+                                                                        $fur = date("d-m-Y", strtotime($historia->fur));
+                                                                    ?>
+                                                                    <td><strong>FUR</strong></td>
+                                                                    <td align="center">
+                                                                        @if ($fur != '01-01-1970')
+                                                                            {{ $fur }}
+                                                                        @endif
+                                                                        
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <?php
+                                                                        $fechaParto = date("d-m-Y", strtotime($historia->fur));
+                                                                        $fechaParto = date("d-m-Y", strtotime($fechaParto.'+ 280 days'));
+                                                                    ?>
+                                                                    <td><strong>FPP</strong></td>
+                                                                    <td align="center">
+                                                                        @if ($fur != '01-01-1970')
+                                                                        {{ $fechaParto }}
+                                                                        @endif
+                                                                    </td>
+                                                                </tr>
+                                                                
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                @else
+                                                    <div class="alert alert-warning">
+                                                    <ul>
+                                                          <li>Aun no se han ingresado datos en la historia de este paciente.</li>
+                                                    </ul>
+                                                    </div>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>

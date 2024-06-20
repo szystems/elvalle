@@ -163,7 +163,7 @@
                                                                   <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
                                                                       data-parent="#accordionExample">
                                                                       <div class="card-body">
-                          
+                                                                        @if ($historia)
                                                                           <div class="table-responsive">
                                                                                 <table class="table table-sm table-striped table-bordered table-condensed table-hover">
                                                                                     
@@ -213,7 +213,13 @@
                                                                                     </tbody>
                                                                                 </table>
                                                                           </div>
-                          
+                                                                        @else
+                                                                          <div class="alert alert-warning">
+                                                                          <ul>
+                                                                                <li>Aun no se han ingresado datos en la historia de este paciente.</li>
+                                                                          </ul>
+                                                                          </div>
+                                                                        @endif
                                                                       </div>
                                                                   </div>
                                                               </div>

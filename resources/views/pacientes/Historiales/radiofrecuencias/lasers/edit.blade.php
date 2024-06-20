@@ -110,52 +110,7 @@
                               </header>
 
                               <div class="card-body">
-                                    <!--<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                                          <div class="form-group">
-                                              <label for=""><strong><u>Antecedentes Obstetricos</u></strong></label>
-                                          </div>
-                                          <div class="table-responsive">
-                                              <table class="table table-sm table-striped table-bordered table-condensed table-hover">
-                                                  
-                                                  <tbody>
-                                                      <tr>
-                                                          
-                                                          <td><strong>Gestas</strong></td>
-                                                          <td align="center">{{ $historia->gestas }}</td>
-                                                      </tr>
-                                                      <tr>
-                                                          <td><strong>Vias de resolucion</strong></td>
-                                                          <td align="center">{{ $historia->vias_resolucion }}</td>
-                                                      </tr>
-                                                      <tr>
-                                                          <td><strong>Hijos Vivos</strong></td>
-                                                          <td align="center">{{ $historia->hijos_vivos }}</td>
-                                                      </tr>
-                                                      <tr>
-                                                          <td><strong>Hijos Muertos</strong></td>
-                                                          <td align="center">{{ $historia->hijos_muertos }}</td>
-                                                      </tr>
-                                                      <tr>
-                                                          <td><strong>Complicaciones Neonatales</strong></td>
-                                                          <td align="center">{{ $historia->complicaciones_neonatales }}</td>
-                                                      </tr>
-                                                      <tr>
-                                                          <td><strong>Complicaciones Obstetricos</strong></td>
-                                                          <td align="center">{{ $historia->complicaciones_obstetricos }}</td>
-                                                      </tr>
-                                                      <tr>
-                                                          <td><strong>Abortos</strong></td>
-                                                          <td align="center">{{ $historia->abortos }}</td>
-                                                      </tr>
-                                                      <tr>
-                                                          <td><strong>causa</strong></td>
-                                                          <td align="center">{{ $historia->causa }}</td>
-                                                      </tr>
-                                                      
-                                                  </tbody>
-                                              </table>
-                                          </div>
-                                    </div>-->
+                                    
                                     {!!Form::model($sesion,['method'=>'PATCH','route'=>['lasers.update',$sesion->idradiofrecuencia_laser]])!!}
                                     {{Form::token()}}
                                           <div class="row">

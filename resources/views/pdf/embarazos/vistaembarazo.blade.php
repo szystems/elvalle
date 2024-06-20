@@ -86,6 +86,7 @@
 				<tr>		
 					<th colspan="2"><p align="center">Antecedentes Obstetricos: </p></th>
 				</tr>
+				@if ($historia)
 				<tr>
 					<td><p align="right"><strong>Gestas:</strong></p></td>
 					<td><p align="left"><font color="black">{{ $historia->gestas}}</font></p></td>	
@@ -118,7 +119,11 @@
 					<td><p align="right"><strong>Causa:</strong></p></td>
 					<td><p align="left"><font color="black">{{ $historia->causa}}</font></p></td>	
 				</tr>
-				
+				@else
+					<tr>
+							<p align="center">Aun no se han ingresado datos en la historia de este paciente.</p>
+					</tr>
+				@endif
 			</table>
 		</div>
 		
@@ -327,7 +332,7 @@
 				</tr>
 				@else
 				<tr>
-					<td><p align="center"><strong><h2> No se han ingresado controles</h2></strong></p></td>
+					<td><p align="center">No se han ingresado controles</p></td>
 					
 				</tr>
 				@endif

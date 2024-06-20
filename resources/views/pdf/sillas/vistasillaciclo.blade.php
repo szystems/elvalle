@@ -56,45 +56,7 @@
 			<br><strong>Ciclo:</strong><font color="Blue"> <strong>#{{ $sillaCiclo->ciclo_numero}}<strong></font>
 			
 		</h6>
-		<div style="text-align:center;">
-			<table>
-				<!--<tr>		
-					<th colspan="3"><p align="center">Antecedentes Obstetricos: </p></th>
-				</tr>
-				<tr>
-					<td><p align="right"><strong>Gestas:</strong></p></td>
-					<td colspan="2"><p align="left"><font color="black">{{ $historia->gestas}}</font></p></td>	
-				</tr>
-				<tr>
-					<td><p align="right"><strong>Vias de resolucion:</strong></p></td>
-					<td colspan="2"><p align="left"><font color="black">{{ $historia->vias_resolucion}}</font></p></td>	
-				</tr>
-				<tr>
-					<td><p align="right"><strong>Hijos Vivos:</strong></p></td>
-					<td colspan="2"><p align="left"><font color="black">{{ $historia->hijos_vivos}}</font></p></td>	
-				</tr>
-				<tr>
-					<td><p align="right"><strong>Hijos Muertos:</strong></p></td>
-					<td colspan="2"><p align="left"><font color="black">{{ $historia->hijos_muertos}}</font></p></td>	
-				</tr>
-				<tr>
-					<td><p align="right"><strong>Complicaciones Neonatales:</strong></p></td>
-					<td colspan="2"><p align="left"><font color="black">{{ $historia->complicaciones_neonatales}}</font></p></td>	
-				</tr>
-				<tr>
-					<td><p align="right"><strong>Complicaciones Obstetricos:</strong></p></td>
-					<td colspan="2"><p align="left"><font color="black">{{ $historia->complicaciones_obstetricos}}</font></p></td>	
-				</tr>
-				<tr>
-					<td><p align="right"><strong>Abortos:</strong></p></td>
-					<td colspan="2"><p align="left"><font color="black">{{ $historia->abortos}}</font></p></td>	
-				</tr>
-				<tr>
-					<td><p align="right"><strong>Causa:</strong></p></td>
-					<td colspan="2"><p align="left"><font color="black">{{ $historia->causa}}</font></p></td>	
-				</tr>-->
-			</table>
-		</div>
+		
 		<h4 align="center">
 			<strong><u>Sesiones de Ciclo de Silla Electromagnetica</u></strong>
 		</h4>

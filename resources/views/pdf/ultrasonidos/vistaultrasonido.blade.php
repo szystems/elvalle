@@ -78,6 +78,7 @@
 				<tr>
 					<th colspan="2" ><b><u><p align="center"> Antecedentes:</p></u></b></th>
 				</tr>
+				@if ($historia)
 				<tr>
                                                                   
 					<td><strong>Gestas</strong></td>
@@ -119,6 +120,11 @@
 						@endif
 					</td>
 				</tr>
+				@else
+				<tr>
+						<p align="center">Aun no se han ingresado datos en la historia de este paciente.</p>
+				</tr>
+			@endif
 
 			</table>
 		</div>
