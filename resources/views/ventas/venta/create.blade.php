@@ -113,8 +113,11 @@
                                     @foreach($articulos as $articulo)
                                     <?php
                                         $precio_descuento= ($articulo->precio_venta-(($articulo->precio_oferta*$articulo->precio_venta)/(100)));
+                                        
+                                        $fecha_vencimiento = date("d-m-Y", strtotime($articulo->fecha_vencimiento));
+                                    
                                     ?>
-                                        <option value="{{$articulo->idarticulo}}_{{$articulo->stock}}_{{number_format($articulo->costo_unidad_inventario,2, '.', '')}}_{{number_format($articulo->precio_venta,2, '.', '')}}_{{number_format($articulo->precio_oferta,2, '.', '')}}_{{$articulo->estado_oferta}}_{{$articulo->iddetalle_ingreso}}_{{$articulo->idpresentacion_inventario}}_{{$articulo->Presentacion}}">{{$articulo->codigo}} - {{$articulo->Articulo}} - {{$articulo->Presentacion}} - Stock: {{$articulo->stock}} - Precio: {{ Auth::user()->moneda }}{{number_format($articulo->precio_venta,2, '.', ',')}} @if($articulo->estado_oferta == "Activada") Oferta: {{ Auth::user()->moneda }}{{number_format($precio_descuento,2, '.', ',')}} ({{$articulo->precio_oferta}}%)  @endif</option>
+                                        <option value="{{$articulo->idarticulo}}_{{$articulo->stock}}_{{number_format($articulo->costo_unidad_inventario,2, '.', '')}}_{{number_format($articulo->precio_venta,2, '.', '')}}_{{number_format($articulo->precio_oferta,2, '.', '')}}_{{$articulo->estado_oferta}}_{{$articulo->iddetalle_ingreso}}_{{$articulo->idpresentacion_inventario}}_{{$articulo->Presentacion}}">{{$articulo->codigo}} - {{$articulo->Articulo}} - {{$articulo->Presentacion}} - Stock: {{$articulo->stock}} - Precio: {{ Auth::user()->moneda }}{{number_format($articulo->precio_venta,2, '.', ',')}} @if($articulo->estado_oferta == "Activada") Oferta: {{ Auth::user()->moneda }}{{number_format($precio_descuento,2, '.', ',')}} ({{$articulo->precio_oferta}}%)  @endif - Vencimiento: {{ $fecha_vencimiento }}</option>
                                     @endforeach
                             </select>
                         </div>
@@ -229,6 +232,16 @@
                         </select>
                       </div>
                     </div>
+                    <div class="col-lg-4 col-sm-6 col-md-8 col-xs-12">
+                        <div class="form-group">
+                            <label for="descripcion">Notas de pago:</label>
+                            <textarea type="text" name="notas" class="form-control" value="{{old('notas')}}" placeholder="Notas del pago..."></textarea>
+                        </div>
+                    </div>
+
+                    
+
+
                     <!--<div>
                         <div class="form-group">
                             <label for="total_comision">Total Comision</label>

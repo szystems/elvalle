@@ -317,7 +317,7 @@
                         @else
                             <input type="hidden" name="abonado" class="form-control" id="abonado" value="0">
                         @endif
-                        <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12">
+                        <div class="col-lg-4 col-sm-3 col-md-3 col-xs-12">
                             <div class="form-group">
                                 <label>Tipo Pago:</label>
                                 <select name="tipopago" class="form-control">
@@ -329,6 +329,13 @@
                                     <option value="Transferencia">Transferencia</option>
                                     <option value="Mixto">Mixto</option>
                                 </select>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-8 col-sm-6 col-md-8 col-xs-12">
+                            <div class="form-group">
+                                <label for="descripcion">Notas de pago:</label>
+                                <textarea type="text" name="notas" class="form-control" placeholder="Notas del pago...">{{ $venta->notas }}</textarea>
                             </div>
                         </div>
                 

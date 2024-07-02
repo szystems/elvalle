@@ -31,7 +31,8 @@ class Venta extends Model
         'estadosaldo',
         'estadoventa',
         'tipopago',
-        'idorden'
+        'idorden',
+        'notas'
         
     ];
 

@@ -32,7 +32,7 @@ class IngresoController extends Controller
 
     public function index(Request $request)
     {
-        
+        // dd($request);
         if ($request)
             {
                 $idempresa = Auth::user()->idempresa;
@@ -102,6 +102,7 @@ class IngresoController extends Controller
                     ->groupBy('i.idingreso','i.fecha','p.nombre','u.name','i.tipo_comprobante','i.serie_comprobante','i.num_comprobante','i.impuesto','i.estado')
                     ->paginate(20);
                 }
+                // dd($request);
                 return view('compras.ingreso.index',["ingresos"=>$ingresos,"personas"=>$personas,"usuarios"=>$usuarios,"desde"=>$desde,"hasta"=>$hasta,"proveedor"=>$proveedor,"usuario"=>$usuario,"estado"=>$estado,"hoy"=>$hoy,"usufiltro"=>$usufiltro,"provfiltro"=>$provfiltro]);
             }
 

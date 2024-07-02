@@ -41,18 +41,17 @@
 
 	<div class="card-body">
 		<div class="row">
-
+			
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				<?php
 					$desdeReporte=$desde;
 					$hastaReporte=$hasta;
 
-					$desde = $desde;
-					$hasta = $hasta;
+					// $desde = $desde;
+					// $hasta = $hasta;
 
-					$desde = date("d-m-Y", strtotime($desde));
-					$hasta = date("d-m-Y", strtotime($hasta));
-								
+					// $desde = date("d-m-Y", strtotime($desde));
+					// $hasta = date("d-m-Y", strtotime($hasta));		
 				?>
 				@include('ventas.venta.search')
 

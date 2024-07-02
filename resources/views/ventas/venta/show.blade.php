@@ -117,6 +117,13 @@
                                 </div>
                             </div>
 
+                            <div class="col-lg-8 col-sm-6 col-md-8 col-xs-12">
+                                <div class="form-group">
+                                    <label for="descripcion">Notas de pago:</label>
+                                    <textarea readonly type="text" name="nota" class="form-control" placeholder="Notas de pago...">{{ $venta->notas }}</textarea>
+                                </div>
+                            </div>
+
 
                         
                             
